@@ -1,0 +1,74 @@
+!include <font-awesome/common>
+@startuml
+title Rhodey War Simulator
+hide circle
+
+' ===== CLASSES =====
+class Conglomerate {
+    strategy : BattleStrategy*
+}
+class Groupy
+
+class Leafy {
+    name: string
+}
+class Corpse
+
+class EntityFactory
+class TroopFactory
+class VehicleFactory
+class ResearchFactory
+
+class Countries{
+    sizeOfArmy: int
+    Population: int
+    Economy: int
+    Morale: int
+    //not sure what data type you guys want for allies and available equipment 
+     
+    army : Troop **
+    
+    trainingFacilitys : TroopFactory **
+    vehicleFactories : VehicleFactory **
+}
+
+
+' == Entities == '
+rectangle "Entities" {
+    class Troop
+    class Entity
+    class Vehicle
+    class GroundVehicle
+    class AirVehicle
+    class WaterVehicle
+    class Soldier
+    class Commander
+}
+
+' Different straegy states'
+rectangle "Strategy States" {
+    class BattleStrategy
+    class DefensiveStrategy
+    class OffensiveStrategy
+    class ResearchiveStrategy
+}
+
+' ===== RELATIONSHIPS =====
+Entity <|-- Troop
+Entity <|-- Vehicle
+Troop <|-- Soldier
+Troop <|-- Commander
+Vehicle <|-- GroundVehicle
+Vehicle <|-- AirVehicle
+Vehicle <|-- WaterVehicle
+Leafy <|-- Country
+Leafy <|-- Faction
+Conglomerate <|-- Groupy
+Conglomerate <|-- Leafy
+Conglomerate *-- Groupy
+Conglomerate *-- BattleStrategy
+DefensiveStrategy <|-- BattleStrategy
+OffensiveStrategy <|-- BattleStrategy
+ResearchiveStrategy <|-- BattleStrategy
+
+@enduml
