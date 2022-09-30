@@ -1,17 +1,79 @@
 !include <font-awesome/common>
 @startuml
+skinparam classAttributeIconSize 0
 title Rhodey War Simulator
 hide circle
 
 ' ===== CLASSES =====
 class Conglomerate {
     strategy : BattleStrategy*
+    + add(Conglomerate* ) : void
+    ~Conglomerate()
 }
-class Groupy
+class Alliance{
+    - members: vector<Conglomerate*>
 
-class Leafy {
-    name: string
 }
+
+class AllianceMember {
+    name: string
+    
+
+}
+
+
+
+
+rectangle Military{
+    class Military{
+        - BattleGroups: Forces**
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Forces{
+        - name: string
+        - army: Army
+        - navy: Navy
+        - airforce: Airforce
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Army{
+        - name: string
+        - numSoldiers: int
+        - numCommanders: int
+        - numTanks: int
+        - numTrucks: int
+        - units: Entity**
+        + move(): void
+        ~Army()
+    }
+
+    class Navy{
+        - name: string
+        - numCargoShips: int
+        - numWarShips: int
+        - numCarriers: int
+        - numSubmarines: int
+        - numFighters: int
+        - units: Entity**
+        + move(): void
+        ~Navy()
+    }
+
+    class AirForce{
+        - name: string
+        - numFighters: int
+        - numBombers: int
+        - units: Entity**
+        + move(): void
+        ~AirForce()
+    }
+}
+
+
 class Corpse
 
 class EntityFactory
@@ -19,33 +81,156 @@ class TroopFactory
 class VehicleFactory
 class ResearchFactory
 
-class Countries{
+class Faction{
     sizeOfArmy: int
-    Population: int
-    Economy: int
-    Morale: int
-    //not sure what data type you guys want for allies and available equipment 
-     
-    army : Troop **
-    
+    population: int
+    economy: int
+    morale: int
+    forces: Military
+}
+
+class Country{
+    sizeOfArmy: int
+    population: int
+    economy: int
+    morale: int
+    forces: Military
+    locations: Location**
+    Allies: Countries**
     trainingFacilitys : TroopFactory **
     vehicleFactories : VehicleFactory **
 }
 
+class Location{
+    - name: string
+    - description: string
+    - terrain: string
+    - population: int
+
+}
+
+class Battle{
+    - country: Country*
+    - location: Location*
+    - attackingForces: Forces**
+    - defendingForces: Forces**
+    + Battle(Forces**, Forces**, Forces*, Location*, Country*)
+    + start(): void
+    + end(): void
+    ~Battle()
+}
+
+
+
 
 ' == Entities == '
 rectangle "Entities" {
-    class Troop
-    class Entity
-    class Vehicle
-    class GroundVehicle
-    class AirVehicle
-    class WaterVehicle
-    class Soldier
-    class Commander
+    
+
+    class Entity{
+        - name: string
+        - hp: int
+        - dmg: int
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+
+
+    }
+
+
+
+    class Troop{
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+
+    }
+
+    class Vehicle{
+        - capacity: int
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+    }
+
+    class GroundVehicle{
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+    }
+
+    class Truck{
+        + attack(): void
+        + defend(): void
+    }
+
+    class Tank{
+        + attack(): void
+        + defend(): void
+    }
+
+    class AirVehicle{
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+    }
+
+    class Fighter{
+        + attack(): void
+        + defend(): void
+    }
+
+    class Bomber{
+        + attack(): void
+        + defend(): void
+    }
+
+    class CargoPlane{
+
+        + attack(): void
+        + defend(): void
+    }
+
+    class WaterVehicle{
+
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+    }
+
+    class CargoPlane{
+
+        + attack(): void
+        + defend(): void
+    }
+
+    class Warship{
+
+        + attack(): void
+        + defend(): void
+    }
+
+    class Submarine{
+
+        + attack(): void
+        + defend(): void
+    }
+
+    class Carriers{
+
+        + attack(): void
+        + defend(): void
+    }
+
+    class Soldier{
+
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+    }
+
+    class Commander{
+        + attack(): void
+        + defend(): void
+        + command(): void
+    }
 }
 
-' Different straegy states'
+' Different strategy states'
 rectangle "Strategy States" {
     class BattleStrategy
     class DefensiveStrategy
@@ -61,12 +246,37 @@ Troop <|-- Commander
 Vehicle <|-- GroundVehicle
 Vehicle <|-- AirVehicle
 Vehicle <|-- WaterVehicle
-Leafy <|-- Country
-Leafy <|-- Faction
-Conglomerate <|-- Groupy
-Conglomerate <|-- Leafy
-Conglomerate *-- Groupy
-Conglomerate *-- BattleStrategy
+GroundVehicle <|-- Truck
+GroundVehicle <|-- Tank
+AirVehicle <|-- Fighter
+AirVehicle <|-- Bomber
+AirVehicle <|-- CargoPlane
+WaterVehicle <|-- Warship
+WaterVehicle <|-- Carriers
+WaterVehicle <|-- Submarine
+
+Forces *-- Army
+Forces *-- Navy
+Forces *-- AirForce
+
+Military o-- Forces
+
+Army o-- Entity
+Navy o-- Entity
+AirForce o-- Entity
+
+Country o-- Location
+Country *-- Military
+
+Battle o-- Country
+Battle o-- Forces
+
+AllianceMember <|-- Country
+AllianceMember <|-- Faction
+Conglomerate <|-- Alliance
+Conglomerate <|-- AllianceMember
+Conglomerate o-- Alliance
+Conglomerate o-- BattleStrategy
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
 ResearchiveStrategy <|-- BattleStrategy
