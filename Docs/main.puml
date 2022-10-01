@@ -1,5 +1,5 @@
 !include <font-awesome/common>
-@startuml
+@startuml Rhodey Class Diagram
 skinparam classAttributeIconSize 0
 title Rhodey War Simulator
 hide circle
@@ -10,14 +10,14 @@ class Conglomerate {
     + add(Conglomerate* ) : void
     ~Conglomerate()
 }
-class Alliance{
-    - members: vector<Conglomerate*>
-
-}
 
 class AllianceMember {
     name: string
     
+
+}
+class Alliance{
+    - members: vector<Conglomerate*>
 
 }
 
@@ -300,7 +300,7 @@ AllianceMember <|-- Faction
 Conglomerate <|-- Alliance
 Conglomerate <|-- AllianceMember
 Conglomerate o-- Alliance
-Conglomerate o-- BattleStrategy
+BattleStrategy o-- Conglomerate
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
 ResearchiveStrategy <|-- BattleStrategy
