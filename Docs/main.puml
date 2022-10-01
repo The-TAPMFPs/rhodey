@@ -21,6 +21,24 @@ class AllianceMember {
 
 }
 
+class Weapons {
+    weaponEquiped: bool
+    weaponName: string
+}
+
+class ReasonForWar {
+    reason: string
+
+}
+class ReasonEndWar {
+    reason :string
+}
+class ChangesThroughoutWar {
+    Research: int
+    TreatyNegotiations: int // not sure about data type for this one but was thinking on a scale of 1-100 and when its 100 a treaty agreement has been reached.
+    Recruitment: int
+}
+
 
 
 
@@ -236,6 +254,12 @@ rectangle "Strategy States" {
     class DefensiveStrategy
     class OffensiveStrategy
     class ResearchiveStrategy
+    class Spy
+    class RedistributeTroops
+    class RandD
+    class BuildVehicle
+    class BuildWeapon
+    class RecruitSoldiers
 }
 
 ' ===== RELATIONSHIPS =====
