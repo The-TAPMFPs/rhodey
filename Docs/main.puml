@@ -3,13 +3,19 @@
 skinparam classAttributeIconSize 0
 title Rhodey War Simulator
 hide circle
+skinparam linetype ortho
 
 ' ===== CLASSES =====
-class Conglomerate {
-    strategy : BattleStrategy*
-    + add(Conglomerate* ) : void
-    ~Conglomerate()
+
+rectangle AllianceGroups{
+    class Alliance
+    class AllianceMember
+    class Conglomerate
+    Class Country
+    class Faction
 }
+
+
 
 class AllianceMember {
     name: string
@@ -45,6 +51,7 @@ class ChangesThroughoutWar {
 rectangle Military{
     class Military{
         - BattleGroups: Forces**
+        - Spies: SpyAgency**
         {abstract} + move(): void
         ~Military()
     }
@@ -92,31 +99,110 @@ rectangle Military{
 }
 
 
-class Corpse
 
 class EntityFactory
 class TroopFactory
 class VehicleFactory
 class ResearchFactory
 
+class UnitFactory{
+    # name: string
+    # hp: int
+    # dmg: int
+    + unitFactory()
+    ~ unitFactory()
+    + {abstract} makeUnit(): Entity*
+    
+}
+
+class TruckFactory{
+    + TruckFactory()
+    ~ TruckFactory()
+    + makeUnit(): Entity*   
+}
+
+class TankFactory{
+    + TankFactory()
+    ~ TankFactory()
+    + makeUnit(): Entity*   
+}
+
+class SoldierFactory{
+    + SoldierFactory()
+    ~ SoldierFactory()
+    + makeUnit(): Entity*   
+}
+
+class CommanderFactory{
+    + CommanderFactory()
+    ~ CommanderFactory()
+    + makeUnit(): Entity*   
+}
+
+class CarrierFactory{
+    + CarrierFactory()
+    ~ CarrierFactory()
+    + makeUnit(): Entity*   
+}
+
+class CargoShipFactory{
+    + CargoShipFactory()
+    ~ CargoShipFactory()
+    + makeUnit(): Entity*   
+}
+
+class WarshipFactory{
+    + WarshipFactory()
+    ~ WarshipFactory()
+    + makeUnit(): Entity*   
+}
+
+class SubmarineFactory{
+    + SubmarineFactory()
+    ~ SubmarineFactory()
+    + makeUnit(): Entity*   
+}
+
+class FighterFactory{
+    + FighterFactory()
+    ~ FighterFactory()
+    + makeUnit(): Entity*   
+}
+
+class BomberFactory{
+    + BomberFactory()
+    ~ BomberFactory()
+    + makeUnit(): Entity*   
+}
+
+class CargoPlaneFactory{
+    + CargoPlaneFactory()
+    ~ CargoPlaneFactory()
+    + makeUnit(): Entity*   
+}
+
+
+
+
 class Faction{
-    sizeOfArmy: int
-    population: int
-    economy: int
-    morale: int
-    forces: Military
+    - sizeOfArmy: int
+    - population: int
+    - economy: int
+    - morale: int
+    - forces: Military
 }
 
 class Country{
-    sizeOfArmy: int
-    population: int
-    economy: int
-    morale: int
-    forces: Military
-    locations: Location**
-    Allies: Countries**
-    trainingFacilitys : TroopFactory **
-    vehicleFactories : VehicleFactory **
+    - sizeOfArmy: int
+    - population: int
+    - economy: int
+    - morale: int
+    - attrition: int
+    - forces: Military
+    - locations: Location**
+    - Allies: Countries**
+    - trainingFacilitys : TroopFactory **
+    - vehicleFactories : VehicleFactory **
 }
 
 class Location{
@@ -132,11 +218,28 @@ class Battle{
     - location: Location*
     - attackingForces: Forces**
     - defendingForces: Forces**
-    + Battle(Forces**, Forces**, Forces*, Location*, Country*)
+    + Battle(Forces~**, Forces~**, Location*, Country*)
     + start(): void
     + end(): void
     ~Battle()
 }
+
+
+
+class SpyAgency{
+    # workFor: Country*
+    # spyingOn: Country*
+    # status: string
+    + SpyAgency(spyingFor Country*, spyingOn Country*)
+    + update(): void
+    ~SpyAgency()
+}
+
+class Spy{
+     {abstract} + update(): void
+}
+
+
 
 
 
@@ -211,7 +314,8 @@ rectangle "Entities" {
         {abstract} + defend(): void
     }
 
-    class CargoPlane{
+
+    class CargoShip{
 
         + attack(): void
         + defend(): void
@@ -229,7 +333,7 @@ rectangle "Entities" {
         + defend(): void
     }
 
-    class Carriers{
+    class Carrier{
 
         + attack(): void
         + defend(): void
@@ -276,8 +380,35 @@ AirVehicle <|-- Fighter
 AirVehicle <|-- Bomber
 AirVehicle <|-- CargoPlane
 WaterVehicle <|-- Warship
-WaterVehicle <|-- Carriers
+WaterVehicle <|-- Carrier
 WaterVehicle <|-- Submarine
+WaterVehicle <|-- CargoShip
+
+UnitFactory <|-- TruckFactory
+UnitFactory <|-- TankFactory
+UnitFactory <|-- SoldierFactory
+UnitFactory <|-- CommanderFactory
+UnitFactory <|-- WarshipFactory
+UnitFactory <|-- SubmarineFactory
+UnitFactory <|-- CarrierFactory
+UnitFactory <|-- CargoShipFactory
+UnitFactory <|-- FighterFactory
+UnitFactory <|-- BomberFactory
+UnitFactory <|-- CargoPlaneFactory
+
+TruckFactory .l.> Truck : <<instantiates>>
+TankFactory .l.> Tank : <<instantiates>>
+SoldierFactory .l.> Soldier : <<instantiates>>
+CommanderFactory .l.> Commander : <<instantiates>>
+WarshipFactory .l.> Warship : <<instantiates>>
+SubmarineFactory .l.> Submarine : <<instantiates>>
+CarrierFactory .l.> Carrier : <<instantiates>>
+CargoShipFactory .l.> CargoShip : <<instantiates>>
+FighterFactory .l.> Fighter : <<instantiates>>
+BomberFactory .l.> Bomber : <<instantiates>>
+CargoPlaneFactory .l.> CargoPlane : <<instantiates>>
+
+
 
 Forces *-- Army
 Forces *-- Navy
@@ -294,6 +425,9 @@ Country *-- Military
 
 Battle o-- Country
 Battle o-- Forces
+
+SpyAgency <|-- Spy
+Military o-- SpyAgency
 
 AllianceMember <|-- Country
 AllianceMember <|-- Faction
