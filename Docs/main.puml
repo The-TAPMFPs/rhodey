@@ -8,131 +8,142 @@ skinparam linetype ortho
 ' ===== CLASSES =====
 
 rectangle "AllianceGroups" {
+    class Alliance {
+        - members: vector<Conglomerate*>
+    }
 
-class Alliance {
-    - members: vector<Conglomerate*>
+    class AllianceMember {
+        name: string
+    }
+    note bottom #lightgreen : DECORATOR
+
+    class Conglomerate{
+        - name: string
+        + add(Conglomerate)*: void
+        + print(): void
+        + ~Conglomerate()
+    }
+
+    class Country {
+        - sizeOfArmy: int
+        - population: int
+        - economy: double
+        - morale: double
+        - resolve: double
+        - supplies: double
+        - attrition: double
+        - forces: Military
+        - locations: vector<Location*>
+        - Allies: vector<Countries*>
+        - trainingFacilitys: vector<TroopFactory*>
+        - vehicleFactories: vector<VehicleFactory*>
+    }
+
+    class Faction {
+        - sizeOfArmy: int
+        - population: int
+        - economy: int
+        - morale: int
+        - forces: Military
+    }
+
+    class Location {
+        - name: string
+        - description: string
+        - terrain: string
+        - population: int
+    }
 }
+note bottom #lightgreen : COMPOSITE
 
-class AllianceMember {
-    name: string
+
+
+rectangle "War " as War {
+
+    class Simulation {
+        + Simulation()
+        {static} - uniqueInstance: Simulation*
+        # Simulation()
+        #~Simulation()
+        #Simulation(Simulation &)
+        #=(Simulation &) : Simulation &
+        - war: War*
+        - playerName: string
+        ~Simulation()
+        
+    }
+        
+    class War{
+        - participants: vector<Conglomerate*>
+        - reasonForWar: string
+        - reasonEndWar: string
+        - battles: vector<Battle*>
+        - state: WarPhases
+        + request(): void
+        + setState(phase: WarPhases): void
+        + makeMemento():WarMemento
+        + restoreBeforeState(WarMemento memento): void
+    }
+
+
+
+    class WarPhases {
+        #war: War*
+        {abstract} + handle(): void
+        {abstract} + changeState(): void
+    }
+
+    class Dispute {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Conflict {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Hostilities {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class PostHostilitiesConflict {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class PostHostilitiesDispute {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class DisputeSettled {
+        + handle(): void
+        + changeState(): void
+    }
+    note bottom #lightgreen : STATE
 }
+note top of War #lightgreen : SINGLETON
 
-class Conglomerate{
-    - name: string
-    + add(Conglomerate)*: void
-    + print(): void
-    + ~Conglomerate()
-}
-note left : Send my regards to\nPipi Longstocking
-
-class Country {
-    - sizeOfArmy: int
-    - population: int
-    - economy: double
-    - morale: double
-    - resolve: double
-    - supplies: double
-    - attrition: double
-    - forces: Military
-    - locations: Location**
-    - Allies: Countries**
-    - trainingFacilitys : TroopFactory **
-    - vehicleFactories : VehicleFactory **
-}
-
-class Faction {
-    - sizeOfArmy: int
-    - population: int
-    - economy: int
-    - morale: int
-    - forces: Military
-}
-
-class Location {
-    - name: string
-    - description: string
-    - terrain: string
-    - population: int
-
-}
-
-}
-
-class Simulation {
-    + Simulation()
-    - war: War*
-    - playerName: string
-    ~Simulation()
-    
-}
-
-rectangle "War"{
-class War{
-    - participants: vector<Conglomerate*>
-    - reasonForWar: string
-    - reasonEndWar: string
-    - battles: vector<Battle*>
-    - state: WarPhases
-    + request(): void
-    + setState(phase: WarPhases): void
-}
-
-
-
-class WarPhases {
-    #war: War*
-    {abstract} + handle(): void
-    {abstract} + changeState(): void
-}
-
-class Dispute {
-    + handle(): void
-    + changeState(): void
-}
-
-class Conflict {
-    + handle(): void
-    + changeState(): void
-}
-
-class Hostilities {
-    + handle(): void
-    + changeState(): void
-}
-
-class PostHostilitiesConflict {
-    + handle(): void
-    + changeState(): void
-}
-
-class PostHostilitiesDispute {
-    + handle(): void
-    + changeState(): void
-}
-
-class DisputeSettled {
-    + handle(): void
-    + changeState(): void
-}
-
-}
 
 
 
 
 rectangle Military {
     class Military {
-        - BattleGroups: Forces**
-        - Spies: SpyAgency**
+        - BattleGroups: vector<Forces*>
+        - Spies: vector<SpyAgency*>
         {abstract} + move(): void
         ~Military()
     }
 
     class Forces {
         - name: string
-        - army: Army
-        - navy: Navy
-        - airforce: Airforce
+        - army: Army*
+        - navy: Navy*
+        - airforce: Airforce*
+        - location: Location*
         {abstract} + move(): void
         ~Military()
     }
@@ -143,7 +154,7 @@ rectangle Military {
         - numCommanders: int
         - numTanks: int
         - numTrucks: int
-        - units: Entity**
+        - units: vector<Entity*>
         + move(): void
         ~Army()
     }
@@ -155,7 +166,7 @@ rectangle Military {
         - numCarriers: int
         - numSubmarines: int
         - numFighters: int
-        - units: Entity**
+        - units: vector<Entity*>
         + move(): void
         ~Navy()
     }
@@ -164,23 +175,28 @@ rectangle Military {
         - name: string
         - numFighters: int
         - numBombers: int
-        - units: Entity**
+        - units: vector<Entity*>
         + move(): void
         ~AirForce()
     }
 
-    class SpyAgency {
-        # workFor: Country*
-        # spyingOn: Country*d
-        # status: string
-        + SpyAgency(spyingFor Country*, spyingOn Country*)
-        + update(): void
-        ~SpyAgency()
-}
+    rectangle Spies {
 
-    class Spy {
-        {abstract} + update(): void
+        class SpyAgency {
+            # workFor: vector<Country*>
+            # spyingOn: vector<Country*>
+            # status: string
+            + SpyAgency(spyingFor Country*, spyingOn Country*)
+            + update(): void
+            ~SpyAgency()
+        }
+
+        class Spy {
+            {abstract} + update(): void
+        }
+
     }
+    note right #lightgreen : OBSERVER
 }
 
 
@@ -189,78 +205,49 @@ rectangle Military {
 
 '==== Factory method ===='
 rectangle "Factories" {
-class UnitFactory{
-    # name: string
-    # hp: int
-    # dmg: int
-    + unitFactory()
-    ~ unitFactory()
-    + {abstract} makeUnit(): Entity*
-    
+    class UnitFactory{
+        # name: string
+        # hp: int
+        # dmg: int
+        + unitFactory()
+        ~ unitFactory()
+        + {abstract} makeUnit(): Entity*
+        
+    }
+
+    class VehicleFactory {
+        + VehicleFactory()
+        ~ VehicleFactory()
+        + makeUnit(): Entity*
+    }
+
+    class TroopFactory {
+        + TroopFactory()
+        ~ TruckFactory()
+        + makeUnit(): Entity*
+    }
+
+    enum VehicleType {
+        <<enumeration>>
+        Truck
+        Tank
+        Carrier
+        CargoShip
+        Warship
+        Submarine
+        FighterJet
+        Bomber
+        CargoPlane
+    }
+
+    enum TroopType {
+        <<enumeration>>
+        Soldier
+        Commander
+        Spy
+    }
 }
-
-class VehicleFactory {
-    + VehicleFactory()
-    ~ VehicleFactory()
-    + makeUnit(): Entity*
-}
-
-class TroopFactory {
-    + TroopFactory()
-    ~ TruckFactory()
-    + makeUnit(): Entity*
-}
-
-class AirVehicleFactory {
-
-}
-
-class WaterVehicleFactory {
-
-}
-' dankie <3<3<3<3<3<3
-
-class LandVehicleFactory {
-
-} 
-
-
-
-class MilitaryFactory {
-    + MilitaryFactory()
-    ~ MilitaryFactory()
-    + makeMilitary() : Military*
-}
-
-enum VehicleType {
-    <<enumeration>>
-    Truck
-    Tank
-    Carrier
-    CargoShip
-    Warship
-    Submarine
-    FighterJet
-    Bomber
-    CargoPlane
-}
-
-enum TroopType {
-    <<enumeration>>
-    Soldier
-    Commander
-    Spy
-}
-
-enum MilitaryType {
-    <<enumeration>>
-    Navy
-    Army
-    AirForce
-    SpyAgency
-}
-
-}
+note bottom #lightgreen : ABSTRACT FACTORY
 
 class Battle {
     - country: Country*
@@ -272,14 +259,6 @@ class Battle {
     + end(): void
     ~Battle()
 }
-
-
-
-
-
-
-
-
 
 
 '==== Entities ===='
@@ -295,6 +274,7 @@ rectangle "Entities" {
         {abstract} + defend(): void
         {abstract} + clone(): Entity
     }
+    note bottom #lightgreen : PROTOTYPE
 
     class Vehicle {
         - capacity: int
@@ -411,14 +391,15 @@ rectangle "Entities" {
     }
 
     class Weapon {
-    - weaponName: string
-    - dmg: int
+        - weaponName: string
+        - dmg: int
     }
 }
+note bottom #lightgreen : TEMPLATE METHOD
 
 
 '==== Different strategy states ===='
-rectangle "Strategy States" {
+rectangle "Strategy States" as StratStates {
     class BattleStrategy {
         + battleAlgorithm()
         {abstract} + redistributeTroops(): void
@@ -433,8 +414,8 @@ rectangle "Strategy States" {
         {abstract} + surrender(): void
         {abstract} + proposeTreaty(): void
         {abstract} + spy(): void
-  
     }
+
     class DefensiveStrategy {
         + defensiveAlgorithm()
         + redistributeTroops(): void
@@ -500,50 +481,69 @@ rectangle "Strategy States" {
         + spy(): void
     }
 }
+note right of StratStates #lightgreen : STRATEGY
 
 
 
 
 '==== Iterators ===='
-rectangle "Iterators" {
+rectangle "Iterators" as Iterators {
     class normalIterator {
+        {abstract} +first()
+        {abstract} +next()
+        {abstract} +isDone()
+        {abstract} +currentItem()
+    }
+'==== Aliance Groups Iterators ===='
+    class allianceIterators {
         +first()
         +next()
         +isDone()
         +currentItem()
     }
-'==== Aliance Groups Iterators ===='
-    class allianceIterators {}
-    class conglomerateIterator {}
-    class countryIterator {}
-    class factionIterator {}
+    class conglomerateIterator {
+        +first()
+        +next()
+        +isDone()
+        +currentItem()
+    }
+    class countryIterator {
+        +first()
+        +next()
+        +isDone()
+        +currentItem()
+    }
+    class factionIterator {
+        +first()
+        +next()
+        +isDone()
+        +currentItem()
+    }
 }
+note bottom of Iterators #lightgreen : ITERATOR
 
-rectangle "Memento" {
+rectangle "Mementos" as Mementos {
     class WarMemento{
         +getState()
-        -state
+        -state: WarState*
         ~Memento():virtual
     }
     class caretaker {
-        - MementoList<Memento>:List
-        + add(Memento state):void
+        - warStates: vector<WarMemento>
+        + add(memento WarMemento):void
 
     }
-    class Originator {
-        +setState(String state):void
-        +restoreBeforeState(Memento):String
-    }
 
-    class warMomento { 
-    'Im thinking this makes a deep copy of a war
-    ' which is gonna be fucking hard i think so pls come up with a better way lmao
-
+    class WarState { 
+        - Vector<String>
+        - WarState(War* war)
     }
 }
+note top of Mementos #lightgreen : MEMENTO
 
 ' ===== RELATIONSHIPS =====
 Simulation o- War
+Simulation o- Simulation
 
 Entity o- Weapon
 Entity <|-- Troop
@@ -559,7 +559,9 @@ AirVehicle <|-- FighterJet
 AirVehicle <|-- Bomber
 AirVehicle <|-- CargoPlane
 WaterVehicle <|-- CargoShip
-' WaterVehicle <|-- 
+WaterVehicle <|-- Warship
+WaterVehicle <|-- Submarine
+WaterVehicle <|-- Carrier
 
     
 
@@ -574,12 +576,14 @@ VehicleFactory ..> CargoPlane : <<instantiates>>
 TroopFactory   ..> Soldier : <<instantiates>>
 TroopFactory   ..> Commander : <<instantiates>>
 
-Originator ..> Memento
-caretaker o-- Memento
+War ..> WarMemento
+caretaker o-- WarMemento
+WarMemento o-- WarState
 
-Forces *-- Army
-Forces *-- Navy
-Forces *-- AirForce
+Forces o-- Army
+Forces o-- Navy
+Forces o-- AirForce
+Forces o-- Location
 
 Military o-- Forces
 
@@ -589,6 +593,8 @@ AirForce o-- Entity
 
 Country o- Location
 Country *-- Military
+Country o-- VehicleFactory
+Country o-- TroopFactory
 
 Battle o-- Country
 Battle o-- Forces
@@ -620,13 +626,14 @@ WarPhases o- War
 War o-- Battle
 
 'Iterators'
+Conglomerate ..> normalIterator : <<creates>>
 normalIterator <|-- allianceIterators
-allianceIterators <|-- countryIterator
-allianceIterators <|-- factionIterator
-allianceIterators <|-- conglomerateIterator
-Country <--x countryIterator
-Faction <--x factionIterator
-Conglomerate <--x conglomerateIterator
-allianceIterators <.. Alliance : <<instanciate>>
+normalIterator <|-- countryIterator
+normalIterator <|-- factionIterator
+normalIterator <|-- conglomerateIterator
+Country -- countryIterator
+Faction -- factionIterator
+Conglomerate -- conglomerateIterator
+allianceIterators <.. Alliance : <<instantiate>>
 
 @enduml
