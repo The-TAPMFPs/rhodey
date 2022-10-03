@@ -15,7 +15,12 @@ rectangle AllianceGroups{
     class Faction
 }
 
-
+class Conglomerate{
+    - name: string
+    + add(Conglomerate)*: void
+    + print(): void
+    + ~Conglomerate()
+}
 
 class AllianceMember {
     name: string
@@ -27,9 +32,9 @@ class Alliance{
 
 }
 
-class Weapons {
-    weaponEquiped: bool
-    weaponName: string
+class Weapon {
+    - weaponName: string
+    - dmg: int
 }
 
 class ReasonForWar {
@@ -44,6 +49,56 @@ class ChangesThroughoutWar {
     TreatyNegotiations: int // not sure about data type for this one but was thinking on a scale of 1-100 and when its 100 a treaty agreement has been reached.
     Recruitment: int
 }
+
+class War{
+    - participants: vector<Conglomerate*>
+    - reasonForWar: string
+    - reasonEndWar: string
+    - battles: vector<Battle*>
+    - state: WarPhases
+    + request(): void
+    + setState(phase: WarPhases): void
+}
+
+
+class WarPhases{
+    #war: War*
+    {abstract} + handle(): void
+    {abstract} + changeState(): void
+
+}
+
+class Dispute{
+    + handle(): void
+    + changeState(): void
+}
+
+class Conflict{
+    + handle(): void
+    + changeState(): void
+}
+
+class Hostilities{
+    + handle(): void
+    + changeState(): void
+}
+
+class PostHostilitiesConflict{
+    + handle(): void
+    + changeState(): void
+}
+
+class PostHostilitiesDispute{
+    + handle(): void
+    + changeState(): void
+}
+
+class DisputeSettled{
+    + handle(): void
+    + changeState(): void
+}
+
+
 
 
 
@@ -228,7 +283,7 @@ class Battle{
 
 class SpyAgency{
     # workFor: Country*
-    # spyingOn: Country*
+    # spyingOn: Country*d
     # status: string
     + SpyAgency(spyingFor Country*, spyingOn Country*)
     + update(): void
@@ -252,6 +307,7 @@ rectangle "Entities" {
         - name: string
         - hp: int
         - dmg: int
+        - weapons: Weapon**
         {abstract} + attack(): void
         {abstract} + defend(): void
 
@@ -367,6 +423,7 @@ rectangle "Strategy States" {
 }
 
 ' ===== RELATIONSHIPS =====
+Entity o-- Weapon
 Entity <|-- Troop
 Entity <|-- Vehicle
 Troop <|-- Soldier
@@ -395,6 +452,7 @@ UnitFactory <|-- CargoShipFactory
 UnitFactory <|-- FighterFactory
 UnitFactory <|-- BomberFactory
 UnitFactory <|-- CargoPlaneFactory
+
 
 TruckFactory .l.> Truck : <<instantiates>>
 TankFactory .l.> Tank : <<instantiates>>
@@ -438,5 +496,21 @@ BattleStrategy o-- Conglomerate
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
 ResearchiveStrategy <|-- BattleStrategy
+
+Dispute <|-- WarPhases
+Conflict <|-- WarPhases
+Hostilities <|-- WarPhases
+PostHostilitiesConflict <|-- WarPhases
+PostHostilitiesDispute <|-- WarPhases
+DisputeSettled <|-- WarPhases
+
+War o- WarPhases
+War o-- Conglomerate
+WarPhases o- War
+War o-- Battle
+
+
+
+
 
 @enduml
