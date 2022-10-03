@@ -419,7 +419,6 @@ rectangle "Entities" {
 
 '==== Different strategy states ===='
 rectangle "Strategy States" {
-<<<<<<< HEAD
     class BattleStrategy {
         + battleAlgorithm()
         {abstract} + redistributeTroops(): void
@@ -521,9 +520,9 @@ rectangle "Iterators" {
 }
 
 rectangle "Memento" {
-    class Memento{
+    class WarMemento{
         +getState()
-        -state : String
+        -state
         ~Memento():virtual
     }
     class caretaker {
@@ -541,26 +540,6 @@ rectangle "Memento" {
     ' which is gonna be fucking hard i think so pls come up with a better way lmao
 
     }
-=======
-    class BattleStrategy{
-        + battleAlgorithm()
-    }
-    class DefensiveStrategy{
-        + defensiveAlgorithm()
-    }
-    class OffensiveStrategy{
-        +offensiveAlgorithm()
-    }
-    class ResearchiveStrategy{
-        +researchAlgorithm()
-    }
-    class Spy
-    class RedistributeTroops
-    class RandD
-    class BuildVehicle
-    class BuildWeapon
-    class RecruitSoldiers
->>>>>>> c14c79941c46f2653d5f33280bc18fb1a131916e
 }
 
 ' ===== RELATIONSHIPS =====
@@ -580,7 +559,7 @@ AirVehicle <|-- FighterJet
 AirVehicle <|-- Bomber
 AirVehicle <|-- CargoPlane
 WaterVehicle <|-- CargoShip
-WaterVehicle <|-- 
+' WaterVehicle <|-- 
 
     
 
