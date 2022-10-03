@@ -410,10 +410,18 @@ rectangle "Entities" {
 
 ' Different strategy states'
 rectangle "Strategy States" {
-    class BattleStrategy
-    class DefensiveStrategy
-    class OffensiveStrategy
-    class ResearchiveStrategy
+    class BattleStrategy{
+        + battleAlgorithm()
+    }
+    class DefensiveStrategy{
+        + defensiveAlgorithm()
+    }
+    class OffensiveStrategy{
+        +offensiveAlgorithm()
+    }
+    class ResearchiveStrategy{
+        +researchAlgorithm()
+    }
     class Spy
     class RedistributeTroops
     class RandD
