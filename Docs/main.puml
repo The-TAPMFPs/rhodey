@@ -7,6 +7,17 @@ skinparam linetype ortho
 
 ' ===== CLASSES =====
 
+rectangle UI as UI {
+    class UIView {
+        - controller: UIController*
+    }
+    class UIController {
+        - view: UIView*
+        - model: Simluation*
+    }
+}
+note bottom of UI #lightblue : USER INTERFACE
+
 rectangle "AllianceGroups" {
     class Alliance {
         - members: vector<Conglomerate*>
@@ -67,6 +78,7 @@ rectangle "War " as War {
         #~Simulation()
         #Simulation(Simulation &)
         #=(Simulation &) : Simulation &
+        - view: UIView*
         - war: War*
         - playerName: string
         ~Simulation()
@@ -635,5 +647,11 @@ Country -- countryIterator
 Faction -- factionIterator
 Conglomerate -- conglomerateIterator
 allianceIterators <.. Alliance : <<instantiate>>
+
+' UI Model View Controller
+UIView -u-o UIController
+UIController -d-o UIView
+UIController -r-o Simulation
+Simulation -r-o UIView
 
 @enduml
