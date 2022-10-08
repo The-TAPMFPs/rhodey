@@ -74,3 +74,7 @@ int main(void) {
   std::cout << screen.ToString();
   return EXIT_SUCCESS;
 }
+
+// TO RUN:
+// `cd build`
+// `make -j ; ./ftx-starter`
