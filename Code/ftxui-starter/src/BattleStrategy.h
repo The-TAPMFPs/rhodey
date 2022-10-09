@@ -1,0 +1,4 @@
+#ifndef CODE_FTXUI_STARTER_SRC_BATTLESTRATEGY_H_
+#define CODE_FTXUI_STARTER_SRC_BATTLESTRATEGY_H_
+class BattleStrategy {};
+#endif
