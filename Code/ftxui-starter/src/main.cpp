@@ -7,9 +7,13 @@
 #include "ftxui/component/component.hpp"            // for Slider, Checkbox, Vertical, Renderer, Button, Input, Menu, Radiobox, Toggle
 #include "ftxui/component/component_base.hpp"       // for ComponentBase
 #include "ftxui/component/screen_interactive.hpp"   // for Component, ScreenInteractive
+#include "ftxui/component/event.hpp"                // for Event
+#include "ftxui/component/mouse.hpp"                // for Mouse
+
 #include "ftxui/dom/elements.hpp"                   // for separator, operator|, Element, size, xflex, text, WIDTH, hbox, vbox, EQUAL, border, GREATER_THAN
 #include "ftxui/dom/canvas.hpp"                     // for Canvas
 #include "ftxui/dom/node.hpp"                       // for Render
+
 #include "ftxui/screen/color.hpp"                   // for Color, Color::Red, Color::Blue, Color::Green, ftxui
  
 using namespace ftxui;
@@ -32,9 +36,11 @@ Component Wrap(std::string name, Component component) {
 int main(int argc, const char* argv[]) {
   auto screen = ScreenInteractive::Fullscreen();
 
+  int mouseX = 0, mouseY = 0;
+
   //===== CREATE SCREEN CONTAINERS =====//
 
-#pragma region MAIN_PANEL
+#pragma region PARENT_PANEL
   
   //CREATE MENU
   const std::vector<std::string> menu_entries = {
@@ -59,8 +65,8 @@ int main(int argc, const char* argv[]) {
       menu
   });
 
-  //=====MIDDLE PANEL=====//
-  auto middle = Renderer(layout, [&] {
+  //=====PARENT PANEL=====//
+  auto parent = Renderer(layout, [&] {
       return vbox({
         menu->Render(),
         separator(),
@@ -86,13 +92,36 @@ int main(int argc, const char* argv[]) {
   mapCanvas.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
   mapCanvas.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
 
-  mapCanvas.DrawText(mapW/4, mapH/2, "MAP GOES HERE :)", [](Pixel& p) {
+  mapCanvas.DrawText(mapW/4, mapH/2, std::to_string(mouseX), [](Pixel& p) {
     p.foreground_color = Color::Aquamarine1;
+  });
+
+  auto mapRenderer = Renderer([&] {
+    auto c = Canvas(mapW, mapH);
+
+    c.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
+    c.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
+
+    c.DrawText(mapW/4, mapH/2, std::to_string(mouseX), [](Pixel& p) {
+      p.foreground_color = Color::Aquamarine1;
+    });
+
+    return canvas(std::move(c));
+  });
+
+  auto tab_with_mouse = CatchEvent(parent, [&](Event e) {
+    if(e.is_mouse())
+    {
+      mouseX = (e.mouse().x - 1) * 2;
+      mouseY = (e.mouse().x - 1) * 4;
+    }
+    return false;
   });
 
   //=====RIGHT PANEL=====//
   auto right = Renderer([&] {
-    return canvas(&mapCanvas) | hcenter;
+    // return canvas(&mapCanvas) | hcenter;
+    return mapRenderer->Render() | hcenter;
   });
 #pragma endregion
 
@@ -101,15 +130,15 @@ int main(int argc, const char* argv[]) {
   //=====BOTTOM PANEL=====//
   auto bottom = Renderer([] { return text("BOTTOM PANEL") | center; });
 #pragma endregion
- 
 
-#pragma region MAIN_PANEL
+
+#pragma region MAIN_CONTAINER
   //Default starting sizes for each panel
   int right_size = 40;
   int top_size = 1;
   int bottom_size = 2;
  
-  auto container = middle; // The main container holding all the window panels
+  auto container = parent; // The main container holding all the window panels
   container = ResizableSplitTop(top, container, &top_size);
   container = ResizableSplitRight(right, container, &right_size);
   container = ResizableSplitBottom(bottom, container, &bottom_size);
