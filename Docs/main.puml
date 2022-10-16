@@ -23,11 +23,6 @@ rectangle "AllianceGroups" {
         - members: vector<Conglomerate*>
     }
 
-    class AllianceMember {
-        name: string
-    }
-    note bottom #lightgreen : DECORATOR
-
     class Conglomerate{
         - name: string
         + add(Conglomerate)*: void
@@ -44,18 +39,10 @@ rectangle "AllianceGroups" {
         - supplies: double
         - attrition: double
         - forces: Military
-        - locations: vector<Location*>
+        - alliances: Alliance *
         - Allies: vector<Countries*>
         - trainingFacilitys: vector<TroopFactory*>
         - vehicleFactories: vector<VehicleFactory*>
-    }
-
-    class Faction {
-        - sizeOfArmy: int
-        - population: int
-        - economy: int
-        - morale: int
-        - forces: Military
     }
 
     class Location {
@@ -64,8 +51,11 @@ rectangle "AllianceGroups" {
         - terrain: string
         - population: int
     }
+
+    class Map {
+        - regions : std::map>regionUUID, Region*>
+    }
 }
-note bottom #lightgreen : COMPOSITE
 
 
 
@@ -101,7 +91,7 @@ rectangle "War " as War {
 
     class WarPhases {
         #war: War*
-        {abstract} + handle(): void
+        + handle(): void
         {abstract} + changeState(): void
     }
 
@@ -120,12 +110,7 @@ rectangle "War " as War {
         + changeState(): void
     }
 
-    class PostHostilitiesConflict {
-        + handle(): void
-        + changeState(): void
-    }
-
-    class PostHostilitiesDispute {
+    class PostWar {
         + handle(): void
         + changeState(): void
     }
@@ -498,42 +483,6 @@ note right of StratStates #lightgreen : STRATEGY
 
 
 
-'==== Iterators ===='
-rectangle "Iterators" as Iterators {
-    class normalIterator {
-        {abstract} +first()
-        {abstract} +next()
-        {abstract} +isDone()
-        {abstract} +currentItem()
-    }
-'==== Aliance Groups Iterators ===='
-    class allianceIterators {
-        +first()
-        +next()
-        +isDone()
-        +currentItem()
-    }
-    class conglomerateIterator {
-        +first()
-        +next()
-        +isDone()
-        +currentItem()
-    }
-    class countryIterator {
-        +first()
-        +next()
-        +isDone()
-        +currentItem()
-    }
-    class factionIterator {
-        +first()
-        +next()
-        +isDone()
-        +currentItem()
-    }
-}
-note bottom of Iterators #lightgreen : ITERATOR
-
 rectangle "Mementos" as Mementos {
     class WarMemento{
         +getState()
@@ -595,7 +544,6 @@ WarMemento o-- WarState
 Forces o-- Army
 Forces o-- Navy
 Forces o-- AirForce
-Forces o-- Location
 
 Military o-- Forces
 
@@ -603,7 +551,6 @@ Army o-- Entity
 Navy o-- Entity
 AirForce o-- Entity
 
-Country o- Location
 Country *-- Military
 Country o-- VehicleFactory
 Country o-- TroopFactory
@@ -614,11 +561,10 @@ Battle o-- Forces
 SpyAgency <|-- Spy
 Military o-- SpyAgency
 
-AllianceMember <|-- Country
-AllianceMember <|-- Faction
-Conglomerate <|-- Alliance
-Conglomerate <|-- AllianceMember
-Conglomerate o-- Alliance
+Alliance o-- Conglomerate
+Conglomerate <|-- Country
+War o-- Alliance
+War o-- Conglomerate
 BattleStrategy o-- Conglomerate
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
@@ -628,26 +574,18 @@ PrepareStrategy <|-- BattleStrategy
 Dispute <|-- WarPhases
 Conflict <|-- WarPhases
 Hostilities <|-- WarPhases
-PostHostilitiesConflict <|-- WarPhases
-PostHostilitiesDispute <|-- WarPhases
+PostWar <|-- WarPhases
 DisputeSettled <|-- WarPhases
 
 War o-l- WarPhases
-War o-l- Conglomerate
 WarPhases o- War
 War o-- Battle
 
-'Iterators'
-Conglomerate ..> normalIterator : <<creates>>
-normalIterator <|-- allianceIterators
-normalIterator <|-- countryIterator
-normalIterator <|-- factionIterator
-normalIterator <|-- conglomerateIterator
-Country -- countryIterator
-Faction -- factionIterator
-Conglomerate -- conglomerateIterator
-allianceIterators <.. Alliance : <<instantiate>>
-
+War o-- Map
+Map o-- Location
+Location o-- Country
+Location o-- Forces
+Battle o-- Location
 ' UI Model View Controller
 UIView -u-o UIController
 UIController -d-o UIView

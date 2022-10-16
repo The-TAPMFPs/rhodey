@@ -1,0 +1,118 @@
+@startuml stateActivity
+|Dispute|
+start
+:State Dispute between two countries;
+fork
+  :Countries begin to  
+  find alliances;
+fork again
+  :Countires begin to consider 
+  miltary resources;
+end fork
+
+|Hostilities|
+if (Country is aggressor) then (Yes) 
+:Aggresor begins showing actions 
+of Hostilities to either 
+its own people or its opposition;
+else
+->no;
+:Opposition begins to prepare 
+defensive strategies;
+endif
+
+|Conflict|
+:War begins with intial conflict 
+which requires action;
+if (Country is aggressor) then (Yes)
+  switch (Reason for war)
+  case (Land conflict)
+    :Invasion of Neighbouring 
+    region;
+  case (War crimes)
+    :Commits War crimes;
+  case (Ideological)
+    :Starts Ideological war;
+  endswitch
+else
+->no;
+:Opposition acts in retalition, against 
+the aggressor, depending on the 
+reason of war;
+endif
+:war begins;
+repeat:battles are fought and war decisions are made;
+:Different strategies are implemented
+throughout the war by each countrys
+depending on how their battles are going;
+repeat while (Winner of the war has been established) is (No) not (Yes)
+
+|PostWar|
+:Military fighting of war is complete 
+however there are still issues to resolve;
+if (Country is winner) then (Yes)
+  :Decide on reperations and punishments;
+else
+->No;
+  :Begin paying reperations;
+endif
+|DisputeSettled|
+:War is finished, there is no longer conflict,
+all post war issues have been accounted for;
+stop
+@enduml
+
+@startuml StrategySelector
+|startOfWar|
+start
+:TeamsTurn;
+switch (DecideStrategy)
+case (OffensiveStrategy)
+  if (decideAction)
+    :Attack;
+  else 
+  ->;
+    :Prepare to attack by moving troops;
+  endif
+case (DefensiveStrategy) 
+  if (decideAction)
+    :Defend;
+  else 
+  ->;
+    :Move troops and recruit troops;
+  endif
+case (DevelopmentStrategy)
+  :Invest in economy and resources;
+case (IntelStrategy)
+  if (decideAction)
+    :place spies on countries;
+  else
+  ->;
+    :Move troops and recruit troops;
+  endif
+case (PreparationStrategy)
+  if (decideAction)
+    :RedistributeTroops;
+  else 
+  ->;
+    :RecruitTroops;
+  
+  
+  endif;
+endswitch
+stop
+@enduml
+
+@startuml BattleFlow
+start
+
+repeat 
+if (User would like to input data) then (No)
+:;
+else
+->Yes;
+  :Change the parameters of the country;
+endif
+repeat while (If war hasn't finshed) is (Yes) not (No)
+stop
+@enduml

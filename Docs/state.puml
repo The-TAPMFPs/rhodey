@@ -1,0 +1,17 @@
+@startuml WarState
+hide empty description
+[*] --> Dispute
+Dispute --> Conflict
+Conflict --> Hostilities
+Hostilities --> PostWar
+PostWar --> DisputeSettled
+@enduml
+
+@startuml StrategyState
+    hide empty description
+    [*] --> NoBattleStrategy
+    NoBattleStrategy --> OffensiveStategy : [Wanting to attack]
+    NoBattleStrategy --> DefensiveStategy : [Being attacked]
+    NoBattleStrategy --> ResearchStategy : [Improve equipment]
+    NoBattleStrategy --> PrepareStategy : [Prepare to attack]
+@enduml
