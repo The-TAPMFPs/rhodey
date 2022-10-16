@@ -87,14 +87,13 @@ int main(int argc, const char* argv[]) {
 #pragma region RIGHT_PANEL
   //GAME MAP
   int mapW = 50, mapH = 50;
-  auto mapCanvas = Canvas(mapW, mapH);
 
-  mapCanvas.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
-  mapCanvas.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
-
-  mapCanvas.DrawText(mapW/4, mapH/2, std::to_string(mouseX), [](Pixel& p) {
-    p.foreground_color = Color::Aquamarine1;
-  });
+  // auto mapCanvas = Canvas(mapW, mapH);
+  // mapCanvas.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
+  // mapCanvas.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
+  // mapCanvas.DrawText(mapW/4, mapH/2, std::to_string(mouseX), [](Pixel& p) {
+  //   p.foreground_color = Color::Aquamarine1;
+  // });
 
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
@@ -102,18 +101,20 @@ int main(int argc, const char* argv[]) {
     c.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
     c.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
 
-    c.DrawText(mapW/4, mapH/2, std::to_string(mouseX), [](Pixel& p) {
+    c.DrawText(mouseX, mouseY, std::to_string(mouseX) + ", " + std::to_string(mouseY), [](Pixel& p) {
+    // c.DrawText(mapW/4, mapH/2, std::to_string(mouseX) + ", " + std::to_string(mouseY), [](Pixel& p) {
       p.foreground_color = Color::Aquamarine1;
     });
 
-    return canvas(std::move(c));
+    return canvas(c);
   });
 
-  auto tab_with_mouse = CatchEvent(parent, [&](Event e) {
+  //Capture mouse input for the mapRenderer
+  auto mapMouseCapture = CatchEvent(mapRenderer, [&](Event e) {
     if(e.is_mouse())
     {
-      mouseX = (e.mouse().x - 1) * 2;
-      mouseY = (e.mouse().x - 1) * 4;
+      mouseX = (e.mouse().x - 1);
+      mouseY = (e.mouse().y - 1) * 2;
     }
     return false;
   });
@@ -121,7 +122,10 @@ int main(int argc, const char* argv[]) {
   //=====RIGHT PANEL=====//
   auto right = Renderer([&] {
     // return canvas(&mapCanvas) | hcenter;
-    return mapRenderer->Render() | hcenter;
+    return mapMouseCapture->Render() | hcenter;
+  });
+  right = Container::Horizontal({
+    mapMouseCapture
   });
 #pragma endregion
 
@@ -138,6 +142,10 @@ int main(int argc, const char* argv[]) {
   int top_size = 1;
   int bottom_size = 2;
  
+  // auto container = Container::Horizontal({
+  //   parent,
+  //   mapMouseCapture
+  // });
   auto container = parent; // The main container holding all the window panels
   container = ResizableSplitTop(top, container, &top_size);
   container = ResizableSplitRight(right, container, &right_size);
