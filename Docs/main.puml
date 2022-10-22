@@ -45,7 +45,7 @@ rectangle "AllianceGroups" {
         - vehicleFactories: vector<VehicleFactory*>
     }
 
-    class Location {
+    class Region {
         - name: string
         - description: string
         - terrain: string
@@ -53,7 +53,7 @@ rectangle "AllianceGroups" {
     }
 
     class Map {
-        - regions : std::map>regionUUID, Region*>
+        - regions : std::map<regionUUID, Region*>
     }
 }
 
@@ -140,7 +140,7 @@ rectangle Military {
         - army: Army*
         - navy: Navy*
         - airforce: Airforce*
-        - location: Location*
+        - Region: Region*
         {abstract} + move(): void
         ~Military()
     }
@@ -248,10 +248,10 @@ note bottom #lightgreen : ABSTRACT FACTORY
 
 class Battle {
     - country: Country*
-    - location: Location*
+    - Region: Region*
     - attackingForces: Forces**
     - defendingForces: Forces**
-    + Battle(Forces~**, Forces~**, Location*, Country*)
+    + Battle(Forces~**, Forces~**, Region*, Country*)
     + start(): void
     + end(): void
     ~Battle()
@@ -582,10 +582,10 @@ WarPhases o- War
 War o-- Battle
 
 War o-- Map
-Map o-- Location
-Location o-- Country
-Location o-- Forces
-Battle o-- Location
+Map o-- Region
+Region o-- Country
+Region o-- Forces
+Battle o-- Region
 ' UI Model View Controller
 UIView -u-o UIController
 UIController -d-o UIView
