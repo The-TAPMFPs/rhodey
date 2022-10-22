@@ -11,9 +11,10 @@ class War {
         Alliance* teamB;
         Map* map;
     public:
-        War();
         War(WarPhase* warPhase);
         void TransitionTo(WarPhase* warPhase);
         ~War();
+        void addCountryToSideA(Country* country);
+        void addCountryToSideB(Country* country);
         void start();
 };

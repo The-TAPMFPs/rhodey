@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "Country.h"
 
 class Alliance {
@@ -13,6 +14,6 @@ class Alliance {
 
     public:
 		Alliance(std::string name);
-		void add(Country* &);
+		void add(Country*);
 		void print();
 };
