@@ -10,5 +10,7 @@ class War {
         Map* map;
     public:
         War();
+        void addCountryToSideA(Country* country);
+        void addCountryToSideB(Country* country);
         void start();
 };
