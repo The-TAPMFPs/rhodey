@@ -1,15 +1,17 @@
 #include "War.h"
 
-War(WarPhase* warPhase) : _warPhase(warPhase) {
+War::War(WarPhase* warPhase) : _warPhase(warPhase) {
   TransitionTo(warPhase);
 }
 
-void TransitionTo(WarPhase* warPhase) {
+void War::TransitionTo(WarPhase* warPhase) {
   if (_warPhase)
     delete _warPhase;
   _warPhase = warPhase;
+  _warPhase->set_war(this);
 }
 
-~War() {
+War::~War() {
   delete _warPhase;
 }
+
