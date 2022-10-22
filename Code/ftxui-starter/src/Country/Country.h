@@ -5,6 +5,7 @@
 
 class Country {
  private:
+  std::string name;
   BattleStrategy* strategy;
 
   //===== STATS =====//
@@ -25,4 +26,7 @@ class Country {
   // TODO trainingFacilities vector<TroopFactory *>
   // TODO vehicleFactories vector<VehicleFactory *>
   Alliance* allies;
+  public:
+	Country(std::string name);
+	std::string getName();
 };
