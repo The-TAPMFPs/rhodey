@@ -14,7 +14,6 @@ if(NOT ftxui_POPULATED)
   FetchContent_Populate(ftxui)
   add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
-
 # ------------------------------------------------------------------------------
 
 project(ftxui-starter
@@ -23,10 +22,13 @@ project(ftxui-starter
 )
 
 # Create the `ftxui-starter` executable in build/
-add_executable(ftxui-starter src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/UI.cpp)
 
 # Specify where the executable target should look for include files
-target_include_directories(ftxui-starter PRIVATE src)
+target_include_directories(ftxui-starter
+  PRIVATE src
+)
+# target_include_directories(ftxui-starter PRIVATE src)
 
 target_link_libraries(ftxui-starter
   PRIVATE ftxui::screen
@@ -44,3 +46,4 @@ if (EMSCRIPTEN)
     configure_file("src/${file}" ${file})
   endforeach(file)
 endif() 
+# ------------------------------------------------------------------------------
