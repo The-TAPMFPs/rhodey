@@ -6,12 +6,7 @@ class WarPhase {
     protected:
         War* _war;
     public:
-        WarPhase();
         virtual ~WarPhase(){};
-        
-        void set_war(War* war){
-            _war = war;
-        }
-
-        virtual void handleWarPhase() = 0; //State pattern `handle()`
+        void set_war(War* war);
+        virtual void DoSomething() = 0;//TODO : Need to implement into ui that the state has changed
 };
