@@ -4,4 +4,6 @@
 #pragma once
 
 class WarPhase { //State
+    public:
+        virtual void handleWarPhase() = 0; //State pattern `handle()`
 };

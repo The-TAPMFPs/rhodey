@@ -22,7 +22,10 @@ project(ftxui-starter
   VERSION 1.0.0
 )
 
+# Create the `ftxui-starter` executable in build/
 add_executable(ftxui-starter src/main.cpp)
+
+# Specify where the executable target should look for include files
 target_include_directories(ftxui-starter PRIVATE src)
 
 target_link_libraries(ftxui-starter
@@ -31,6 +34,7 @@ target_link_libraries(ftxui-starter
   PRIVATE ftxui::component # Not needed for this example.
 )
 
+# --- Emscripten build (can ignore) --------------------------------------------
 if (EMSCRIPTEN) 
   string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS") 
   string(APPEND CMAKE_EXE_LINKER_FLAGS " -s ASYNCIFY") 
