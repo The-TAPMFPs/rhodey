@@ -7,6 +7,8 @@
 #include <iostream>
 #include "Country.h"
 
+class Country;
+
 class Alliance {
     private:
 		std::string name;

@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Country/Country.h"
+#include "../Country/Country.h"
 #include <string>
+
+class Country; //Needed to resolve circular dependency
 
 //The RegionUUID is used for uniquely referencing a region when, for example, it is stored as a Memento
 typedef std::string RegionUUID;

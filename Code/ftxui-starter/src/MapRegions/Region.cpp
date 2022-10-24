@@ -30,11 +30,15 @@ void Region::setRegionName(std::string name) {
 }
 
 int* Region::getCoords() {
-  int coords[2] = {xCoord, yCoord};
-  return coords;
+  return new int[2] {xCoord, yCoord};
 }
 
 void Region::setRegionCoords(int xCoord, int yCoord) {
   this->xCoord = xCoord;
   this->yCoord = yCoord;
+}
+
+RegionUUID Region::generateUUID()
+{
+  return nullptr;
 }

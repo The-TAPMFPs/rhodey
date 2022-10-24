@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "War/War.h"
 
 // Display a component nicely with a title on the left.
 //TODO: Remove since we probably won't need this
@@ -12,6 +13,10 @@ Component Wrap(std::string name, Component component) {
            xflex;
   });
 }
+
+UI::UI(War* war)
+ : war(war)
+{}
 
 void UI::render()
 {

@@ -1,7 +1,12 @@
 #pragma once
 
 #include "Alliance.h"
-#include "BattleStrategy.h"
+#include "BattleStrategy/BattleStrategy.h"
+#include "../MapRegions/Region.h"
+
+//Predefine classes to resolve circular dependencies:
+class Region;
+class Alliance;
 
 class Country {
  private:
@@ -18,10 +23,8 @@ class Country {
   double aggressiveness;
 
   //===== AGGREGATE STATS =====//
-  unsigned int sizeOfArmy() {
-    return 0;  // TODO: Calculate based off of troops
-  }
-  unsigned int prowessInRegion(Region* region) {}
+  unsigned int sizeOfArmy();
+  unsigned int prowessInRegion(Region* region);
 
   // TODO trainingFacilities vector<TroopFactory *>
   // TODO vehicleFactories vector<VehicleFactory *>

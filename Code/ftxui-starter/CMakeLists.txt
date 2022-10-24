@@ -21,20 +21,32 @@ project(ftxui-starter
   VERSION 1.0.0
 )
 
-# Create the `ftxui-starter` executable in build/
-add_executable(${PROJECT_NAME} src/main.cpp src/UI.cpp)
+# --- Create executable --------------------------------------------------------
 
-# Specify where the executable target should look for include files
-target_include_directories(ftxui-starter
-  PRIVATE src
+# This is a bit of a hack, but we can clean it up later
+# Get all .cpp files, set SRC_FILES variable
+file(GLOB_RECURSE SRC_FILES
+  src/main.cpp
+  src/UI.cpp
+
+  #===== Add new folders here!=====#
+  src/Country/*.cpp
+  src/Entities/*.cpp
+  src/MapRegions/*.cpp
+  src/War/*.cpp
 )
-# target_include_directories(ftxui-starter PRIVATE src)
+
+# Create the `ftxui-starter` executable in build/, add all .cpp files
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_link_libraries(ftxui-starter
   PRIVATE ftxui::screen
   PRIVATE ftxui::dom
-  PRIVATE ftxui::component # Not needed for this example.
+  PRIVATE ftxui::component
 )
+
+# ------------------------------------------------------------------------------
+
 
 # --- Emscripten build (can ignore) --------------------------------------------
 if (EMSCRIPTEN) 

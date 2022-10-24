@@ -1,5 +1,8 @@
 #include "War.h"
 
+War::War() {
+}
+
 War::War(WarPhase* warPhase) : _warPhase(warPhase) {
   TransitionTo(warPhase);
   teamA = new Alliance("Side A");

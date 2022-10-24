@@ -2,6 +2,8 @@
 #pragma once
 #include "../War.h"
 
+class War;
+
 class WarPhase {
     protected:
         War* _war;

@@ -1,3 +1,4 @@
+#pragma once
 #pragma region INCLUDES
 #include <functional>
 #include <memory>      // for shared_ptr, allocator, __shared_ptr_access
@@ -16,11 +17,17 @@
 #include "ftxui/dom/node.hpp"                       // for Render
 
 #include "ftxui/screen/color.hpp"                   // for Color, Color::Red, Color::Blue, Color::Green, ftxui
+
+#include "War/War.h"
 #pragma endregion
 
 using namespace ftxui;
 
 class UI {
+    private:
+        War* war;
+
     public:
+        UI(War* war);
         void render();
 };
