@@ -1,24 +1,23 @@
 #include "War.h"
 
-War::War() {
-}
+#include "Conflict.h"
 
-War::War(WarPhase* warPhase) : _warPhase(warPhase) {
-  TransitionTo(warPhase);
+War::War() {
+  this->warPhase = new Conflict();
   teamA = new Alliance("Side A");
   teamB = new Alliance("Side B");
   // map = new Map();
 }
 
 War::~War() {
-  delete _warPhase;
+  delete warPhase;
+  delete teamA, teamB;
 }
 
-void War::TransitionTo(WarPhase* warPhase) {
-  if (_warPhase)
-    delete _warPhase;
-  _warPhase = warPhase;
-  _warPhase->set_war(this);
+void War::transitionTo(WarPhase* warPhase) {
+  if (warPhase != NULL)
+    delete warPhase;
+  this->warPhase = warPhase;
 }
 
 void War::addCountryToSideA(Country* country) {
@@ -29,8 +28,11 @@ void War::addCountryToSideB(Country* country) {
   teamB->add(country);
 }
 
+void War::changeState() {
+  warPhase->handleWarChange(this);
+}
+
 void War::start() {
   teamA->print();
   teamB->print();
-  // TODO start the war
 }
