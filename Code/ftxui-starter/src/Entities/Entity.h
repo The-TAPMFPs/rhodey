@@ -22,7 +22,7 @@ class Entity{
 	void assignWeapon(Weapon & weapon);
 	bool getAndSetDefense(); // gets current value of defense flag and then
 				//   flips it.
-	virtual bool transport()=0;
+	virtual void transport()=0;
 	virtual bool transport(Entity &)=0;
 	virtual Entity* split()=0;
 };

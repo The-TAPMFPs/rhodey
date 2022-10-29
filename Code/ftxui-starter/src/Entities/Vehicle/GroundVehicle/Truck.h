@@ -8,9 +8,9 @@ using namespace std;
 class Truck :public GroundVehicle{
     public:
     Truck();
-     void attack();
-     void d();
-     void transport();
+    void attack();
+    void d();
+    void transport();
     Entity* clone();
 
 };

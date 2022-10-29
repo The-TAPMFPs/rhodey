@@ -1,6 +1,10 @@
 #pragma once
+#include <string>
+#include "Military.h"
 
-class Forces{
+class Forces : public Military{
     private:
-        string name;
+        std::string name;
+        
+
 };

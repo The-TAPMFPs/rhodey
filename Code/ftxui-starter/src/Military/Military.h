@@ -9,3 +9,6 @@ class Military{
         std::vector<Forces*> battleGroups;
         std::vector<SpyAgency*> spies;
     public:
+        virtual void move() = 0;
+        ~Military();
+};
