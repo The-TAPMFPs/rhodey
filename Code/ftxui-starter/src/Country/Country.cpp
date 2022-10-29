@@ -9,7 +9,10 @@ unsigned int Country::prowessInRegion(Region* region)
     return 0;
 }
 
-Country::Country(std::string name) : name(name) {
+Country::Country(std::string name)
+: name(name)
+{
+    //TODO: Initialize country properties
     int population = 0;
     double economy = 0;
     double morale = 0;
@@ -20,5 +23,5 @@ Country::Country(std::string name) : name(name) {
 
 std::string Country::getName()
 {
-    return "";
+    return this->name;
 }
