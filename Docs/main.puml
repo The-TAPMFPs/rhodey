@@ -72,9 +72,9 @@ rectangle "War " as War {
         - war: War*
         - playerName: string
         ~Simulation()
-        
+
     }
-        
+
     class War{
         - participants: vector<Conglomerate*>
         - reasonForWar: string
@@ -209,7 +209,7 @@ rectangle "Factories" {
         + unitFactory()
         ~ unitFactory()
         + {abstract} makeUnit(): Entity*
-        
+
     }
 
     class VehicleFactory {
@@ -260,7 +260,7 @@ class Battle {
 
 '==== Entities ===='
 rectangle "Entities" {
-    
+
     class Entity {
         - name: string
         - hp: int
@@ -399,18 +399,6 @@ note bottom #lightgreen : TEMPLATE METHOD
 rectangle "Strategy States" as StratStates {
     class BattleStrategy {
         + battleAlgorithm()
-        {abstract} + redistributeTroops(): void
-        {abstract} + recruitTroops(): void
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + ReasearchAndDevelop(): void
-        {abstract} + buildVehicles(): void
-        {abstract} + buildWeapons(): void
-        {abstract} + makeAlliance(): void
-        {abstract} + endAlliance(): void
-        {abstract} + surrender(): void
-        {abstract} + proposeTreaty(): void
-        {abstract} + spy(): void
     }
 
     class DefensiveStrategy {
@@ -418,63 +406,39 @@ rectangle "Strategy States" as StratStates {
         + redistributeTroops(): void
         + recruitTroops(): void
         + defend(): void
-        + ReasearchAndDevelop(): void
-        + buildVehicles(): void
-        + buildWeapons(): void
         + makeAlliance(): void
         + endAlliance(): void
         + surrender(): void
         + proposeTreaty(): void
-        + spy(): void
     }
     class OffensiveStrategy {
-        +offensiveAlgorithm()
-        + defensiveAlgorithm()
+        + offensiveAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
         + attack(): void
-        + defend(): void
-        + ReasearchAndDevelop(): void
-        + buildVehicles(): void
-        + buildWeapons(): void
         + makeAlliance(): void
         + endAlliance(): void
-        + surrender(): void
-        + proposeTreaty(): void
         + spy(): void
     }
-    
+
     class ResearchiveStrategy {
-        +researchAlgorithm()
-        + defensiveAlgorithm()
-        + redistributeTroops(): void
-        + recruitTroops(): void
-        + attack(): void
-        + defend(): void
+        + researchAlgorithm()
         + ReasearchAndDevelop(): void
         + buildVehicles(): void
         + buildWeapons(): void
-        + makeAlliance(): void
-        + endAlliance(): void
-        + surrender(): void
-        + proposeTreaty(): void
         + spy(): void
     }
 
     class PrepareStrategy {
-        +researchAlgorithm()
-        + defensiveAlgorithm()
+        + prepareAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
-        + attack(): void
+        + prepare(): void
         + defend(): void
-        + ReasearchAndDevelop(): void
         + buildVehicles(): void
         + buildWeapons(): void
         + makeAlliance(): void
         + endAlliance(): void
-        + surrender(): void
-        + proposeTreaty(): void
         + spy(): void
     }
 }
@@ -495,7 +459,8 @@ rectangle "Mementos" as Mementos {
 
     }
 
-    class WarState { 
+    class WarState {
+
         - Vector<String>
         - WarState(War* war)
     }
@@ -524,7 +489,7 @@ WaterVehicle <|-- Warship
 WaterVehicle <|-- Submarine
 WaterVehicle <|-- Carrier
 
-    
+
 
 VehicleFactory ..> Truck : <<instantiates>>
 VehicleFactory ..> Tank : <<instantiates>>
