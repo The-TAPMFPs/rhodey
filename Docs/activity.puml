@@ -116,3 +116,30 @@ endif
 repeat while (If war hasn't finshed) is (Yes) not (No)
 stop
 @enduml
+
+
+
+@startuml decideStrategy
+(*)  --> "generate 'variable ratings' matrix"
+--> "multiply 'country personality' matrix with the 'variable ratings' matrix to get 'strategy ratings' matrix"
+--> "determine the highest value in the 'strategy ratings' matrix and store the index of the highest value"
+if "Index" then
+  -->[0] "Set Strategy to Offensive"
+  --> (*)
+else
+  -->[1] "Set Strategy to Defensive"
+  --> (*)
+else
+  -->[2] "Set Strategy to Development"
+  --> (*)
+else
+  -->[3] "Set Strategy to Intel"
+  --> (*)
+else
+  -->[4] "Set Strategy to Preparation"
+  --> (*)
+else 
+  -->[5] "Set Strategy to Diplomacy"
+  --> (*)
+endif
+@enduml
