@@ -4,4 +4,5 @@
 
 class BattleStrategy {
     public:
-}
+        virtual void warAlgorithm() = 0;
+};

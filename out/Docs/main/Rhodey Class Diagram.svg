@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="2681px" preserveAspectRatio="none" style="width:4851px;height:2681px;background:#FFFFFF;" version="1.1" viewBox="0 0 4851 2681" width="4851px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="184" x="2326.75" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="174" x="2331.75" y="22.9951">Rhodey War Simulator</text><!--MD5=[9681dc6e01e10c6b4fe06895ae94f592]
+cluster UI--><g id="cluster_UI"><rect fill="none" height="414" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="234" x="159.5" y="236.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="15" x="269" y="251.292">UI</text></g><!--MD5=[0a35392e0e31c55b75b246374c94685e]
+cluster AllianceGroups--><g id="cluster_AllianceGroups"><rect fill="none" height="632" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="429" x="2443.5" y="532.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="119" x="2598.5" y="547.292">AllianceGroups</text></g><!--MD5=[eb9ea793beedcd9ba6c6b852bdb425d6]
+cluster War--><g id="cluster_War"><rect fill="none" height="391" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="977" x="1023.5" y="44.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="31" x="1494" y="59.292">War</text></g><!--MD5=[25c8dd0eab9e9a8b787cf8c59818ad4e]
+cluster Military--><g id="cluster_Military"><rect fill="none" height="623" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="1179" x="2459.5" y="1188.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="56" x="3021" y="1203.292">Military</text></g><!--MD5=[3a83c74b5d015e8f7d0323091d153019]
+cluster Spies--><g id="cluster_Spies"><rect fill="none" height="383" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="412" x="2483.5" y="1363.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="43" x="2668" y="1378.292">Spies</text></g><!--MD5=[13deee7bba1140ca9d8aad9bd20b3c41]
+cluster Factories--><g id="cluster_Factories"><rect fill="none" height="256" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="870" x="1987.5" y="2068.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="73" x="2386" y="2083.292">Factories</text></g><!--MD5=[114f4823940f317c08f5bedd633c9afd]
+cluster Entities--><g id="cluster_Entities"><rect fill="none" height="840" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="1807" x="3038.5" y="1835.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="58" x="3913" y="1850.292">Entities</text></g><!--MD5=[e9ad6c0ac0a2a22f39e025ac32b9639c]
+cluster StratStates--><g id="cluster_StratStates"><rect fill="none" height="383" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="1198" x="796.5" y="467.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="122" x="1334.5" y="482.292">Strategy States</text></g><!--MD5=[10b47cfe567f7e207aae0457b7679e70]
+cluster Mementos--><g id="cluster_Mementos"><rect fill="none" height="622" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="323" x="433.5" y="236.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="82" x="554" y="251.292">Mementos</text></g><!--MD5=[cad2a110fbc9693d34ba885a18d62133]
+class UIView--><g id="elem_UIView"><rect codeLine="9" fill="#F1F1F1" height="58.5938" id="UIView" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="191.5" y="567.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="258" y="585.292">UIView</text><line style="stroke:#181818;stroke-width:0.5;" x1="192.5" x2="368.5" y1="593.5938" y2="593.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="197.5" y="610.5889">-controller: UIController*</text><line style="stroke:#181818;stroke-width:0.5;" x1="192.5" x2="368.5" y1="617.8906" y2="617.8906"/></g><!--MD5=[27c5a2a809d0cc42536cb46b7555e957]
+class UIController--><g id="elem_UIController"><rect codeLine="12" fill="#F1F1F1" height="74.8906" id="UIController" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="147" x="207" y="279.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="240.5" y="297.292">UIController</text><line style="stroke:#181818;stroke-width:0.5;" x1="208" x2="353" y1="305.5938" y2="305.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="213" y="322.5889">-view: UIView*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="213" y="338.8857">-model: Simluation*</text><line style="stroke:#181818;stroke-width:0.5;" x1="208" x2="353" y1="346.1875" y2="346.1875"/></g><!--MD5=[8b0b84c05b2c60065cde3e262a36ebd2]
+class Alliance--><g id="elem_Alliance"><rect codeLine="20" fill="#F1F1F1" height="58.5938" id="Alliance" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="220" x="2459.5" y="767.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="2543.5" y="785.292">Alliance</text><line style="stroke:#181818;stroke-width:0.5;" x1="2460.5" x2="2678.5" y1="793.5938" y2="793.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="208" x="2465.5" y="810.5889">-members: vector&lt;Country*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="2460.5" x2="2678.5" y1="817.8906" y2="817.8906"/></g><!--MD5=[deb4e1f6eb1e3c1256fdb830f96abfbb]
+class Country--><g id="elem_Country"><rect codeLine="31" fill="#F1F1F1" height="237.8594" id="Country" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="311" x="2460" y="910.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="2588.5" y="928.292">Country</text><line style="stroke:#181818;stroke-width:0.5;" x1="2461" x2="2770" y1="936.5938" y2="936.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="2466" y="953.5889">-sizeOfArmy: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="2466" y="969.8857">-population: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="2466" y="986.1826">-economy: double</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="2466" y="1002.4795">-morale: double</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="2466" y="1018.7764">-resolve: double</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="2466" y="1035.0732">-supplies: double</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="2466" y="1051.3701">-attrition: double</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="2466" y="1067.667">-forces: Military</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="2466" y="1083.9639">-alliances: Alliance *</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="2466" y="1100.2607">-Allies: vector&lt;Countries*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="2466" y="1116.5576">-trainingFacilitys: vector&lt;TroopFactory*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="299" x="2466" y="1132.8545">-vehicleFactories: vector&lt;VehicleFactory*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="2461" x2="2770" y1="1140.1563" y2="1140.1563"/></g><!--MD5=[bdb7a498ae268604f9dee9fee1851af7]
+class Region--><g id="elem_Region"><rect codeLine="46" fill="#F1F1F1" height="107.4844" id="Region" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="142" x="2714.5" y="743.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="2761" y="761.292">Region</text><line style="stroke:#181818;stroke-width:0.5;" x1="2715.5" x2="2855.5" y1="769.5938" y2="769.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="2720.5" y="786.5889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="2720.5" y="802.8857">-description: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="2720.5" y="819.1826">-terrain: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="2720.5" y="835.4795">-population: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="2715.5" x2="2855.5" y1="842.7813" y2="842.7813"/></g><!--MD5=[4dfc6a72b8dd60daa1b635d583ff79da]
+class Map--><g id="elem_Map"><rect codeLine="53" fill="#F1F1F1" height="58.5938" id="Map" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="310" x="2502.5" y="567.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="2643" y="585.292">Map</text><line style="stroke:#181818;stroke-width:0.5;" x1="2503.5" x2="2811.5" y1="593.5938" y2="593.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="298" x="2508.5" y="610.5889">-regions : std::map&lt;regionUUID, Region*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="2503.5" x2="2811.5" y1="617.8906" y2="617.8906"/></g><!--MD5=[e36a4c0f7055b067b077b74a1222e806]
+class Simulation--><g id="elem_Simulation"><rect codeLine="62" fill="#F1F1F1" height="205.2656" id="Simulation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="233" x="1332" y="214.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="1413" y="232.292">Simulation</text><line style="stroke:#181818;stroke-width:0.5;" x1="1333" x2="1564" y1="240.5938" y2="240.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="199" x="1338" y="257.5889">-uniqueInstance: Simulation*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="1338" y="273.8857">-view: UIView*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="1338" y="290.1826">-war: War*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="1338" y="306.4795">-playerName: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="1333" x2="1564" y1="313.7813" y2="313.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="1338" y="330.7764">+Simulation()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="1338" y="347.0732">#Simulation()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="1338" y="363.3701">#~Simulation()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="1338" y="379.667">#Simulation(Simulation &amp;)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221" x="1338" y="395.9639">#=(Simulation &amp;) : Simulation &amp;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="1338" y="412.2607">~Simulation()</text></g><!--MD5=[5b4d422899d51f944b4a408469b6a57a]
+class War--><g id="elem_War"><rect codeLine="76" fill="#F1F1F1" height="188.9688" id="War" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="366" x="1618.5" y="222.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="1788.5" y="240.292">War</text><line style="stroke:#181818;stroke-width:0.5;" x1="1619.5" x2="1983.5" y1="248.5938" y2="248.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="228" x="1624.5" y="265.5889">-participants: vector&lt;Alliances*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="1624.5" y="281.8857">-reasonForWar: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="1624.5" y="298.1826">-reasonEndWar: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="1624.5" y="314.4795">-battles: vector&lt;Battle*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="1624.5" y="330.7764">-state: WarPhases</text><line style="stroke:#181818;stroke-width:0.5;" x1="1619.5" x2="1983.5" y1="338.0781" y2="338.0781"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="1624.5" y="355.0732">+request(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="1624.5" y="371.3701">+setState(phase: WarPhases): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="223" x="1624.5" y="387.667">+makeMemento():WarMemento</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="354" x="1624.5" y="403.9639">+restoreBeforeState(WarMemento memento): void</text></g><!--MD5=[0c65bee69f14559525e0db94cac6b363]
+class WarPhases--><g id="elem_WarPhases"><rect codeLine="90" fill="#F1F1F1" height="91.1875" id="WarPhases" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="1136.5" y="271.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="1178" y="289.292">WarPhases</text><line style="stroke:#181818;stroke-width:0.5;" x1="1137.5" x2="1295.5" y1="297.5938" y2="297.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="1142.5" y="314.5889">#war: War*</text><line style="stroke:#181818;stroke-width:0.5;" x1="1137.5" x2="1295.5" y1="321.8906" y2="321.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1142.5" y="338.8857">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="148" x="1142.5" y="355.1826">+changeState(): void</text></g><!--MD5=[9be687320010de235d42f861cee129f6]
+class Dispute--><g id="elem_Dispute"><rect codeLine="96" fill="#F1F1F1" height="74.8906" id="Dispute" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="1815" y="79.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="1867.5" y="97.292">Dispute</text><line style="stroke:#181818;stroke-width:0.5;" x1="1816" x2="1973" y1="105.5938" y2="105.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1816" x2="1973" y1="113.5938" y2="113.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1821" y="130.5889">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="1821" y="146.8857">+changeState(): void</text></g><!--MD5=[b85b2eaa9d07e18f255ffe398ebe2465]
+class Conflict--><g id="elem_Conflict"><rect codeLine="101" fill="#F1F1F1" height="74.8906" id="Conflict" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="1621" y="79.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="1675" y="97.292">Conflict</text><line style="stroke:#181818;stroke-width:0.5;" x1="1622" x2="1779" y1="105.5938" y2="105.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1622" x2="1779" y1="113.5938" y2="113.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1627" y="130.5889">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="1627" y="146.8857">+changeState(): void</text></g><!--MD5=[cb668886808a2df382ea427d505ee2e7]
+class Hostilities--><g id="elem_Hostilities"><rect codeLine="106" fill="#F1F1F1" height="74.8906" id="Hostilities" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="1427" y="79.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="1473.5" y="97.292">Hostilities</text><line style="stroke:#181818;stroke-width:0.5;" x1="1428" x2="1585" y1="105.5938" y2="105.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1428" x2="1585" y1="113.5938" y2="113.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1433" y="130.5889">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="1433" y="146.8857">+changeState(): void</text></g><!--MD5=[5c99b14326425bfb7e2d0a34824834d9]
+class PostWar--><g id="elem_PostWar"><rect codeLine="111" fill="#F1F1F1" height="74.8906" id="PostWar" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="1233" y="79.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1284" y="97.292">PostWar</text><line style="stroke:#181818;stroke-width:0.5;" x1="1234" x2="1391" y1="105.5938" y2="105.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1234" x2="1391" y1="113.5938" y2="113.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1239" y="130.5889">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="1239" y="146.8857">+changeState(): void</text></g><!--MD5=[fbeaf0168be1337c141a5044bcceaf1b]
+class DisputeSettled--><g id="elem_DisputeSettled"><rect codeLine="116" fill="#F1F1F1" height="74.8906" id="DisputeSettled" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159" x="1039" y="79.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="1067" y="97.292">DisputeSettled</text><line style="stroke:#181818;stroke-width:0.5;" x1="1040" x2="1197" y1="105.5938" y2="105.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1040" x2="1197" y1="113.5938" y2="113.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="1045" y="130.5889">+handle(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="1045" y="146.8857">+changeState(): void</text></g><g id="elem_GMN22"><path d="M1040,304.2969 L1040,329.4297 A0,0 0 0 0 1040,329.4297 L1101,329.4297 A0,0 0 0 0 1101,329.4297 L1101,314.2969 L1091,304.2969 L1074.5,304.2969 L1070.5,154.4169 L1066.5,304.2969 L1040,304.2969 A0,0 0 0 0 1040,304.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M1091,304.2969 L1091,314.2969 L1101,314.2969 L1091,304.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="40" x="1046" y="321.3638">STATE</text></g><!--MD5=[ba5c4602add3486c2e20ae3d324fdc4e]
+class Military--><g id="elem_Military"><rect codeLine="129" fill="#F1F1F1" height="107.4844" id="Military" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="238" x="2570.5" y="1223.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="2666.5" y="1241.292">Military</text><line style="stroke:#181818;stroke-width:0.5;" x1="2571.5" x2="2807.5" y1="1249.5938" y2="1249.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="226" x="2576.5" y="1266.5889">-BattleGroups: vector&lt;Forces*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="202" x="2576.5" y="1282.8857">-Spies: vector&lt;SpyAgency*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="2571.5" x2="2807.5" y1="1290.1875" y2="1290.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="99" x="2576.5" y="1307.1826">+move(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="2576.5" y="1323.4795">~Military()</text></g><!--MD5=[fe750f2370fc4c18020a8aa7661fb12e]
+class Forces--><g id="elem_Forces"><rect codeLine="136" fill="#F1F1F1" height="156.375" id="Forces" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="3054.5" y="1390.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="3099" y="1408.292">Forces</text><line style="stroke:#181818;stroke-width:0.5;" x1="3055.5" x2="3189.5" y1="1416.5938" y2="1416.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="3060.5" y="1433.5889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="3060.5" y="1449.8857">-army: Army*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="3060.5" y="1466.1826">-navy: Navy*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="3060.5" y="1482.4795">-airforce: Airforce*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="3060.5" y="1498.7764">-Region: Region*</text><line style="stroke:#181818;stroke-width:0.5;" x1="3055.5" x2="3189.5" y1="1506.0781" y2="1506.0781"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="99" x="3060.5" y="1523.0732">+move(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="3060.5" y="1539.3701">~Military()</text></g><!--MD5=[b96ce472b013257463663b1526cad2a5]
+class Army--><g id="elem_Army"><rect codeLine="146" fill="#F1F1F1" height="172.6719" id="Army" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="3243.5" y="1614.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="3312.5" y="1632.292">Army</text><line style="stroke:#181818;stroke-width:0.5;" x1="3244.5" x2="3414.5" y1="1640.5938" y2="1640.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="3249.5" y="1657.5889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="3249.5" y="1673.8857">-numSoldiers: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="3249.5" y="1690.1826">-numCommanders: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="3249.5" y="1706.4795">-numTanks: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="3249.5" y="1722.7764">-numTrucks: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="3249.5" y="1739.0732">-units: vector&lt;Entity*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="3244.5" x2="3414.5" y1="1746.375" y2="1746.375"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="3249.5" y="1763.3701">+move(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="3249.5" y="1779.667">~Army()</text></g><!--MD5=[3bc30742d41fbfb363fa205fef73a3bc]
+class Navy--><g id="elem_Navy"><rect codeLine="157" fill="#F1F1F1" height="188.9688" id="Navy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="3450.5" y="1606.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="3520.5" y="1624.292">Navy</text><line style="stroke:#181818;stroke-width:0.5;" x1="3451.5" x2="3621.5" y1="1632.5938" y2="1632.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="3456.5" y="1649.5889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="3456.5" y="1665.8857">-numCargoShips: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="3456.5" y="1682.1826">-numWarShips: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="3456.5" y="1698.4795">-numCarriers: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="3456.5" y="1714.7764">-numSubmarines: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="3456.5" y="1731.0732">-numFighters: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="3456.5" y="1747.3701">-units: vector&lt;Entity*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="3451.5" x2="3621.5" y1="1754.6719" y2="1754.6719"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="3456.5" y="1771.667">+move(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="3456.5" y="1787.9639">~Navy()</text></g><!--MD5=[50e3071ce4a3a39aefda7b691ee1caaf]
+class AirForce--><g id="elem_AirForce"><rect codeLine="169" fill="#F1F1F1" height="140.0781" id="AirForce" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="3036.5" y="1630.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="3094.5" y="1648.792">AirForce</text><line style="stroke:#181818;stroke-width:0.5;" x1="3037.5" x2="3207.5" y1="1657.0938" y2="1657.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="3042.5" y="1674.0889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="3042.5" y="1690.3857">-numFighters: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="3042.5" y="1706.6826">-numBombers: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="3042.5" y="1722.9795">-units: vector&lt;Entity*&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="3037.5" x2="3207.5" y1="1730.2813" y2="1730.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="3042.5" y="1747.2764">+move(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="3042.5" y="1763.5732">~AirForce()</text></g><g id="elem_GMN37"><path d="M2911.5,1688.2969 L2911.5,1697.2969 L2813.15,1701.2969 L2911.5,1705.2969 L2911.5,1713.4297 A0,0 0 0 0 2911.5,1713.4297 L3001.5,1713.4297 A0,0 0 0 0 3001.5,1713.4297 L3001.5,1698.2969 L2991.5,1688.2969 L2911.5,1688.2969 A0,0 0 0 0 2911.5,1688.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M2991.5,1688.2969 L2991.5,1698.2969 L3001.5,1698.2969 L2991.5,1688.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="2917.5" y="1705.3638">OBSERVER</text></g><!--MD5=[0bcb2b7249c2f062b18179176f1003ff]
+class SpyAgency--><g id="elem_SpyAgency"><rect codeLine="180" fill="#F1F1F1" height="140.0781" id="SpyAgency" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="380" x="2499.5" y="1398.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="2651.5" y="1416.292">SpyAgency</text><line style="stroke:#181818;stroke-width:0.5;" x1="2500.5" x2="2878.5" y1="1424.5938" y2="1424.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="204" x="2505.5" y="1441.5889">#workFor: vector&lt;Country*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="214" x="2505.5" y="1457.8857">#spyingOn: vector&lt;Country*&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="2505.5" y="1474.1826">#status: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="2500.5" x2="2878.5" y1="1481.4844" y2="1481.4844"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="368" x="2505.5" y="1498.4795">+SpyAgency(spyingFor Country*, spyingOn Country*)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="2505.5" y="1514.7764">+update(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="2505.5" y="1531.0732">~SpyAgency()</text></g><!--MD5=[1372b348485b5afded9e8912acfd28bd]
+class Spy--><g id="elem_Spy"><rect codeLine="189" fill="#F1F1F1" height="58.5938" id="Spy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="121" x="2692" y="1671.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="2740" y="1689.292">Spy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2693" x2="2812" y1="1697.5938" y2="1697.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="2693" x2="2812" y1="1705.5938" y2="1705.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="2698" y="1722.5889">+update(): void</text></g><!--MD5=[cda3a893985e473c2837dcfe17a6824f]
+class UnitFactory--><g id="elem_UnitFactory"><rect codeLine="203" fill="#F1F1F1" height="140.0781" id="UnitFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="154" x="2687.5" y="2135.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="2726" y="2153.792">UnitFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="2688.5" x2="2840.5" y1="2162.0938" y2="2162.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="2693.5" y="2179.0889">#name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="2693.5" y="2195.3857">#hp: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="2693.5" y="2211.6826">#dmg: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="2688.5" x2="2840.5" y1="2218.9844" y2="2218.9844"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="2693.5" y="2235.9795">+unitFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="2693.5" y="2252.2764">~unitFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="142" x="2693.5" y="2268.5732">+makeUnit(): Entity*</text></g><!--MD5=[0ddca5c7e8a4f8347a16b84b3700570e]
+class VehicleFactory--><g id="elem_VehicleFactory"><rect codeLine="213" fill="#F1F1F1" height="91.1875" id="VehicleFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153" x="2004" y="2160.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="2030.5" y="2178.292">VehicleFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="2005" x2="2156" y1="2186.5938" y2="2186.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="2005" x2="2156" y1="2194.5938" y2="2194.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="2010" y="2211.5889">+VehicleFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="2010" y="2227.8857">~VehicleFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="2010" y="2244.1826">+makeUnit(): Entity*</text></g><!--MD5=[e59a14aac8f16df11c0331dd95ea525d]
+class TroopFactory--><g id="elem_TroopFactory"><rect codeLine="219" fill="#F1F1F1" height="91.1875" id="TroopFactory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153" x="2499" y="2160.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="2530" y="2178.292">TroopFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="2500" x2="2651" y1="2186.5938" y2="2186.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="2500" x2="2651" y1="2194.5938" y2="2194.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="2505" y="2211.5889">+TroopFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="2505" y="2227.8857">~TruckFactory()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="2505" y="2244.1826">+makeUnit(): Entity*</text></g><!--MD5=[9e8cdc57c56bad5cdfc47653c9df3022]
+class VehicleType--><g id="elem_VehicleType"><rect codeLine="225" fill="#F1F1F1" height="205.2656" id="VehicleType" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="2192.5" y="2103.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="2209.5" y="2121.292">VehicleType</text><line style="stroke:#181818;stroke-width:0.5;" x1="2193.5" x2="2309.5" y1="2129.5938" y2="2129.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="2198.5" y="2146.5889">«enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="2198.5" y="2162.8857">Truck</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="2198.5" y="2179.1826">Tank</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="2198.5" y="2195.4795">Carrier</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="2198.5" y="2211.7764">CargoShip</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="2198.5" y="2228.0732">Warship</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="2198.5" y="2244.3701">Submarine</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="2198.5" y="2260.667">FighterJet</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="2198.5" y="2276.9639">Bomber</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="2198.5" y="2293.2607">CargoPlane</text><line style="stroke:#181818;stroke-width:0.5;" x1="2193.5" x2="2309.5" y1="2300.5625" y2="2300.5625"/></g><!--MD5=[286f13879ac3359ac0ce726638817127]
+class TroopType--><g id="elem_TroopType"><rect codeLine="238" fill="#F1F1F1" height="107.4844" id="TroopType" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="2345.5" y="2152.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="2367" y="2170.292">TroopType</text><line style="stroke:#181818;stroke-width:0.5;" x1="2346.5" x2="2462.5" y1="2178.5938" y2="2178.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="2351.5" y="2195.5889">«enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="2351.5" y="2211.8857">Soldier</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="2351.5" y="2228.1826">Commander</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="2351.5" y="2244.4795">Spy</text><line style="stroke:#181818;stroke-width:0.5;" x1="2346.5" x2="2462.5" y1="2251.7813" y2="2251.7813"/></g><!--MD5=[be996cdb8e6bf2fc7cb89c555f2cd144]
+class Entity--><g id="elem_Entity"><rect codeLine="262" fill="#F1F1F1" height="172.6719" id="Entity" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="3249.5" y="1870.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="3310.5" y="1888.292">Entity</text><line style="stroke:#181818;stroke-width:0.5;" x1="3250.5" x2="3408.5" y1="1896.5938" y2="1896.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="3255.5" y="1913.5889">-name: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="3255.5" y="1929.8857">-hp: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="3255.5" y="1946.1826">-dmg: int</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="3255.5" y="1962.4795">-weapons: Weapon**</text><line style="stroke:#181818;stroke-width:0.5;" x1="3250.5" x2="3408.5" y1="1969.7813" y2="1969.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="3255.5" y="1986.7764">+Entity()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="3255.5" y="2003.0732">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="3255.5" y="2019.3701">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="108" x="3255.5" y="2035.667">+clone(): Entity</text></g><g id="elem_GMN52"><path d="M3120.5,2193.2969 L3120.5,2218.4297 L3214.5,2218.4297 L3214.5,2203.2969 L3204.5,2193.2969 L3120.5,2193.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M3204.5,2193.2969 L3204.5,2203.2969 L3214.5,2203.2969 L3204.5,2193.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="73" x="3126.5" y="2210.3638">PROTOTYPE</text></g><!--MD5=[3aa0d89c6bfdcbf7f32042cedac57549]
+class Vehicle--><g id="elem_Vehicle"><rect codeLine="274" fill="#F1F1F1" height="123.7813" id="Vehicle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="132" x="3695.5" y="2143.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="3736.5" y="2161.792">Vehicle</text><line style="stroke:#181818;stroke-width:0.5;" x1="3696.5" x2="3826.5" y1="2170.0938" y2="2170.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="3701.5" y="2187.0889">-capacity: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="3696.5" x2="3826.5" y1="2194.3906" y2="2194.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="3701.5" y="2211.3857">+Vehicle()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="3701.5" y="2227.6826">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="3701.5" y="2243.9795">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="120" x="3701.5" y="2260.2764">+clone(): Vehicle</text></g><!--MD5=[5170aa657d2a9e28e8f566ab9de8aedb]
+class GroundVehicle--><g id="elem_GroundVehicle"><rect codeLine="282" fill="#F1F1F1" height="107.4844" id="GroundVehicle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="184" x="3878.5" y="2376.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="3919.5" y="2394.792">GroundVehicle</text><line style="stroke:#181818;stroke-width:0.5;" x1="3879.5" x2="4061.5" y1="2403.0938" y2="2403.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3879.5" x2="4061.5" y1="2411.0938" y2="2411.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="3884.5" y="2428.0889">+GroundVehicle()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="3884.5" y="2444.3857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="3884.5" y="2460.6826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="172" x="3884.5" y="2476.9795">+clone(): GroundVehicle</text></g><!--MD5=[f2ba7f6ab60af8dd0d3e354f91729b14]
+class Truck--><g id="elem_Truck"><rect codeLine="289" fill="#F1F1F1" height="107.4844" id="Truck" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="183" x="4097" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="4169" y="2570.292">Truck</text><line style="stroke:#181818;stroke-width:0.5;" x1="4098" x2="4279" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="4098" x2="4279" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="4103" y="2603.5889">+Truck()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="4103" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="4103" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="4103" y="2652.4795">+clone(): GroundVehicle</text></g><!--MD5=[e3a50cf08d0c0cc2e56b10ad5dd922e4]
+class Tank--><g id="elem_Tank"><rect codeLine="296" fill="#F1F1F1" height="107.4844" id="Tank" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="183" x="3879" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="3953.5" y="2570.292">Tank</text><line style="stroke:#181818;stroke-width:0.5;" x1="3880" x2="4061" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3880" x2="4061" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="3885" y="2603.5889">+Tank()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3885" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3885" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="3885" y="2652.4795">+clone(): GroundVehicle</text></g><!--MD5=[464d3be058316ddb22c93cfda7e2518a]
+class AirVehicle--><g id="elem_AirVehicle"><rect codeLine="303" fill="#F1F1F1" height="107.4844" id="AirVehicle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="4405.5" y="2376.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="4447" y="2394.792">AirVehicle</text><line style="stroke:#181818;stroke-width:0.5;" x1="4406.5" x2="4554.5" y1="2403.0938" y2="2403.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="4406.5" x2="4554.5" y1="2411.0938" y2="2411.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="4411.5" y="2428.0889">+AirVehicle()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="4411.5" y="2444.3857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="4411.5" y="2460.6826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="138" x="4411.5" y="2476.9795">+clone(): AirVehicle</text></g><!--MD5=[aef0084f23f15ba904bd1b6de03ead42]
+class FighterJet--><g id="elem_FighterJet"><rect codeLine="310" fill="#F1F1F1" height="107.4844" id="FighterJet" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="4681.5" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="4723" y="2570.292">FighterJet</text><line style="stroke:#181818;stroke-width:0.5;" x1="4682.5" x2="4828.5" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="4682.5" x2="4828.5" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="4687.5" y="2603.5889">+FighterJet()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="4687.5" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="4687.5" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="4687.5" y="2652.4795">+clone(): AirVehicle</text></g><!--MD5=[1d65913cb02bd31f7533a34c54f49902]
+class Bomber--><g id="elem_Bomber"><rect codeLine="317" fill="#F1F1F1" height="107.4844" id="Bomber" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="4315.5" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="4362" y="2570.292">Bomber</text><line style="stroke:#181818;stroke-width:0.5;" x1="4316.5" x2="4462.5" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="4316.5" x2="4462.5" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="4321.5" y="2603.5889">+Bomber()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="4321.5" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="4321.5" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="4321.5" y="2652.4795">+clone(): AirVehicle</text></g><!--MD5=[f404fb335fe7d6a6f6bd75daad77eff5]
+class CargoPlane--><g id="elem_CargoPlane"><rect codeLine="324" fill="#F1F1F1" height="107.4844" id="CargoPlane" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="4498.5" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="4533" y="2570.292">CargoPlane</text><line style="stroke:#181818;stroke-width:0.5;" x1="4499.5" x2="4645.5" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="4499.5" x2="4645.5" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="4504.5" y="2603.5889">+CargoPlane()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="4504.5" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="4504.5" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="4504.5" y="2652.4795">+clone(): AirVehicle</text></g><!--MD5=[ddbaff940da520c929b2e15e9bcd4e15]
+class WaterVehicle--><g id="elem_WaterVehicle"><rect codeLine="331" fill="#F1F1F1" height="107.4844" id="WaterVehicle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="173" x="3466" y="2376.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="3507.5" y="2394.792">WaterVehicle</text><line style="stroke:#181818;stroke-width:0.5;" x1="3467" x2="3638" y1="2403.0938" y2="2403.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3467" x2="3638" y1="2411.0938" y2="2411.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="3472" y="2428.0889">+WaterVehicle()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="3472" y="2444.3857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="3472" y="2460.6826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="161" x="3472" y="2476.9795">+clone(): WaterVehicle</text></g><!--MD5=[d081347fb9a72870ae6b6f95b8433de0]
+class CargoShip--><g id="elem_CargoShip"><rect codeLine="338" fill="#F1F1F1" height="107.4844" id="CargoShip" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171" x="3261" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="3311" y="2570.292">CargoShip</text><line style="stroke:#181818;stroke-width:0.5;" x1="3262" x2="3431" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3262" x2="3431" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="3267" y="2603.5889">+CargoShip()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3267" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3267" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="3267" y="2652.4795">+clone(): WaterVehicle</text></g><!--MD5=[a8bd195286ad77a7cfb4314cc8cc6778]
+class Warship--><g id="elem_Warship"><rect codeLine="345" fill="#F1F1F1" height="107.4844" id="Warship" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171" x="3055" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="3113" y="2570.292">Warship</text><line style="stroke:#181818;stroke-width:0.5;" x1="3056" x2="3225" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3056" x2="3225" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="3061" y="2603.5889">+Warship()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3061" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3061" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="3061" y="2652.4795">+clone(): WaterVehicle</text></g><!--MD5=[4ebc25de43fe9fb42083a385e08d059e]
+class Submarine--><g id="elem_Submarine"><rect codeLine="352" fill="#F1F1F1" height="107.4844" id="Submarine" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171" x="3467" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="3515.5" y="2570.292">Submarine</text><line style="stroke:#181818;stroke-width:0.5;" x1="3468" x2="3637" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3468" x2="3637" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="3473" y="2603.5889">+Submarine()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3473" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3473" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="3473" y="2652.4795">+clone(): WaterVehicle</text></g><!--MD5=[a0a16592912506033c23e089b53304f5]
+class Carrier--><g id="elem_Carrier"><rect codeLine="359" fill="#F1F1F1" height="107.4844" id="Carrier" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171" x="3673" y="2552.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="3736" y="2570.292">Carrier</text><line style="stroke:#181818;stroke-width:0.5;" x1="3674" x2="3843" y1="2578.5938" y2="2578.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3674" x2="3843" y1="2586.5938" y2="2586.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="3679" y="2603.5889">+Carrier()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3679" y="2619.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3679" y="2636.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159" x="3679" y="2652.4795">+clone(): WaterVehicle</text></g><!--MD5=[a894ef9f30ffb0847c46959c7f3022c7]
+class Troop--><g id="elem_Troop"><rect codeLine="366" fill="#F1F1F1" height="107.4844" id="Troop" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="3249.5" y="2152.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="3290" y="2170.292">Troop</text><line style="stroke:#181818;stroke-width:0.5;" x1="3250.5" x2="3370.5" y1="2178.5938" y2="2178.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3250.5" x2="3370.5" y1="2186.5938" y2="2186.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="3255.5" y="2203.5889">+Troop()</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="102" x="3255.5" y="2219.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="109" x="3255.5" y="2236.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="110" x="3255.5" y="2252.4795">+clone(): Troop</text></g><!--MD5=[ab18ab109d20d07a46d8dcc7319a218d]
+class Soldier--><g id="elem_Soldier"><rect codeLine="373" fill="#F1F1F1" height="107.4844" id="Soldier" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="3244.5" y="2376.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="3282" y="2394.792">Soldier</text><line style="stroke:#181818;stroke-width:0.5;" x1="3245.5" x2="3365.5" y1="2403.0938" y2="2403.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3245.5" x2="3365.5" y1="2411.0938" y2="2411.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="3250.5" y="2428.0889">+Soldier()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3250.5" y="2444.3857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3250.5" y="2460.6826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="3250.5" y="2476.9795">+clone(): Troop</text></g><!--MD5=[0901e0b4d45ea89c0093187a195c32bf]
+class Commander--><g id="elem_Commander"><rect codeLine="380" fill="#F1F1F1" height="123.7813" id="Commander" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="140" x="3059.5" y="2368.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="3087" y="2386.292">Commander</text><line style="stroke:#181818;stroke-width:0.5;" x1="3060.5" x2="3198.5" y1="2394.5938" y2="2394.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="3060.5" x2="3198.5" y1="2402.5938" y2="2402.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="3065.5" y="2419.5889">+Commander()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3065.5" y="2435.8857">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="3065.5" y="2452.1826">+defend(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="3065.5" y="2468.4795">+command(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="3065.5" y="2484.7764">+clone(): Troop</text></g><!--MD5=[a3f6aaa3f93db2c29fed664e0312b4de]
+class Weapon--><g id="elem_Weapon"><rect codeLine="388" fill="#F1F1F1" height="74.8906" id="Weapon" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="3054.5" y="1919.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="3106" y="1937.292">Weapon</text><line style="stroke:#181818;stroke-width:0.5;" x1="3055.5" x2="3213.5" y1="1945.5938" y2="1945.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="3060.5" y="1962.5889">-weaponName: string</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="3060.5" y="1978.8857">-dmg: int</text><line style="stroke:#181818;stroke-width:0.5;" x1="3055.5" x2="3213.5" y1="1986.1875" y2="1986.1875"/></g><!--MD5=[b8f3e6aed6df189d6c1e9c59d199ab8c]
+class BattleStrategy--><g id="elem_BattleStrategy"><rect codeLine="398" fill="#F1F1F1" height="58.5938" id="BattleStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="124" x="1484.5" y="767.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="1498" y="785.292">BattleStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1485.5" x2="1607.5" y1="793.5938" y2="793.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1485.5" x2="1607.5" y1="801.5938" y2="801.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="1490.5" y="818.5889">+warAlgorithm()</text></g><!--MD5=[ccfaad6c578f74810ea2e8adc7817d98]
+class DefensiveStrategy--><g id="elem_DefensiveStrategy"><rect codeLine="402" fill="#F1F1F1" height="123.7813" id="DefensiveStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="199" x="1564" y="534.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="1600.5" y="552.792">DefensiveStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1565" x2="1762" y1="561.0938" y2="561.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1565" x2="1762" y1="569.0938" y2="569.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1570" y="586.0889">+warAlgorithm()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="187" x="1570" y="602.3857">+redistributeTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="1570" y="618.6826">+recruitTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="1570" y="634.9795">+makeAlliance(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="1570" y="651.2764">+endAlliance(): void</text></g><!--MD5=[ff6ae3af37cf08f4d5b63dcf8d4178b2]
+class OffensiveStrategy--><g id="elem_OffensiveStrategy"><rect codeLine="409" fill="#F1F1F1" height="140.0781" id="OffensiveStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="199" x="1330" y="526.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="1369" y="544.792">OffensiveStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1331" x2="1528" y1="553.0938" y2="553.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1331" x2="1528" y1="561.0938" y2="561.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1336" y="578.0889">+warAlgorithm()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="187" x="1336" y="594.3857">+redistributeTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="1336" y="610.6826">+recruitTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="1336" y="626.9795">+attack(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="1336" y="643.2764">+makeAlliance(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="1336" y="659.5732">+spy(): void</text></g><!--MD5=[06c6b1f65b6b4c70722f79d2328d976e]
+class ResearchiveStrategy--><g id="elem_ResearchiveStrategy"><rect codeLine="418" fill="#F1F1F1" height="123.7813" id="ResearchiveStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="221" x="1074" y="534.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="1113.5" y="552.792">ResearchiveStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1075" x2="1294" y1="561.0938" y2="561.0938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1075" x2="1294" y1="569.0938" y2="569.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1080" y="586.0889">+warAlgorithm()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="209" x="1080" y="602.3857">+ResearchAndDevelop(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="1080" y="618.6826">+buildVehicles(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="1080" y="634.9795">+buildWeapons(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="1080" y="651.2764">+spy(): void</text></g><!--MD5=[4e98515750f58b50c5678ce270b04517]
+class PrepareStrategy--><g id="elem_PrepareStrategy"><rect codeLine="426" fill="#F1F1F1" height="172.6719" id="PrepareStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="199" x="840" y="510.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="884" y="528.292">PrepareStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="841" x2="1038" y1="536.5938" y2="536.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="841" x2="1038" y1="544.5938" y2="544.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="846" y="561.5889">+warAlgorithm()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="187" x="846" y="577.8857">+redistributeTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="846" y="594.1826">+recruitTroops(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="846" y="610.4795">+buildVehicles(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="846" y="626.7764">+buildWeapons(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="846" y="643.0732">+makeAlliance(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="846" y="659.3701">+endAlliance(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="846" y="675.667">+spy(): void</text></g><!--MD5=[431b38b5cf0b473e4641cacc9b09eef9]
+class DiplomacyStrategy--><g id="elem_DiplomacyStrategy"><rect codeLine="437" fill="#F1F1F1" height="91.1875" id="DiplomacyStrategy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="1798.5" y="551.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="1820.5" y="569.292">DiplomacyStrategy</text><line style="stroke:#181818;stroke-width:0.5;" x1="1799.5" x2="1969.5" y1="577.5938" y2="577.5938"/><line style="stroke:#181818;stroke-width:0.5;" x1="1799.5" x2="1969.5" y1="585.5938" y2="585.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1804.5" y="602.5889">+warAlgorithm()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="1804.5" y="618.8857">+proposeTreaty(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="127" x="1804.5" y="635.1826">+surrender(): void</text></g><!--MD5=[707c71eb0a9ff26a040d7bf1f06ff5db]
+class WarMemento--><g id="elem_WarMemento"><rect codeLine="449" fill="#F1F1F1" height="91.1875" id="WarMemento" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="558" y="551.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="584.5" y="569.292">WarMemento</text><line style="stroke:#181818;stroke-width:0.5;" x1="559" x2="702" y1="577.5938" y2="577.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="564" y="594.5889">-state: WarState*</text><line style="stroke:#181818;stroke-width:0.5;" x1="559" x2="702" y1="601.8906" y2="601.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="564" y="618.8857">+getState()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="564" y="635.1826">~Memento():virtual</text></g><!--MD5=[9e715210afc2f8a6031a73b242893469]
+class caretaker--><g id="elem_caretaker"><rect codeLine="454" fill="#F1F1F1" height="74.8906" id="caretaker" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="256" x="476.5" y="279.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="572" y="297.292">caretaker</text><line style="stroke:#181818;stroke-width:0.5;" x1="477.5" x2="731.5" y1="305.5938" y2="305.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="241" x="482.5" y="322.5889">-warStates: vector&lt;WarMemento&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="477.5" x2="731.5" y1="329.8906" y2="329.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="244" x="482.5" y="346.8857">+add(memento WarMemento):void</text></g><!--MD5=[35ab0f04328168a4f436b119ffe589de]
+class WarState--><g id="elem_WarState"><rect codeLine="460" fill="#F1F1F1" height="74.8906" id="WarState" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="555.5" y="759.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="599.5" y="777.292">WarState</text><line style="stroke:#181818;stroke-width:0.5;" x1="556.5" x2="704.5" y1="785.5938" y2="785.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="561.5" y="802.5889">-Vector&lt;String&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="556.5" x2="704.5" y1="809.8906" y2="809.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="561.5" y="826.8857">-WarState(War* war)</text></g><g id="elem_GMN5"><path d="M6,584.2969 L6,609.4297 L135,609.4297 L135,594.2969 L125,584.2969 L6,584.2969 " fill="#ADD8E6" style="stroke:#181818;stroke-width:0.5;"/><path d="M125,584.2969 L125,594.2969 L135,594.2969 L125,584.2969 " fill="#ADD8E6" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="108" x="12" y="601.3638">USER INTERFACE</text></g><g id="elem_GMN25"><path d="M909,104.2969 L909,129.4297 L1004,129.4297 L1004,114.2969 L994,104.2969 L909,104.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M994,104.2969 L994,114.2969 L1004,114.2969 L994,104.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="915" y="121.3638">SINGLETON</text></g><g id="elem_GMN46"><path d="M2630,2417.7969 L2630,2442.9297 L2779,2442.9297 L2779,2427.7969 L2769,2417.7969 L2630,2417.7969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M2769,2417.7969 L2769,2427.7969 L2779,2427.7969 L2769,2417.7969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="2636" y="2434.8638">ABSTRACT FACTORY</text></g><!--MD5=[56044dde1eb5c59443a17cac917b404f]
+class Battle--><g id="elem_Battle"><rect codeLine="247" fill="#F1F1F1" height="172.6719" id="Battle" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="337" x="2090" y="510.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="2238.5" y="528.292">Battle</text><line style="stroke:#181818;stroke-width:0.5;" x1="2091" x2="2426" y1="536.5938" y2="536.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="127" x="2096" y="553.5889">-country: Country*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="2096" y="569.8857">-Region: Region*</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="185" x="2096" y="586.1826">-attackingForces: Forces**</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="192" x="2096" y="602.4795">-defendingForces: Forces**</text><line style="stroke:#181818;stroke-width:0.5;" x1="2091" x2="2426" y1="609.7813" y2="609.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="325" x="2096" y="626.7764">+Battle(Forces**, Forces**, Region*, Country*)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="2096" y="643.0732">+start(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="2096" y="659.3701">+end(): void</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="2096" y="675.667">~Battle()</text></g><g id="elem_GMN72"><path d="M2876.5,2193.2969 L2876.5,2218.4297 L3022.5,2218.4297 L3022.5,2203.2969 L3012.5,2193.2969 L2876.5,2193.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M3012.5,2193.2969 L3012.5,2203.2969 L3022.5,2203.2969 L3012.5,2193.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="125" x="2882.5" y="2210.3638">TEMPLATE METHOD</text></g><g id="elem_GMN82"><path d="M2888.5,584.2969 L2888.5,609.4297 L2974.5,609.4297 L2974.5,594.2969 L2964.5,584.2969 L2888.5,584.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M2964.5,584.2969 L2964.5,594.2969 L2974.5,594.2969 L2964.5,584.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="2894.5" y="601.3638">STRATEGY</text></g><g id="elem_GMN89"><path d="M398.5,104.2969 L398.5,129.4297 L484.5,129.4297 L484.5,114.2969 L474.5,104.2969 L398.5,104.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:0.5;"/><path d="M474.5,104.2969 L474.5,114.2969 L484.5,114.2969 L474.5,104.2969 " fill="#90EE90" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="404.5" y="121.3638">MEMENTO</text></g><!--MD5=[b8c0310a82c385cd7e91efac8ec98f27]
+link UI to GMN5--><g id="link_UI_GMN5"><path d="M159.4796,597.2969 C159.437,597.2969 159.3942,597.2969 159.3512,597.2969 C159.2654,597.2969 159.179,597.2969 159.092,597.2969 C158.744,597.2969 158.387,597.2969 158.0213,597.2969 C152.17,597.2969 144.095,597.2969 135.2,597.2969 " fill="none" id="UI-GMN5" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[b4b992abf20e85fa3a3829aa7c61a3c6]
+link GMN25 to War--><g id="link_GMN25_War"><path d="M956.5,129.7169 C956.5,143.1669 956.5,162.2969 956.5,162.2969 C956.5,162.2969 1716.4,162.2969 1716.4,162.2969 C1716.4,162.2969 1716.4,190.0469 1716.4,222.0269 " fill="none" id="GMN25-War" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[b573c2c3b1f9735a29a71fac07e24625]
+link TroopType to GMN46--><g id="link_TroopType_GMN46"><path d="M2463.69,2255.2969 C2532.13,2255.2969 2635.5,2255.2969 2635.5,2255.2969 C2635.5,2255.2969 2635.5,2377.5869 2635.5,2417.7069 " fill="none" id="TroopType-GMN46" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[896fe09e39137f2182bdabe21a77b8e9]
+link Entity to GMN52--><g id="link_Entity_GMN52"><path d="M3249.45,2019.2969 C3208.64,2019.2969 3167.5,2019.2969 3167.5,2019.2969 C3167.5,2019.2969 3167.5,2151.4569 3167.5,2193.2669 " fill="none" id="Entity-GMN52" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[99b746df7a25743a0b77cd645690a72d]
+link Weapon to GMN72--><g id="link_Weapon_GMN72"><path d="M3090,1994.4169 C3090,2064.1169 3090,2206.2969 3090,2206.2969 C3090,2206.2969 3056.77,2206.2969 3022.63,2206.2969 " fill="none" id="Weapon-GMN72" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[a26251236f8a42302dea90dc17a8e298]
+link StratStates to GMN82--><g id="link_StratStates_GMN82"><path d="M1999.1582,713.2969 C2015.3854,713.2969 2031.5646,713.2969 2047.6799,713.2969 C2112.1411,713.2969 2175.5791,713.2969 2236.9707,713.2969 C2359.7539,713.2969 2474.3516,713.2969 2572.5781,713.2969 C2769.0313,713.2969 2900,713.2969 2900,713.2969 C2900,713.2969 2900,640.0369 2900,609.7069 " fill="none" id="StratStates-GMN82" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[603520fcb51c0cd96430f1ed20a0e008]
+link GMN89 to Mementos--><g id="link_GMN89_Mementos"><path d="M441.5,129.3069 C441.5,150.5169 441.5,195.1694 441.5,235.5781 " fill="none" id="GMN89-Mementos" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[b15ba37cc89b594f1f910cece4902c19]
+reverse link Simulation to War--><g id="link_Simulation_War"><path codeLine="469" d="M1578.06,317.2969 C1578.06,317.2969 1618.39,317.2969 1618.39,317.2969 " fill="none" id="Simulation-backto-War" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1565.06,317.2969,1571.06,321.2969,1577.06,317.2969,1571.06,313.2969,1565.06,317.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b384d8c7dc837bcc5aad163606b792ed]
+reverse link Simulation to Simulation--><g id="link_Simulation_Simulation"><path codeLine="470" d="M1519,207.9769 C1519,207.9769 1519,207.2969 1519,207.2969 C1519,207.2969 1575.5,207.2969 1575.5,207.2969 C1575.5,207.2969 1575.5,450.2969 1575.5,450.2969 C1575.5,450.2969 1546.5,450.2969 1546.5,450.2969 C1546.5,450.2969 1546.5,437.2569 1546.5,419.3369 " fill="none" id="Simulation-backto-Simulation" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1519,214.1469,1523,208.1469,1519,202.1469,1515,208.1469,1519,214.1469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[300da2fe99e4914b4992e804e9d0d3f0]
+reverse link Entity to Weapon--><g id="link_Entity_Weapon"><path codeLine="472" d="M3236.34,1957.2969 C3236.34,1957.2969 3214.66,1957.2969 3214.66,1957.2969 " fill="none" id="Entity-backto-Weapon" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3249.34,1957.2969,3243.34,1953.2969,3237.34,1957.2969,3243.34,1961.2969,3249.34,1957.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7f375f5a08ce69e172870eeec65b8ff3]
+reverse link Entity to Troop--><g id="link_Entity_Troop"><path codeLine="473" d="M3310.5,2063.5369 C3310.5,2063.5369 3310.5,2151.9869 3310.5,2151.9869 " fill="none" id="Entity-backto-Troop" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3303.5,2063.5369,3310.5,2043.5369,3317.5,2063.5369,3303.5,2063.5369" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[55c634b90cb05ff988745873d42afa72]
+reverse link Entity to Vehicle--><g id="link_Entity_Vehicle"><path codeLine="474" d="M3390.5,2063.3069 C3390.5,2063.3069 3390.5,2148.2969 3390.5,2148.2969 C3390.5,2148.2969 3588.46,2148.2969 3695.17,2148.2969 " fill="none" id="Entity-backto-Vehicle" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3383.5,2063.3069,3390.5,2043.3069,3397.5,2063.3069,3383.5,2063.3069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f8f9575ac78e28c5fdabff47525eb0d4]
+reverse link Troop to Soldier--><g id="link_Troop_Soldier"><path codeLine="475" d="M3327.5,2279.5669 C3327.5,2279.5669 3327.5,2376.5769 3327.5,2376.5769 " fill="none" id="Troop-backto-Soldier" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3320.5,2279.5669,3327.5,2259.5669,3334.5,2279.5669,3320.5,2279.5669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f6e4c8d7a397d7746e4c8ce1233cbed0]
+reverse link Troop to Commander--><g id="link_Troop_Commander"><path codeLine="476" d="M3229.29,2239.2969 C3229.29,2239.2969 3160,2239.2969 3160,2239.2969 C3160,2239.2969 3160,2312.5169 3160,2368.2869 " fill="none" id="Troop-backto-Commander" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3229.29,2232.2969,3249.29,2239.2969,3229.29,2246.2969,3229.29,2232.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3cbe70ca35bc0de40103638d243aed65]
+reverse link Vehicle to GroundVehicle--><g id="link_Vehicle_GroundVehicle"><path codeLine="477" d="M3761.5,2288.0569 C3761.5,2288.0569 3761.5,2413.2969 3761.5,2413.2969 C3761.5,2413.2969 3822.23,2413.2969 3878.22,2413.2969 " fill="none" id="Vehicle-backto-GroundVehicle" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3754.5,2288.0569,3761.5,2268.0569,3768.5,2288.0569,3754.5,2288.0569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[590573f16bfa4e2deadce73c2a389f11]
+reverse link Vehicle to AirVehicle--><g id="link_Vehicle_AirVehicle"><path codeLine="478" d="M3847.53,2206.2969 C3847.53,2206.2969 4480.5,2206.2969 4480.5,2206.2969 C4480.5,2206.2969 4480.5,2310.3769 4480.5,2376.6469 " fill="none" id="Vehicle-backto-AirVehicle" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3847.53,2213.2969,3827.53,2206.2969,3847.53,2199.2969,3847.53,2213.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0ef27b68a5c7bea76e9ce4b12c768b3a]
+reverse link Vehicle to WaterVehicle--><g id="link_Vehicle_WaterVehicle"><path codeLine="479" d="M3675.36,2264.2969 C3675.36,2264.2969 3630.75,2264.2969 3630.75,2264.2969 C3630.75,2264.2969 3630.75,2327.9269 3630.75,2376.3969 " fill="none" id="Vehicle-backto-WaterVehicle" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3675.36,2257.2969,3695.36,2264.2969,3675.36,2271.2969,3675.36,2257.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c3dedb542dc6a95fba7acd3a5f3cfb42]
+reverse link GroundVehicle to Truck--><g id="link_GroundVehicle_Truck"><path codeLine="480" d="M4082.6,2430.2969 C4082.6,2430.2969 4158,2430.2969 4158,2430.2969 C4158,2430.2969 4158,2500.5769 4158,2552.1869 " fill="none" id="GroundVehicle-backto-Truck" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4082.6,2437.2969,4062.6,2430.2969,4082.6,2423.2969,4082.6,2437.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[710771bebeefc0201cfceb6786c2030f]
+reverse link GroundVehicle to Tank--><g id="link_GroundVehicle_Tank"><path codeLine="481" d="M4001,2503.9069 C4001,2503.9069 4001,2552.2169 4001,2552.2169 " fill="none" id="GroundVehicle-backto-Tank" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3994,2503.9069,4001,2483.9069,4008,2503.9069,3994,2503.9069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[080ce3c0385054584e3f3d5cca77b6ec]
+reverse link AirVehicle to FighterJet--><g id="link_AirVehicle_FighterJet"><path codeLine="482" d="M4575.64,2430.2969 C4575.64,2430.2969 4755.5,2430.2969 4755.5,2430.2969 C4755.5,2430.2969 4755.5,2500.5769 4755.5,2552.1869 " fill="none" id="AirVehicle-backto-FighterJet" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4575.64,2437.2969,4555.64,2430.2969,4575.64,2423.2969,4575.64,2437.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4db9f650553e36df60927e73912659fb]
+reverse link AirVehicle to Bomber--><g id="link_AirVehicle_Bomber"><path codeLine="483" d="M4434.5,2503.9069 C4434.5,2503.9069 4434.5,2552.2169 4434.5,2552.2169 " fill="none" id="AirVehicle-backto-Bomber" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4427.5,2503.9069,4434.5,2483.9069,4441.5,2503.9069,4427.5,2503.9069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ce2e66eacd79bb33ef3403c48a2341b7]
+reverse link AirVehicle to CargoPlane--><g id="link_AirVehicle_CargoPlane"><path codeLine="484" d="M4536.5,2503.9069 C4536.5,2503.9069 4536.5,2552.2169 4536.5,2552.2169 " fill="none" id="AirVehicle-backto-CargoPlane" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="4529.5,2503.9069,4536.5,2483.9069,4543.5,2503.9069,4529.5,2503.9069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0ad8c37a351f13fa0d87e55949258659]
+reverse link WaterVehicle to CargoShip--><g id="link_WaterVehicle_CargoShip"><path codeLine="485" d="M3445.91,2430.2969 C3445.91,2430.2969 3423.75,2430.2969 3423.75,2430.2969 C3423.75,2430.2969 3423.75,2500.5769 3423.75,2552.1869 " fill="none" id="WaterVehicle-backto-CargoShip" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3445.91,2423.2969,3465.91,2430.2969,3445.91,2437.2969,3445.91,2423.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[cd62ddd55e40ff538f7552ecab45c9cf]
+reverse link WaterVehicle to Warship--><g id="link_WaterVehicle_Warship"><path codeLine="486" d="M3552.5,2503.9969 C3552.5,2503.9969 3552.5,2542.2969 3552.5,2542.2969 C3552.5,2542.2969 3220.25,2542.2969 3220.25,2542.2969 C3220.25,2542.2969 3220.25,2546.2669 3220.25,2552.2169 " fill="none" id="WaterVehicle-backto-Warship" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3545.5,2503.9969,3552.5,2483.9969,3559.5,2503.9969,3545.5,2503.9969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c94b82857c6bf3783c1537aefca3c508]
+reverse link WaterVehicle to Submarine--><g id="link_WaterVehicle_Submarine"><path codeLine="487" d="M3595.25,2503.9069 C3595.25,2503.9069 3595.25,2552.2169 3595.25,2552.2169 " fill="none" id="WaterVehicle-backto-Submarine" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3588.25,2503.9069,3595.25,2483.9069,3602.25,2503.9069,3588.25,2503.9069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7a98818179d699f334ddc8427c89c54c]
+reverse link WaterVehicle to Carrier--><g id="link_WaterVehicle_Carrier"><path codeLine="488" d="M3659.3,2448.2969 C3659.3,2448.2969 3680.5,2448.2969 3680.5,2448.2969 C3680.5,2448.2969 3680.5,2506.4069 3680.5,2552.0369 " fill="none" id="WaterVehicle-backto-Carrier" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3659.3,2455.2969,3639.3,2448.2969,3659.3,2441.2969,3659.3,2455.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6c1a3cec02f83df3ecb73392180cfe90]
+link VehicleFactory to Truck--><g id="link_VehicleFactory_Truck"><path codeLine="492" d="M2123,2251.3969 C2123,2289.7269 2123,2338.2969 2123,2338.2969 C2123,2338.2969 4219,2338.2969 4219,2338.2969 C4219,2338.2969 4219,2546.9869 4219,2546.9869 " fill="none" id="VehicleFactory-to-Truck" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="4219,2551.9869,4223,2542.9869,4219,2546.9869,4215,2542.9869,4219,2551.9869" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="3139.89" y="2334.3638">«instantiates»</text></g><!--MD5=[db95d9c3c2cc6597a342a674d45b99a5]
+link VehicleFactory to Tank--><g id="link_VehicleFactory_Tank"><path codeLine="493" d="M2072,2251.3569 C2072,2336.7369 2072,2512.2969 2072,2512.2969 C2072,2512.2969 3940,2512.2969 3940,2512.2969 C3940,2512.2969 3940,2547.2169 3940,2547.2169 " fill="none" id="VehicleFactory-to-Tank" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3940,2552.2169,3944,2543.2169,3940,2547.2169,3936,2543.2169,3940,2552.2169" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2800.99" y="2508.3638">«instantiates»</text></g><!--MD5=[f966f92feddbaa1fb1d032f6a81c7fcd]
+link VehicleFactory to Warship--><g id="link_VehicleFactory_Warship"><path codeLine="494" d="M2021,2251.3469 C2021,2356.3169 2021,2606.2969 2021,2606.2969 C2021,2606.2969 3049.98,2606.2969 3049.98,2606.2969 " fill="none" id="VehicleFactory-to-Warship" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3054.98,2606.2969,3045.98,2602.2969,3049.98,2606.2969,3045.98,2610.2969,3054.98,2606.2969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2266.01" y="2602.3638">«instantiates»</text></g><!--MD5=[7507c888c20b1b0b3972627c72a474b6]
+link VehicleFactory to Submarine--><g id="link_VehicleFactory_Submarine"><path codeLine="495" d="M2055,2251.4769 C2055,2339.1269 2055,2522.2969 2055,2522.2969 C2055,2522.2969 3509.75,2522.2969 3509.75,2522.2969 C3509.75,2522.2969 3509.75,2546.9669 3509.75,2546.9669 " fill="none" id="VehicleFactory-to-Submarine" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3509.75,2551.9669,3513.75,2542.9669,3509.75,2546.9669,3505.75,2542.9669,3509.75,2551.9669" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2567.3" y="2518.3638">«instantiates»</text></g><!--MD5=[a9c760ebb4359107dc10d2e8aa8ef845]
+link VehicleFactory to Carrier--><g id="link_VehicleFactory_Carrier"><path codeLine="496" d="M2106,2251.6569 C2106,2294.9569 2106,2353.2969 2106,2353.2969 C2106,2353.2969 3688,2353.2969 3688,2353.2969 C3688,2353.2969 3688,2547.2469 3688,2547.2469 " fill="none" id="VehicleFactory-to-Carrier" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3688,2552.2469,3692,2543.2469,3688,2547.2469,3684,2543.2469,3688,2552.2469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2851.16" y="2349.3638">«instantiates»</text></g><!--MD5=[815376805d3d12345e76d1812cbfe79e]
+link VehicleFactory to CargoShip--><g id="link_VehicleFactory_CargoShip"><path codeLine="497" d="M2038,2251.5369 C2038,2341.3969 2038,2532.2969 2038,2532.2969 C2038,2532.2969 3313.75,2532.2969 3313.75,2532.2969 C3313.75,2532.2969 3313.75,2546.9969 3313.75,2546.9969 " fill="none" id="VehicleFactory-to-CargoShip" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3313.75,2551.9969,3317.75,2542.9969,3313.75,2546.9969,3309.75,2542.9969,3313.75,2551.9969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2450.84" y="2528.3638">«instantiates»</text></g><!--MD5=[4b51e70fb7bf1c44195258c18c71420d]
+link VehicleFactory to Bomber--><g id="link_VehicleFactory_Bomber"><path codeLine="498" d="M2140,2251.5669 C2140,2284.5569 2140,2323.2969 2140,2323.2969 C2140,2323.2969 4360.5,2323.2969 4360.5,2323.2969 C4360.5,2323.2969 4360.5,2546.9969 4360.5,2546.9969 " fill="none" id="VehicleFactory-to-Bomber" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="4360.5,2551.9969,4364.5,2542.9969,4360.5,2546.9969,4356.5,2542.9969,4360.5,2551.9969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="3234.23" y="2319.3638">«instantiates»</text></g><!--MD5=[83d55fdd6ed67ff5cb1802bd5808d33c]
+link VehicleFactory to CargoPlane--><g id="link_VehicleFactory_CargoPlane"><path codeLine="499" d="M2089,2251.4769 C2089,2334.6469 2089,2502.2969 2089,2502.2969 C2089,2502.2969 4517.5,2502.2969 4517.5,2502.2969 C4517.5,2502.2969 4517.5,2547.2269 4517.5,2547.2269 " fill="none" id="VehicleFactory-to-CargoPlane" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="4517.5,2552.2269,4521.5,2543.2269,4517.5,2547.2269,4513.5,2543.2269,4517.5,2552.2269" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="3108.3" y="2515.3638">«instantiates»</text></g><!--MD5=[bfe0c25d06fb85d1c38a3de0b202ec76]
+link TroopFactory to Soldier--><g id="link_TroopFactory_Soldier"><path codeLine="500" d="M2646.5,2251.3269 C2646.5,2272.1669 2646.5,2292.2969 2646.5,2292.2969 C2646.5,2292.2969 3288.5,2292.2969 3288.5,2292.2969 C3288.5,2292.2969 3288.5,2371.5469 3288.5,2371.5469 " fill="none" id="TroopFactory-to-Soldier" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3288.5,2376.5469,3292.5,2367.5469,3288.5,2371.5469,3284.5,2367.5469,3288.5,2376.5469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2894.64" y="2288.3638">«instantiates»</text></g><!--MD5=[3671930e1e454a74781f4f8f5be6c7c6]
+link TroopFactory to Commander--><g id="link_TroopFactory_Commander"><path codeLine="501" d="M2641,2251.6669 C2641,2307.1769 2641,2393.2969 2641,2393.2969 C2641,2393.2969 3054.25,2393.2969 3054.25,2393.2969 " fill="none" id="TroopFactory-to-Commander" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3059.25,2393.2969,3050.25,2389.2969,3054.25,2393.2969,3050.25,2397.2969,3059.25,2393.2969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="2684.81" y="2389.3638">«instantiates»</text></g><!--MD5=[5a4c141739a7d7229a7995687cc44f85]
+link War to WarMemento--><g id="link_War_WarMemento"><path codeLine="503" d="M1690.75,411.4369 C1690.75,447.5869 1690.75,480.2969 1690.75,480.2969 C1690.75,480.2969 654.67,480.2969 654.67,480.2969 C654.67,480.2969 654.67,546.0869 654.67,546.0869 " fill="none" id="War-to-WarMemento" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="654.67,551.0869,658.67,542.0869,654.67,546.0869,650.67,542.0869,654.67,551.0869" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c6034638e85fed73c8dce1d7822c230c]
+reverse link caretaker to WarMemento--><g id="link_caretaker_WarMemento"><path codeLine="504" d="M606.33,367.5569 C606.33,367.5569 606.33,550.8169 606.33,550.8169 " fill="none" id="caretaker-backto-WarMemento" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="606.33,354.5569,602.33,360.5569,606.33,366.5569,610.33,360.5569,606.33,354.5569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b6fddcd779268ef352a29891f49ebff9]
+reverse link WarMemento to WarState--><g id="link_WarMemento_WarState"><path codeLine="505" d="M630.5,655.4269 C630.5,655.4269 630.5,759.0669 630.5,759.0669 " fill="none" id="WarMemento-backto-WarState" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="630.5,642.4269,626.5,648.4269,630.5,654.4269,634.5,648.4269,630.5,642.4269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[73228c0c6c61424420703d0175ab3874]
+reverse link Forces to Army--><g id="link_Forces_Army"><path codeLine="507" d="M3122.5,1559.7069 C3122.5,1559.7069 3122.5,1623.2969 3122.5,1623.2969 C3122.5,1623.2969 3186.41,1623.2969 3243.21,1623.2969 " fill="none" id="Forces-backto-Army" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3122.5,1546.7069,3118.5,1552.7069,3122.5,1558.7069,3126.5,1552.7069,3122.5,1546.7069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e030aa8d2272bec74c01247a782d97e3]
+reverse link Forces to Navy--><g id="link_Forces_Navy"><path codeLine="508" d="M3156.5,1559.3569 C3156.5,1559.3569 3156.5,1610.2969 3156.5,1610.2969 C3156.5,1610.2969 3338.16,1610.2969 3450.27,1610.2969 " fill="none" id="Forces-backto-Navy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3156.5,1546.3569,3152.5,1552.3569,3156.5,1558.3569,3160.5,1552.3569,3156.5,1546.3569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[88f5467a5ee0b1dc45ff2dc8df06c3b9]
+reverse link Forces to AirForce--><g id="link_Forces_AirForce"><path codeLine="509" d="M3088.5,1559.3669 C3088.5,1559.3669 3088.5,1630.7569 3088.5,1630.7569 " fill="none" id="Forces-backto-AirForce" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3088.5,1546.3669,3084.5,1552.3669,3088.5,1558.3669,3092.5,1552.3669,3088.5,1546.3669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0591c47b3f214e2d988247327600ef0f]
+reverse link Military to Forces--><g id="link_Military_Forces"><path codeLine="511" d="M2821.68,1277.2969 C2821.68,1277.2969 3122.5,1277.2969 3122.5,1277.2969 C3122.5,1277.2969 3122.5,1337.3069 3122.5,1390.0569 " fill="none" id="Military-backto-Forces" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2808.68,1277.2969,2814.68,1281.2969,2820.68,1277.2969,2814.68,1273.2969,2808.68,1277.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[183af0ed1961a8fe6f53af95d58a2c68]
+reverse link Army to Entity--><g id="link_Army_Entity"><path codeLine="513" d="M3302.83,1800.4669 C3302.83,1800.4669 3302.83,1870.2169 3302.83,1870.2169 " fill="none" id="Army-backto-Entity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3302.83,1787.4669,3298.83,1793.4669,3302.83,1799.4669,3306.83,1793.4669,3302.83,1787.4669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7ee503a0d3b5fcb59d8b71390ba2f387]
+reverse link Navy to Entity--><g id="link_Navy_Entity"><path codeLine="514" d="M3437.29,1791.2969 C3437.29,1791.2969 3356.17,1791.2969 3356.17,1791.2969 C3356.17,1791.2969 3356.17,1830.1269 3356.17,1870.1669 " fill="none" id="Navy-backto-Entity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3450.29,1791.2969,3444.29,1787.2969,3438.29,1791.2969,3444.29,1795.2969,3450.29,1791.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3636de8e2e4bec469172f22ec03b1b42]
+reverse link AirForce to Entity--><g id="link_AirForce_Entity"><path codeLine="515" d="M3131.5,1784.0169 C3131.5,1784.0169 3131.5,1895.2969 3131.5,1895.2969 C3131.5,1895.2969 3194.37,1895.2969 3249.25,1895.2969 " fill="none" id="AirForce-backto-Entity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="3131.5,1771.0169,3127.5,1777.0169,3131.5,1783.0169,3135.5,1777.0169,3131.5,1771.0169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7b90ba3689f2f2327ca42629af6da6d9]
+reverse link Country to Military--><g id="link_Country_Military"><path codeLine="517" d="M2670.75,1161.3369 C2670.75,1161.3369 2670.75,1223.2069 2670.75,1223.2069 " fill="none" id="Country-backto-Military" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2670.75,1148.3369,2666.75,1154.3369,2670.75,1160.3369,2674.75,1154.3369,2670.75,1148.3369" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[643c95dd98943e175c612914d95a30e9]
+reverse link Country to VehicleFactory--><g id="link_Country_VehicleFactory"><path codeLine="518" d="M2446.83,1089.2969 C2446.83,1089.2969 2123.5,1089.2969 2123.5,1089.2969 C2123.5,1089.2969 2123.5,1949.8469 2123.5,2159.9469 " fill="none" id="Country-backto-VehicleFactory" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2459.83,1089.2969,2453.83,1085.2969,2447.83,1089.2969,2453.83,1093.2969,2459.83,1089.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[39382a84ec89f54c107b462ad0b61bd8]
+reverse link Country to TroopFactory--><g id="link_Country_TroopFactory"><path codeLine="519" d="M2481.25,1161.3569 C2481.25,1161.3569 2481.25,2206.2969 2481.25,2206.2969 C2481.25,2206.2969 2488.5,2206.2969 2498.98,2206.2969 " fill="none" id="Country-backto-TroopFactory" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2481.25,1148.3569,2477.25,1154.3569,2481.25,1160.3569,2485.25,1154.3569,2481.25,1148.3569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5ca8252bb5f6cf249117806dee4e00f5]
+reverse link Battle to Country--><g id="link_Battle_Country"><path codeLine="521" d="M2372.67,696.4269 C2372.67,696.4269 2372.67,970.2969 2372.67,970.2969 C2372.67,970.2969 2412.55,970.2969 2459.99,970.2969 " fill="none" id="Battle-backto-Country" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2372.67,683.4269,2368.67,689.4269,2372.67,695.4269,2376.67,689.4269,2372.67,683.4269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4b513ee8ad2c79403f562a2c7621a29b]
+reverse link SpyAgency to Spy--><g id="link_SpyAgency_Spy"><path codeLine="523" d="M2752.5,1558.3669 C2752.5,1558.3669 2752.5,1671.1469 2752.5,1671.1469 " fill="none" id="SpyAgency-backto-Spy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2745.5,1558.3669,2752.5,1538.3669,2759.5,1558.3669,2745.5,1558.3669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[27c9af6024e0e1208546564030e897f3]
+reverse link Military to SpyAgency--><g id="link_Military_SpyAgency"><path codeLine="524" d="M2689.5,1343.3969 C2689.5,1343.3969 2689.5,1398.2169 2689.5,1398.2169 " fill="none" id="Military-backto-SpyAgency" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2689.5,1330.3969,2685.5,1336.3969,2689.5,1342.3969,2693.5,1336.3969,2689.5,1330.3969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f7af0e2bc58d6e7a31f7f9c6eebc1842]
+reverse link Alliance to Country--><g id="link_Alliance_Country"><path codeLine="526" d="M2569.75,846.7169 C2569.75,846.7169 2569.75,910.2269 2569.75,910.2269 " fill="none" id="Alliance-backto-Country" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2562.75,846.7169,2569.75,826.7169,2576.75,846.7169,2562.75,846.7169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4195d4da6486e6644a50832a6c996d52]
+reverse link War to Alliance--><g id="link_War_Alliance"><path codeLine="527" d="M1975.17,424.4469 C1975.17,424.4469 1975.17,787.2969 1975.17,787.2969 C1975.17,787.2969 2287.65,787.2969 2459.45,787.2969 " fill="none" id="War-backto-Alliance" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1975.17,411.4469,1971.17,417.4469,1975.17,423.4469,1979.17,417.4469,1975.17,411.4469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1f2881f5c72a90de416a6cc26e76b7f6]
+reverse link BattleStrategy to Country--><g id="link_BattleStrategy_Country"><path codeLine="528" d="M1546.5,839.7169 C1546.5,839.7169 1546.5,1029.2969 1546.5,1029.2969 C1546.5,1029.2969 2163.18,1029.2969 2459.77,1029.2969 " fill="none" id="BattleStrategy-backto-Country" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1546.5,826.7169,1542.5,832.7169,1546.5,838.7169,1550.5,832.7169,1546.5,826.7169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[679486e779b3836cbbeb99292e4afff2]
+reverse link DefensiveStrategy to BattleStrategy--><g id="link_DefensiveStrategy_BattleStrategy"><path codeLine="529" d="M1586.25,678.9769 C1586.25,678.9769 1586.25,767.0569 1586.25,767.0569 " fill="none" id="DefensiveStrategy-backto-BattleStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1579.25,678.9769,1586.25,658.9769,1593.25,678.9769,1579.25,678.9769" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dab375b58fc77a247d93d68f39d06a68]
+reverse link OffensiveStrategy to BattleStrategy--><g id="link_OffensiveStrategy_BattleStrategy"><path codeLine="530" d="M1514.17,687.0269 C1514.17,687.0269 1514.17,767.1469 1514.17,767.1469 " fill="none" id="OffensiveStrategy-backto-BattleStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1507.17,687.0269,1514.17,667.0269,1521.17,687.0269,1507.17,687.0269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[04caa09f5fe08d02dd37bb7466ffe637]
+reverse link ResearchiveStrategy to BattleStrategy--><g id="link_ResearchiveStrategy_BattleStrategy"><path codeLine="531" d="M1184.5,678.8669 C1184.5,678.8669 1184.5,797.2969 1184.5,797.2969 C1184.5,797.2969 1380.77,797.2969 1484.27,797.2969 " fill="none" id="ResearchiveStrategy-backto-BattleStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1177.5,678.8669,1184.5,658.8669,1191.5,678.8669,1177.5,678.8669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c05d81f9c276bcd551e11f4108bb7f8d]
+reverse link PrepareStrategy to BattleStrategy--><g id="link_PrepareStrategy_BattleStrategy"><path codeLine="532" d="M1059.26,675.2969 C1059.26,675.2969 1499.33,675.2969 1499.33,675.2969 C1499.33,675.2969 1499.33,731.1069 1499.33,767.0769 " fill="none" id="PrepareStrategy-backto-BattleStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1059.26,682.2969,1039.26,675.2969,1059.26,668.2969,1059.26,682.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7ccb1977259ca1e4e57f0fd008a1259e]
+reverse link DiplomacyStrategy to BattleStrategy--><g id="link_DiplomacyStrategy_BattleStrategy"><path codeLine="533" d="M1884.5,662.4769 C1884.5,662.4769 1884.5,807.2969 1884.5,807.2969 C1884.5,807.2969 1706.55,807.2969 1608.89,807.2969 " fill="none" id="DiplomacyStrategy-backto-BattleStrategy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1877.5,662.4769,1884.5,642.4769,1891.5,662.4769,1877.5,662.4769" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2667ccb19c1d8be8831e374a631e0808]
+reverse link Dispute to WarPhases--><g id="link_Dispute_WarPhases"><path codeLine="535" d="M1894.5,174.4969 C1894.5,174.4969 1894.5,184.2969 1894.5,184.2969 C1894.5,184.2969 1269.29,184.2969 1269.29,184.2969 C1269.29,184.2969 1269.29,232.8669 1269.29,271.1969 " fill="none" id="Dispute-backto-WarPhases" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1887.5,174.4969,1894.5,154.4969,1901.5,174.4969,1887.5,174.4969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[79a6de6e0c8fb76bf44cd036243e12cb]
+reverse link Conflict to WarPhases--><g id="link_Conflict_WarPhases"><path codeLine="536" d="M1748.2,174.4269 C1748.2,174.4269 1748.2,177.2969 1748.2,177.2969 C1748.2,177.2969 1260.21,177.2969 1260.21,177.2969 C1260.21,177.2969 1260.21,230.4369 1260.21,271.1169 " fill="none" id="Conflict-backto-WarPhases" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1741.2,174.4269,1748.2,154.4269,1755.2,174.4269,1741.2,174.4269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[72fd8148d1be24e1944284418e095e02]
+reverse link Hostilities to WarPhases--><g id="link_Hostilities_WarPhases"><path codeLine="537" d="M1473,167.8069 C1473,167.8069 1473,169.2969 1473,169.2969 C1473,169.2969 1251.14,169.2969 1251.14,169.2969 C1251.14,169.2969 1251.14,227.6369 1251.14,270.9369 " fill="none" id="Hostilities-backto-WarPhases" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1466,174.3969,1473,154.3969,1480,174.3969,1466,174.3969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[39f7e691582efaa00f7df5a9d5141a0b]
+reverse link PostWar to WarPhases--><g id="link_PostWar_WarPhases"><path codeLine="538" d="M1242.07,174.4169 C1242.07,174.4169 1242.07,271.2869 1242.07,271.2869 " fill="none" id="PostWar-backto-WarPhases" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1235.07,174.4169,1242.07,154.4169,1249.07,174.4169,1235.07,174.4169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c0c3548769b623728f5c6bf295947f93]
+reverse link DisputeSettled to WarPhases--><g id="link_DisputeSettled_WarPhases"><path codeLine="539" d="M1167.25,174.4169 C1167.25,174.4169 1167.25,271.2869 1167.25,271.2869 " fill="none" id="DisputeSettled-backto-WarPhases" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1160.25,174.4169,1167.25,154.4169,1174.25,174.4169,1160.25,174.4169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9c3410670d51bd40b98e5ae863a8605a]
+link WarPhases to War--><g id="link_WarPhases_War"><path codeLine="541" d="M1278.36,271.1469 C1278.36,235.6169 1278.36,192.2969 1278.36,192.2969 C1278.36,192.2969 1684.6,192.2969 1684.6,192.2969 C1684.6,192.2969 1684.6,209.1169 1684.6,209.1169 " fill="none" id="WarPhases-to-War" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1684.6,222.1169,1688.6,216.1169,1684.6,210.1169,1680.6,216.1169,1684.6,222.1169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0a27ad1e18a15a461a2c66c8db38249c]
+reverse link WarPhases to War--><g id="link_WarPhases_War"><path codeLine="542" d="M1287.43,258.0269 C1287.43,258.0269 1287.43,199.2969 1287.43,199.2969 C1287.43,199.2969 1652.8,199.2969 1652.8,199.2969 C1652.8,199.2969 1652.8,208.7169 1652.8,222.2269 " fill="none" id="WarPhases-backto-War" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1287.43,271.0269,1291.4366,265.0313,1287.4432,259.0269,1283.4366,265.0225,1287.43,271.0269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[32b067d41c1955120da80accee54fee0]
+reverse link War to Battle--><g id="link_War_Battle"><path codeLine="543" d="M1979.83,424.5269 C1979.83,424.5269 1979.83,519.2969 1979.83,519.2969 C1979.83,519.2969 2031.28,519.2969 2089.97,519.2969 " fill="none" id="War-backto-Battle" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1979.83,411.5269,1975.83,417.5269,1979.83,423.5269,1983.83,417.5269,1979.83,411.5269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dd7307c7a61fe273eb493f93790b8e61]
+reverse link War to Map--><g id="link_War_Map"><path codeLine="545" d="M1997.61,317.2969 C1997.61,317.2969 2657.5,317.2969 2657.5,317.2969 C2657.5,317.2969 2657.5,495.2169 2657.5,567.1469 " fill="none" id="War-backto-Map" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1984.61,317.2969,1990.61,321.2969,1996.61,317.2969,1990.61,313.2969,1984.61,317.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0a424cce55ca84d82b7f3839ee255266]
+reverse link Map to Region--><g id="link_Map_Region"><path codeLine="546" d="M2763.5,639.3069 C2763.5,639.3069 2763.5,743.0469 2763.5,743.0469 " fill="none" id="Map-backto-Region" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2763.5,626.3069,2759.5,632.3069,2763.5,638.3069,2767.5,632.3069,2763.5,626.3069" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[952a348bbd7d4f3c19379b2679180a30]
+reverse link Region to Country--><g id="link_Region_Country"><path codeLine="547" d="M2742.75,863.4269 C2742.75,863.4269 2742.75,910.1569 2742.75,910.1569 " fill="none" id="Region-backto-Country" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2742.75,850.4269,2738.75,856.4269,2742.75,862.4269,2746.75,856.4269,2742.75,850.4269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[efb68774fa191313cbabd0a1363dbb61]
+reverse link Region to Forces--><g id="link_Region_Forces"><path codeLine="548" d="M2832.5,863.3469 C2832.5,863.3469 2832.5,1394.2969 2832.5,1394.2969 C2832.5,1394.2969 2968.4,1394.2969 3054.14,1394.2969 " fill="none" id="Region-backto-Forces" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2832.5,850.3469,2828.5,856.3469,2832.5,862.3469,2836.5,856.3469,2832.5,850.3469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[36c605b1323c0464159cec719260c8d3]
+reverse link Battle to Region--><g id="link_Battle_Region"><path codeLine="549" d="M2399.83,696.5269 C2399.83,696.5269 2399.83,751.2969 2399.83,751.2969 C2399.83,751.2969 2602.88,751.2969 2714.31,751.2969 " fill="none" id="Battle-backto-Region" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="2399.83,683.5269,2395.83,689.5269,2399.83,695.5269,2403.83,689.5269,2399.83,683.5269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4c9b94c95f73707e7337eb860e1f96b3]
+reverse link UIController to UIView--><g id="link_UIController_UIView"><path codeLine="551" d="M243.75,367.5569 C243.75,367.5569 243.75,566.8969 243.75,566.8969 " fill="none" id="UIController-backto-UIView" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="243.75,354.5569,239.75,360.5569,243.75,366.5569,247.75,360.5569,243.75,354.5569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[609ea8b66ac31a84fbe56ab171dab244]
+link UIController to UIView--><g id="link_UIController_UIView"><path codeLine="552" d="M280.5,354.5569 C280.5,354.5569 280.5,553.8969 280.5,553.8969 " fill="none" id="UIController-to-UIView" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="280.5,566.8969,284.5,560.8969,280.5,554.8969,276.5,560.8969,280.5,566.8969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[10640758dfa614421e370b90ef9016dc]
+link UIController to Simulation--><g id="link_UIController_Simulation"><path codeLine="553" d="M317.25,354.3169 C317.25,368.5069 317.25,381.2969 317.25,381.2969 C317.25,381.2969 1318.96,381.2969 1318.96,381.2969 " fill="none" id="UIController-to-Simulation" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1331.96,381.2969,1325.96,377.2969,1319.96,381.2969,1325.96,385.2969,1331.96,381.2969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[78ddb0b1ea983b8aa3bd91da85996a26]
+link Simulation to UIView--><g id="link_Simulation_UIView"><path codeLine="554" d="M1331.94,400.2969 C1051.42,400.2969 361.75,400.2969 361.75,400.2969 C361.75,400.2969 361.75,553.9569 361.75,553.9569 " fill="none" id="Simulation-to-UIView" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="361.75,566.9569,365.75,560.9569,361.75,554.9569,357.75,560.9569,361.75,566.9569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a0e03f875fec76e9f1e51d41ff082b86]
+@startuml Rhodey Class Diagram
+skinparam classAttributeIconSize 0
+title Rhodey War Simulator
+hide circle
+skinparam linetype ortho
+
+' ===== CLASSES =====
+
+rectangle UI as UI {
+    class UIView {
+        - controller: UIController*
+    }
+    class UIController {
+        - view: UIView*
+        - model: Simluation*
+    }
+}
+note bottom of UI #lightblue : USER INTERFACE
+
+rectangle "AllianceGroups" {
+    class Alliance {
+        - members: vector<Country*>
+    }
+
+    ' class Conglomerate{
+        ' - name: string
+        ' + add(Conglomerate)*: void
+        ' + print(): void
+        ' + ~Conglomerate()
+    ' }
+
+    class Country {
+        - sizeOfArmy: int
+        - population: int
+        - economy: double
+        - morale: double
+        - resolve: double
+        - supplies: double
+        - attrition: double
+        - forces: Military
+        - alliances: Alliance *
+        - Allies: vector<Countries*>
+        - trainingFacilitys: vector<TroopFactory*>
+        - vehicleFactories: vector<VehicleFactory*>
+    }
+
+    class Region {
+        - name: string
+        - description: string
+        - terrain: string
+        - population: int
+    }
+
+    class Map {
+        - regions : std::map<regionUUID, Region*>
+    }
+}
+
+
+
+rectangle "War " as War {
+
+    class Simulation {
+        + Simulation()
+        {static} - uniqueInstance: Simulation*
+        # Simulation()
+        #~Simulation()
+        #Simulation(Simulation &)
+        #=(Simulation &) : Simulation &
+        - view: UIView*
+        - war: War*
+        - playerName: string
+        ~Simulation()
+
+    }
+
+    class War{
+        - participants: vector<Alliances*>
+        - reasonForWar: string
+        - reasonEndWar: string
+        - battles: vector<Battle*>
+        - state: WarPhases
+        + request(): void
+        + setState(phase: WarPhases): void
+        + makeMemento():WarMemento
+        + restoreBeforeState(WarMemento memento): void
+    }
+
+
+
+    class WarPhases {
+        #war: War*
+        + handle(): void
+        {abstract} + changeState(): void
+    }
+
+    class Dispute {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Conflict {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Hostilities {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class PostWar {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class DisputeSettled {
+        + handle(): void
+        + changeState(): void
+    }
+    note bottom #lightgreen : STATE
+}
+note top of War #lightgreen : SINGLETON
+
+
+
+
+
+rectangle Military {
+    class Military {
+        - BattleGroups: vector<Forces*>
+        - Spies: vector<SpyAgency*>
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Forces {
+        - name: string
+        - army: Army*
+        - navy: Navy*
+        - airforce: Airforce*
+        - Region: Region*
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Army {
+        - name: string
+        - numSoldiers: int
+        - numCommanders: int
+        - numTanks: int
+        - numTrucks: int
+        - units: vector<Entity*>
+        + move(): void
+        ~Army()
+    }
+
+    class Navy {
+        - name: string
+        - numCargoShips: int
+        - numWarShips: int
+        - numCarriers: int
+        - numSubmarines: int
+        - numFighters: int
+        - units: vector<Entity*>
+        + move(): void
+        ~Navy()
+    }
+
+    class AirForce {
+        - name: string
+        - numFighters: int
+        - numBombers: int
+        - units: vector<Entity*>
+        + move(): void
+        ~AirForce()
+    }
+
+    rectangle Spies {
+
+        class SpyAgency {
+            # workFor: vector<Country*>
+            # spyingOn: vector<Country*>
+            # status: string
+            + SpyAgency(spyingFor Country*, spyingOn Country*)
+            + update(): void
+            ~SpyAgency()
+        }
+
+        class Spy {
+            {abstract} + update(): void
+        }
+
+    }
+    note right #lightgreen : OBSERVER
+}
+
+
+
+
+
+'==== Factory method ===='
+rectangle "Factories" {
+    class UnitFactory{
+        # name: string
+        # hp: int
+        # dmg: int
+        + unitFactory()
+        ~ unitFactory()
+        + {abstract} makeUnit(): Entity*
+
+    }
+
+    class VehicleFactory {
+        + VehicleFactory()
+        ~ VehicleFactory()
+        + makeUnit(): Entity*
+    }
+
+    class TroopFactory {
+        + TroopFactory()
+        ~ TruckFactory()
+        + makeUnit(): Entity*
+    }
+
+    enum VehicleType {
+        <<enumeration>>
+        Truck
+        Tank
+        Carrier
+        CargoShip
+        Warship
+        Submarine
+        FighterJet
+        Bomber
+        CargoPlane
+    }
+
+    enum TroopType {
+        <<enumeration>>
+        Soldier
+        Commander
+        Spy
+    }
+}
+note bottom #lightgreen : ABSTRACT FACTORY
+
+class Battle {
+    - country: Country*
+    - Region: Region*
+    - attackingForces: Forces**
+    - defendingForces: Forces**
+    + Battle(Forces~**, Forces~**, Region*, Country*)
+    + start(): void
+    + end(): void
+    ~Battle()
+}
+
+
+'==== Entities ===='
+rectangle "Entities" {
+
+    class Entity {
+        - name: string
+        - hp: int
+        - dmg: int
+        - weapons: Weapon**
+        + Entity()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Entity
+    }
+    note bottom #lightgreen : PROTOTYPE
+
+    class Vehicle {
+        - capacity: int
+        + Vehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Vehicle
+    }
+
+    class GroundVehicle {
+        + GroundVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): GroundVehicle
+    }
+
+    class Truck {
+        + Truck()
+        + attack(): void
+        + defend(): void
+        + clone(): GroundVehicle
+    }
+
+    class Tank {
+        + Tank()
+        + attack(): void
+        + defend(): void
+        + clone(): GroundVehicle
+    }
+
+    class AirVehicle {
+        + AirVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): AirVehicle
+    }
+
+    class FighterJet {
+        + FighterJet()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class Bomber {
+        + Bomber()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class CargoPlane {
+        + CargoPlane()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class WaterVehicle {
+        + WaterVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): WaterVehicle
+    }
+
+    class CargoShip {
+        + CargoShip()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Warship {
+        + Warship()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Submarine {
+        + Submarine()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Carrier {
+        + Carrier()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Troop {
+        + Troop()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Troop
+    }
+
+    class Soldier {
+        + Soldier()
+        + attack(): void
+        + defend(): void
+        + clone(): Troop
+    }
+
+    class Commander {
+        + Commander()
+        + attack(): void
+        + defend(): void
+        + command(): void
+        + clone(): Troop
+    }
+
+    class Weapon {
+        - weaponName: string
+        - dmg: int
+    }
+}
+note bottom #lightgreen : TEMPLATE METHOD
+
+
+'==== Different strategy states ===='
+rectangle "Strategy States" as StratStates {
+    class BattleStrategy {
+        {abstract} + warAlgorithm()
+    }
+
+    class DefensiveStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + makeAlliance(): void
+        + endAlliance(): void
+    }
+    class OffensiveStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + attack(): void
+        + makeAlliance(): void
+        + spy(): void
+    }
+
+    class ResearchiveStrategy {
+        + warAlgorithm()
+        + ResearchAndDevelop(): void
+        + buildVehicles(): void
+        + buildWeapons(): void
+        + spy(): void
+    }
+
+    class PrepareStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + buildVehicles(): void
+        + buildWeapons(): void
+        + makeAlliance(): void
+        + endAlliance(): void
+        + spy(): void
+    }
+
+    class DiplomacyStrategy{
+        + warAlgorithm()
+        + proposeTreaty(): void
+        + surrender(): void
+    }
+}
+note right of StratStates #lightgreen : STRATEGY
+
+
+
+
+rectangle "Mementos" as Mementos {
+    class WarMemento{
+        +getState()
+        -state: WarState*
+        ~Memento():virtual
+    }
+    class caretaker {
+        - warStates: vector<WarMemento>
+        + add(memento WarMemento):void
+
+    }
+
+    class WarState {
+
+        - Vector<String>
+        - WarState(War* war)
+    }
+}
+note top of Mementos #lightgreen : MEMENTO
+
+' ===== RELATIONSHIPS =====
+Simulation o- War
+Simulation o- Simulation
+
+Entity o- Weapon
+Entity <|- - Troop
+Entity <|- - Vehicle
+Troop <|- - Soldier
+Troop <|- - Commander
+Vehicle <|- - GroundVehicle
+Vehicle <|- - AirVehicle
+Vehicle <|- - WaterVehicle
+GroundVehicle <|- - Truck
+GroundVehicle <|- - Tank
+AirVehicle <|- - FighterJet
+AirVehicle <|- - Bomber
+AirVehicle <|- - CargoPlane
+WaterVehicle <|- - CargoShip
+WaterVehicle <|- - Warship
+WaterVehicle <|- - Submarine
+WaterVehicle <|- - Carrier
+
+
+
+VehicleFactory ..> Truck : <<instantiates>>
+VehicleFactory ..> Tank : <<instantiates>>
+VehicleFactory ..> Warship : <<instantiates>>
+VehicleFactory ..> Submarine : <<instantiates>>
+VehicleFactory ..> Carrier : <<instantiates>>
+VehicleFactory ..> CargoShip : <<instantiates>>
+VehicleFactory ..> Bomber : <<instantiates>>
+VehicleFactory ..> CargoPlane : <<instantiates>>
+TroopFactory   ..> Soldier : <<instantiates>>
+TroopFactory   ..> Commander : <<instantiates>>
+
+War ..> WarMemento
+caretaker o- - WarMemento
+WarMemento o- - WarState
+
+Forces o- - Army
+Forces o- - Navy
+Forces o- - AirForce
+
+Military o- - Forces
+
+Army o- - Entity
+Navy o- - Entity
+AirForce o- - Entity
+
+Country *- - Military
+Country o- - VehicleFactory
+Country o- - TroopFactory
+
+Battle o- - Country
+
+SpyAgency <|- - Spy
+Military o- - SpyAgency
+
+Alliance <|- - Country
+War o- - Alliance
+BattleStrategy o- - Country
+DefensiveStrategy <|- - BattleStrategy
+OffensiveStrategy <|- - BattleStrategy
+ResearchiveStrategy <|- - BattleStrategy
+PrepareStrategy <|- - BattleStrategy
+DiplomacyStrategy <|- - BattleStrategy
+
+Dispute <|- - WarPhases
+Conflict <|- - WarPhases
+Hostilities <|- - WarPhases
+PostWar <|- - WarPhases
+DisputeSettled <|- - WarPhases
+
+War o-l- WarPhases
+WarPhases o- War
+War o- - Battle
+
+War o- - Map
+Map o- - Region
+Region o- - Country
+Region o- - Forces
+Battle o- - Region
+' UI Model View Controller
+UIView -u-o UIController
+UIController -d-o UIView
+UIController -r-o Simulation
+Simulation -r-o UIView
+
+@enduml
+
+@startuml Rhodey Class Diagram
+skinparam classAttributeIconSize 0
+title Rhodey War Simulator
+hide circle
+skinparam linetype ortho
+
+
+rectangle UI as UI {
+    class UIView {
+        - controller: UIController*
+    }
+    class UIController {
+        - view: UIView*
+        - model: Simluation*
+    }
+}
+note bottom of UI #lightblue : USER INTERFACE
+
+rectangle "AllianceGroups" {
+    class Alliance {
+        - members: vector<Country*>
+    }
+
+
+    class Country {
+        - sizeOfArmy: int
+        - population: int
+        - economy: double
+        - morale: double
+        - resolve: double
+        - supplies: double
+        - attrition: double
+        - forces: Military
+        - alliances: Alliance *
+        - Allies: vector<Countries*>
+        - trainingFacilitys: vector<TroopFactory*>
+        - vehicleFactories: vector<VehicleFactory*>
+    }
+
+    class Region {
+        - name: string
+        - description: string
+        - terrain: string
+        - population: int
+    }
+
+    class Map {
+        - regions : std::map<regionUUID, Region*>
+    }
+}
+
+
+
+rectangle "War " as War {
+
+    class Simulation {
+        + Simulation()
+        {static} - uniqueInstance: Simulation*
+        # Simulation()
+        #~Simulation()
+        #Simulation(Simulation &)
+        #=(Simulation &) : Simulation &
+        - view: UIView*
+        - war: War*
+        - playerName: string
+        ~Simulation()
+
+    }
+
+    class War{
+        - participants: vector<Alliances*>
+        - reasonForWar: string
+        - reasonEndWar: string
+        - battles: vector<Battle*>
+        - state: WarPhases
+        + request(): void
+        + setState(phase: WarPhases): void
+        + makeMemento():WarMemento
+        + restoreBeforeState(WarMemento memento): void
+    }
+
+
+
+    class WarPhases {
+        #war: War*
+        + handle(): void
+        {abstract} + changeState(): void
+    }
+
+    class Dispute {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Conflict {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class Hostilities {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class PostWar {
+        + handle(): void
+        + changeState(): void
+    }
+
+    class DisputeSettled {
+        + handle(): void
+        + changeState(): void
+    }
+    note bottom #lightgreen : STATE
+}
+note top of War #lightgreen : SINGLETON
+
+
+
+
+
+rectangle Military {
+    class Military {
+        - BattleGroups: vector<Forces*>
+        - Spies: vector<SpyAgency*>
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Forces {
+        - name: string
+        - army: Army*
+        - navy: Navy*
+        - airforce: Airforce*
+        - Region: Region*
+        {abstract} + move(): void
+        ~Military()
+    }
+
+    class Army {
+        - name: string
+        - numSoldiers: int
+        - numCommanders: int
+        - numTanks: int
+        - numTrucks: int
+        - units: vector<Entity*>
+        + move(): void
+        ~Army()
+    }
+
+    class Navy {
+        - name: string
+        - numCargoShips: int
+        - numWarShips: int
+        - numCarriers: int
+        - numSubmarines: int
+        - numFighters: int
+        - units: vector<Entity*>
+        + move(): void
+        ~Navy()
+    }
+
+    class AirForce {
+        - name: string
+        - numFighters: int
+        - numBombers: int
+        - units: vector<Entity*>
+        + move(): void
+        ~AirForce()
+    }
+
+    rectangle Spies {
+
+        class SpyAgency {
+            # workFor: vector<Country*>
+            # spyingOn: vector<Country*>
+            # status: string
+            + SpyAgency(spyingFor Country*, spyingOn Country*)
+            + update(): void
+            ~SpyAgency()
+        }
+
+        class Spy {
+            {abstract} + update(): void
+        }
+
+    }
+    note right #lightgreen : OBSERVER
+}
+
+
+
+
+
+rectangle "Factories" {
+    class UnitFactory{
+        # name: string
+        # hp: int
+        # dmg: int
+        + unitFactory()
+        ~ unitFactory()
+        + {abstract} makeUnit(): Entity*
+
+    }
+
+    class VehicleFactory {
+        + VehicleFactory()
+        ~ VehicleFactory()
+        + makeUnit(): Entity*
+    }
+
+    class TroopFactory {
+        + TroopFactory()
+        ~ TruckFactory()
+        + makeUnit(): Entity*
+    }
+
+    enum VehicleType {
+        <<enumeration>>
+        Truck
+        Tank
+        Carrier
+        CargoShip
+        Warship
+        Submarine
+        FighterJet
+        Bomber
+        CargoPlane
+    }
+
+    enum TroopType {
+        <<enumeration>>
+        Soldier
+        Commander
+        Spy
+    }
+}
+note bottom #lightgreen : ABSTRACT FACTORY
+
+class Battle {
+    - country: Country*
+    - Region: Region*
+    - attackingForces: Forces**
+    - defendingForces: Forces**
+    + Battle(Forces~**, Forces~**, Region*, Country*)
+    + start(): void
+    + end(): void
+    ~Battle()
+}
+
+
+rectangle "Entities" {
+
+    class Entity {
+        - name: string
+        - hp: int
+        - dmg: int
+        - weapons: Weapon**
+        + Entity()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Entity
+    }
+    note bottom #lightgreen : PROTOTYPE
+
+    class Vehicle {
+        - capacity: int
+        + Vehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Vehicle
+    }
+
+    class GroundVehicle {
+        + GroundVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): GroundVehicle
+    }
+
+    class Truck {
+        + Truck()
+        + attack(): void
+        + defend(): void
+        + clone(): GroundVehicle
+    }
+
+    class Tank {
+        + Tank()
+        + attack(): void
+        + defend(): void
+        + clone(): GroundVehicle
+    }
+
+    class AirVehicle {
+        + AirVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): AirVehicle
+    }
+
+    class FighterJet {
+        + FighterJet()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class Bomber {
+        + Bomber()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class CargoPlane {
+        + CargoPlane()
+        + attack(): void
+        + defend(): void
+        + clone(): AirVehicle
+    }
+
+    class WaterVehicle {
+        + WaterVehicle()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): WaterVehicle
+    }
+
+    class CargoShip {
+        + CargoShip()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Warship {
+        + Warship()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Submarine {
+        + Submarine()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Carrier {
+        + Carrier()
+        + attack(): void
+        + defend(): void
+        + clone(): WaterVehicle
+    }
+
+    class Troop {
+        + Troop()
+        {abstract} + attack(): void
+        {abstract} + defend(): void
+        {abstract} + clone(): Troop
+    }
+
+    class Soldier {
+        + Soldier()
+        + attack(): void
+        + defend(): void
+        + clone(): Troop
+    }
+
+    class Commander {
+        + Commander()
+        + attack(): void
+        + defend(): void
+        + command(): void
+        + clone(): Troop
+    }
+
+    class Weapon {
+        - weaponName: string
+        - dmg: int
+    }
+}
+note bottom #lightgreen : TEMPLATE METHOD
+
+
+rectangle "Strategy States" as StratStates {
+    class BattleStrategy {
+        {abstract} + warAlgorithm()
+    }
+
+    class DefensiveStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + makeAlliance(): void
+        + endAlliance(): void
+    }
+    class OffensiveStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + attack(): void
+        + makeAlliance(): void
+        + spy(): void
+    }
+
+    class ResearchiveStrategy {
+        + warAlgorithm()
+        + ResearchAndDevelop(): void
+        + buildVehicles(): void
+        + buildWeapons(): void
+        + spy(): void
+    }
+
+    class PrepareStrategy {
+        + warAlgorithm()
+        + redistributeTroops(): void
+        + recruitTroops(): void
+        + buildVehicles(): void
+        + buildWeapons(): void
+        + makeAlliance(): void
+        + endAlliance(): void
+        + spy(): void
+    }
+
+    class DiplomacyStrategy{
+        + warAlgorithm()
+        + proposeTreaty(): void
+        + surrender(): void
+    }
+}
+note right of StratStates #lightgreen : STRATEGY
+
+
+
+
+rectangle "Mementos" as Mementos {
+    class WarMemento{
+        +getState()
+        -state: WarState*
+        ~Memento():virtual
+    }
+    class caretaker {
+        - warStates: vector<WarMemento>
+        + add(memento WarMemento):void
+
+    }
+
+    class WarState {
+
+        - Vector<String>
+        - WarState(War* war)
+    }
+}
+note top of Mementos #lightgreen : MEMENTO
+
+Simulation o- War
+Simulation o- Simulation
+
+Entity o- Weapon
+Entity <|- - Troop
+Entity <|- - Vehicle
+Troop <|- - Soldier
+Troop <|- - Commander
+Vehicle <|- - GroundVehicle
+Vehicle <|- - AirVehicle
+Vehicle <|- - WaterVehicle
+GroundVehicle <|- - Truck
+GroundVehicle <|- - Tank
+AirVehicle <|- - FighterJet
+AirVehicle <|- - Bomber
+AirVehicle <|- - CargoPlane
+WaterVehicle <|- - CargoShip
+WaterVehicle <|- - Warship
+WaterVehicle <|- - Submarine
+WaterVehicle <|- - Carrier
+
+
+
+VehicleFactory ..> Truck : <<instantiates>>
+VehicleFactory ..> Tank : <<instantiates>>
+VehicleFactory ..> Warship : <<instantiates>>
+VehicleFactory ..> Submarine : <<instantiates>>
+VehicleFactory ..> Carrier : <<instantiates>>
+VehicleFactory ..> CargoShip : <<instantiates>>
+VehicleFactory ..> Bomber : <<instantiates>>
+VehicleFactory ..> CargoPlane : <<instantiates>>
+TroopFactory   ..> Soldier : <<instantiates>>
+TroopFactory   ..> Commander : <<instantiates>>
+
+War ..> WarMemento
+caretaker o- - WarMemento
+WarMemento o- - WarState
+
+Forces o- - Army
+Forces o- - Navy
+Forces o- - AirForce
+
+Military o- - Forces
+
+Army o- - Entity
+Navy o- - Entity
+AirForce o- - Entity
+
+Country *- - Military
+Country o- - VehicleFactory
+Country o- - TroopFactory
+
+Battle o- - Country
+
+SpyAgency <|- - Spy
+Military o- - SpyAgency
+
+Alliance <|- - Country
+War o- - Alliance
+BattleStrategy o- - Country
+DefensiveStrategy <|- - BattleStrategy
+OffensiveStrategy <|- - BattleStrategy
+ResearchiveStrategy <|- - BattleStrategy
+PrepareStrategy <|- - BattleStrategy
+DiplomacyStrategy <|- - BattleStrategy
+
+Dispute <|- - WarPhases
+Conflict <|- - WarPhases
+Hostilities <|- - WarPhases
+PostWar <|- - WarPhases
+DisputeSettled <|- - WarPhases
+
+War o-l- WarPhases
+WarPhases o- War
+War o- - Battle
+
+War o- - Map
+Map o- - Region
+Region o- - Country
+Region o- - Forces
+Battle o- - Region
+UIView -u-o UIController
+UIController -d-o UIView
+UIController -r-o Simulation
+Simulation -r-o UIView
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 SAST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

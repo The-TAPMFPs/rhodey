@@ -1,6 +1,12 @@
+#pragma once
 #include "BattleStrategy.h"
 
 class Offensive : public BattleStrategy {
     public:
-        void executeStrategy();
+        void warAlgorithm();
+        void redistributeTroops();
+        void recruitTroops();
+        void attack();
+        void makeAlliance();
+        void spy();
 };
