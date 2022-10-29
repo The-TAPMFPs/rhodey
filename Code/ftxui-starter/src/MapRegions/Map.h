@@ -18,11 +18,12 @@ struct MapData
 
 class Map {
     private:
-        std::map<RegionUUID, Region*> regions;
+        std::map<UUID, Region*> regions;
         //The travel distance fields are 2D scalar fields that determine
         //The difficulty of crossing any particular square on the map
         scalarField2D travelDifficultyField_allianceA;
         scalarField2D travelDifficultyField_allianceB;
+
         static float distToRegion(int x, int y, Region* r);
 
     public:

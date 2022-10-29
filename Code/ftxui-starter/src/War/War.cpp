@@ -1,10 +1,10 @@
 #include "War.h"
 
-War::War() {
-}
+War::War(WarPhase* warPhase)
+  : _warPhase(warPhase)
+{
+  // TransitionTo(warPhase); //REMOVED: for now, re-add later
 
-War::War(WarPhase* warPhase) : _warPhase(warPhase) {
-  TransitionTo(warPhase);
   teamA = new Alliance("Side A");
   teamB = new Alliance("Side B");
 
@@ -26,8 +26,12 @@ War::~War() {
 }
 
 void War::TransitionTo(WarPhase* warPhase) {
+  //TODO: Fix, something is segfaulting in here!
   if (_warPhase)
+  {
     delete _warPhase;
+  }
+
   _warPhase = warPhase;
   _warPhase->set_war(this);
 }

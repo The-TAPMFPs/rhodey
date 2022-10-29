@@ -28,6 +28,7 @@ project(ftxui-starter
 file(GLOB_RECURSE SRC_FILES
   src/main.cpp
   src/UI.cpp
+  src/uuid.cpp
 
   #===== Add new folders here!=====#
   src/Country/*.cpp

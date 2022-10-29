@@ -29,23 +29,36 @@ void UI::render()
 
 #pragma region PARENT_PANEL
   //GAME MAP
-  int mapW = 50, mapH = 50;
+  int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
   int mapHeight = 40;
 
-  // MapData m = war->getCurrentMapData(); //ERROR: Segfault
+  MapData m = war->getCurrentMapData();
 
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
 
-    for(int i = -1; i < 100; i++) {
-      for(int j = 0; j < 100; j++) {
+    for(int i = 0; i < mapW; i++) {
+      for(int j = 0; j < mapH; j++) {
         // if(i % 5 != 0) //Optional; splits grid into 4x4 tiles to account for horizontal lines
-        // if(m.travelFieldA[i][j] > 0.5)
         {
-          c.DrawPoint(i+mapHeight, j, Color::Green);
+          if(m.travelFieldA[i][j] > (mapHeight/100.0))
+          {
+            // int col = (255*mapHeight/100.0);
+            int col = (255*m.travelFieldA[i][j]);
+            // c.DrawPoint(i, j, true, Color(0, col, ((i/2+j/4)%2==0?col/2:col))); //Add tiling pattern to terrain
+            c.DrawPoint(i, j, true, Color(0, col, col));
+          }
         }
       }
+    }
+
+    // Draw regions markers
+    for(auto r = m.regionLocations.begin(); r != m.regionLocations.end(); r++)
+    {
+      int x = r->x;
+      int y = r->y;
+      c.DrawPoint(x, y, true, Color::Red1);
     }
 
     // c.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
