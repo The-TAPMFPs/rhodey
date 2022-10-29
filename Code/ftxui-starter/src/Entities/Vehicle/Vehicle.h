@@ -6,6 +6,8 @@
 using namespace std;
 
 class Vehicle :public Entity{
+    private:
+    int capacity=0;
     public:
     Vehicle();
     virtual void attack();
