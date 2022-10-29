@@ -10,15 +10,28 @@ unsigned int Country::prowessInRegion(Region* region)
 }
 
 Country::Country(std::string name) : name(name) {
-    int population = 0;
-    double economy = 0;
-    double morale = 0;
-    double supplies = 0;
-    double attrition = 0;
-    double aggressiveness = 0;
+    population = 0;
+    economy = 0;
+    morale = 0;
+    resources = 0;
+    research = 0;
+    aggressiveness = 0;
+    goalRating = 0;
+    numSpies = 0;
+    generatePersonalityMatrix();
 }
 
 std::string Country::getName()
 {
     return "";
+}
+
+void Country::generatePersonalityMatrix()
+{
+    this->personalityMatrix << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 }
