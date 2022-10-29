@@ -405,15 +405,13 @@ rectangle "Strategy States" as StratStates {
         + warAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
-        + makeAlliance(): void
-        + endAlliance(): void
     }
+    
     class OffensiveStrategy {
         + warAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
         + attack(): void
-        + makeAlliance(): void
         + spy(): void
     }
 
@@ -431,8 +429,6 @@ rectangle "Strategy States" as StratStates {
         + recruitTroops(): void
         + buildVehicles(): void
         + buildWeapons(): void
-        + makeAlliance(): void
-        + endAlliance(): void
         + spy(): void
     }
 

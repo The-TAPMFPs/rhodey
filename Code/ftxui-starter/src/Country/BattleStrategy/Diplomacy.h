@@ -1,9 +1,13 @@
 #pragma once
 #include "BattleStrategy.h"
 
-class Defensive : public BattleStrategy {
+enum _dip {su, pt};
+class Diplomacy : public BattleStrategy {
+    private:
+        _dip dip;
     public:
-        void warAlgorithm();
+        Diplomacy(_dip dip);
+        void warAlgorithm() override;
         void surrender();
         void proposeTreaty();
 };
