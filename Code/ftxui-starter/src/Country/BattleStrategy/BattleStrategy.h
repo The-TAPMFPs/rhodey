@@ -4,5 +4,4 @@
 
 class BattleStrategy {
     public:
-        virtual void executeStrategy() = 0; //Strategy pattern `algorithm()`
-};
+}
