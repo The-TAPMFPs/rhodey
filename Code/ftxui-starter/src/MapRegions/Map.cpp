@@ -103,4 +103,12 @@ MapData Map::getCurrentMapData()
         this->mapW,
         this->mapH
     };
+    
+}
+MapMemento* Map::makeMemento()
+{
+    return new MapMemento(&getCurrentMapData());
+}
+void Map::SetMemento(MapMemento* md){
+    
 }

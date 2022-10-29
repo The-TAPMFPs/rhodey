@@ -4,6 +4,8 @@
 #include <map>
 #include <vector>
 #include "Region.h"
+#include "MapMemento.h"
+
 
 typedef float** scalarField2D;
 
@@ -15,6 +17,9 @@ struct MapData
 
     unsigned int width, height;
 };
+
+
+class MapMemento;
 
 class Map {
     private:
@@ -37,4 +42,9 @@ class Map {
         scalarField2D getTravelFieldB();
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
+
+        // THIS IS WHERE THE PROBLEM IS!
+        MapMemento* makeMemento();
+        void SetMemento (MapMemento * mem);
+
 };
