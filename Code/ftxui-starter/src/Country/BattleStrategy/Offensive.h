@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _off {red, rec, att, spy};
+enum _off {red, att};
 
 class Offensive : public BattleStrategy {
     private:
@@ -10,6 +10,5 @@ class Offensive : public BattleStrategy {
         Offensive(_off off);
         void warAlgorithm() override;
         void redistributeTroops();
-        void recruitTroops();
         void attack();
 };

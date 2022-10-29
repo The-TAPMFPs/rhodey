@@ -5,7 +5,21 @@ Prepare::Prepare(_prep prep){
 }
 
 void Prepare::warAlgorithm(){
-
+    switch(prep){
+        case red:
+            redistributeTroops();
+            break;
+        case rec:
+            recruitTroops();
+            break;
+        case bv:
+            buildVehicles();
+            break;
+        case bw:
+            buildWeapons();
+            break;
+    }
+    return;
 }
 
 void Prepare::redistributeTroops(){

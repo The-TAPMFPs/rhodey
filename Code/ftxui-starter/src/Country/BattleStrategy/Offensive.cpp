@@ -6,16 +6,17 @@ Offensive::Offensive(_off off){
 
 void Offensive::warAlgorithm(){
     switch(off){
-        case red: 
+        case red:
+            redistributeTroops();
+            break;
+        case att:
+            attack();
+            break;
     }
-
+    return;
 }
 
 void Offensive::redistributeTroops(){
-
-}
-
-void Offensive::recruitTroops(){
 
 }
 

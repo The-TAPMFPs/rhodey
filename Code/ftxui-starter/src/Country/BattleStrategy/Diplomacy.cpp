@@ -5,7 +5,15 @@ Diplomacy::Diplomacy(_dip dip){
 }
 
 void Diplomacy::warAlgorithm(){
-
+    switch(dip){
+        case su:
+            surrender();
+            break;
+        case pt:
+            proposeTreaty();
+            break;
+    }
+    return;
 }
 
 void Diplomacy::surrender(){
