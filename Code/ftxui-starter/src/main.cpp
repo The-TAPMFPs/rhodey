@@ -1,9 +1,13 @@
 #include "UI.h"
+// #include "War/WarPhases/Dispute.h"
 
 using namespace ftxui;
 
 int main(int argc, const char* argv[]) {
-    War* war = new War();
+
+    // WarPhase* startPhase = new Dispute();
+
+    War* war = new War(nullptr);
 
     UI* ui = new UI(war);
 

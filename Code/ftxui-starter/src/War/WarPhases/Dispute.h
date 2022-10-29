@@ -1,7 +1,7 @@
 #pragma once 
 #include "WarPhase.h"
 
-class Conflict : public WarPhase{
+class Dispute : public WarPhase{
     public:
         void DoSomething();
 };
