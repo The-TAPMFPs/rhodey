@@ -1,22 +1,30 @@
 #include "Troop.h"
+#include <vector>
 #include "Entities/Entity.h"
 
-Troop::Troop(string name, string type, int HP, int Damage) :
-    Entity(name, type, HP, Damage) {}
-
-
-void Troop::transport() {
-}
-
-void Troop::defend(int damage, Weapon &weapon) {
-    int potentialDamage = damage;
-    if (this->getAndSetDefense()) {
-	potentialDamage = potentialDamage/this->Damage;
+Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon) :
+    Entity(name, "Ground Infantry", numberOfTroops, 2, weapon) {
+	this->HPScalling = 3;
+	this->HP = this->HP* this->HPScalling;
     }
 
+
+int Troop::getCarryingCapacity() {
+    return 0;
+}
+
+Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new Troop(name, numberOfTroops, weapon);
+}
+
+int Troop::weaknesses(int damage, Weapon& weapon) {
+    int potentialDamage =damage;
     if (weapon.getType() == "AntiVehicle") {
 	potentialDamage = this->HP/damage;
     }
+    return potentialDamage;
+}
 
-    this->HP = this->HP - potentialDamage;
+int Troop::getTerrainHandling() {
+    return 0;
 }
