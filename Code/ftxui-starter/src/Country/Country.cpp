@@ -23,7 +23,7 @@ Country::Country(std::string name) : name(name) {
 
 std::string Country::getName()
 {
-    return "";
+    return this->name;
 }
 
 void Country::generatePersonalityMatrix()

@@ -1,18 +1,17 @@
 #include "Region.h"
 
 Region::Region() {
-  generateUUID();
+  this->uuid = generateUUID();
   this->name = "NaN";
-  this->xCoord = -1;
-  this->yCoord = -1;
+  this->coords = { -1, -1 };
 }
 
 Region::Region(std::string name, int xCoord, int yCoord)
-    : name(name), xCoord(xCoord), yCoord(yCoord) {
+    : name(name), coords({ xCoord, yCoord }) {
   generateUUID();
 }
 
-Region::Region(int xCoord, int yCoord) : xCoord(xCoord), yCoord(yCoord) {
+Region::Region(int xCoord, int yCoord) : coords({ xCoord, yCoord }) {
   generateUUID();
   this->name = "NaN";
 }
@@ -29,16 +28,21 @@ void Region::setRegionName(std::string name) {
   this->name = name;
 }
 
-int* Region::getCoords() {
-  return new int[2] {xCoord, yCoord};
+MapCoords Region::getCoords() {
+  return this->coords;
 }
 
 void Region::setRegionCoords(int xCoord, int yCoord) {
-  this->xCoord = xCoord;
-  this->yCoord = yCoord;
+  this->coords = { xCoord, yCoord };
+}
+
+Country* Region::getPossessor()
+{
+  return this->possessor;
 }
 
 RegionUUID Region::generateUUID()
 {
-  return nullptr;
+  //TODO
+  return "a";
 }
