@@ -1,16 +1,12 @@
 #pragma once
-#include <string>
-#include <vector>
 #include "WaterVehicle.h"
 
 using namespace std;
 
 class CargoShip :public WaterVehicle{
+    protected:
+	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
     public:
-    CargoShip();
-     void attack();
-     void d();
-     void transport();
-    Entity* clone();
+    CargoShip(string name, int numberOfTroops, vector<Weapon *> * weapons);
 
 };

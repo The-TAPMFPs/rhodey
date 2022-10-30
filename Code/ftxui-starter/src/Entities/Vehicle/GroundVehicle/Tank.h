@@ -1,16 +1,12 @@
 #pragma once
-#include <string>
-#include <vector>
 #include "GroundVehicle.h"
 
 using namespace std;
 
 class Tank :public GroundVehicle{
+    protected:
+	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
     public:
-    Tank();
-     void attack();
-     void d();
-     void transport();
-    Entity* clone();
+    Tank(string name, int numberOfTroops, vector<Weapon *> * weapons);
 
 };
