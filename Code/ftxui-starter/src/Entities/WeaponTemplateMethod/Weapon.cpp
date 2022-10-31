@@ -1,8 +1,12 @@
 #include "Weapon.h"
 #include <math.h>
 
-Bazooka::Bazooka() : Weapon(0, "Bazooka") { //1st
-    this->damage = 90 + rand()%100;  // DO RANDOM DAMAGE GENERATION 
+int Weapon::getDamage() {return this->damage;}
+string Weapon::getName() {return this->WeaponName;}
+string Weapon::getType() {return this->WeaponType;}
+
+Bazooka::Bazooka() : Weapon(0, "Bazooka") {
+    this->damage = 90 + rand( )%100;  // DO RANDOM DAMAGE GENERATION
   }
 
 Sniper::Sniper(): Weapon(0,"Sniper"){ //2nd
