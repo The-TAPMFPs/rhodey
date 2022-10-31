@@ -6,7 +6,18 @@ War::War() {
   this->warPhase = new Conflict();
   teamA = new Alliance("Side A");
   teamB = new Alliance("Side B");
-  // map = new Map();
+
+  //TODO: Replace with properly initialized data
+  teamA->add(new Country("country A"));
+  teamA->add(new Country("country B"));
+  teamA->add(new Country("country C"));
+  teamA->add(new Country("country D"));
+  teamB->add(new Country("country E"));
+  teamB->add(new Country("country F"));
+  teamB->add(new Country("country G"));
+  teamB->add(new Country("country H"));
+
+  map = new Map();
 }
 
 War::~War() {
@@ -35,4 +46,10 @@ void War::changeState() {
 void War::start() {
   teamA->print();
   teamB->print();
+  // TODO start the war
+}
+
+MapData War::getCurrentMapData()
+{
+  return this->map->getCurrentMapData();
 }

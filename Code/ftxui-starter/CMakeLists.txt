@@ -31,9 +31,20 @@ file(GLOB_RECURSE SRC_FILES
 
   #===== Add new folders here!=====#
   src/Country/*.cpp
+  src/Country/BattleStrategy/*.cpp
+
   src/Entities/*.cpp
+  src/Entities/Troop/*.cpp
+  src/Entities/Vehicle/*.cpp
+  src/Entities/Vehicle/AirVehicle/*.cpp
+  src/Entities/Vehicle/GroundVehicle/*.cpp
+  src/Entities/Vehicle/WaterVehicle/*.cpp
+  src/Entities/WeaponTemplateMethod/*.cpp
+
   src/MapRegions/*.cpp
+
   src/War/*.cpp
+  src/War/WarPhases/*.cpp
 )
 
 # Create the `ftxui-starter` executable in build/, add all .cpp files

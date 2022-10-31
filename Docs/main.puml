@@ -20,15 +20,15 @@ note bottom of UI #lightblue : USER INTERFACE
 
 rectangle "AllianceGroups" {
     class Alliance {
-        - members: vector<Conglomerate*>
+        - members: vector<Country*>
     }
 
-    class Conglomerate{
-        - name: string
-        + add(Conglomerate)*: void
-        + print(): void
-        + ~Conglomerate()
-    }
+    ' class Conglomerate{
+        ' - name: string
+        ' + add(Conglomerate)*: void
+        ' + print(): void
+        ' + ~Conglomerate()
+    ' }
 
     class Country {
         - sizeOfArmy: int
@@ -76,7 +76,7 @@ rectangle "War " as War {
     }
 
     class War{
-        - participants: vector<Conglomerate*>
+        - participants: vector<Alliances*>
         - reasonForWar: string
         - reasonEndWar: string
         - battles: vector<Battle*>
@@ -398,41 +398,40 @@ note bottom #lightgreen : TEMPLATE METHOD
 '==== Different strategy states ===='
 rectangle "Strategy States" as StratStates {
     class BattleStrategy {
-        + battleAlgorithm()
+        {abstract} + warAlgorithm()
     }
 
     class DefensiveStrategy {
-        + defensiveAlgorithm()
+        + warAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
-        + makeAlliance(): void
-        + endAlliance(): void
     }
+    
     class OffensiveStrategy {
-        + offensiveAlgorithm()
+        + warAlgorithm()
         + redistributeTroops(): void
-        + recruitTroops(): void
-        + makeAlliance(): void
-        + spy(): void
+        + attack(): void
     }
 
     class ResearchiveStrategy {
-        + researchAlgorithm()
-        + ReasearchAndDevelop(): void
-        + buildVehicles(): void
-        + buildWeapons(): void
-        + spy(): void
+        + warAlgorithm()
+        + researchTroops(): void
+        + researchVehicles(): void
+        + researchWeapons(): void
     }
 
     class PrepareStrategy {
-        + prepareAlgorithm()
+        + warAlgorithm()
         + redistributeTroops(): void
         + recruitTroops(): void
         + buildVehicles(): void
         + buildWeapons(): void
-        + makeAlliance(): void
-        + endAlliance(): void
-        + spy(): void
+    }
+
+    class DiplomacyStrategy{
+        + warAlgorithm()
+        + proposeTreaty(): void
+        + surrender(): void
     }
 }
 note right of StratStates #lightgreen : STRATEGY
@@ -514,20 +513,18 @@ Country o-- VehicleFactory
 Country o-- TroopFactory
 
 Battle o-- Country
-Battle o-- Forces
 
 SpyAgency <|-- Spy
 Military o-- SpyAgency
 
-Alliance o-- Conglomerate
-Conglomerate <|-- Country
+Alliance <|-- Country
 War o-- Alliance
-War o-- Conglomerate
-BattleStrategy o-- Conglomerate
+BattleStrategy o-- Country
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
 ResearchiveStrategy <|-- BattleStrategy
 PrepareStrategy <|-- BattleStrategy
+DiplomacyStrategy <|-- BattleStrategy
 
 Dispute <|-- WarPhases
 Conflict <|-- WarPhases

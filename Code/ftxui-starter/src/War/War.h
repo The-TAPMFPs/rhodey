@@ -22,4 +22,5 @@ class War {
         void addCountryToSideB(Country* country);
         void changeState();
         void start();
+        MapData getCurrentMapData();
 };
