@@ -1,7 +1,8 @@
 #pragma once
 
 #include "UnitFactory.h"
-#include <memory>
+
+
 enum WEAPON_TYPE {bazooka, sniper, sniper50, pistol, ar, smg};
 
 class TroopFactory : public UnitFactory{
