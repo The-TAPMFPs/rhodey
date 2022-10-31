@@ -1,5 +1,5 @@
 #include "AirVehicle.h"
-#include "Entities/Vehicle/Vehicle.h"
+#include "../Vehicle.h"
 
 AirVehicle::AirVehicle(string name, int numberOfTroops, int HP, int Damage,
 	vector<Weapon*> * weapon) :

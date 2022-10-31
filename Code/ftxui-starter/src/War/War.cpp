@@ -1,6 +1,6 @@
 #include "War.h"
 
-#include "Conflict.h"
+#include "WarPhases/Conflict.h"
 
 War::War() {
   this->warPhase = new Conflict();

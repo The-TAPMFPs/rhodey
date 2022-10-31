@@ -2,5 +2,5 @@
 
 class Forces{
     private:
-        string name;
+        std::string name;
 };
