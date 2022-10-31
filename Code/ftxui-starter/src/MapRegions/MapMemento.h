@@ -11,7 +11,7 @@ class MapMemento
         MapData* setState();
         friend class Map;
     public:
-        MapMemento(MapData*);
+        MapMemento(MapData);
         virtual ~MapMemento();
         
 };

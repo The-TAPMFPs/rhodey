@@ -4,7 +4,6 @@ MapMemento::~MapMemento()
 {
     delete md;
 }
-MapMemento::MapMemento(MapData* md){
-    
+MapMemento::MapMemento(MapData md){
 
 }

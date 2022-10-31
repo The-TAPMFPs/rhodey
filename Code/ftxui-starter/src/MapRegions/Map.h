@@ -45,7 +45,7 @@ class Map {
         MapData getCurrentMapData();
 
         // THIS IS WHERE THE PROBLEM IS!
-        MapMemento* makeMemento();
-        void SetMemento (MapMemento * mem);
+        MapMemento makeMemento();
+        void SetMemento (MapMemento mem);
 
 };

@@ -93,10 +93,18 @@ MapData Map::getCurrentMapData()
     };
     
 }
-MapMemento* Map::makeMemento()
+MapMemento Map::makeMemento()
 {
-    return new MapMemento(&getCurrentMapData());
+    //REMOVED: Causing compilation errors
+    //TODO: Fix
+    // MapData m = getCurrentMapData();
+    // return new MapMemento(&m);
+
+    // return nullptr;
+
+    MapData md = getCurrentMapData();
+    return MapMemento(md);
 }
-void Map::SetMemento(MapMemento* md){
+void Map::SetMemento(MapMemento md){
     
 }

@@ -1,6 +1,7 @@
 #include "UI.h"
 #include "War/War.h"
 #include <cmath>
+#include <chrono>
 
 // Display a component nicely with a title on the left.
 //TODO: Remove since we probably won't need this
@@ -42,12 +43,21 @@ void UI::render()
       for(int j = 0; j < mapH; j++) {
         // if(i % 5 != 0) //Optional; splits grid into 4x4 tiles to account for horizontal lines
         {
+          mapHeight = 100*m.travelFieldA[mouseX][mouseY];
           if(m.travelFieldA[i][j] > (mapHeight/100.0))
           {
-            // int col = (255*mapHeight/100.0);
-            int col = (255*m.travelFieldA[i][j]);
+            int colIntensity = (255*m.travelFieldA[i][j]);
+            auto col = Color(0, colIntensity, colIntensity);
+            
+            int x = 100*m.travelFieldA[i][j];
+
+            if(x%5==0 || x%5==1) //Draw banding
+            {
+              // col = Color::White;
+              c.DrawPoint(i, j, true, col);
+            }
+
             // c.DrawPoint(i, j, true, Color(0, col, ((i/2+j/4)%2==0?col/2:col))); //Add tiling pattern to terrain
-            c.DrawPoint(i, j, true, Color(0, col, col));
           }
         }
       }
@@ -58,13 +68,19 @@ void UI::render()
     {
       int x = r->x;
       int y = r->y;
-      c.DrawPoint(x, y, true, Color::Red1);
+      c.DrawBlock(x, y, true, Color::Red1);
+      c.DrawText(x, y, "R");
     }
 
     // c.DrawPointLine(0, 0, mapW-1, mapH-1, Color::Red);
     // c.DrawPointLine(0, mapH-1, mapW-1, 0, Color::Red);
 
-    c.DrawPoint(mouseX%mapW, mouseY%mapW, true, Color::Red);
+    //Draw mouse cursor
+    if(mouseX >= 0 && mouseY >= 0 && mouseX < mapW && mouseY < mapH)
+    {
+      // c.DrawBlock(mouseX, mouseY, true, Color::Red);
+      c.DrawText(mouseX, mouseY, "X");
+    }
 
     // c.DrawText(mouseX, mouseY, std::to_string(mouseX) + ", " + std::to_string(mouseY), [](Pixel& p) {
     //   p.foreground_color = Color::Aquamarine1;
