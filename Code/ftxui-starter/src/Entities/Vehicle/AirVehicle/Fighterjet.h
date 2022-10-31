@@ -1,16 +1,11 @@
 #pragma once
-#include <string>
-#include <vector>
 #include "AirVehicle.h"
 
 using namespace std;
 
 class Fighterjet :public AirVehicle{
+    protected:
+	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
     public:
-    Fighterjet();
-     void attack();
-     void d();
-     void transport();
-    Entity* clone();
-
+    Fighterjet(string name, int numberOfTroops, vector<Weapon *> * weapons);
 };

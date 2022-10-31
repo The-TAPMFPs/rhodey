@@ -1,16 +1,11 @@
 #pragma once
-#include <string>
-#include <vector>
-#include "Vehicle.h"
+#include "../Vehicle.h"
 
 using namespace std;
 
 class AirVehicle :public Vehicle{
+    protected:
+	virtual int weaknesses(int damage, Weapon & weapon);
     public:
-    AirVehicle();
-    virtual void attack();
-    virtual void defend();
-    virtual void transport();
-    virtual Entity* clone();
-
+    AirVehicle(string name, int numberOfTroops, int HP, int Damage, vector<Weapon*> * weapon);
 };
