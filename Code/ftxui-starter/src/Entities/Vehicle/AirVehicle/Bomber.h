@@ -6,7 +6,7 @@ using namespace std;
 
 class Bomber :public AirVehicle{
     protected:
-	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
+	Entity* splitType(string name, int numberOfTroops, vector<Weapon*>* weapon);
     public:
-    Bomber(string name, int numberOfTroops, vector<Weapon *> * weapons);
+    Bomber(string name, int numberOfTroops, vector<Weapon*>* weapons);
 };
