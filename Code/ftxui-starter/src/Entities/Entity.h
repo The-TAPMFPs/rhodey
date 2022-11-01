@@ -5,7 +5,9 @@ using namespace std;
 
 class Entity{
 
-protected:
+    protected:
+	bool getAndSetDefense(); // gets current value of defense flag and then
+				//   flips it.
 	virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
 	virtual int weaknesses(int damage,Weapon & weapon)=0;
 
@@ -21,6 +23,7 @@ protected:
 	int terrianHandling = 0;
 public:
 	Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon);
+	~Entity();
 	// Virtuals
 	virtual int getCarryingCapacity()=0;
 	virtual int getTerrainHandling()=0;
@@ -29,8 +32,7 @@ public:
 
 	void attack(Entity & defender);
 	void assignWeapon(Weapon & weapon);
-	virtual void defend(int damage, Weapon & weapon);
-	bool getAndSetDefense(); // gets current value of defense flag and then
-				//   flips it.
+	void defend(int damage, Weapon & weapon); /// Do not use this method
+	int getAmount();
 	Entity* split(int numberOfEntities);
 };

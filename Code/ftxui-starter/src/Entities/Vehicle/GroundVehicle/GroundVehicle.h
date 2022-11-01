@@ -5,7 +5,8 @@ using namespace std;
 
 class GroundVehicle :public Vehicle{
     protected:
-	virtual int weaknesses(int damage, Weapon & weapon);
+	int weaknesses(int damage, Weapon & weapon);
+    virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
     public:
     GroundVehicle(string name, int numberOfTroops, int HP, int Damage, vector<Weapon*> * weapon);
 

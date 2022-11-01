@@ -4,3 +4,7 @@ Submarine::Submarine(string name, int numberOfTroops, vector<Weapon *> * weapons
 	this->terrianHandling = 32;
 	this->capacity = 30;
     };
+
+Entity * Submarine::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new Submarine(name, numberOfTroops, weapon);
+}

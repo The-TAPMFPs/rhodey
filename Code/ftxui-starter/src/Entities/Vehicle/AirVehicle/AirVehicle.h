@@ -3,9 +3,10 @@
 
 using namespace std;
 
-class AirVehicle :public Vehicle{
+class AirVehicle :protected Vehicle{
     protected:
-	virtual int weaknesses(int damage, Weapon & weapon);
+	int weaknesses(int damage, Weapon & weapon);
+	virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
     public:
     AirVehicle(string name, int numberOfTroops, int HP, int Damage, vector<Weapon*> * weapon);
 };

@@ -1,5 +1,4 @@
 #include "Vehicle.h"
-#include "../Entity.h"
 
 Vehicle::Vehicle(string name, int numberOfTroops, int HP, int Damage, vector<Weapon*> * weapon) : Entity(name, "Vehicle", HP, Damage, weapon ) {
     this->HPScalling = this->HP;
