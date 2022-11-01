@@ -5,7 +5,7 @@ using namespace std;
 
 class Entity{
 
-    protected:
+protected:
 	virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
 	virtual int weaknesses(int damage,Weapon & weapon)=0;
 
@@ -19,7 +19,7 @@ class Entity{
 	int HPScalling = 1;
 	vector<Weapon*> * weapons;
 	int terrianHandling = 0;
-    public:
+public:
 	Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon);
 	// Virtuals
 	virtual int getCarryingCapacity()=0;
