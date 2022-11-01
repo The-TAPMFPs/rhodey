@@ -6,3 +6,6 @@ Bomber::Bomber(string name, int numberOfTroops, vector<Weapon*>* weapons) :
 	this->capacity = 30;
 };
 
+Entity * Bomber::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new Bomber(name, numberOfTroops, weapon);
+}

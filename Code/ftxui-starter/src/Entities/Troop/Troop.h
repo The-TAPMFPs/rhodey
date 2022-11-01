@@ -10,6 +10,5 @@ protected:
 public:
     Troop(string name, int numberOfTroops, vector<Weapon*> * weapon);
     virtual int getCarryingCapacity();
-    virtual void defend(int damage, Weapon & weapon);
     virtual int getTerrainHandling();
 };

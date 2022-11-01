@@ -4,3 +4,7 @@ CargoPlane::CargoPlane(string name, int numberOfTroops, vector<Weapon *> * weapo
 	this->terrianHandling = 50;
 	this->capacity = 30;
     };
+
+Entity * CargoPlane::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new CargoPlane(name, numberOfTroops, weapon);
+}
