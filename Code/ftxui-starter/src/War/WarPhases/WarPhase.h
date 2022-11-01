@@ -5,10 +5,7 @@
 class War;
 
 class WarPhase {
-    protected:
-        War* _war;
     public:
-        virtual ~WarPhase(){};
-        void set_war(War* war);
-        virtual void DoSomething() = 0;//TODO : Need to implement into ui that the state has changed
+        virtual void handleWarChange(War* war) = 0;
+        virtual std::string getCurrentWarState() = 0;//TODO : Need to implement into ui that the state has changed
 };

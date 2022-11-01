@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Country.h"
-#include "Region.h"
-#include "Military/Forces.h"
+#include "../../Country/Country.h"
+#include "../../MapRegions/Region.h"
+#include "../../Military/Forces.h"
 #include <vector>
 
 class Battle{
