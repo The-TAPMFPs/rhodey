@@ -4,6 +4,8 @@
 #include <map>
 #include <vector>
 #include "Region.h"
+#include "MapMemento.h"
+
 
 typedef float** scalarField2D;
 
@@ -16,13 +18,17 @@ struct MapData
     unsigned int width, height;
 };
 
+
+class MapMemento;
+
 class Map {
     private:
-        std::map<RegionUUID, Region*> regions;
+        std::map<UUID, Region*> regions;
         //The travel distance fields are 2D scalar fields that determine
         //The difficulty of crossing any particular square on the map
         scalarField2D travelDifficultyField_allianceA;
         scalarField2D travelDifficultyField_allianceB;
+
         static float distToRegion(int x, int y, Region* r);
 
     public:
@@ -37,4 +43,9 @@ class Map {
         scalarField2D getTravelFieldB();
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
+
+        // THIS IS WHERE THE PROBLEM IS!
+        MapMemento makeMemento();
+        void SetMemento (MapMemento mem);
+
 };
