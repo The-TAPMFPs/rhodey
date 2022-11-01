@@ -11,7 +11,7 @@ int main(int argc, const char* argv[]) {
 
     UI* ui = new UI(war);
 
-    ui->render();
+    ui->startSim();
 
     delete war;
     delete ui;
