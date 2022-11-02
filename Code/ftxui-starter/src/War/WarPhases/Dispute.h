@@ -1,7 +1,9 @@
-#pragma once 
+#pragma once
 #include "WarPhase.h"
+#include "Hostilities.h"
 
-class Conflict : public WarPhase{
-    public:
-        void DoSomething();
+class Dispute : public WarPhase {
+ public:
+  void handleWarChange(War* war);
+  std::string getCurrentWarState();
 };

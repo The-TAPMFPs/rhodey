@@ -4,3 +4,7 @@ Tank::Tank(string name, int numberOfTroops, vector<Weapon *> * weapons) :
 	this->terrianHandling = 50;
 	this->capacity = 5;
     };
+
+Entity * Tank::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new Tank(name, numberOfTroops, weapon);
+}

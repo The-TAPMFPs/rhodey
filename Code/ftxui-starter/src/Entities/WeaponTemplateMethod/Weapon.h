@@ -15,6 +15,7 @@ class Weapon {
   string getType();
   string getName();
 };
+
 class Bazooka : public Weapon {
   Bazooka();
 };

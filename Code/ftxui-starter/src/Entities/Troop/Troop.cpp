@@ -1,6 +1,4 @@
 #include "Troop.h"
-#include <vector>
-#include "Entity.h"
 
 Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon) :
     Entity(name, "Ground Infantry", numberOfTroops, 2, weapon) {

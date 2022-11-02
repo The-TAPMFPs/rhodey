@@ -4,3 +4,7 @@ Warship::Warship(string name, int numberOfTroops, vector<Weapon *> * weapons) :
 	this->terrianHandling = 32;
 	this->capacity = 2000;
     };
+
+Entity * Warship::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
+    return new Warship(name, numberOfTroops, weapon);
+}

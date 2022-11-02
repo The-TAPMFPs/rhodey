@@ -1,22 +1,18 @@
 #include "Region.h"
 
-Region::Region() {
-  this->uuid = generateUUID();
-  this->name = "NaN";
-  this->coords = { -1, -1 };
-}
+Region::Region()
+ : uuid(uuid::generateUUID()), name("R_" + uuid), coords({ uuid::randomInt(0, 99), uuid::randomInt(0, 99) })
+{}
 
 Region::Region(std::string name, int xCoord, int yCoord)
-    : name(name), coords({ xCoord, yCoord }) {
-  generateUUID();
-}
+    : name(name), coords({ xCoord, yCoord }), uuid(uuid::generateUUID())
+{}
 
-Region::Region(int xCoord, int yCoord) : coords({ xCoord, yCoord }) {
-  generateUUID();
-  this->name = "NaN";
-}
+Region::Region(int xCoord, int yCoord)
+: coords({ xCoord, yCoord }), uuid(uuid::generateUUID()), name("R_" + uuid) //TODO: Generate a proper name
+{}
 
-RegionUUID Region::getUUID() {
+UUID Region::getUUID() {
   return uuid;
 }
 
@@ -39,10 +35,4 @@ void Region::setRegionCoords(int xCoord, int yCoord) {
 Country* Region::getPossessor()
 {
   return this->possessor;
-}
-
-RegionUUID Region::generateUUID()
-{
-  //TODO
-  return "a";
 }

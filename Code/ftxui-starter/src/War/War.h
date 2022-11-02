@@ -8,7 +8,7 @@ class WarPhase;
 
 class War {
     private:
-        WarPhase* _warPhase;
+        WarPhase* warPhase;
         Alliance* teamA;
         Alliance* teamB;
         Map* map;
@@ -16,10 +16,11 @@ class War {
     public:
         War();
         War(WarPhase* warPhase);
-        void TransitionTo(WarPhase* warPhase);
         ~War();
+        void transitionTo(WarPhase* warPhase);
         void addCountryToSideA(Country* country);
         void addCountryToSideB(Country* country);
+        void changeState();
         void start();
         MapData getCurrentMapData();
 };

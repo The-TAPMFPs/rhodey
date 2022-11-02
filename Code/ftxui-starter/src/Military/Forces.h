@@ -1,10 +1,14 @@
 #pragma once
-#include <string>
-#include "Military.h"
+#include "Regiment.h"
+
 
 class Forces : public Military{
     private:
-        std::string name;
-        
+	std::string name;
+	Region * region;
+	vector<Regiment *> * airForce;
+	vector<Regiment *> * army;
+	vector<Regiment *> * navy;
+    public:
 
 };

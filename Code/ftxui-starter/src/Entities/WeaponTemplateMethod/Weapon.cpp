@@ -5,8 +5,15 @@ int Weapon::getDamage() {return this->damage;}
 string Weapon::getName() {return this->WeaponName;}
 string Weapon::getType() {return this->WeaponType;}
 
+Weapon::Weapon(int damage, std::string name) {
+    this->damage = damage;
+    this->WeaponName = name;
+    this->WeaponType = "";
+}
+
 Bazooka::Bazooka() : Weapon(0, "Bazooka") {
     this->damage = 90 + rand( )%100;  // DO RANDOM DAMAGE GENERATION
+    this->WeaponType = "anti-tank";
   }
 
 Sniper::Sniper(): Weapon(0,"Sniper"){ //2nd
@@ -15,6 +22,7 @@ Sniper::Sniper(): Weapon(0,"Sniper"){ //2nd
 
 Sniper50::Sniper50(): Weapon(0,"Sniper50"){ //1st
     this->damage=90 + rand( )%100;
+    this->WeaponType = "anti-armour";
 }
 
 Pistol::Pistol(): Weapon(0,"Pistol"){ //last

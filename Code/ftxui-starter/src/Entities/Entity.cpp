@@ -9,6 +9,14 @@ Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * w
     this->weapons = weapon;
 }
 
+Entity::~Entity() {
+    for (int count = 0; count < this->weapons->size(); count++) {
+	delete this->weapons->at(this->weapons->size()-1);
+	this->weapons->pop_back();
+    }
+    delete this->weapons;
+}
+
 void Entity::attack(Entity & defender) {
     if (this->HP <= 0) {
 	return;
@@ -43,6 +51,10 @@ bool Entity::getAndSetDefense() {
 	this->defending = true;
     }
     return currentValue;
+}
+
+int Entity::getAmount() {
+    return this->HP/this->HPScalling;
 }
 
 void Entity::assignWeapon(Weapon &weapon) {

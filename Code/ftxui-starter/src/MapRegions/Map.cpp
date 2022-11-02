@@ -1,29 +1,17 @@
 #include "Map.h"
 #include <cmath>
 
-//TODO: Calculate the difficulty field for each alliance
-
 Map::Map()
 {
     //Randomly initialize regions
-    // std::map<RegionUUID, Region*> regions;
-    this->regions = std::map<RegionUUID, Region*>();
+    this->regions = std::map<UUID, Region*>();
 
-    //Temp
-    regions.emplace("a", new Region("A", 39, 29));
-    regions.emplace("b", new Region("B", 4, 10));
-    regions.emplace("c", new Region("C", 22, 32));
-    regions.emplace("d", new Region("D", 78, 16));
-    regions.emplace("e", new Region("E", 46, 6));
-    regions.emplace("f", new Region("F", 43, 54));
-    regions.emplace("g", new Region("G", 70, 81));
-
-    // for(int i = 0; i < numRegions; i++)
-    // {
-    //     Region* r = new Region();
-    //     //TODO: Check position is not already taken
-    //     regions.emplace(r->getUUID(), r);
-    // }
+    for(int i = 0; i < numRegions; i++)
+    {
+        Region* r = new Region();
+        //TODO: Check position is not already taken
+        regions.emplace(r->getUUID(), r);
+    }
 
     //Initialize travel difficulty field to 0's
     this->travelDifficultyField_allianceA = new float*[mapW];
@@ -103,4 +91,20 @@ MapData Map::getCurrentMapData()
         this->mapW,
         this->mapH
     };
+    
+}
+MapMemento Map::makeMemento()
+{
+    //REMOVED: Causing compilation errors
+    //TODO: Fix
+    // MapData m = getCurrentMapData();
+    // return new MapMemento(&m);
+
+    // return nullptr;
+
+    MapData md = getCurrentMapData();
+    return MapMemento(md);
+}
+void Map::SetMemento(MapMemento md){
+    
 }
