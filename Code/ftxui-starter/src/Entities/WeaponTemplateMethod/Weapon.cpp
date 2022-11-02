@@ -30,16 +30,20 @@ AR::AR():Weapon(0,"AR"){
 SMG::SMG():Weapon(0,"SMG"){
     this->damage=10+rand()%25;
 }
+//Vehicle Weapons
 Bomb::Bomb():Weapon(0,"Bomb"){
     this->damage=35+rand()%55;
 }
-Cannon::Cannon():   Weapon(0,"Cannon"){
+Cannon::Cannon():Weapon(0,"Cannon"){
     this->damage=25+rand()%45;
 }
-Torpedo::Torpedo(): Weapon(0,"Torpedo"){
+Torpedo::Torpedo():Weapon(0,"Torpedo"){
     this->damage=45+rand()%75;
 }
 Missile::Missile():Weapon(0,"Missile"){
     this->damage=40+rand()%65;
+}
+Mg160::Mg160():Weapon(0, "Missle"){
+    this->damage = 30+rand()%25;
 }
 

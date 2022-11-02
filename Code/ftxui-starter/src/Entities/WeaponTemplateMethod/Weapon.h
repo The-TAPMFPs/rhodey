@@ -53,4 +53,7 @@ class Bomb:public Weapon{
 class Cannon:public Weapon{
     Cannon();
 };
+class Mg160:public Weapon{
+    Mg160();
+};
 
