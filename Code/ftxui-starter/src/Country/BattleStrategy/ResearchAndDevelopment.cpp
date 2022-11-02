@@ -6,13 +6,13 @@ ResearchAndDevelopment::ResearchAndDevelopment(_rad rad){
 
 void ResearchAndDevelopment::warAlgorithm(){
     switch(rad){
-        case rt:
+        case rtRD:
             researchTroops();
             break;
-        case rv:
+        case rvRD:
             researchVehicles();
             break;
-        case rw:
+        case rwRD:
             researchWeapons();
             break;
     }
