@@ -16,9 +16,8 @@ class VehicleFactory : protected UnitFactory{
     private:
         VEHICLE_TYPE currVehicleType;
     public:
-        VehicleFactory(std::string name, int num);
+        VehicleFactory(std::string name, int num, VEHICLE_TYPE type);
         ~VehicleFactory();
-        void setVehicleType(VEHICLE_TYPE type);
         Entity* makeUnit();
         
 };

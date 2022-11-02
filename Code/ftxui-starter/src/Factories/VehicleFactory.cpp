@@ -1,6 +1,6 @@
 #include "VehicleFactory.h"
 
-VehicleFactory::VehicleFactory(std::string name, int num) {
+VehicleFactory::VehicleFactory(std::string name, int num, VEHICLE_TYPE type) {
   _name = name;
   _num = num;
   Mg160* mg;
@@ -14,14 +14,10 @@ VehicleFactory::VehicleFactory(std::string name, int num) {
   w4 = new vector<Weapon*> {tor, mis};
   w5 = new vector<Weapon*> {mg};
   w6 = new vector<Weapon*> {bom, mg};
-  //Need to make more guns
+  currVehicleType = type;
 }
 
 VehicleFactory::~VehicleFactory() {}
-
-void VehicleFactory::setVehicleType(VEHICLE_TYPE type) {
-  currVehicleType = type;
-}
 
 Entity* VehicleFactory::makeUnit() {
   switch (currVehicleType) {
