@@ -39,3 +39,18 @@ class AR : public Weapon{
 class SMG : public Weapon{
     SMG();
 };
+class Torpedo:public Weapon{
+    Torpedo();
+};
+
+class Missile:public Weapon{
+    Missile();
+};
+
+class Bomb:public Weapon{
+    Bomb();
+};
+class Cannon:public Weapon{
+    Cannon();
+};
+
