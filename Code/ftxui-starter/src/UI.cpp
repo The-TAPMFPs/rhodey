@@ -25,15 +25,31 @@ UI::UI(War* war)
  : war(war)
 {}
 
+void gameLoop()
+{
+}
+
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
 
   int mouseX = 0, mouseY = 0;
 
+  // This thread exists to make sure that the event queue has an event to
+  // process at approximately a rate of 60 FPS
+  std::atomic<bool> refresh_ui_continue = true;
+  std::thread refresh_ui([&] {
+    while (refresh_ui_continue) {
+      using namespace std::chrono_literals;
+      const auto refresh_time = 1.0s / 60.0;
+      std::this_thread::sleep_for(refresh_time);
+      screen.PostEvent(Event::Custom);
+    }
+  });
+
   //===== CREATE SCREEN CONTAINERS =====//
 
-#pragma region PARENT_PANEL
+#pragma region MAP_PANEL
   //GAME MAP
   int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
@@ -48,8 +64,6 @@ void UI::render()
     for(int i = 0; i < mapW; i++) {
       for(int j = 0; j < mapH; j++) {
         {
-          // mapHeight = 100*m.travelFieldA[clamp(mouseX, 0, 99)][clamp(mouseX, 0, 99)];
-
           int colIntensity = (255*m.travelFieldA[i][j]);
           auto col = Color(0, colIntensity, colIntensity);
 
@@ -66,8 +80,6 @@ void UI::render()
             // col = Color::White;
             c.DrawPoint(i, j, true, col);
           }
-
-            // c.DrawPoint(i, j, true, Color(0, col, ((i/2+j/4)%2==0?col/2:col))); //Add tiling pattern to terrain
         }
       }
     }
@@ -80,7 +92,14 @@ void UI::render()
 
       if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y)
       {
-        c.DrawText(x-4, y-1, "REGION", Color::Red3);
+        std::string regionName = "REGION";
+        int nameLen = regionName.length()*2;
+
+        //Position name so it doesnt overflow out of the map bounds
+        int clampX = clamp(x-nameLen/2, 2, 99-nameLen);
+        int clampY = (y < 1)?4:y-1;
+
+        c.DrawText(clampX, clampY, regionName, Color::Red3);
       }
       else
       {
@@ -118,11 +137,17 @@ void UI::render()
         // selectedRegion = new Region("test", mouseX, mouseY);
       }
     }
+    else if(e == Event::Custom)
+    {
+      war->step();
+    }
+    war->onEvent(e);
+
     return false;
   });
 
-  //=====PARENT PANEL=====//
-  auto parent = mapRenderer;
+  //=====MAP PANEL=====//
+  auto map = mapRenderer;
 
 #pragma endregion
 
@@ -131,10 +156,7 @@ void UI::render()
   //=====TOP PANEL=====//
 
   // auto mapSlider = Slider("Height:", &mapHeight, 0, 100, 1);
-
-  auto regionDataLayout = Container::Vertical({
-    // mapSlider
-  });
+  auto regionDataLayout = Container::Vertical({});
 
   auto regionData = Renderer(regionDataLayout, [&] {
     if(selectedRegion!=nullptr)
@@ -143,9 +165,8 @@ void UI::render()
         text("Region Data") | center,
         separator(),
         text(selectedRegion->getRegionName()) | center,
-        text(std::to_string(selectedRegion->getCoords().x))
-        // text(std::to_string(mapHeight)) | center,
-        // mapSlider->Render()
+        text(std::to_string(selectedRegion->getCoords().x)),
+        text(std::to_string(selectedRegion->getCoords().y))
       });
     }
     else
@@ -156,12 +177,6 @@ void UI::render()
         text("Please select a region on the map.") | center,
       });
     }
-    return vbox({
-      text("Region Data") | center,
-      text(selectedRegion==nullptr?"No region selected":selectedRegion->getRegionName()) | center,
-      // text(std::to_string(mapHeight)) | center,
-      // mapSlider->Render()
-    });
   });
 #pragma endregion
 
@@ -207,43 +222,43 @@ void UI::render()
 #pragma endregion
 
 
-#pragma region BOTTOM_PANEL
-  //=====BOTTOM PANEL=====//
-  auto bottom = Renderer([] { return text("BOTTOM PANEL") | center; });
+#pragma region INFO_PANEL
+  //=====INFO PANEL=====//
+  auto info = Renderer([] {
+      return text("ADDITIONAL DATA") | center;
+    });
 #pragma endregion
 
 
 #pragma region MAIN_CONTAINER
   //Default starting sizes for each panel
-  int right_size = 75;
-  int regionData_size = 20;
+  int left_size = 50;
+  int map_size = 25;
   int bottom_size = 2;
- 
-  // auto container = Container::Horizontal({
-  //   parent,
-  //   mapMouseCapture
-  // });
-  auto container = parent; // The main container holding all the window panels
-  container = ResizableSplitBottom(regionData, container, &regionData_size);
-  container = ResizableSplitRight(right, container, &right_size);
-  container = ResizableSplitBottom(bottom, container, &bottom_size);
+
+  auto mapContainer = ResizableSplitTop(map, regionData, &map_size);
+  auto container = ResizableSplitLeft(mapContainer, right, &left_size);
+  container = ResizableSplitBottom(info, container, &bottom_size);
 
   //=====MAIN PANEL=====//
   auto renderer = Renderer(container, [&] { return container->Render() | border; }); //The global container renderer
 #pragma endregion
 
   screen.Loop(renderer);
+
+  //Kill game loop thread
+  refresh_ui_continue = false;
+  refresh_ui.join();
 }
 
 Element cutSceneDecorator(Element buttons)
 {
   auto desc = vbox({
-    filler(),
     paragraphAlignCenter("DISPUTE"),
     separator(),
     filler(),
     paragraphAlignCenter("The war in Asia began when Japan invaded China on July 7, 1937. The war began in Europe when Germany invaded Poland on September 1, 1939. France and the United Kingdom reacted by declaring war on Germany. By 1941, much of Europe was under German control, including France. Only the British remained fighting against the Axis in North Africa"),
-    filler()
+    filler(),
   });
 
   auto page = vbox({
