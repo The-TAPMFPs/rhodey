@@ -60,3 +60,8 @@ MapData War::getCurrentMapData()
 {
   return this->map->getCurrentMapData();
 }
+
+Region* War::getRegionAt(int x, int y)
+{
+  return this->map->getRegionAt(x, y);
+}

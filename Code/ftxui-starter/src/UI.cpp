@@ -8,7 +8,7 @@
 Component Wrap(std::string name, Component component) {
   return Renderer(component, [name, component] {
     return hbox({
-               text(name) | size(WIDTH, EQUAL, 8),
+               text(name) | size(WIDTH, EQUAL, 10),
                separator(),
                component->Render() | xflex,
            }) |
@@ -38,7 +38,7 @@ void UI::render()
   int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
   int mapHeight = 40;
-  Region* selectedRegion;
+  Region* selectedRegion = nullptr;
 
   MapData m = war->getCurrentMapData();
 
@@ -75,33 +75,31 @@ void UI::render()
     // Draw regions markers
     for(auto r = m.regionLocations.begin(); r != m.regionLocations.end(); r++)
     {
-      //X and Y coords must be rounded to nearest mouse coord
-      int x = 2*(floor(r->x/2));
-      int y = 4*(floor(r->y/4));
-
-      c.DrawBlock(x, y, true, Color::Red1);
+      int x = r->x*2;
+      int y = r->y*4;
 
       if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y)
       {
-        c.DrawText(x, y, (std::to_string(x) + ", " + std::to_string(y)), Color::Red3);
+        c.DrawText(x-4, y-1, "REGION", Color::Red3);
       }
       else
       {
         c.DrawText(x, y, "R", Color::Red);
-        c.DrawText(mouseX+1, mouseY+1, "X");
 
         //Draw mouse cursor
-        // if(mouseX >= 0 && mouseY >= 0 && mouseX < mapW && mouseY < mapH)
+        if(mouseX >= 0 && mouseY >= 0 && mouseX < mapW && mouseY < mapH)
         {
-          // c.DrawText(mouseX, mouseY, "X", Color::Red);
+          c.DrawText(mouseX, mouseY, "X", Color::Red);
         }
       }
-    }
 
-    //DEBUG: Show mouse coords
-    // c.DrawText(mouseX, mouseY, std::to_string(mouseX) + ", " + std::to_string(mouseY), [](Pixel& p) {
-      // p.foreground_color = Color::Aquamarine1;
-    // });
+      //Draw selected region marker
+      if(selectedRegion != nullptr)
+      {
+        MapCoords coords = selectedRegion->getCoords();
+        c.DrawText(coords.x*2, coords.y*4, "R", Color::Gold1);
+      }
+    }
 
     return canvas(c);
   });
@@ -116,6 +114,8 @@ void UI::render()
       if(e.mouse().button == Mouse::Left &&
          e.mouse().motion == Mouse::Pressed)
       {
+        selectedRegion = war->getRegionAt(mouseX/2, mouseY/4);
+        // selectedRegion = new Region("test", mouseX, mouseY);
       }
     }
     return false;
@@ -137,8 +137,28 @@ void UI::render()
   });
 
   auto regionData = Renderer(regionDataLayout, [&] {
+    if(selectedRegion!=nullptr)
+    {
+      return vbox({
+        text("Region Data") | center,
+        separator(),
+        text(selectedRegion->getRegionName()) | center,
+        text(std::to_string(selectedRegion->getCoords().x))
+        // text(std::to_string(mapHeight)) | center,
+        // mapSlider->Render()
+      });
+    }
+    else
+    {
+      return vbox({
+        text("Region Data") | center,
+        separator(),
+        text("Please select a region on the map.") | center,
+      });
+    }
     return vbox({
       text("Region Data") | center,
+      text(selectedRegion==nullptr?"No region selected":selectedRegion->getRegionName()) | center,
       // text(std::to_string(mapHeight)) | center,
       // mapSlider->Render()
     });

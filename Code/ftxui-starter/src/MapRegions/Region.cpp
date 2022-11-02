@@ -1,7 +1,8 @@
 #include "Region.h"
 
+//Map is 100x100, tiles are 2x4, therefore possible region locations (0,0) to (49, 24)
 Region::Region()
- : uuid(uuid::generateUUID()), name("R_" + uuid), coords({ uuid::randomInt(0, 99), uuid::randomInt(0, 99) })
+ : uuid(uuid::generateUUID()), name("R_" + uuid), coords({ uuid::randomInt(0, 49), uuid::randomInt(0, 24) })
 {}
 
 Region::Region(std::string name, int xCoord, int yCoord)

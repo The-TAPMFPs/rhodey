@@ -23,4 +23,5 @@ class War {
         void changeState();
         void start();
         MapData getCurrentMapData();
+        Region* getRegionAt(int x, int y);
 };
