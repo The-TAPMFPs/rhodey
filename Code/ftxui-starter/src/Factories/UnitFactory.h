@@ -13,6 +13,7 @@ class UnitFactory{
         vector<Weapon *> * w3;
         vector<Weapon *> * w4;
         vector<Weapon *> * w5;
+        Entity* e;
     public:
         virtual ~UnitFactory();
         virtual Entity* makeUnit() = 0;

@@ -27,20 +27,20 @@ Entity* TroopFactory::makeUnit(){
     int i = rand() % 5 + 1;
     switch(i){
         case 1:
-            Troop* t1 = new Troop(_name, _num, w1);
-            return t1;
+            e = new Troop(_name, _num, w1);
+            return e;
         case 2:
-            Troop* t2 = new Troop(_name, _num, w2);
-            return t2;
+            e = new Troop(_name, _num, w2);
+            return e;
         case 3:
-            Troop* t3 = new Troop(_name, _num, w3);
-            return t3;
+            e = new Troop(_name, _num, w3);
+            return e;
         case 4:
-            Troop* t4 = new Troop(_name, _num, w4);
-            return t4;
+            e = new Troop(_name, _num, w4);
+            return e;
         case 5:
-            Troop* t5 = new Troop(_name, _num, w5);
-            return t5;
+            e = new Troop(_name, _num, w5);
+            return e;
     }
 }
 
