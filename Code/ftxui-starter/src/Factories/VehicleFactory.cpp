@@ -1,10 +1,12 @@
 #include "VehicleFactory.h"
-#include "Entities/Vehicle/Vehicle.h"
 
 VehicleFactory::VehicleFactory(std::string name, int hp, int num){
     _name = name;
-    _hp = hp;
-    _num = num
+    _num = num;
+    AR* ar;
+    SMG* smg;
+    Pistol* pis;
+    w1 =  new vector<Weapon *> {ar, smg, pis};
 }
 
 VehicleFactory::~VehicleFactory(){}
@@ -16,13 +18,10 @@ void VehicleFactory::setVehicleType(VEHICLE_TYPE type){
 Entity* VehicleFactory::makeUnit(){
     switch(currVehicleType){
         case truck:
-            Vehicle tr = new truck();
-            return tr;
+            Truck* v1 = new Truck(_name, _num, w1);
+            return v1;
         case tank:
-            Vehicle ta = new Tank();
-            return ta;
         case carrier:
-            Vehicle 
         case cargoship:
         case warship:
         case submarine:
