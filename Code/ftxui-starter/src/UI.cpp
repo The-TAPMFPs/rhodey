@@ -219,10 +219,10 @@ Element cutSceneDecorator(Element buttons)
 {
   auto desc = vbox({
     filler(),
-    paragraphAlignCenter("DISPUTE"),
+    paragraphAlignCenter(War::warState),
     separator(),
     filler(),
-    paragraphAlignCenter("The war in Asia began when Japan invaded China on July 7, 1937. The war began in Europe when Germany invaded Poland on September 1, 1939. France and the United Kingdom reacted by declaring war on Germany. By 1941, much of Europe was under German control, including France. Only the British remained fighting against the Axis in North Africa"),
+    paragraphAlignCenter(War::warStateDesc),
     filler()
   });
 
@@ -249,11 +249,17 @@ void UI::startSim()
   int frameCount = 0;
 
   //PHASES:
-  //Dispute, Conflict, Hostilitiies, Post-hostilities conflict, Post-hostilities dispute, Settlement
+  //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
 
-  executeDispute();
-
-  render();
+  int i = 0;
+  while(!war->isOver()) {
+    executeDispute();
+    war->changeState();
+    if(i == 1) {
+      render();
+    }
+    i++;
+  }
 
   // while(running)
   {
