@@ -50,6 +50,7 @@ file(GLOB_RECURSE SRC_FILES
 
 # Create the `ftxui-starter` executable in build/, add all .cpp files
 add_executable(${PROJECT_NAME} ${SRC_FILES})
+target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(ftxui-starter
   PRIVATE ftxui::screen
@@ -61,13 +62,13 @@ target_link_libraries(ftxui-starter
 
 
 # --- Emscripten build (can ignore) --------------------------------------------
-if (EMSCRIPTEN) 
-  string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS") 
-  string(APPEND CMAKE_EXE_LINKER_FLAGS " -s ASYNCIFY") 
-  string(APPEND CMAKE_EXE_LINKER_FLAGS " -s PROXY_TO_PTHREAD") 
+if (EMSCRIPTEN)
+  string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS")
+  string(APPEND CMAKE_EXE_LINKER_FLAGS " -s ASYNCIFY")
+  string(APPEND CMAKE_EXE_LINKER_FLAGS " -s PROXY_TO_PTHREAD")
 
   foreach(file "index.html" "run_webassembly.py")
     configure_file("src/${file}" ${file})
   endforeach(file)
-endif() 
+endif()
 # ------------------------------------------------------------------------------

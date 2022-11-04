@@ -52,8 +52,8 @@ Map::Map()
 float Map::distToRegion(int x, int y, Region* r)
 {
     MapCoords regionCoords = r->getCoords();
-    int dx = x - regionCoords.x;
-    int dy = y - regionCoords.y;
+    int dx = x - regionCoords.x*2; //Scale to map proportions
+    int dy = y - regionCoords.y*4;
 
     //TODO: Consider multiplying by the 'danger' of the region,
     //      i.e. How big of a threat the enemy region poses
@@ -79,6 +79,21 @@ std::vector<MapCoords> Map::getRegionLocations()
     }
 
     return res;
+}
+
+//Return the region at the specified coordinates
+//Returns nullptr if no such region exists
+Region* Map::getRegionAt(int x, int y)
+{
+    for(auto it = regions.begin(); it != regions.end(); it++)
+    {
+        MapCoords coords = it->second->getCoords();
+        if(coords.x == x && coords.y == y)
+        {
+            return it->second;
+        }
+    }
+    return nullptr;
 }
 
 MapData Map::getCurrentMapData()

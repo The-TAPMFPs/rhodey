@@ -1,16 +1,14 @@
 #pragma once
-#include <string>
-#include <vector>
-#include "Entity.h"
+#include "../Entity.h"
 
 using namespace std;
 
-class Troop :public Entity{
-    public:
-    Troop();
-    virtual void attack();
-    virtual void defend();
-    virtual void transport();
-    Entity* clone();
-
+class Troop : public Entity{
+protected:
+    virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
+    virtual int weaknesses(int damage, Weapon & weapon);
+public:
+    Troop(string name, int numberOfTroops, vector<Weapon*> * weapon);
+    virtual int getCarryingCapacity();
+    virtual int getTerrainHandling();
 };
