@@ -3,12 +3,12 @@
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
 #include "BattleStrategy/BattleStrategy.h"
-#include "../MapRegions/Region.h"
-/* #include "BattleStrategy/Offensive.h"
+#include "../MapRegions/Map.h"
+#include "BattleStrategy/Offensive.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
 #include "BattleStrategy/Defensive.h"
 #include "BattleStrategy/Prepare.h"
-#include "BattleStrategy/Diplomacy.h" */
+#include "BattleStrategy/Diplomacy.h"
 
 
 

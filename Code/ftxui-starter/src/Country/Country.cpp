@@ -10,12 +10,14 @@ unsigned int Country::prowessInRegion(Region* region)
 }
 
 Country::Country(std::string name) : name(name) {
-    population = 0;
-    economy = 0;
-    morale = 0;
-    resources = 0;
-    research = 0;
-    aggressiveness = 0;
+    int min=0.25, max=0.75;
+    srand((unsigned)time(NULL));
+    population = (int) (rand() % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
+    economy = min + (double)(rand() / RAND_MAX) * (max-min); 
+    morale = min + (double)(rand() / RAND_MAX) * (max-min); 
+    resources = min + (double)(rand() / RAND_MAX) * (max-min); 
+    research = min + (double)(rand() / RAND_MAX) * (max-min); 
+    aggressiveness = min + (double)(rand() / RAND_MAX) * (max-min); 
     goalRating = 0;
     numSpies = 0;
     numTroops = 0;
@@ -125,31 +127,41 @@ int Country::nextStrategy()
 
 void Country::takeTurn()
 {
-    /* int nextStrat = nextStrategy();
+    int nextStrat = nextStrategy();
 
     switch(nextStrat)
     {
         case 0:
-            this->strategy = new Offensive(red);
+        
+            //loop through regions, check if there is an enemy region in which we have a 90% troop ratio to enemies
+            //if so, attack
+            //else move troops to region with least enemy troops and easy to get there
+
             break;
          case 1:
-            this->strategy = new Defensive();
+            //if there is a non contesting region, move those troops to a contesting region
+            //if no contesting region then recruit
+            //this->strategy = new Defensive();
             break;
         case 2:
-            this->strategy = new ResearchAndDevelopment();
+            //develop the lowest stat between economy, resources and research
+            //this->strategy = new ResearchAndDevelopment();
             break;
         case 3:
-            this->strategy = new PreparationStrategy();
+            //take action of lowest between trrop and vehicle count
+            //this->strategy = new PreparationStrategy();
             break;
         case 4:
-            this->strategy = new IntelligenceStrategy();
+            //create spy on an enemy region with most enemy or friendly troops
+            //this->strategy = new IntelligenceStrategy();
             break;
         case 5:
-            this->strategy = new DiplomacyStrategy();
+            //if goal rating is high and aggressivness is low then propose treaty, else surrender()
+            //this->strategy = new DiplomacyStrategy();
             break; 
         default:
-            this->strategy = new Offensive(red);
+            //this->strategy = new Offensive(red);
             break;
-    } */
+    }
     
 }
