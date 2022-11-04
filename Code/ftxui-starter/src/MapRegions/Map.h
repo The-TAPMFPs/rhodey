@@ -44,6 +44,7 @@ class Map {
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
         Region* getRegionAt(int x, int y);
+        float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento makeMemento();
