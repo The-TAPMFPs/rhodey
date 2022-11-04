@@ -28,6 +28,17 @@ War::~War() {
   delete teamA, teamB;
 }
 
+//The main simulation loop
+void War::step()
+{
+}
+
+//Called when there is an input event from the UI
+bool War::onEvent(ftxui::Event e)
+{
+  return false;
+}
+
 void War::transitionTo(WarPhase* warPhase) {
   //TODO: Fix, something is segfaulting in here!
   if (this->warPhase)
@@ -59,4 +70,9 @@ void War::start() {
 MapData War::getCurrentMapData()
 {
   return this->map->getCurrentMapData();
+}
+
+Region* War::getRegionAt(int x, int y)
+{
+  return this->map->getRegionAt(x, y);
 }
