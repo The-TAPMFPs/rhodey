@@ -43,6 +43,7 @@ class Map {
         scalarField2D getTravelFieldB();
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
+        Region* getRegionAt(int x, int y);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento makeMemento();
