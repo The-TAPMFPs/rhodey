@@ -413,7 +413,7 @@ rectangle "Strategy States" as StratStates {
         + attack(): void
     }
 
-    class ResearchiveStrategy {
+    class ResearchStrategy {
         + warAlgorithm()
         + researchTroops(): void
         + researchVehicles(): void
@@ -425,7 +425,6 @@ rectangle "Strategy States" as StratStates {
         + redistributeTroops(): void
         + recruitTroops(): void
         + buildVehicles(): void
-        + buildWeapons(): void
     }
 
     class DiplomacyStrategy{
