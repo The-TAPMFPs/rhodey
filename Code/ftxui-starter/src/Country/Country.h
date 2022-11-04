@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../lib/eigen3/Eigen/Dense"
+#include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
 #include "BattleStrategy/BattleStrategy.h"
 #include "../MapRegions/Map.h"
@@ -17,6 +18,9 @@ class Region;
 class Alliance;
 
 class Country {
+  private:
+    std::string name;
+    BattleStrategy* strategy;
   private:
     std::string name;
     BattleStrategy* strategy;
@@ -50,6 +54,9 @@ class Country {
     unsigned int sizeOfArmy();
     unsigned int prowessInRegion(Region* region);
 
+    // TODO trainingFacilities vector<TroopFactory *>
+    // TODO vehicleFactories vector<VehicleFactory *>
+    Alliance* allies;
     // TODO trainingFacilities vector<TroopFactory *>
     // TODO vehicleFactories vector<VehicleFactory *>
     Alliance* allies;
