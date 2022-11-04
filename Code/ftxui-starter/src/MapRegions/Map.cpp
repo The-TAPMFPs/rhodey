@@ -145,4 +145,17 @@ MapMemento Map::makeMemento()
 }
 void Map::SetMemento(MapMemento md){
     
+    this->mapH= md.height;
+    this->mapW= md.width;
+    this->travelDifficultyField_allianceB = md.travelFieldB;
+    this->travelDifficultyField_allianceA = md.travelFieldA;
+ 
+    // std::map<UUID, Region*> newRegions = std::map<UUID, Region*>();//need to fix 
+    // for(int i = 0; i < md.regionLocations.size() ; i++)
+    // {
+    //     Region* r = md.regionLocations.at(i);
+    //     regions.emplace(r->getUUID(), r);
+    // }
+    // this->region = newRegions;
+
 }
