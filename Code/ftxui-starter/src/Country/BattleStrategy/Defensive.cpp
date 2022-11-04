@@ -6,10 +6,10 @@ Defensive::Defensive(_def def){
 
 void Defensive::warAlgorithm(){
     switch(def){
-        case red:
+        case redDef:
             redistributeTroops();
             break;
-        case rec:
+        case recDef:
             recruitTroops();
             break;
     }

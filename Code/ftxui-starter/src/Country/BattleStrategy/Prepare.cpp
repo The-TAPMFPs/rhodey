@@ -6,16 +6,16 @@ Prepare::Prepare(_prep prep){
 
 void Prepare::warAlgorithm(){
     switch(prep){
-        case red:
+        case redP:
             redistributeTroops();
             break;
-        case rec:
+        case recP:
             recruitTroops();
             break;
-        case bv:
+        case bvP:
             buildVehicles();
             break;
-        case bw:
+        case bwP:
             buildWeapons();
             break;
     }

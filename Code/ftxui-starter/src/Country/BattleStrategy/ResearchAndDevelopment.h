@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _rad {rt, rv, rw};
+enum _rad {rtRD, rvRD, rwRD};
 class ResearchAndDevelopment : public BattleStrategy {
     private:
         _rad rad;
