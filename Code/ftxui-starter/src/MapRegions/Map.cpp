@@ -133,29 +133,10 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
 
 MapMemento Map::makeMemento()
 {
-    //REMOVED: Causing compilation errors
-    //TODO: Fix
-    // MapData m = getCurrentMapData();
-    // return new MapMemento(&m);
-
-    // return nullptr;
-
     MapData md = getCurrentMapData();
     return MapMemento(md);
 }
 void Map::SetMemento(MapMemento md){
-    
-    this->mapH= md.height;
-    this->mapW= md.width;
-    this->travelDifficultyField_allianceB = md.travelFieldB;
-    this->travelDifficultyField_allianceA = md.travelFieldA;
- 
-    // std::map<UUID, Region*> newRegions = std::map<UUID, Region*>();//need to fix 
-    // for(int i = 0; i < md.regionLocations.size() ; i++)
-    // {
-    //     Region* r = md.regionLocations.at(i);
-    //     regions.emplace(r->getUUID(), r);
-    // }
-    // this->region = newRegions;
-
+    this->travelDifficultyField_allianceB = md.getState()->travelFieldB;
+    this->travelDifficultyField_allianceA = md.getState()->travelFieldA;
 }

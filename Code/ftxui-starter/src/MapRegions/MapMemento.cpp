@@ -4,14 +4,15 @@ MapMemento::~MapMemento()
 {
     delete md;
 }
+
 MapMemento::MapMemento(MapData md){
-    this->md=&md;
+    this->md = &md;
 }
 
-Mapdata* MapMemento::getState(){
+MapData* MapMemento::getState() {
     return md;
 }
 
-void MapMemento::setState(Mapdata* md){
-    this->md=md;
+void MapMemento::setState(MapData md) {
+    this->md = &md;
 }
