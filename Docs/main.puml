@@ -204,24 +204,23 @@ rectangle Military {
 rectangle "Factories" {
     class UnitFactory{
         # name: string
-        # hp: int
-        # dmg: int
-        + unitFactory()
+        # num: int
+        + unitFactory(name : string, int : num)
         ~ unitFactory()
-        + {abstract} makeUnit(): Entity*
+        + {abstract} makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
 
     }
 
     class VehicleFactory {
-        + VehicleFactory()
+        + VehicleFactory(name : string, int : num, vehicle : VehicleType)
         ~ VehicleFactory()
-        + makeUnit(): Entity*
+        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
     }
 
     class TroopFactory {
-        + TroopFactory()
+        + TroopFactory(name : string, int : num)
         ~ TruckFactory()
-        + makeUnit(): Entity*
+        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
     }
 
     enum VehicleType {
@@ -237,11 +236,19 @@ rectangle "Factories" {
         CargoPlane
     }
 
-    enum TroopType {
+    enum WeaponType {
         <<enumeration>>
-        Soldier
-        Commander
-        Spy
+        Bazooka
+        Sniper
+        Sniper50
+        Pistol
+        AR
+        SMG 
+        Bomb
+        Cannon 
+        Torpedo
+        Missile
+        MG160
     }
 }
 note bottom #lightgreen : ABSTRACT FACTORY
@@ -413,7 +420,7 @@ rectangle "Strategy States" as StratStates {
         + attack(): void
     }
 
-    class ResearchiveStrategy {
+    class ResearchStrategy {
         + warAlgorithm()
         + researchTroops(): void
         + researchVehicles(): void
@@ -425,7 +432,6 @@ rectangle "Strategy States" as StratStates {
         + redistributeTroops(): void
         + recruitTroops(): void
         + buildVehicles(): void
-        + buildWeapons(): void
     }
 
     class DiplomacyStrategy{

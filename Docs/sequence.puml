@@ -1,17 +1,54 @@
-@startuml
-participant Participant as Foo
-actor       Actor       as Foo1
-boundary    Boundary    as Foo2
-control     Control     as Foo3
-entity      Entity      as Foo4
-database    Database    as Foo5
-collections Collections as Foo6
-queue       Queue       as Foo7
-Foo -> Foo1 : To actor 
-Foo -> Foo2 : To boundary
-Foo -> Foo3 : To control
-Foo -> Foo4 : To entity
-Foo -> Foo5 : To database
-Foo -> Foo6 : To collections
-Foo -> Foo7 : To queue
+@startuml WarSequence
+War -> WarPhases
+alt Conflict
+    WarPhases --> War
+    War -> Battle
+    loop Until end of war
+        Battle -> BattleStrategy
+        alt PrepareStrategy
+            alt redistributeTroops
+                BattleStrategy --> Battle : redistributeTroops()
+            else recruitTroops
+                BattleStrategy -> UnitFactory : recruitTroops(name : string , num : int, weapon : vector<Weapon*>*)
+                UnitFactory -> TroopFactory 
+                TroopFactory -> Troop : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
+            else buildVehicles
+                BattleStrategy -> UnitFactory : buildVehicles(name : string , num : int, weapon : vector<Weapon*>*)
+                UnitFactory -> VehicleFactory
+                VehicleFactory -> Vehicle : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
+            end
+        else ResearchStrategy
+            alt researchTroops
+                BattleStrategy --> Battle : researchTroops()
+            else researchVehicles
+                BattleStrategy --> Battle : researchVehicles()
+            else researchWeapons
+                BattleStrategy --> Battle : researchWeapons()
+            end
+        else OffensiveStrategy
+            alt redistributeTroops
+                BattleStrategy --> Battle : redistributeTroops()
+            else attack
+                BattleStrategy --> Battle : attack()
+            end
+        else DefensiveStrategy
+            alt redistributeTroops
+                BattleStrategy --> Battle : redistributeTroops()
+            else recruitTroops
+                BattleStrategy -> UnitFactory : recruitTroops()
+                UnitFactory -> TroopFactory 
+                TroopFactory -> Troop : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
+                Troop -> Battle
+            end
+        else DiplomacyStrategy
+            alt proposeTreaty
+                BattleStrategy --> Battle : proposeTreaty()
+            else surrender
+                BattleStrategy --> Battle : surrender()
+            end
+        end
+    end
+else Other Phase
+    WarPhases --> War : Explain what is happening at this time in the war
+end
 @enduml
