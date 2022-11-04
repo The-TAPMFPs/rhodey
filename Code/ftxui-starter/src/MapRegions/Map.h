@@ -43,6 +43,7 @@ class Map {
         scalarField2D getTravelFieldB();
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
+        float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento makeMemento();

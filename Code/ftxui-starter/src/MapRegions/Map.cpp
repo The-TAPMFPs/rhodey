@@ -93,6 +93,44 @@ MapData Map::getCurrentMapData()
     };
     
 }
+
+//Returns the linearly interpolated point between two mapCoords
+//t in [0, 1] inclusive
+MapCoords lerp(MapCoords a, MapCoords b, float t)
+{
+    int dx = (a.x - b.x) * t;
+    int dy = (a.y - b.y) * t;
+
+    return {b.x + dx, b.y + dy};
+}
+
+int dist(MapCoords a, MapCoords b)
+{
+    int dx = a.x-b.x;
+    int dy = a.y-b.y;
+
+    return sqrt(dx*dx + dy*dy);
+}
+
+//Get a measure of the difficulty for a country from teamA/teamB to travel linearly between two points on the map
+float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
+{
+    float sum = 0.0f;
+
+    int distance = dist(from, to);
+
+    for(int t = 0; t <= distance; t++)
+    {
+        MapCoords samplePt = lerp(from, to, ((float)t)/distance);
+
+        sum += teamA ?
+                    this->travelDifficultyField_allianceA[samplePt.x][samplePt.y]:
+                    this->travelDifficultyField_allianceB[samplePt.x][samplePt.y];
+    }
+
+    return sum;
+}
+
 MapMemento Map::makeMemento()
 {
     //REMOVED: Causing compilation errors
