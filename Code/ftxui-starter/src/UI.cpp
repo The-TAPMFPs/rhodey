@@ -243,6 +243,73 @@ void executeDispute()
   screen.Loop(nextButton | cutSceneDecorator);
 }
 
+void UI::simSetup() {
+  auto screen = ScreenInteractive::Fullscreen();
+
+  std::vector<std::string> tab_values{
+      "Team A",
+      "Team B",
+  };
+
+  int tab_selected = 0;
+  auto tab_toggle = Toggle(&tab_values, &tab_selected);
+
+  std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
+  int countryA_selected = 0;
+
+  std::vector<std::string> countries_on_sideB = war->teamB->getAllianceNames();
+  int countryB_selected = 0;
+
+  auto tab_container = Container::Tab(
+    {
+      Dropdown(&countries_on_sideA, &countryA_selected),
+      Dropdown(&countries_on_sideB, &countryB_selected),
+    },
+    &tab_selected);
+
+  auto container = Container::Vertical({
+    tab_toggle,
+    tab_container,
+  });
+
+  auto renderer = Renderer(container, [&] {
+    std::vector<std::string> stats;
+    if(tab_selected == 0) {
+      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+    } else {
+      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+    }
+
+    std::vector<Element> twoByTwoElems;
+    for(int i = 0; i < stats.size(); i += 2) {
+      auto elem = vbox({
+        text(stats[i]) | borderLight,
+        text(stats[i + 1]) | borderLight,
+      });
+
+      twoByTwoElems.push_back(elem);
+    };
+
+    std::vector<Element> tabContainerElems {
+      tab_container->Render(),
+      separator(),
+    };
+    tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
+
+    auto doneButton = Button("Done", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+
+    return vbox({
+      tab_toggle->Render(),
+      separator(),
+      hbox(tabContainerElems) | flex,
+      separator(),
+      doneButton->Render() | center,
+    }) | border | flex;
+  });
+
+  screen.Loop(renderer);
+}
+
 void UI::startSim()
 {
   bool running = true;
@@ -250,6 +317,8 @@ void UI::startSim()
 
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
+
+  simSetup();
 
   int i = 0;
   while(!war->isOver()) {

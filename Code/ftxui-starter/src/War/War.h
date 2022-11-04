@@ -9,11 +9,11 @@ class WarPhase;
 class War {
     private:
         WarPhase* warPhase;
-        Alliance* teamA;
-        Alliance* teamB;
         Map* map;
 
     public:
+        Alliance* teamA;
+        Alliance* teamB;
         static std::string warState;
         static std::string warStateDesc;
         War();

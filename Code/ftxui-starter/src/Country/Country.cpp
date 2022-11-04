@@ -40,3 +40,16 @@ void Country::generatePersonalityMatrix()
 
     this->personalityMatrix = pm;
 }
+
+std::vector<std::string> Country::getFormattedStats() {
+    return std::vector<std::string> {
+        "Population: " + std::to_string(population),
+        "Economy: " + std::to_string(economy),
+        "Morale: " + std::to_string(morale),
+        "Resources: " + std::to_string(resources),
+        "Research: " + std::to_string(research),
+        "Aggressiveness: " + std::to_string(aggressiveness),
+        "Goal Rating: " + std::to_string(goalRating),
+        "Number of Spies: " + std::to_string(numSpies)
+    };
+}

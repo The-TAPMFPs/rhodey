@@ -48,4 +48,5 @@ class Country {
     std::string getName();
     void takeTurn();
     void generatePersonalityMatrix();
+    std::vector<std::string> getFormattedStats();
 };
