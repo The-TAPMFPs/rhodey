@@ -43,3 +43,4 @@ Missile::Missile():Weapon(0,"Missile"){
     this->damage=40+rand()%65;
 }
 
+TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){}

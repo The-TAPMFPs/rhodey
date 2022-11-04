@@ -22,6 +22,7 @@ struct MapData
 class MapMemento;
 
 class Map {
+    friend class OccupancyTable;
     private:
         std::map<UUID, Region*> regions;
         //The travel distance fields are 2D scalar fields that determine
