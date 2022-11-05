@@ -145,37 +145,6 @@ rectangle Military {
         ~Military()
     }
 
-    class Army {
-        - name: string
-        - numSoldiers: int
-        - numCommanders: int
-        - numTanks: int
-        - numTrucks: int
-        - units: vector<Entity*>
-        + move(): void
-        ~Army()
-    }
-
-    class Navy {
-        - name: string
-        - numCargoShips: int
-        - numWarShips: int
-        - numCarriers: int
-        - numSubmarines: int
-        - numFighters: int
-        - units: vector<Entity*>
-        + move(): void
-        ~Navy()
-    }
-
-    class AirForce {
-        - name: string
-        - numFighters: int
-        - numBombers: int
-        - units: vector<Entity*>
-        + move(): void
-        ~AirForce()
-    }
 
     rectangle Spies {
 
@@ -204,24 +173,23 @@ rectangle Military {
 rectangle "Factories" {
     class UnitFactory{
         # name: string
-        # hp: int
-        # dmg: int
-        + unitFactory()
+        # num: int
+        + unitFactory(name : string, int : num)
         ~ unitFactory()
-        + {abstract} makeUnit(): Entity*
+        + {abstract} makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
 
     }
 
     class VehicleFactory {
-        + VehicleFactory()
+        + VehicleFactory(name : string, int : num, vehicle : VehicleType)
         ~ VehicleFactory()
-        + makeUnit(): Entity*
+        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
     }
 
     class TroopFactory {
-        + TroopFactory()
+        + TroopFactory(name : string, int : num)
         ~ TruckFactory()
-        + makeUnit(): Entity*
+        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
     }
 
     enum VehicleType {
@@ -237,11 +205,19 @@ rectangle "Factories" {
         CargoPlane
     }
 
-    enum TroopType {
+    enum WeaponType {
         <<enumeration>>
-        Soldier
-        Commander
-        Spy
+        Bazooka
+        Sniper
+        Sniper50
+        Pistol
+        AR
+        SMG 
+        Bomb
+        Cannon 
+        Torpedo
+        Missile
+        MG160
     }
 }
 note bottom #lightgreen : ABSTRACT FACTORY
@@ -372,21 +348,6 @@ rectangle "Entities" {
         {abstract} + clone(): Troop
     }
 
-    class Soldier {
-        + Soldier()
-        + attack(): void
-        + defend(): void
-        + clone(): Troop
-    }
-
-    class Commander {
-        + Commander()
-        + attack(): void
-        + defend(): void
-        + command(): void
-        + clone(): Troop
-    }
-
     class Weapon {
         - weaponName: string
         - dmg: int
@@ -413,7 +374,7 @@ rectangle "Strategy States" as StratStates {
         + attack(): void
     }
 
-    class ResearchiveStrategy {
+    class ResearchStrategy {
         + warAlgorithm()
         + researchTroops(): void
         + researchVehicles(): void
@@ -425,7 +386,6 @@ rectangle "Strategy States" as StratStates {
         + redistributeTroops(): void
         + recruitTroops(): void
         + buildVehicles(): void
-        + buildWeapons(): void
     }
 
     class DiplomacyStrategy{
@@ -466,8 +426,6 @@ Simulation o- Simulation
 Entity o- Weapon
 Entity <|-- Troop
 Entity <|-- Vehicle
-Troop <|-- Soldier
-Troop <|-- Commander
 Vehicle <|-- GroundVehicle
 Vehicle <|-- AirVehicle
 Vehicle <|-- WaterVehicle
@@ -482,7 +440,8 @@ WaterVehicle <|-- Submarine
 WaterVehicle <|-- Carrier
 
 
-
+UnitFactory <|-- VehicleFactory
+UnitFactory <|-- TroopFactory
 VehicleFactory ..> Truck : <<instantiates>>
 VehicleFactory ..> Tank : <<instantiates>>
 VehicleFactory ..> Warship : <<instantiates>>
@@ -491,24 +450,17 @@ VehicleFactory ..> Carrier : <<instantiates>>
 VehicleFactory ..> CargoShip : <<instantiates>>
 VehicleFactory ..> Bomber : <<instantiates>>
 VehicleFactory ..> CargoPlane : <<instantiates>>
-TroopFactory   ..> Soldier : <<instantiates>>
-TroopFactory   ..> Commander : <<instantiates>>
+TroopFactory   ..> Troop : <<instantiates>>
+DefensiveStrategy ..> TroopFactory : <<instantiates>>
+PrepareStrategy ..> TroopFactory : <<instantiates>>
+PrepareStrategy ..> VehicleFactory : <<instantiates>>
 
 War ..> WarMemento
 caretaker o-- WarMemento
 WarMemento o-- WarState
 
-Forces o-- Army
-Forces o-- Navy
-Forces o-- AirForce
+Forces o-- Entity
 
-Military o-- Forces
-
-Army o-- Entity
-Navy o-- Entity
-AirForce o-- Entity
-
-Country *-- Military
 Country o-- VehicleFactory
 Country o-- TroopFactory
 
@@ -522,7 +474,7 @@ War o-- Alliance
 BattleStrategy o-- Country
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
-ResearchiveStrategy <|-- BattleStrategy
+ResearchStrategy <|-- BattleStrategy
 PrepareStrategy <|-- BattleStrategy
 DiplomacyStrategy <|-- BattleStrategy
 

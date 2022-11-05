@@ -1,0 +1,58 @@
+@startuml CommunicationDiagram
+skinparam linetype polyline
+left to right direction
+rectangle WarSimulation as 1
+rectangle War as 2
+rectangle Battle as 3
+rectangle WarPhases as 4
+rectangle Dispute as 5
+rectangle Hostilities as 6
+rectangle Conflict as 7
+rectangle PostWar as 8 
+rectangle DisputeSettled as 9 
+rectangle BattleStrategy as 10
+rectangle PrepareStrategy as 11
+rectangle ResearchStrategy as 12
+rectangle OffensiveStrategy as 13
+rectangle DefensiveStrategy as 14
+rectangle DiplomacyStrategy as 15
+rectangle Country as 16
+rectangle unitFactory as 17
+rectangle TroopFactory as 18
+rectangle VehicleFactory as 19
+
+1 -> 2 : 1. beginSimulation()
+2 --> 4 : 2.1 checkPhase()
+4 --> 5 : 3.1 [if == setState] changeState()
+4 --> 6 : 3.2 [if == setState] changeState()
+4 --> 7 : 3.3 [if == setState] changeState()
+4 --> 8 : 3.4 [if == setState] changeState()
+4 --> 9 : 3.5 [if == setState] changeState()
+
+2 --> 16 : 2.2 checkCountries()
+16 --> 3 : 4. newBattle()
+
+3 --> 10 : 5. battleStrategy()
+
+10 --> 11 : 6.1 [if == setStrategy] changeStategy()
+11 --> 3 : 7.1 [if == redistribute] redistributeTroops()
+11 --> 17 : 7.2 [if == recruitTroops or buildVehilecs] recruitTroops() or builderVehicles()
+17 --> 18 : 7.3 makeUnit()
+17 --> 19 : 7.4 makeUnit()
+
+10 --> 12 : 6.2 [if == setStrategy] changeStategy()
+12 --> 3 : 8. [Choose research Strategy] researchTroops() or researchVehicles() or reseachWeapons()
+
+10 --> 13 : 6.3 [if == setStrategy] changeStategy()
+13 --> 3 : 9. [Choose offensive Strategy] redistributeTroops() or attack()
+
+10 --> 14 : 6.4 [if == setStrategy] changeStategy()
+14 --> 3 : 10.1 [if == redistribute] redistributeTroops()
+14 --> 17 : 10.2 [if == recruitTroops] recruitTroops()
+17 --> 18 : 10.3 makeUnit()
+
+10 --> 15 : 6.5 [if == setStrategy] changeStategy()
+15 --> 3 : 11. [Choose diplomacy strategy] surrender() or proposeTreaty()
+
+
+@enduml

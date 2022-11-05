@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _dip {su, pt};
+enum _dip {suDip, ptDip};
 class Diplomacy : public BattleStrategy {
     private:
         _dip dip;

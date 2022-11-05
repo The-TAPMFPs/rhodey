@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _off {red, att};
+enum _off {redOff, attOff};
 
 class Offensive : public BattleStrategy {
     private:

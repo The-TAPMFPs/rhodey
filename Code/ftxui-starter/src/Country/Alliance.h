@@ -18,4 +18,6 @@ class Alliance {
 		Alliance(std::string name);
 		void add(Country*);
 		void print();
+		std::vector<std::string> getAllianceNames();
+		std::vector<Country *>* getMembers();
 };
