@@ -221,10 +221,8 @@ void UI::render()
     std::vector<std::string> stats;
     if(tab_selected == 0) {
       stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
-      Logger::log("tab 1");
     } else {
       stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
-      Logger::log("tab 2");
     }
 
     std::vector<Element> twoByTwoElems;
@@ -251,8 +249,6 @@ void UI::render()
         separator(),
         hbox(tabContainerElems),
       }) | border,
-      separator(),
-      text(Logger::getMsg()) | center,
     });
   });
 
@@ -277,7 +273,10 @@ void UI::render()
 #pragma region INFO_PANEL
   //=====INFO PANEL=====//
   auto info = Renderer([] {
-      return text("ADDITIONAL DATA") | center;
+      return vbox({
+        text("=====LOG=====") | center,
+        text(Logger::getMsg()) | center,
+      });
     });
 #pragma endregion
 
@@ -411,7 +410,7 @@ void UI::startSim()
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
 
-  // simSetup();
+  simSetup();
 
   int i = 0;
   while(!war->isOver()) {
