@@ -3,6 +3,8 @@
 
 std::string War::warState = "UNSET_WAR_STATE";
 std::string War::warStateDesc = "UNSET_WAR_STATE_DESC";
+std::vector<std::string> War::warStateThumbnail;
+ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 
 War::War(WarPhase* warPhase) : warPhase(warPhase) {
   // TransitionTo(warPhase); //REMOVED: for now, re-add later

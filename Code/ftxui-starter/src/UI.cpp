@@ -25,10 +25,6 @@ UI::UI(War* war)
  : war(war)
 {}
 
-void gameLoop()
-{
-}
-
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -267,14 +263,57 @@ Element cutSceneDecorator(Element buttons)
     buttons | center
   });
 
-  return page |= border;
+  if(War::warStateThumbnail.empty()) //No thumbnail available
+  {
+    return page;
+  }
+
+  auto c = Canvas(150, 100);
+  int i = 0;
+  for(auto line = War::warStateThumbnail.begin(); line != War::warStateThumbnail.end(); line++, i++)
+  {
+    c.DrawText(0, i*4, line->data(), War::warStateThumbnailColor);
+  }
+
+  auto thumb = vbox({
+    filler(),
+    canvas(c) | center | border,
+    filler()
+  });
+
+  auto result = hbox({
+    filler(),
+    page,
+    filler(),
+    thumb
+  });
+
+  return result |= border;
 }
 
-void executeDispute()
+void UI::executeDispute()
 {
   auto screen = ScreenInteractive::Fullscreen();
 
-  auto nextButton = Button("Next", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+  // std::atomic<bool> refresh_ui_continue = true;
+  // std::thread refresh_ui([&] {
+  //   while (refresh_ui_continue) {
+  //     using namespace std::chrono_literals;
+  //     const auto refresh_time = 1.0s / 10.0;
+  //     std::this_thread::sleep_for(refresh_time);
+  //     screen.PostEvent(Event::Custom);
+  //   }
+  // });
+
+  auto nextButton = Button("Next", screen.ExitLoopClosure(), ButtonOption::Animated(War::warStateThumbnailColor));
+
+  // page |= CatchEvent([&](Event e) {
+  //   if(e == Event::Custom) {
+  //     // War::warStateThumbnailFrameCount++;
+  //   }
+
+    // return false;
+  // });
 
   screen.Loop(nextButton | cutSceneDecorator);
 }
