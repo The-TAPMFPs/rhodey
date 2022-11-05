@@ -26,3 +26,12 @@ std::vector<std::string> Alliance::getAllianceNames() {
 std::vector<Country*>* Alliance::getMembers() {
     return &members;
 }
+
+//For round-robin selection of a country from the alliance
+Country* Alliance::getMemberModuloSize(int modIndex) {
+    if(!this->members.empty())
+    {
+        return this->members[modIndex%this->members.size()];
+    }
+    return nullptr;
+}

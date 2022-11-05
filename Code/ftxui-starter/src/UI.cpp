@@ -134,11 +134,11 @@ void UI::render()
         // selectedRegion = new Region("test", mouseX, mouseY);
       }
     }
-    else if(e == Event::Custom)
-    {
-      war->step();
-    }
-    war->onEvent(e);
+    // else if(e == Event::Custom)
+    // {
+    //   war->step();
+    // }
+    // war->onEvent(e);
 
     return false;
   });
@@ -178,7 +178,7 @@ void UI::render()
 #pragma endregion
 
 
-#pragma region RIGHT_PANEL
+#pragma region COUNTRY_DATA_PANEL
   //CREATE BUTTON
   std::string button_label = "Quit";
   std::function<void()> on_button_clicked_;
@@ -238,7 +238,7 @@ void UI::render()
     tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
 
     return vbox({
-      text("WAR START STATE") | center,
+      text("Conflict") | center,
       separator(),
       vbox({
         tab_toggle->Render(),
@@ -249,14 +249,14 @@ void UI::render()
   });
 
   //PANEL LAYOUT
-  auto rightPanelLayout = Container::Vertical({
+  auto countryDataPanelLayout = Container::Vertical({
       button,
       countryManager
   });
 
   //=====RIGHT PANEL=====//
 
-  auto right = Renderer(rightPanelLayout, [&] {
+  auto countryData = Renderer(countryDataPanelLayout, [&] {
       return vbox({
         countryManager->Render(),
         separator(),
@@ -284,12 +284,22 @@ void UI::render()
   int bottom_size = 2;
 
   auto mapContainer = ResizableSplitTop(map, regionData, &map_size);
-  auto container = ResizableSplitLeft(mapContainer, right, &left_size);
+  auto container = ResizableSplitLeft(mapContainer, countryData, &left_size);
   container = ResizableSplitBottom(info, container, &bottom_size);
 
   //=====MAIN PANEL=====//
   auto renderer = Renderer(container, [&] { return container->Render() | border; }); //The global container renderer
 #pragma endregion
+
+  renderer |= CatchEvent([&](Event e) {
+    if(e == Event::Custom)
+    {
+      war->step();
+    }
+    war->onEvent(e);
+
+    return false;
+  });
 
   screen.Loop(renderer);
 
