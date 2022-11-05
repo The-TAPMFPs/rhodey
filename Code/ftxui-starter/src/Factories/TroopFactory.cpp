@@ -1,6 +1,5 @@
 #include "TroopFactory.h"
 #include "Entities/Troop/Troop.h"
-#include "WeaponTemplateMethod/Weapon.h"
 #include <vector>
 #include <cstdlib>
 
@@ -25,21 +24,32 @@ TroopFactory::~TroopFactory(){}
 
 Entity* TroopFactory::makeUnit(){
     int i = rand() % 5 + 1;
+    std::string temp;
     switch(i){
         case 1:
-            e = new Troop(_name, _num, w1);//cout "_num troops with AR's, Sniper's and Sniper50's were recruited"
-            return e;                      //Do this for each case corresponding to the weapons that they were given
+            e = new Troop(_name, _num, w1);
+            temp = _num + " troops with ARs, Snipers and Sniper50s were recruited.";
+            Logger::log(temp);
+            return e;                     
         case 2: 
             e = new Troop(_name, _num, w2);
+            temp = _num + " troops with SMGs, Pistols and Bazookas were recruited.";
+            Logger::log(temp);
             return e;
         case 3:
             e = new Troop(_name, _num, w3);
+            temp = _num + " troops with ARs, SMGs and Pistols were recruited.";
+            Logger::log(temp);
             return e;
         case 4:
             e = new Troop(_name, _num, w4);
+            temp = _num + " troops with ARs, Pistols and Bazookas were recruited.";
+            Logger::log(temp);
             return e;
         case 5:
             e = new Troop(_name, _num, w5);
+            temp = _num + " troops with SMGs, Snipers and Bazookas were recruited.";
+            Logger::log(temp);
             return e;
     }
 }

@@ -2,7 +2,9 @@
 #include "Entities/Entity.h"
 #include <string>
 #include <vector>
-#include "WeaponTemplateMethod/Weapon.h"
+#include "../Entities/WeaponTemplateMethod/Weapon.h"
+#include "logger.h"
+
 
 class UnitFactory{
     protected:

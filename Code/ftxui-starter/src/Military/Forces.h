@@ -4,7 +4,7 @@
 //#include "Regiment.h"
 
 
-class Forces : public Military{
+class Forces{
     private:
 	// std::string name;
 	// Region * region;
