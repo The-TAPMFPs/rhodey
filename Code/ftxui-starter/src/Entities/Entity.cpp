@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include <iostream>
 
 Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon) {
     this->name = name;
@@ -7,10 +8,12 @@ Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * w
     this->Damage = Damage;
     this->defending = false;
     this->weapons = weapon;
+    this->uuid = uuid::generateUUID();
 }
 
 Entity::~Entity() {
-    for (int count = 0; count < this->weapons->size(); count++) {
+    int initial = this->weapons->size();
+    for (int count = 0; count < initial; count++) {
 	delete this->weapons->at(this->weapons->size()-1);
 	this->weapons->pop_back();
     }
@@ -22,25 +25,25 @@ void Entity::attack(Entity & defender) {
 	return;
     }
     int totalDamage = 0;
-    int damageModifier = 1;
-    totalDamage = this->Damage;
-
-    if (!this->getAndSetDefense()) {
-	int damageModifier = 2;
-    }
-
+    totalDamage = (this->Damage*this->getAmount())/this->weapons->size();
     for (int count = 0; count < this->weapons->size(); count++) {
-	defender.defend(totalDamage*damageModifier, * this->weapons->at(count));
+	defender.defend(totalDamage, * this->weapons->at(count));
     }
+}
+
+void Entity::update() {
+    this->HP = this->HP - this->DamageDone;
+    this->DamageDone = 0;
 }
 
 void Entity::defend(int damage, Weapon &weapon) {
     int potentialDamage = damage;
     if (this->getAndSetDefense()) {
-	potentialDamage = potentialDamage/this->Damage;
+	potentialDamage = potentialDamage*0.7;
     }
+    potentialDamage = potentialDamage/this->HPScalling;
     potentialDamage = this->weaknesses(potentialDamage, weapon);
-    this->HP = this->HP - potentialDamage;
+    this->DamageDone = potentialDamage;
 }
 
 bool Entity::getAndSetDefense() {
