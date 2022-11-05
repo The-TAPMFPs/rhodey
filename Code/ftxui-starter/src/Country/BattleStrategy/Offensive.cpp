@@ -6,10 +6,10 @@ Offensive::Offensive(_off off){
 
 void Offensive::warAlgorithm(){
     switch(off){
-        case red:
+        case redOff:
             redistributeTroops();
             break;
-        case att:
+        case attOff:
             attack();
             break;
     }

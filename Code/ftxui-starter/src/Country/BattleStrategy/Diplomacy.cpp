@@ -6,10 +6,10 @@ Diplomacy::Diplomacy(_dip dip){
 
 void Diplomacy::warAlgorithm(){
     switch(dip){
-        case su:
+        case suDip:
             surrender();
             break;
-        case pt:
+        case ptDip:
             proposeTreaty();
             break;
     }

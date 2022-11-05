@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _prep {rec, bv, bw};
+enum _prep {rec, bv};
 
 class Prepare : public BattleStrategy {
     private:
