@@ -1,0 +1,125 @@
+@startuml
+
+object "Country1:Country" as Country
+
+Country : sizeOfArmy = 10,000
+Country : population = 1,200,000
+Country : economy = 0.56
+Country : morale =0.27
+Country : resources = 0.67
+Country : research = 0.88
+Country : aggresiveness =0.71
+
+object "map1:map" as map
+map : numRegions = 10
+map : mapWidth = 100
+map : mapHeight = 100
+
+Country -->map
+
+
+object "Region1:Region" as Region1
+Region1 : name = "Hanamura"
+Region1 : x = 67
+Region1 : y=44
+
+
+map --> Region1
+
+object "Region2:Region" as Region2
+Region2 : name = "Eichenwalde"
+Region2 : x = 22
+Region2 : y=49
+
+
+
+map --> Region2
+
+object "Battle1:Battle" as Battle1
+
+object "Battle2:Battle" as Battle2
+
+object "Battle3:Battle" as Battle3
+
+Region1 --> Battle1
+Region1 --> Battle2
+Region2 --> Battle3
+
+
+
+
+
+
+
+@enduml
+
+@startuml
+
+
+
+object "War1:War" as War
+
+
+object "Alliance1:Alliance" as Alliance1
+Alliance1 : name = "TeamA"
+
+
+
+War --> Alliance1
+
+object "Alliance2:Alliance" as Alliance2
+Alliance2 : name = "TeamB"
+
+
+
+
+War --> Alliance2
+
+object "Country1:Country" as Country1
+Country1 : sizeOfArmy = 20000
+Country1 : population = 1,150,000
+Country1 : economy = 0.59
+Country1 : morale =0.30
+Country1 : resources = 0.50
+Country1 : research = 0.92
+Country1 : aggresiveness =0.24
+
+object "Country2:Country" as Country2
+Country2 : sizeOfArmy = 10,000
+Country2 : population = 1,111,000
+Country2 : economy = 0.57
+Country2 : morale =0.29
+Country2 : resources = 0.34
+Country2 : research = 0.92
+Country2 : aggresiveness =0.25
+
+object "Country3:Country" as Country3
+Country3 : sizeOfArmy = 25,000
+Country3 : population = 1,200,000
+Country3 : economy = 0.51
+Country3 : morale =0.21
+Country3 : resources = 0.61
+Country3 : research = 0.34
+Country3 : aggresiveness =0.77
+
+object "Country4:Country" as Country4
+Country4 : sizeOfArmy = 15000
+Country4 : population = 900,000
+Country4 : economy = 0.22
+Country4 : morale =0.59
+Country4 : resources = 0.33
+Country4 : research = 0.45
+Country4 : aggresiveness =0.32
+
+Alliance1 --> Country1
+Alliance1 --> Country2
+Alliance2 --> Country3
+Alliance2 --> Country4
+
+
+
+
+
+
+
+@enduml
