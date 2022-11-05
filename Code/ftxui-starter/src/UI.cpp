@@ -254,11 +254,12 @@ void UI::render()
 Element cutSceneDecorator(Element buttons)
 {
   auto desc = vbox({
-    paragraphAlignCenter("DISPUTE"),
+    filler(),
+    paragraphAlignCenter(War::warState),
     separator(),
     filler(),
-    paragraphAlignCenter("The war in Asia began when Japan invaded China on July 7, 1937. The war began in Europe when Germany invaded Poland on September 1, 1939. France and the United Kingdom reacted by declaring war on Germany. By 1941, much of Europe was under German control, including France. Only the British remained fighting against the Axis in North Africa"),
-    filler(),
+    paragraphAlignCenter(War::warStateDesc),
+    filler()
   });
 
   auto page = vbox({
@@ -278,17 +279,98 @@ void executeDispute()
   screen.Loop(nextButton | cutSceneDecorator);
 }
 
+void UI::simSetup() {
+  auto screen = ScreenInteractive::Fullscreen();
+
+  std::vector<std::string> tab_values{
+      "Team A",
+      "Team B",
+  };
+
+  int tab_selected = 0;
+  auto tab_toggle = Toggle(&tab_values, &tab_selected);
+
+  std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
+  int countryA_selected = 0;
+
+  std::vector<std::string> countries_on_sideB = war->teamB->getAllianceNames();
+  int countryB_selected = 0;
+
+  auto tab_container = Container::Tab(
+    {
+      Dropdown(&countries_on_sideA, &countryA_selected),
+      Dropdown(&countries_on_sideB, &countryB_selected),
+    },
+    &tab_selected);
+
+    auto doneButton = Button("START", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+
+  auto container = Container::Vertical({
+    tab_toggle,
+    tab_container,
+    doneButton,
+  });
+
+
+
+  auto renderer = Renderer(container, [&] {
+    std::vector<std::string> stats;
+    if(tab_selected == 0) {
+      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+    } else {
+      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+    }
+
+    std::vector<Element> twoByTwoElems;
+    for(int i = 0; i < stats.size(); i += 2) {
+      auto elem = vbox({
+        text(stats[i]) | borderLight,
+        text(stats[i + 1]) | borderLight,
+      });
+
+      twoByTwoElems.push_back(elem);
+    };
+
+    std::vector<Element> tabContainerElems {
+      tab_container->Render(),
+      separator(),
+    };
+    tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
+
+    return vbox({
+      text("WAR START STATE") | center,
+      separator(),
+      vbox({
+        tab_toggle->Render(),
+        separator(),
+        hbox(tabContainerElems),
+      }) | border,
+      doneButton->Render() | center | flex,
+    }) | border;
+  });
+
+  screen.Loop(renderer);
+}
+
 void UI::startSim()
 {
   bool running = true;
   int frameCount = 0;
 
   //PHASES:
-  //Dispute, Conflict, Hostilitiies, Post-hostilities conflict, Post-hostilities dispute, Settlement
+  //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
 
-  executeDispute();
+  simSetup();
 
-  render();
+  int i = 0;
+  while(!war->isOver()) {
+    executeDispute();
+    war->changeState();
+    if(i == 1) {
+      render();
+    }
+    i++;
+  }
 
   // while(running)
   {

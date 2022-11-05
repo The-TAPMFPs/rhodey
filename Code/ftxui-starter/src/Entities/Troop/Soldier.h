@@ -1,3 +1,4 @@
+#pragma once
 #include "Troop.h"
 
 class Soldier : public Troop{

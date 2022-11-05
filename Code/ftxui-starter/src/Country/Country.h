@@ -62,4 +62,5 @@ class Country {
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
     int nextStrategy();
+    std::vector<std::string> getFormattedStats();
 };
