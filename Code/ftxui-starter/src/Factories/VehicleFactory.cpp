@@ -22,8 +22,8 @@ VehicleFactory::~VehicleFactory() {}
 Entity* VehicleFactory::makeUnit() {
   switch (currVehicleType) {
     case truck:
-      e = (Entity*)new Truck(_name, _num, w1);
-      return e;
+      e = (Entity*)new Truck(_name, _num, w1);//cout _num Trucks were made
+      return e;                               //Do this for each vehicle made
     case tank:
       e = (Entity*)new Tank(_name, _num, w2);
       return e;

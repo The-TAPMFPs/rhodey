@@ -17,7 +17,7 @@ void Diplomacy::warAlgorithm(){
 }
 
 void Diplomacy::surrender(){
-
+    //cout 
 }
 
 void Diplomacy::proposeTreaty(){

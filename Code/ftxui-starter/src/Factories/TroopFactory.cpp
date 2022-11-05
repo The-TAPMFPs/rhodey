@@ -27,9 +27,9 @@ Entity* TroopFactory::makeUnit(){
     int i = rand() % 5 + 1;
     switch(i){
         case 1:
-            e = new Troop(_name, _num, w1);
-            return e;
-        case 2:
+            e = new Troop(_name, _num, w1);//cout "_num troops with AR's, Sniper's and Sniper50's were recruited"
+            return e;                      //Do this for each case corresponding to the weapons that they were given
+        case 2: 
             e = new Troop(_name, _num, w2);
             return e;
         case 3:

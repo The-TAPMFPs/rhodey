@@ -16,12 +16,19 @@ void Defensive::warAlgorithm(){
     return;
 }
 
+void Defensive::setNameAndNum(std::string name, int num){
+    _name = name;
+    _num = num;
+}
+
 void Defensive::redistributeTroops(){
 
 }
 
 void Defensive::recruitTroops(){
-
+    uf = new TroopFactory(_name, _num);
+    uf->makeUnit();
+    delete uf;
 }
 
 
