@@ -12,6 +12,7 @@ class OccupancyTable {
     private:
 	map<UUID, Region *> entityToRegion;
 	map<UUID, RegionToEntities*> regionToEntties;
+	Map * globalMap;
     public:
 	OccupancyTable(Map * );
 	~OccupancyTable();
@@ -20,4 +21,6 @@ class OccupancyTable {
 	std::vector<Entity *> getEntities(UUID region);
 	Region * getRegion(Entity *);
 	Region * getRegion(UUID entity);
+	bool moveEntity(Entity * entity, Region * region);
+	bool moveEntity(vector<Entity *> entity, Region * region);
 };

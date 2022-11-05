@@ -37,7 +37,7 @@ class Country {
 
     //===== CHARACTER MATRIX =====//
 
-    
+
     Eigen::MatrixXd personalityMatrix;
     /*  m << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -63,4 +63,5 @@ class Country {
     void setStrategy(BattleStrategy* strategy);
     int nextStrategy();
     std::vector<std::string> getFormattedStats();
+    Alliance * getAlliance() {return this->allies;}
 };

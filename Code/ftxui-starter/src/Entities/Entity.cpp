@@ -1,7 +1,9 @@
 #include "Entity.h"
+#include <exception>
 #include <iostream>
 
-Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon) {
+Entity::Entity(string name, string type, int HP, int Damage,
+	vector<Weapon*> * weapon, Country * country) {
     this->name = name;
     this->type = type;
     this->HP = HP;
@@ -9,6 +11,7 @@ Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * w
     this->defending = false;
     this->weapons = weapon;
     this->uuid = uuid::generateUUID();
+    this->country = country;
 }
 
 Entity::~Entity() {
@@ -56,10 +59,6 @@ bool Entity::getAndSetDefense() {
     return currentValue;
 }
 
-int Entity::getAmount() {
-    return this->HP/this->HPScalling;
-}
-
 void Entity::assignWeapon(Weapon &weapon) {
     this->weapons->push_back(&(weapon));
 }
@@ -72,7 +71,7 @@ Entity * Entity::split(int numberOfEntities) {
     int numberOfWeaponsToTransfer = int (this->weapons->size() *
 	    double (double (numberOfEntities)*3)/(double(this->HP)));
     vector<Weapon *> * newWeapons = new vector<Weapon*>;
-    for (int count = 0; count < numberOfEntities; count++) {
+    for (int count = 0; count < numberOfWeaponsToTransfer; count++) {
 	newWeapons->push_back(this->weapons->back());
 	this->weapons->pop_back();
     }
@@ -80,4 +79,19 @@ Entity * Entity::split(int numberOfEntities) {
     Entity * toReturn = this->splitType(this->name, numberOfEntities, newWeapons);
     this->HP = this->HP - numberOfEntities*3;
     return toReturn;
+}
+
+void Entity::absorb(Entity *entity) {
+    if (entity->getType() == this->type) {
+	this->HP = this->HP + entity->HP;
+	entity->HP = 0;
+	for (auto itr = entity->weapons->begin(); itr != entity->weapons->end(); ++itr) {
+	    this->weapons->push_back(*itr);
+	}
+	for (int count = 0; count < entity->weapons->size(); count++) {
+	    entity->weapons->pop_back();
+	}
+    } else {
+	throw WrongType();
+    }
 }

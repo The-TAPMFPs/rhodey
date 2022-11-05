@@ -7,6 +7,7 @@ class Tank :public GroundVehicle{
     protected:
 	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
     public:
-    Tank(string name, int numberOfTroops, vector<Weapon *> * weapons);
+    Tank(string name, int numberOfTroops, vector<Weapon *> * weapons,
+	    Country * country);
 
 };
