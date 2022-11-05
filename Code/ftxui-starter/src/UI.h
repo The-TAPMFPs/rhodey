@@ -30,5 +30,6 @@ class UI {
     public:
         UI(War* war);
         void render();
+        void simSetup();
         void startSim();
 };

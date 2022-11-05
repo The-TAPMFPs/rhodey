@@ -1,16 +1,17 @@
 #include "War.h"
-#include "WarPhases/Conflict.h"
+#include "WarPhases/Dispute.h"
 
-War::War(WarPhase* warPhase)
-  : warPhase(warPhase)
-{
+std::string War::warState = "UNSET_WAR_STATE";
+std::string War::warStateDesc = "UNSET_WAR_STATE_DESC";
+
+War::War(WarPhase* warPhase) : warPhase(warPhase) {
   // TransitionTo(warPhase); //REMOVED: for now, re-add later
 
-  this->warPhase = new Conflict();
+  this->warPhase = new Dispute();
   teamA = new Alliance("Side A");
   teamB = new Alliance("Side B");
 
-  //TODO: Replace with properly initialized data
+  // TODO: Replace with properly initialized data
   teamA->add(new Country("country A"));
   teamA->add(new Country("country B"));
   teamA->add(new Country("country C"));
@@ -28,10 +29,20 @@ War::~War() {
   delete teamA, teamB;
 }
 
+//The main simulation loop
+void War::step()
+{
+}
+
+//Called when there is an input event from the UI
+bool War::onEvent(ftxui::Event e)
+{
+  return false;
+}
+
 void War::transitionTo(WarPhase* warPhase) {
-  //TODO: Fix, something is segfaulting in here!
-  if (this->warPhase)
-  {
+  // TODO: Fix, something is segfaulting in here!
+  if (this->warPhase) {
     delete this->warPhase;
   }
 
@@ -56,7 +67,15 @@ void War::start() {
   // TODO start the war
 }
 
-MapData War::getCurrentMapData()
-{
+bool War::isOver() {
+  return warPhase == NULL;
+}
+
+MapData War::getCurrentMapData() {
   return this->map->getCurrentMapData();
+}
+
+Region* War::getRegionAt(int x, int y)
+{
+  return this->map->getRegionAt(x, y);
 }
