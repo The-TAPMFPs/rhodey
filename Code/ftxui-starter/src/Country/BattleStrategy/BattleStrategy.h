@@ -4,11 +4,13 @@
 #include <string>
 #include "Factories/TroopFactory.h"
 #include "Factories/VehicleFactory.h"
+#include "../Country.h"
 
 class BattleStrategy {
     protected:
         TroopFactory * uf;
         VehicleFactory * vf;
+        Country * _con;
     public:
         virtual void warAlgorithm() = 0;
         virtual ~BattleStrategy();

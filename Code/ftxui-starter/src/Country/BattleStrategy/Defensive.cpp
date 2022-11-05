@@ -1,7 +1,7 @@
 #include "Defensive.h"
 
-Defensive::Defensive(_def def){
-    this->def = def;
+Defensive::Defensive(Country * con){
+    _con = con;
 }
 
 void Defensive::warAlgorithm(){
@@ -19,6 +19,10 @@ void Defensive::warAlgorithm(){
 void Defensive::setNameAndNum(std::string name, int num){
     _name = name;
     _num = num;
+}
+
+void Defensive::setDef(_def def){
+    this->def = def;
 }
 
 void Defensive::redistributeTroops(){

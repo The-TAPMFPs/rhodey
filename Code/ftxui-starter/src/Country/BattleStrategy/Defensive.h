@@ -8,8 +8,9 @@ class Defensive : public BattleStrategy {
         std::string _name;
         int _num;
     public:
-        Defensive(_def def);
+        Defensive(Country * con);
         void setNameAndNum(std::string name, int num);
+        void setDef(_def def);
         void warAlgorithm() override;
         void redistributeTroops();
         void recruitTroops();
