@@ -233,9 +233,14 @@ void UI::render()
 #pragma endregion
 
 
-#pragma region BOTTOM_PANEL
-  //=====BOTTOM PANEL=====//
-  auto bottom = Renderer([] { return text("BOTTOM PANEL") | center; });
+#pragma region INFO_PANEL
+  //=====INFO PANEL=====//
+  auto info = Renderer([] {
+      return vbox({
+        text("=====LOG=====") | center,
+        text(Logger::getMsg()),
+      });
+    });
 #pragma endregion
 
 
