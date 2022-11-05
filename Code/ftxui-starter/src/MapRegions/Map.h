@@ -45,7 +45,6 @@ class Map {
         MapData getCurrentMapData();
         Region* getRegionAt(int x, int y);
         float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
-        Region* getRegionAt(int x, int y);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento makeMemento();
