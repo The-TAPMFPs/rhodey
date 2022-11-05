@@ -13,6 +13,7 @@ class War {
     private:
         WarPhase* warPhase;
         Map* map;
+        int frameCount;
 
     public:
         Alliance* teamA;
