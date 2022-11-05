@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "logger.h"
 #include "War/War.h"
 #include <cmath>
 #include <chrono>
@@ -216,11 +217,14 @@ void UI::render()
   });
 
   auto countryManager = Renderer(countryManagerLayout, [&] {
+
     std::vector<std::string> stats;
     if(tab_selected == 0) {
       stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+      Logger::log("tab 1");
     } else {
       stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+      Logger::log("tab 2");
     }
 
     std::vector<Element> twoByTwoElems;
@@ -247,6 +251,8 @@ void UI::render()
         separator(),
         hbox(tabContainerElems),
       }) | border,
+      separator(),
+      text(Logger::getMsg()) | center,
     });
   });
 
@@ -357,9 +363,8 @@ void UI::simSetup() {
     doneButton,
   });
 
-
-
   auto renderer = Renderer(container, [&] {
+
     std::vector<std::string> stats;
     if(tab_selected == 0) {
       stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
@@ -406,7 +411,7 @@ void UI::startSim()
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
 
-  simSetup();
+  // simSetup();
 
   int i = 0;
   while(!war->isOver()) {
