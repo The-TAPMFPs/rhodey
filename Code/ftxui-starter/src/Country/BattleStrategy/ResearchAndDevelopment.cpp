@@ -1,32 +1,37 @@
 #include "ResearchAndDevelopment.h"
 
-ResearchAndDevelopment::ResearchAndDevelopment(_rad rad){
-    this->rad = rad;
+ResearchAndDevelopment::ResearchAndDevelopment(){
+    
 }
 
-void ResearchAndDevelopment::warAlgorithm(){
+void ResearchAndDevelopment::warAlgorithm(int rad){
+    this->rad =(_rad) rad;
     switch(rad){
-        case rtRD:
-            researchTroops();
+        case drRD:
+            developResources();
             break;
-        case rvRD:
-            researchVehicles();
+        case deRD:
+            developEconomy();
             break;
-        case rwRD:
-            researchWeapons();
+        case rRD:
+            research();
             break;
     }
     return;
 }
 
-void ResearchAndDevelopment::researchTroops(){
+void ResearchAndDevelopment::developResources(){
 
 }
 
-void ResearchAndDevelopment::researchVehicles(){
+void ResearchAndDevelopment::developEconomy(){
 
 }
 
-void ResearchAndDevelopment::researchWeapons(){
+void ResearchAndDevelopment::research(){
 
+}
+
+void ResearchAndDevelopment::setCountry(Country* country){
+    this->country = country;
 }

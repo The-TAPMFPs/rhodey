@@ -15,6 +15,7 @@
 //Predefine classes to resolve circular dependencies:
 class Region;
 class Alliance;
+class BattleStrategy;
 
 class Country {
   private:
@@ -33,6 +34,7 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
+    BattleStrategy* strats[5];
 
 
     //===== CHARACTER MATRIX =====//

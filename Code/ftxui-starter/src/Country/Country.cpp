@@ -9,21 +9,26 @@ unsigned int Country::prowessInRegion(Region* region) {
 }
 
 Country::Country(std::string name) : name(name) {
-  int min = 0.25, max = 0.75;
-  srand((unsigned)time(NULL));
-  population = (int)(rand() % 500000 - 300000 + 1) +
-               3000000;  // population between 300 000 and 500 000
-  economy = min + (double)(rand() / RAND_MAX) * (max - min);
-  morale = min + (double)(rand() / RAND_MAX) * (max - min);
-  resources = min + (double)(rand() / RAND_MAX) * (max - min);
-  research = min + (double)(rand() / RAND_MAX) * (max - min);
-  aggressiveness = min + (double)(rand() / RAND_MAX) * (max - min);
-  goalRating = 0;
-  numSpies = 0;
-  numTroops = 0;
-  numVehicles = 0;
-  numEnemyRegions = 0;
-  generatePersonalityMatrix();
+    int min=0.25, max=0.75;
+    srand((unsigned)time(NULL));
+    population = (int) (rand() % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
+    economy = min + (double)(rand() / RAND_MAX) * (max-min); 
+    morale = min + (double)(rand() / RAND_MAX) * (max-min); 
+    resources = min + (double)(rand() / RAND_MAX) * (max-min); 
+    research = min + (double)(rand() / RAND_MAX) * (max-min); 
+    aggressiveness = min + (double)(rand() / RAND_MAX) * (max-min); 
+    goalRating = 0;
+    numSpies = 0;
+    numTroops = 0;
+    numVehicles = 0;
+    numEnemyRegions = 0;
+    generatePersonalityMatrix();
+
+    strats[0] = new Offensive();
+    strats[1] = new Defensive();
+    strats[2] = new ResearchAndDevelopment();
+    strats[3] = new Prepare();
+    strats[4] = new Diplomacy();
 }
 
 std::string Country::getName() {

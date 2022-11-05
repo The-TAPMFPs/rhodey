@@ -2,9 +2,14 @@
 //The chosen strategy for each Country is decided within the Coutry based on its statistics at that time
 #pragma once
 #include <string>
+#include "../../MapRegions/Region.h"
+// #include "../Country.h"
+
+class Region;
+
 
 class BattleStrategy {
     public:
-        virtual void warAlgorithm() = 0;
+        virtual void warAlgorithm(int enumInput) = 0;
         virtual ~BattleStrategy();
 };

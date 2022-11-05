@@ -1,10 +1,11 @@
 #include "Diplomacy.h"
 
-Diplomacy::Diplomacy(_dip dip){
-    this->dip = dip;
+Diplomacy::Diplomacy(){
 }
 
-void Diplomacy::warAlgorithm(){
+void Diplomacy::warAlgorithm(int dip){
+    this->dip =(_dip) dip;
+
     switch(dip){
         case suDip:
             surrender();
@@ -22,4 +23,12 @@ void Diplomacy::surrender(){
 
 void Diplomacy::proposeTreaty(){
     
+}
+
+void Diplomacy::setMyCountry(Country* myCountry){
+    this->myCountry = myCountry;
+}
+
+void Diplomacy::setEnemyCountry(Country* enemyCountry){
+    this->enemyCountry = enemyCountry;
 }

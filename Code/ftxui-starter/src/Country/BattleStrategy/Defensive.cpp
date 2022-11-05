@@ -1,10 +1,12 @@
 #include "Defensive.h"
 
-Defensive::Defensive(_def def){
-    this->def = def;
+Defensive::Defensive(){
+    
 }
 
-void Defensive::warAlgorithm(){
+void Defensive::warAlgorithm(int def){
+    this->def =(_def) def;
+
     switch(def){
         case redDef:
             redistributeTroops();
@@ -22,6 +24,14 @@ void Defensive::redistributeTroops(){
 
 void Defensive::recruitTroops(){
 
+}
+
+void Defensive::setFriendlyRegion(Region* friendlyRegion){
+    this->friendlyRegion = friendlyRegion;
+}
+
+void Defensive::setEnemyRegion(Region* enemyRegion){
+    this->enemyRegion = enemyRegion;
 }
 
 

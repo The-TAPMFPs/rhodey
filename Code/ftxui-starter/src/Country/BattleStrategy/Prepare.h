@@ -1,16 +1,20 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _prep {redP, recP, bvP, bwP};
+enum _prep {recP, bvP};
 
 class Prepare : public BattleStrategy {
+    
     private:
         _prep prep;
+        Region* friendlyRegion;
+        Region* enemyRegion;
     public:
-        Prepare(_prep prep);
-        void warAlgorithm() override;
-        void redistributeTroops();
-        void recruitTroops();
+        
+        Prepare();
+        void warAlgorithm(int prep);
         void buildVehicles();
-        void buildWeapons();
+        void recruitTroops();
+        void setFriendlyRegion(Region* friendlyRegion);
+        void setEnemyRegion(Region* enemyRegion);
 };

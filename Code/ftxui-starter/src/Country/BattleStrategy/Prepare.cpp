@@ -1,29 +1,19 @@
 #include "Prepare.h"
 
-Prepare::Prepare(_prep prep){
-    this->prep = prep;
+Prepare::Prepare(){
 }
 
-void Prepare::warAlgorithm(){
+void Prepare::warAlgorithm(int prep){
+    this->prep =(_prep) prep;
     switch(prep){
-        case redP:
-            redistributeTroops();
-            break;
         case recP:
             recruitTroops();
             break;
         case bvP:
             buildVehicles();
             break;
-        case bwP:
-            buildWeapons();
-            break;
     }
     return;
-}
-
-void Prepare::redistributeTroops(){
-
 }
 
 void Prepare::recruitTroops(){
@@ -34,6 +24,11 @@ void Prepare::buildVehicles(){
 
 }
 
-void Prepare::buildWeapons(){
-
+void Prepare::setFriendlyRegion(Region* friendlyRegion){
+    this->friendlyRegion = friendlyRegion;
 }
+
+void Prepare::setEnemyRegion(Region* enemyRegion){
+    this->enemyRegion = enemyRegion;
+}
+

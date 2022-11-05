@@ -1,14 +1,17 @@
 #pragma once
 #include "BattleStrategy.h"
 
-enum _rad {rtRD, rvRD, rwRD};
+enum _rad {drRD, deRD, rRD};
 class ResearchAndDevelopment : public BattleStrategy {
     private:
         _rad rad;
+        Country* country;
     public:
-        ResearchAndDevelopment(_rad rad);
-        void warAlgorithm() override;
-        void researchTroops();
-        void researchVehicles();
-        void researchWeapons();
+        
+        ResearchAndDevelopment();
+        void warAlgorithm(int rad);
+        void developResources();
+        void developEconomy();
+        void research();
+        void setCountry(Country* country);
 };
