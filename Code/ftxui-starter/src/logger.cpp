@@ -1,6 +1,6 @@
 #include "logger.h"
 
-std::string Logger::message = "MESSAGES WILL APPEAR HERE";
+std::string Logger::message = "ACTIONS WILL APPEAR HERE";
 
 void Logger::log(std::string message)
 {
