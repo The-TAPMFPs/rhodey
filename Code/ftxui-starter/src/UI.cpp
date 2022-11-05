@@ -182,39 +182,85 @@ void UI::render()
 
 
 #pragma region RIGHT_PANEL
-  //CREATE MENU
-  const std::vector<std::string> menu_entries = {
-    "Algeria",
-    "Benezuela",
-    "Chad",
-    "Democratic Republic of the Congo",
-    "Equador",
-    "Finland",
-    "Germany"
-  };
-  int menu_selected = 0;
-  auto menu = Menu(&menu_entries, &menu_selected);
-  menu = Wrap("Countries", menu);
-
   //CREATE BUTTON
   std::string button_label = "Quit";
   std::function<void()> on_button_clicked_;
   auto button = Button(&button_label, screen.ExitLoopClosure());
   // button = Wrap("Button", button);
 
+  //COUNTRY MANAGEMENT
+  std::vector<std::string> tab_values{
+      "Team A",
+      "Team B",
+  };
+
+  int tab_selected = 0;
+  auto tab_toggle = Toggle(&tab_values, &tab_selected);
+
+  std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
+  int countryA_selected = 0;
+
+  std::vector<std::string> countries_on_sideB = war->teamB->getAllianceNames();
+  int countryB_selected = 0;
+
+  auto tab_container = Container::Tab(
+    {
+      Dropdown(&countries_on_sideA, &countryA_selected),
+      Dropdown(&countries_on_sideB, &countryB_selected),
+    },
+    &tab_selected);
+
+  auto countryManagerLayout = Container::Vertical({
+    tab_toggle,
+    tab_container,
+  });
+
+  auto countryManager = Renderer(countryManagerLayout, [&] {
+    std::vector<std::string> stats;
+    if(tab_selected == 0) {
+      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+    } else {
+      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+    }
+
+    std::vector<Element> twoByTwoElems;
+    for(int i = 0; i < stats.size(); i += 2) {
+      auto elem = vbox({
+        text(stats[i]) | borderLight,
+        text(stats[i + 1]) | borderLight,
+      });
+
+      twoByTwoElems.push_back(elem);
+    };
+
+    std::vector<Element> tabContainerElems {
+      tab_container->Render(),
+      separator(),
+    };
+    tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
+
+    return vbox({
+      text("WAR START STATE") | center,
+      separator(),
+      vbox({
+        tab_toggle->Render(),
+        separator(),
+        hbox(tabContainerElems),
+      }) | border,
+    });
+  });
+
   //PANEL LAYOUT
   auto rightPanelLayout = Container::Vertical({
       button,
-      menu
+      countryManager
   });
 
   //=====RIGHT PANEL=====//
+
   auto right = Renderer(rightPanelLayout, [&] {
       return vbox({
-        menu->Render(),
-        separator(),
-        (text("Team A") | center),
-        (text("Team B") | center),
+        countryManager->Render(),
         separator(),
         button->Render()
       });
@@ -303,7 +349,7 @@ void UI::simSetup() {
     },
     &tab_selected);
 
-    auto doneButton = Button("START", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+  auto doneButton = Button("START", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
 
   auto container = Container::Vertical({
     tab_toggle,
