@@ -267,10 +267,15 @@ void UI::simSetup() {
     },
     &tab_selected);
 
+    auto doneButton = Button("START", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+
   auto container = Container::Vertical({
     tab_toggle,
     tab_container,
+    doneButton,
   });
+
+
 
   auto renderer = Renderer(container, [&] {
     std::vector<std::string> stats;
@@ -296,15 +301,16 @@ void UI::simSetup() {
     };
     tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
 
-    auto doneButton = Button("Done", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
-
     return vbox({
-      tab_toggle->Render(),
+      text("WAR START STATE") | center,
       separator(),
-      hbox(tabContainerElems) | flex,
-      separator(),
-      doneButton->Render() | center,
-    }) | border | flex;
+      vbox({
+        tab_toggle->Render(),
+        separator(),
+        hbox(tabContainerElems),
+      }) | border,
+      doneButton->Render() | center | flex,
+    }) | border;
   });
 
   screen.Loop(renderer);
