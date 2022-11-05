@@ -6,6 +6,7 @@
 OccupancyTable::OccupancyTable(Map * InitialMap ) {
     std::map<UUID, Region *>::iterator i;
     for (i = InitialMap->regions.begin(); i!=InitialMap->regions.end(); ++i) {
+	i->second->getUUID();
 	RegionToEntities * newGroup = new RegionToEntities();
 	this->regionToEntties.insert(
 		pair<UUID, RegionToEntities *>(i->first,newGroup));
@@ -19,6 +20,13 @@ OccupancyTable::~OccupancyTable() {
     }
 }
 Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
+    std::vector<Entity *> current = this->getEntities(region);
+    for (auto itr = current.begin(); itr != current.end(); ++itr) {
+	if (*itr == entity) {
+	    return region;
+	}
+    }
+
     this->entityToRegion.insert(pair<UUID, Region *>(entity->getUUID(),region));
     this->regionToEntties.at(region->getUUID())->entities.push_back(entity);
     return region;

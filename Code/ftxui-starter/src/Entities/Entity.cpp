@@ -1,7 +1,8 @@
 #include "Entity.h"
 #include <iostream>
 
-Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon) {
+Entity::Entity(string name, string type, int HP, int Damage,
+	vector<Weapon*> * weapon, Country * country) {
     this->name = name;
     this->type = type;
     this->HP = HP;
@@ -9,6 +10,7 @@ Entity::Entity(string name, string type, int HP, int Damage, vector<Weapon*> * w
     this->defending = false;
     this->weapons = weapon;
     this->uuid = uuid::generateUUID();
+    this->country = country;
 }
 
 Entity::~Entity() {

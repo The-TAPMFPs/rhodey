@@ -1,7 +1,7 @@
 #include "Troop.h"
 
-Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon) :
-    Entity(name, "Ground Infantry", numberOfTroops, 3, weapon) {
+Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country * country) :
+    Entity(name, "Ground Infantry", numberOfTroops, 3, weapon, country) {
 	this->HPScalling = 3;
 	this->HP = this->HP* this->HPScalling;
     }
@@ -12,7 +12,7 @@ int Troop::getCarryingCapacity() {
 }
 
 Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
-    return new Troop(name, numberOfTroops, weapon);
+    return new Troop(name, numberOfTroops, weapon, this->country);
 }
 
 int Troop::weaknesses(int damage, Weapon& weapon) {

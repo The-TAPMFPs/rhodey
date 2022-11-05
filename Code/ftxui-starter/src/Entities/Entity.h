@@ -1,8 +1,10 @@
 #pragma once
+#include <string>
 #include <vector>
 #include "./WeaponTemplateMethod/Weapon.h"
 #include <bits/stdc++.h>
 #include "../uuid.h"
+#include "../Country/Country.h"
 using namespace std;
 
 class Entity{
@@ -26,22 +28,56 @@ class Entity{
 	vector<Weapon*> * weapons;
 	int terrianHandling = 0;
 	UUID uuid = "";
+	Country * country;
 public:
-	Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon);
+	Entity(string name, string type, int HP, int Damage,
+		vector<Weapon*> * weapon, Country * country);
 	virtual ~Entity();
-	// Virtuals
+	/**
+	  @returns Returns the amout of additional Entities that this entitiy can transport
+	*/
 	virtual int getCarryingCapacity()=0;
+	/**
+	  @returns Returns the entities ability to traverse terrain
+	*/
 	virtual int getTerrainHandling()=0;
 
-	/// Returns the specified Number of entities.
 
 	void attack(Entity & defender);
 	void assignWeapon(Weapon & weapon);
-	int getAmount();
-	bool getDefenseStatus() {return defending;}
-	std::string getName() {return name;}
-	UUID getUUID() {return uuid;}
+	/**
+	  Updates the HP of the entities.
+	  @warning This function should be called after both sides of a battle have finnished all of their attacks.
+	*/
 	void update();
+
+	/**
+	  Gets the current amount of entities.
+	  @returns Amount of entities
+	*/
+	int getAmount();
+	/**
+	  Gets the status of if a group is in defensive mode or not.
+	  @returns Defensive status
+	*/
+	bool getDefenseStatus() {return defending;}
+	/**
+	  @returns Name of the Entity.
+	*/
+	std::string getName() {return name;}
+	/**
+	  @returns UUID of the Entity
+	*/
+	UUID getUUID() {return uuid;}
+	/**
+	  @returns Returns the Country with which this entity is alligned.
+	*/
+	Country * getCountry() {return country;}
+
+	/**
+	  @returns Returns the Type of the current entity. (Troop, Tank, etc.)
+	*/
+	string getType() {return type;}
 
 	Entity* split(int numberOfEntities);
 };
