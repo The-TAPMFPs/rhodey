@@ -8,7 +8,7 @@ Vehicle::Vehicle(string name, int numberOfTroops, int HP, int Damage,
 };
 
 int Vehicle::getCarryingCapacity() {
-    return this->capacity;
+    return this->capacity*this->getAmount();
 }
 
 int Vehicle::getTerrainHandling() {

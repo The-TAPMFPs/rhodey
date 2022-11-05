@@ -37,7 +37,7 @@ class Country {
 
     //===== CHARACTER MATRIX =====//
 
-    
+
     Eigen::MatrixXd personalityMatrix;
     /*  m << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -62,4 +62,5 @@ class Country {
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
     int nextStrategy();
+    Alliance * getAlliance() {return this->allies;}
 };

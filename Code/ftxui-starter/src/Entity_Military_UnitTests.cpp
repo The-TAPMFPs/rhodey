@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "Country/Country.h"
+#include "Entities/Entity.h"
 #include "Entities/Troop/Troop.h"
 #include "MapRegions/Map.h"
 #include "MapRegions/OccupancyTable.h"
@@ -53,7 +54,8 @@ struct OccupancyTableTest : testing::Test {
     Country * country2;
     Map * theMap;
     OccupancyTable * table;
-    Region * aRegion; /// Region at (20,20)
+    Region * aRegion;
+    Region * bRegion;
 
     OccupancyTableTest() {
 	vector<Weapon *> * weapons = new vector<Weapon *>;
@@ -91,10 +93,12 @@ struct OccupancyTableTest : testing::Test {
 //============================START EntityTest==============================//
 TEST_F(EntitityTest, Initialize) {
     EXPECT_EQ(friendly->getAmount(), 100);
-    EXPECT_EQ(friendly->getName(), "My Squad");
     EXPECT_EQ(this->friendly->getCarryingCapacity(), 0);
+    EXPECT_EQ(this->friendly->getCountry(), this->country1);
     EXPECT_EQ(this->friendly->getDefenseStatus(), false);
     EXPECT_EQ(this->friendly->getTerrainHandling(), 0);
+    EXPECT_EQ(friendly->getName(), "My Squad");
+    EXPECT_EQ(friendly->getType(), "Ground Infantry");
 }
 
 TEST_F(EntitityTest, attackTest1) {
@@ -140,6 +144,16 @@ TEST_F(EntitityTest, attackTest1) {
     this->reset(100,50);
 }
 
+TEST_F(EntitityTest, SplitAndMerge) {
+    Entity * splitup = this->friendly->split(50);
+    EXPECT_EQ(splitup->getAmount(),50);
+    EXPECT_EQ(friendly->getAmount(),50);
+    friendly->absorb(splitup);
+    EXPECT_EQ(splitup->getAmount(), 0);
+    EXPECT_EQ(friendly->getAmount(), 100);
+    delete splitup;
+}
+
 //============================END EntityTest================================//
 //==========================================================================//
 
@@ -155,6 +169,10 @@ TEST_F(OccupancyTableTest, whereAreEntities) {
     EXPECT_EQ(this->table->getRegion(this->hostile)->getUUID(), aRegion->getUUID());
 }
 
+TEST_F(OccupancyTableTest, EntitiesAtRegion) {
+    std::vector<Entity *> entities = {friendly,hostile};
+    EXPECT_EQ(this->table->getEntities(aRegion), entities);
+}
 TEST_F(OccupancyTableTest, MoveEntities) {
 
 }

@@ -12,10 +12,14 @@ class Country;
 class Alliance {
     private:
 		std::string name;
+		bool playerr = false;
 		std::vector<Country *> members;
 
     public:
+		static int first;
 		Alliance(std::string name);
 		void add(Country*);
 		void print();
+		bool isPlayer() {return playerr;}
 };
+

@@ -55,7 +55,11 @@ public:
 	  Gets the current amount of entities.
 	  @returns Amount of entities
 	*/
-	int getAmount();
+	int getAmount() {return HP/HPScalling;}
+	/**
+	  @returns Returns the Country with which this entity is alligned.
+	*/
+	Country * getCountry() {return country;}
 	/**
 	  Gets the status of if a group is in defensive mode or not.
 	  @returns Defensive status
@@ -69,10 +73,6 @@ public:
 	  @returns UUID of the Entity
 	*/
 	UUID getUUID() {return uuid;}
-	/**
-	  @returns Returns the Country with which this entity is alligned.
-	*/
-	Country * getCountry() {return country;}
 
 	/**
 	  @returns Returns the Type of the current entity. (Troop, Tank, etc.)
@@ -80,4 +80,11 @@ public:
 	string getType() {return type;}
 
 	Entity* split(int numberOfEntities);
+	void absorb(Entity * entity);
+};
+
+struct WrongType : public exception {
+   const char * what () const throw () {
+      return "The Entitys that you are trying to merge are of different types.";
+   }
 };

@@ -9,7 +9,7 @@ int main(int argc,char* argv[]) {
 
     UI* ui = new UI(war);
 
-    //ui->startSim();
+    ui->startSim();
 
     delete war;
     delete ui;
