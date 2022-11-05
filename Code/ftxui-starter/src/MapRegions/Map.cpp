@@ -146,12 +146,16 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
     return sum;
 }
 
-MapMemento Map::makeMemento()
+MapMemento* Map::makeMemento()
 {
-    MapData md = getCurrentMapData();
-    return MapMemento(md);
+    HeightMap hm = {
+        this->travelDifficultyField_allianceA,
+        this->travelDifficultyField_allianceB
+    };
+    return new MapMemento(hm);
 }
-void Map::SetMemento(MapMemento md){
-    this->travelDifficultyField_allianceB = md.getState()->travelFieldB;
-    this->travelDifficultyField_allianceA = md.getState()->travelFieldA;
+void Map::setMemento(MapMemento* mem){
+    this->travelDifficultyField_allianceA = mem->getState()->travelFieldA;
+    this->travelDifficultyField_allianceB = mem->getState()->travelFieldB;
+    delete mem; // this is fine becuase it is a stack and the recieved memento should not be accessed again
 }

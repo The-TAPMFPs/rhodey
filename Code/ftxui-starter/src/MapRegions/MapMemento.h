@@ -1,15 +1,16 @@
 #pragma once
 #include "Map.h"
 
-struct MapData;
+struct HeightMap;
 
 class MapMemento
 {
+    public:
+        ~MapMemento();
     private:
-        MapData* md;
-        MapMemento(MapData);
-        virtual ~MapMemento();
-        MapData* getState();
-        void setState(MapData md);
+        HeightMap* hm;
+        MapMemento(HeightMap md);
+        HeightMap* getState();
+        void setState(HeightMap md);
         friend class Map;
 };

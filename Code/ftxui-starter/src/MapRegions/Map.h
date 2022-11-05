@@ -18,6 +18,12 @@ struct MapData
     unsigned int width, height;
 };
 
+struct HeightMap
+{
+    scalarField2D travelFieldA;
+    scalarField2D travelFieldB;
+};
+
 
 class MapMemento;
 
@@ -48,7 +54,7 @@ class Map {
         float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
-        MapMemento makeMemento();
-        void SetMemento (MapMemento mem);
+        MapMemento* makeMemento();
+        void setMemento (MapMemento* mem);
 
 };

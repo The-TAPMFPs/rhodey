@@ -83,6 +83,19 @@ target_link_libraries(Entity_Military_UnitTests
   PRIVATE ftxui::component
   GTest::gtest_main
 )
+
+add_executable(
+    Map_UnitTest
+    src/Map_UnitTest.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Map_UnitTest PUBLIC src)
+target_link_libraries(Map_UnitTest
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
 # ------------------------------------------------------------------------------
 
 
@@ -98,4 +111,4 @@ if (EMSCRIPTEN)
 endif()
 # ------------------------------------------------------------------------------
 include(GoogleTest)
-gtest_discover_tests(Entity_Military_UnitTests)
+gtest_discover_tests(Entity_Military_UnitTests Map_UnitTest)

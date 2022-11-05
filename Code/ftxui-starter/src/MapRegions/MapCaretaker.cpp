@@ -4,5 +4,9 @@ void MapCaretaker::addMemento(MapMemento* mem) {
   list.push_back(mem);
 }
 MapMemento* MapCaretaker::removeMemento() {
-  return list.size() == 0 ? NULL : list.at(list.size());
+  MapMemento* mem = (list.size() == 0 ? nullptr : list.back());
+  if (mem != NULL) {
+    list.pop_back();
+  }
+  return mem;
 }

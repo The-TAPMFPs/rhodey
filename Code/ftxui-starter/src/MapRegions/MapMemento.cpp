@@ -1,18 +1,18 @@
 #include "MapMemento.h"
 
+MapMemento::MapMemento(HeightMap hm){
+    this->hm = new HeightMap(hm);
+}
+
 MapMemento::~MapMemento()
 {
-    delete md;
+    //delete hm;
 }
 
-MapMemento::MapMemento(MapData md){
-    this->md = &md;
+HeightMap* MapMemento::getState() {
+    return hm;
 }
 
-MapData* MapMemento::getState() {
-    return md;
-}
-
-void MapMemento::setState(MapData md) {
-    this->md = &md;
+void MapMemento::setState(HeightMap hm) {
+    this->hm = &hm;
 }
