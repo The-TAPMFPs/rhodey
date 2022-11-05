@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ftxui/component/event.hpp"                // for Event
+#include "ftxui/screen/color.hpp"                   // for Color, Color::Red, Color::Blue, Color::Green, ftxui
 
 #include "../Country/Alliance.h"
 #include "../MapRegions/Map.h"
@@ -12,12 +13,18 @@ class War {
     private:
         WarPhase* warPhase;
         Map* map;
+        int frameCount;
 
     public:
         Alliance* teamA;
         Alliance* teamB;
+
         static std::string warState;
         static std::string warStateDesc;
+        static std::vector<std::string> warStateThumbnail;
+        static int warStateThumbnailFrameCount;
+        static ftxui::Color warStateThumbnailColor;
+
         War();
         War(WarPhase* warPhase);
         ~War();
