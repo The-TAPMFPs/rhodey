@@ -88,7 +88,7 @@ class Country {
     void setNumTroops(int numTroops);
     void setNumVehicles(int numVehicles);
     void setNumEnemyRegions(int numEnemyRegions);
-    
+
 
 
 
