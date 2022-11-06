@@ -1,7 +1,7 @@
 #include "Submarine.h"
 Submarine::Submarine(string name, int numberOfTroops,
 	vector<Weapon *> * weapons, Country * country) : WaterVehicle(name,
-	    numberOfTroops, 100, 42, weapons, country) {
+	    numberOfTroops, 100, 42, weapons, country, "Submarine") {
 	this->terrianHandling = 32;
 	this->capacity = 30;
     };

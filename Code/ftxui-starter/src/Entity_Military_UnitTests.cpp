@@ -4,6 +4,7 @@
 #include "Country/Country.h"
 #include "Entities/Entity.h"
 #include "Entities/Troop/Troop.h"
+#include "Entities/WeaponTemplateMethod/Weapon.h"
 #include "MapRegions/Map.h"
 #include "MapRegions/OccupancyTable.h"
 #include "MapRegions/Region.h"
@@ -391,7 +392,9 @@ TEST_F(BattleTest, RunBattle) {
 }
 
 TEST_F(BattleTest, BigBattle) {
-    this->table->addEntity(new Tank(), aRegion)
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    this->table->addEntity((Entity *) new Tank("7th Heavy Armour Division", 50, tankWeapons, country1), aRegion);
+    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, tankWeapons, country1), aRegion);
 }
 //==============================END BattleTest============================//
 //==========================================================================//

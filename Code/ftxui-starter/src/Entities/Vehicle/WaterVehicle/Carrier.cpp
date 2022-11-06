@@ -2,7 +2,7 @@
 
 Carrier::Carrier(string name, int numberOfTroops, vector<Weapon *> * weapons,
 	Country * country) : WaterVehicle(name, numberOfTroops, 1000, 90,
-	    weapons, country) {
+	    weapons, country, "Carrier") {
 	this->terrianHandling = 32;
 	this->capacity = 3000;
     };

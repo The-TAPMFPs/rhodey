@@ -9,7 +9,7 @@ class Vehicle : protected Entity{
     virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
 public:
     Vehicle(string name, int numberOfTroops, int HP, int Damage,
-	    vector<Weapon*> * weapon, Country * country);
+	    vector<Weapon*> * weapon, Country * country, std::string type);
     int getCarryingCapacity();
     int getTerrainHandling();
 };

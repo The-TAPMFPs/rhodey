@@ -1,7 +1,7 @@
 #include "Fighterjet.h"
 Fighterjet::Fighterjet(string name, int numberOfTroops,
 	vector<Weapon *> * weapons, Country * country) : AirVehicle(name,
-	    numberOfTroops, 200, 30, weapons, country) {
+	    numberOfTroops, 200, 30, weapons, country, "Fighterjet") {
 	this->terrianHandling = 100;
 	this->capacity = 0;
     };

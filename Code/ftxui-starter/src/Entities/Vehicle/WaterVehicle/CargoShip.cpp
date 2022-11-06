@@ -1,7 +1,7 @@
 #include "CargoShip.h"
 CargoShip::CargoShip(string name, int numberOfTroops,
 	vector<Weapon *> * weapons, Country * country) : WaterVehicle(name,
-	    numberOfTroops, 1000, 20, weapons, country) {
+	    numberOfTroops, 1000, 20, weapons, country, "CargoShip") {
 	this->terrianHandling = 32;
 	this->capacity = 2000;
     };

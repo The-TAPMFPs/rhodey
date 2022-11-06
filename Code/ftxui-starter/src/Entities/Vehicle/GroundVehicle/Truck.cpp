@@ -1,7 +1,7 @@
 #include "Truck.h"
 Truck::Truck(string name, int numberOfTroops, vector<Weapon *> * weapons,
 	Country * country) : GroundVehicle(name, numberOfTroops, 100, 10,
-	    weapons, country) {
+	    weapons, country, "Truck") {
 	this->terrianHandling = 32;
 	this->capacity = 30;
     };

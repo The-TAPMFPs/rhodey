@@ -1,8 +1,8 @@
 #include "GroundVehicle.h"
 
 GroundVehicle::GroundVehicle(string name, int numberOfTroops, int HP, int Damage,
-	vector<Weapon*> * weapon, Country * country) :
-    Vehicle(name, numberOfTroops, HP, Damage, weapon, country){};
+	vector<Weapon*> * weapon, Country * country, std::string type) :
+    Vehicle(name, numberOfTroops, HP, Damage, weapon, country, type){};
 
 int GroundVehicle::weaknesses(int damage,Weapon & weapon) {
     int totalDamage = damage;

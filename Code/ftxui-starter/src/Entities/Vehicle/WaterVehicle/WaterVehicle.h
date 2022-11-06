@@ -9,6 +9,6 @@ class WaterVehicle :public Vehicle{
     virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
     public:
     WaterVehicle(string name, int numberOfTroops, int HP, int Damage,
-	    vector<Weapon*> * weapon, Country * country);
+	    vector<Weapon*> * weapon, Country * country, std::string type);
 
 };
