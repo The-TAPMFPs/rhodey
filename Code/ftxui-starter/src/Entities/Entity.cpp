@@ -82,6 +82,9 @@ Entity * Entity::split(int numberOfEntities) {
 }
 
 void Entity::absorb(Entity *entity) {
+    if ((long int) entity == (long int) this) {
+	return;
+    }
     if (entity->getType() == this->type) {
 	this->HP = this->HP + entity->HP;
 	entity->HP = 0;

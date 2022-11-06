@@ -17,6 +17,7 @@ class Region;
 class Alliance;
 
 class Country {
+    friend class Alliance;
   private:
     std::string name;
     BattleStrategy* strategy;

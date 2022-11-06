@@ -1,15 +1,11 @@
 #include "Alliance.h"
 
-int Alliance::first = 0;
-Alliance::Alliance(std::string name) : name(name) {
-    if (Alliance::first == 0) {
-	this->playerr = true;
-    }
-    Alliance::first++;
-}
+Alliance::Alliance(std::string name, bool teamA) : name(name), teamA(teamA){}
+
 
 void Alliance::add(Country* country) {
     members.push_back(country);
+    country->allies = this;
 }
 
 void Alliance::print() {

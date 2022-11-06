@@ -24,5 +24,5 @@ int Troop::weaknesses(int damage, Weapon& weapon) {
 }
 
 int Troop::getTerrainHandling() {
-    return 0;
+    return 3;
 }

@@ -6,13 +6,12 @@ Map::Map()
     //Randomly initialize regions
     this->regions = std::map<UUID, Region*>();
 
-    for(int i = 0; i < numRegions; i++)
-    {
-        Region* r = new Region();
+        Region* r = new Region(0,0);
         //TODO: Check position is not already taken
         regions.emplace(r->getUUID(), r);
-    }
 
+        r = new Region(49,24);
+        regions.emplace(r->getUUID(), r);
     //Initialize travel difficulty field to 0's
     this->travelDifficultyField_allianceA = new float*[mapW];
     this->travelDifficultyField_allianceB = new float*[mapW];
@@ -106,7 +105,7 @@ MapData Map::getCurrentMapData()
         this->mapW,
         this->mapH
     };
-    
+
 }
 
 //Returns the linearly interpolated point between two mapCoords
