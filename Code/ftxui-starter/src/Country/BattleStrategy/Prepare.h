@@ -4,11 +4,13 @@
 enum _prep {recP, bvP};
 
 class Prepare : public BattleStrategy {
-    
     private:
         _prep prep;
         Region* friendlyRegion;
         Region* enemyRegion;
+        std::string _name;
+        int _num;
+        VEHICLE_TYPE _veh;
     public:
         Prepare();
         void warAlgorithm(int prep);
@@ -16,9 +18,6 @@ class Prepare : public BattleStrategy {
         void recruitTroops();
         void setFriendlyRegion(Region* friendlyRegion);
         void setEnemyRegion(Region* enemyRegion);
-        std::string _name;
-        int _num;
-        VEHICLE_TYPE _veh;
-        void setNameAndNum(std::string name, int num, Country * con);
+        void setNameNumCont(std::string name, int num, Country * con);
         void setVehicle(std::string name, int num, VEHICLE_TYPE veh, Country * con);
 };

@@ -28,7 +28,7 @@ void Diplomacy::setEnemyCountry(Country* enemyCountry){
 
 void Diplomacy::proposeTreaty(){
     std::string temp;
-    temp = Country->getName() + " proposed a treaty with " + enemyCountry->getName();
+    temp = myCountry->getName() + " proposed a treaty with " + enemyCountry->getName();
     Logger::log(temp);
     //Have a treaty function in the country
 }

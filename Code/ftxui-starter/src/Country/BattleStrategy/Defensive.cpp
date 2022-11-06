@@ -29,7 +29,7 @@ void Defensive::setDef(_def def){
 }
 
 void Defensive::redistributeTroops(){
-
+    
 }
 
 void Defensive::recruitTroops(){
