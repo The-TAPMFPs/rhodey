@@ -4,9 +4,11 @@
 #include <string>
 #include "../../MapRegions/Region.h"
 // #include "../Country.h"
+#include "../../Factories/TroopFactory.h"
+#include "../../Factories/VehicleFactory.h"
+#include "../Country.h"
 
 class Region;
-
 
 class BattleStrategy {
     public:

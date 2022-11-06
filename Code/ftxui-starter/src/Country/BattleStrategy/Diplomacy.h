@@ -1,5 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
+#include "logger.h"
+#include <string>
 
 enum _dip {suDip, ptDip};
 class Diplomacy : public BattleStrategy {

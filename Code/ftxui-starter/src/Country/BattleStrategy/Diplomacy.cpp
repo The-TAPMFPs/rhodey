@@ -31,4 +31,11 @@ void Diplomacy::setMyCountry(Country* myCountry){
 
 void Diplomacy::setEnemyCountry(Country* enemyCountry){
     this->enemyCountry = enemyCountry;
+    std::string temp;
+    Logger::log("");
+}
+
+void Diplomacy::proposeTreaty(){
+    std::string temp;
+    Logger::log("");
 }
