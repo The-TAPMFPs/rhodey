@@ -11,11 +11,13 @@ class WarPhase;
 class War {
     private:
         WarPhase* warPhase;
-        Alliance* teamA;
-        Alliance* teamB;
         Map* map;
 
     public:
+        Alliance* teamA;
+        Alliance* teamB;
+        static std::string warState;
+        static std::string warStateDesc;
         War();
         War(WarPhase* warPhase);
         ~War();
@@ -28,6 +30,7 @@ class War {
         void addCountryToSideB(Country* country);
         void changeState();
         void start();
+        bool isOver();
         MapData getCurrentMapData();
         Region* getRegionAt(int x, int y);
 };

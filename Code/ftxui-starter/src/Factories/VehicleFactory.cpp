@@ -22,51 +22,53 @@ VehicleFactory::~VehicleFactory() {}
 
 Entity* VehicleFactory::makeUnit() {
   std::string temp;
+std::stringstream convert;
   switch (currVehicleType) {
     case truck:
       e = (Entity*)new Truck(_name, _num, w1, _con);
-      temp = _num + " trucks were made.";
+      convert << _num << " trucks were made.";
+      temp = convert.str();
       Logger::log(temp);
-      return e;                               
     case tank:
       e = (Entity*)new Tank(_name, _num, w2, _con);
-      temp = _num + " tanks were made.";
+      convert << _num << " tanks were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case carrier:
       e = (Entity*)new Carrier(_name, _num, w1, _con);
-      temp = _num + " carriers were made.";
+      convert << _num << " carriers were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case cargoship:
       e = (Entity*)new CargoShip(_name, _num, w1, _con);
-      temp = _num + " cargoships were made.";
+      convert << _num << " cargoships were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case warship:
       e = (Entity*)new Warship(_name, _num, w3, _con);
-      temp = _num + " warships were made.";
+      convert << _num << " warships were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case submarine:
       e = (Entity*)new Submarine(_name, _num, w4, _con);
-      temp = _num + " submarines were made.";
+      convert << _num << " submarines were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case fighterjet:
       e = (Entity*)new Fighterjet(_name, _num, w1, _con);
-      temp = _num + " fighterjets were made.";
+      convert << _num << " fighterjets were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case bomber:
       e = (Entity*)new Bomber(_name, _num, w6, _con);
-      temp = _num + " bombers were made.";
+      convert << _num << " bombers were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
     case cargoplane:
       e = (Entity*)new CargoPlane(_name, _num, w1, _con);
-      temp = _num + " cargo planes were made.";
+      convert << _num << " cargo planes were made.";
+        temp = convert.str();
       Logger::log(temp);
-      return e;
   }
+return e;
 }

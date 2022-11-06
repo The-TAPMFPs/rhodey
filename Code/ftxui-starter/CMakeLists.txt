@@ -36,12 +36,15 @@ project(ftxui-starter
 # This is a bit of a hack, but we can clean it up later
 # Get all .cpp files, set SRC_FILES variable
 file(GLOB_RECURSE SRC_FILES
-  src/UI.cpp
-  src/uuid.cpp
-
   #===== Add new folders here!=====#
   src/Country/*.cpp
   src/Country/BattleStrategy/*.cpp
+
+  src/Factories/*.cpp
+  src/Military/*.cpp
+  src/UI.cpp
+  src/uuid.cpp
+  src/logger.cpp
 
   src/Entities/*.cpp
   src/Entities/Troop/*.cpp

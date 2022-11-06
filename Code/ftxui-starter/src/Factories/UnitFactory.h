@@ -1,11 +1,8 @@
 #pragma once
 #include "../Entities/Entity.h"
-#include <string>
-#include <vector>
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
 #include "../logger.h"
-
-
+class Country;
 class UnitFactory{
     protected:
         std::string _name;
@@ -19,7 +16,6 @@ class UnitFactory{
         vector<Weapon *> * w6;
         Entity* e;
     public:
-        virtual ~UnitFactory();
         virtual Entity* makeUnit() = 0;
 
 

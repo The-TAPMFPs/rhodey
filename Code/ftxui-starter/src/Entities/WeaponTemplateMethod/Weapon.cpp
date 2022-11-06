@@ -9,22 +9,12 @@ Weapon::Weapon(int damage, std::string name) {
     this->damage = damage;
     this->WeaponName = name;
 }
-Bazooka::Bazooka() : Weapon(0, "Bazooka") {
-    this->damage = 90 + rand( )%100;  // DO RANDOM DAMAGE GENERATION
-    this->WeaponType = ANTI_TANK;
-  }
-Sniper::Sniper(): Weapon(0,"Sniper"){
-    this->damage=85+rand()%100;
-    this->WeaponType = SMALL_ARMS;
-}
-Sniper50::Sniper50(): Weapon(0,"Sniper50"){
-    this->damage=90 + rand( )%100;
-    this->WeaponType = HIGH_CAL;
-}
+//research level 1
 Pistol::Pistol(): Weapon(0,"Pistol"){
     this->damage=5+rand()%15;
     this->WeaponType = SMALL_ARMS;
 }
+//research level 2 (0.2>)
 AR::AR():Weapon(0,"AR"){
     this->damage=15+rand()%30;
     this->WeaponType = SMALL_ARMS;
@@ -33,6 +23,32 @@ SMG::SMG():Weapon(0,"SMG"){
     this->damage=10+rand()%25;
     this->WeaponType = SMALL_ARMS;
 }
+
+Sniper::Sniper(): Weapon(0,"Sniper"){
+    this->damage=85+rand()%100;
+    this->WeaponType = SMALL_ARMS;
+}
+//research level 3(0.5>)
+Bazooka::Bazooka() : Weapon(0, "Bazooka") {
+    this->damage = 90 + rand( )%100;  // DO RANDOM DAMAGE GENERATION
+    this->WeaponType = ANTI_TANK;
+}
+
+Sniper50::Sniper50(): Weapon(0,"Sniper50"){
+    this->damage=90 + rand( )%100;
+    this->WeaponType = HIGH_CAL;
+}
+
+DualBurette::DualBurette() : Weapon(0, "Dual"){
+    this->damage=10+rand()%15;
+    this->WeaponType = SMALL_ARMS;
+}
+//research level 4(0.8>)
+AK47::AK47(): Weapon(0, "AK47"){
+    this->damage=20 + rand( )%100;
+    this->WeaponType = SMALL_ARMS;
+}
+
 Bomb::Bomb():Weapon(0,"Bomb"){
     this->damage=35+rand()%55;
     this->WeaponType = BOMB;

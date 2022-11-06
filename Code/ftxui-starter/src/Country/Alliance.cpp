@@ -16,3 +16,15 @@ void Alliance::print() {
     }
     std::cout << std::endl;
 }
+
+std::vector<std::string> Alliance::getAllianceNames() {
+    std::vector<std::string> names;
+    for (Country* country : members) {
+        names.push_back(country->getName());
+    }
+    return names;
+}
+
+std::vector<Country*>* Alliance::getMembers() {
+    return &members;
+}

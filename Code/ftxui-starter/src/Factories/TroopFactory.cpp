@@ -1,9 +1,7 @@
 #include "TroopFactory.h"
-#include "../Entities/Troop/Troop.h"
-#include <vector>
-#include <cstdlib>
+#include <sstream>
 
-    
+
 TroopFactory::TroopFactory(std::string name, int num, Country * con){
     _name = name;
     _num = num;
@@ -25,7 +23,7 @@ TroopFactory::TroopFactory(std::string name, int num, Country * con){
     w3 = new vector<Weapon *> {ar, smg, db, baz};
     w4 = new vector<Weapon *> {ar, pis, sni, baz};
     w5 = new vector<Weapon *> {ar, db, s50, ak};
-    w6 = new vector<Weapon *> {ak, db, baz, s50}
+    w6 = new vector<Weapon *> {ak, db, baz, s50};
 }
 
 TroopFactory::~TroopFactory(){}
@@ -33,46 +31,49 @@ TroopFactory::~TroopFactory(){}
 Entity* TroopFactory::makeUnit(){
     int i = rand() % 2 + 1;
     std::string temp;
+    std::stringstream convert;
+    Troop * e;
     if(_con->getResearch() < 0.2){
         e = new Troop(_name, _num, w1, _con);
-        temp = _num + " troops with SMGs and Pistols were recruited.";
+	convert << _num << " troops with SMGs and Pistols were recruited.";
+        temp = convert.str();
         Logger::log(temp);
-        return e; 
     }
     else if(_con->getResearch() < 0.5){
         e = new Troop(_name, _num, w2, _con);
-        temp = _num + " troops with ARs, Pistols and Snipers were recruited.";
+        convert << _num << " troops with ARs, Pistols and Snipers were recruited.";
+        temp = convert.str();
         Logger::log(temp);
-        return e;
     }
     else if(_con->getResearch() < 0.8){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w3, _con);
-                temp = _num + " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
+                convert << _num << " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
+                temp = convert.str();
                 Logger::log(temp);
-                return e;
             case 2:
                 e = new Troop(_name, _num, w4, _con);
-                temp = _num + " troops with ARs, SMGs, Snipers and Bazookas were recruited.";
+                convert << _num << " troops with ARs, SMGs, Snipers and Bazookas were recruited.";
+                temp = convert.str();
                 Logger::log(temp);
-                return e;
         }
     }
     else if(_con->getResearch() <= 1){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w5, _con);
-                temp = _num + " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
+		convert << _num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
+                temp = convert.str();
                 Logger::log(temp);
-                return e;
             case 2:
                 e = new Troop(_name, _num, w6, _con);
-                temp = _num + " troops with AK47s, Dual Burettes, Bazooka and Sniper50s were recruited.";
+                convert << _num << " troops with AK47s, Dual Burettes, Bazooka and Sniper50s were recruited.";
+                temp = convert.str();
                 Logger::log(temp);
-                return e;
         }
     }
+    return e;
 }
 
 

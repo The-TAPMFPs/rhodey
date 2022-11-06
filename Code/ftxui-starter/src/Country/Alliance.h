@@ -20,6 +20,8 @@ class Alliance {
 		Alliance(std::string name, bool teamA = false);
 		void add(Country*);
 		void print();
+		std::vector<std::string> getAllianceNames();
+		std::vector<Country *>* getMembers();
 		bool isTeamA() {return teamA;}
 };
 

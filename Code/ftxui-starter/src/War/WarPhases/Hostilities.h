@@ -4,6 +4,7 @@
 
 class Hostilities : public WarPhase {
  public:
+  Hostilities();
   void handleWarChange(War* war);
   std::string getCurrentWarState();
 };
