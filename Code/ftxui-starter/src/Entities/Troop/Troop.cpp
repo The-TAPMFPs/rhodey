@@ -8,7 +8,7 @@ Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country 
 
 
 int Troop::getCarryingCapacity() {
-    return 0;
+    return 1;
 }
 
 Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {

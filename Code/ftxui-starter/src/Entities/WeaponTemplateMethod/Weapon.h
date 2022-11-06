@@ -47,17 +47,21 @@ class SMG : public Weapon{
 };
 
 class Torpedo:public Weapon{
+    public:
     Torpedo();
 };
 
 class Missile:public Weapon{
+    public:
     Missile();
 };
 
 class Bomb:public Weapon{
+    public:
     Bomb();
 };
 class Cannon:public Weapon{
+    public:
     Cannon();
 };
 

@@ -98,12 +98,12 @@ bool OccupancyTable::moveEntity(Entity * entity, Region * region) {
 	    }
 	}
 
-	vector<Entity *> entityAtRegion = this->regionToEntties.at(
-		currentlocation->getUUID())->entities;
-	for (auto itr = entityAtRegion.begin(); itr != entityAtRegion.end();
+	vector<Entity *> * entityAtRegion = &(this->regionToEntties.at(
+		currentlocation->getUUID())->entities);
+	for (auto itr = entityAtRegion->begin(); itr != entityAtRegion->end();
 		++itr) {
-	    if (*itr == entity) {
-		entityAtRegion.erase(itr);
+	    if (long(*itr) == long(entity)) {
+		entityAtRegion->erase(itr);
 		return true;
 	    }
 	}
@@ -135,9 +135,9 @@ bool OccupancyTable::moveEntity(vector<Entity *> entities, Region * region) {
 	}
     }
 
-    int difficulty = this->globalMap->getTravelDifficulty(
-	    currentlocation->getCoords(), region->getCoords(),
-	    firstAlliance->isTeamA());
+    bool firstAlly = firstAlliance->isTeamA();
+    float difficulty = this->globalMap->getTravelDifficulty(
+	    currentlocation->getCoords(), region->getCoords(), firstAlly);
 
     avg = avg/entities.size();
     double amoutToTransport = double(capacity)/double(total);
@@ -164,12 +164,12 @@ bool OccupancyTable::moveEntity(vector<Entity *> entities, Region * region) {
 	    }
 
 	    // cleanUp
-	    vector<Entity *> entityAtRegion = this->regionToEntties.at(
+	    vector<Entity *> * entityAtRegion = &this->regionToEntties.at(
 		    currentlocation->getUUID())->entities;
-	    for (auto itr = entityAtRegion.begin(); itr != entityAtRegion.end();
+	    for (auto itr = entityAtRegion->begin(); itr != entityAtRegion->end();
 		    ++itr) {
 		if (*itr == *entity) {
-		    entityAtRegion.erase(itr);
+		    entityAtRegion->erase(itr);
 		    break;
 		}
 	    }
