@@ -5,7 +5,7 @@ enum _rad {drRD, deRD, rRD};
 class ResearchAndDevelopment : public BattleStrategy {
     private:
         _rad rad;
-        Country* country;
+        Country* friendlyCountry;
     public:
         
         ResearchAndDevelopment();
@@ -13,5 +13,5 @@ class ResearchAndDevelopment : public BattleStrategy {
         void developResources();
         void developEconomy();
         void research();
-        void setCountry(Country* country);
+        void setFriendlyCountry(Country* friendly);
 };

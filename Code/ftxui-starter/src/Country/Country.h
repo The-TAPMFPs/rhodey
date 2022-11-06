@@ -66,4 +66,36 @@ class Country {
     int nextStrategy();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
+    double getMorale();
+    double getEconomy();
+    int getPopulation();
+    double getResearch();
+    double getGoalRating();
+    double getAggressiveness();
+    double getResources();
+    int getNumSpies();
+    int getNumTroops();
+    int getNumVehicles();
+    int getNumEnemyRegions();
+    void setMorale(double morale);
+    void setEconomy(double economy);
+    void setPopulation(int population);
+    void setResearch(double research);
+    void setGoalRating(double goalRating);
+    void setAggressiveness(double aggressiveness);
+    void setResources(double resources);
+    void setNumSpies(int numSpies);
+    void setNumTroops(int numTroops);
+    void setNumVehicles(int numVehicles);
+    void setNumEnemyRegions(int numEnemyRegions);
+
+
+
+
+
+
+
+
 };
+
+

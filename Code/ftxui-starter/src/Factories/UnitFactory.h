@@ -1,10 +1,9 @@
 #pragma once
-#include "Entities/Entity.h"
+#include "../Entities/Entity.h"
 #include <string>
 #include <vector>
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
 #include "../logger.h"
-#include "../Country/Country.h"
 
 
 class UnitFactory{
@@ -22,6 +21,6 @@ class UnitFactory{
     public:
         virtual ~UnitFactory();
         virtual Entity* makeUnit() = 0;
-        
-        
+
+
 };

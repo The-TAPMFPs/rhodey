@@ -9,14 +9,14 @@ unsigned int Country::prowessInRegion(Region* region) {
 }
 
 Country::Country(std::string name) : name(name) {
-    int min=0.25, max=0.75;
+    double min=0.25, max=0.75;
     srand((unsigned)time(NULL));
     population = (int) (rand() % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
-    economy = min + (double)(rand() / RAND_MAX) * (max-min); 
-    morale = min + (double)(rand() / RAND_MAX) * (max-min); 
-    resources = min + (double)(rand() / RAND_MAX) * (max-min); 
-    research = min + (double)(rand() / RAND_MAX) * (max-min); 
-    aggressiveness = min + (double)(rand() / RAND_MAX) * (max-min); 
+    economy = (((double) rand() / RAND_MAX) * max-min) + min;
+    morale = (((double) rand() / RAND_MAX) * max-min) + min;
+    resources = (((double) rand() / RAND_MAX) * max-min) + min;
+    research = (((double) rand() / RAND_MAX) * max-min) + min;
+    aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
     goalRating = 0;
     numSpies = 0;
     numTroops = 0;
@@ -29,6 +29,10 @@ Country::Country(std::string name) : name(name) {
     strats[2] = new ResearchAndDevelopment();
     strats[3] = new Prepare();
     strats[4] = new Diplomacy();
+}
+
+Country::~Country(){
+    delete strats;
 }
 
 std::string Country::getName() {
@@ -55,6 +59,13 @@ void Country::generatePersonalityMatrix() {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
       0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2],
       diploVals[3], 0, 0, 0;  // diplomacy
+
+  delete offensiveVals;
+  delete defensiveVals;
+  delete developVals;
+  delete prepVals;
+  delete intelVals;
+  delete diploVals;
 
   this->personalityMatrix = pm;
 }
@@ -136,9 +147,21 @@ void Country::takeTurn() {
       // Defensive();
       break;
     case 2:
+    {
+      strats[2]->setFriendlyCountry(this);
+      if(this->research < this->resources && this->research < this->economy) {
+        strats[2]->warAlgorithm(3);
+      }
+      else if (this->economy < this->resources && this->economy < this->research) {
+        strats[2]->warAlgorithm(2);
+      }
+      else {
+        strats[2]->warAlgorithm(1);
+      }
       // develop the lowest stat between economy, resources and research
       // this->strategy = new ResearchAndDevelopment();
       break;
+    }
     case 3:
       // take action of lowest between trrop and vehicle count
       // this->strategy = new PreparationStrategy();
@@ -168,3 +191,94 @@ std::vector<std::string> Country::getFormattedStats() {
       "Goal Rating: " + std::to_string(goalRating),
       "Number of Spies: " + std::to_string(numSpies)};
 }
+
+void Country::setPopulation(int population) {
+  this->population = population;
+}
+
+void Country::setEconomy(double economy) {
+  this->economy = economy;
+}
+
+void Country::setMorale(double morale) {
+  this->morale = morale;
+}
+
+void Country::setResources(double resources) {
+  this->resources = resources;
+}
+
+void Country::setResearch(double research) {
+  this->research = research;
+}
+
+void Country::setAggressiveness(double aggressiveness) {
+  this->aggressiveness = aggressiveness;
+}
+
+void Country::setGoalRating(double goalRating) {
+  this->goalRating = goalRating;
+}
+
+void Country::setNumSpies(int numSpies) {
+  this->numSpies = numSpies;
+}
+
+void Country::setNumTroops(int numTroops) {
+  this->numTroops = numTroops;
+}
+
+void Country::setNumVehicles(int numVehicles) {
+  this->numVehicles = numVehicles;
+}
+
+void Country::setNumEnemyRegions(int numEnemyRegions) {
+  this->numEnemyRegions = numEnemyRegions;
+}
+
+int Country::getPopulation() {
+  return this->population;
+}
+
+double Country::getEconomy() {
+  return this->economy;
+}
+
+double Country::getMorale() {
+  return this->morale;
+}
+
+double Country::getResources() {
+  return this->resources;
+}
+
+double Country::getResearch() {
+  return this->research;
+}
+
+double Country::getAggressiveness() {
+  return this->aggressiveness;
+}
+
+double Country::getGoalRating() {
+  return this->goalRating;
+}
+
+int Country::getNumSpies() {
+  return this->numSpies;
+}
+
+int Country::getNumTroops() {
+  return this->numTroops;
+}
+
+int Country::getNumVehicles() {
+  return this->numVehicles;
+}
+
+int Country::getNumEnemyRegions() {
+  return this->numEnemyRegions;
+}
+
+
+
