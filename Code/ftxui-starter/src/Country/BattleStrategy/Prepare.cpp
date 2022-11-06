@@ -16,7 +16,7 @@ void Prepare::warAlgorithm(int prep){
     return;
 }
 
-void Prepare::setNameAndNum(std::string name, int num, Country *con){
+void Prepare::setNameNumCont(std::string name, int num, Country *con){
     _name = name;
     _num = num;
     _con = con;

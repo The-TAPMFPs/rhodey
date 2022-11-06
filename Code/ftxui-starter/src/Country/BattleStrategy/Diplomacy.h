@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "../Country.h"
 #include "../../logger.h"
+#include "../Country.h"
 #include <string>
 
 enum _dip {suDip, ptDip};

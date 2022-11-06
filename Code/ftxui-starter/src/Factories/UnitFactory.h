@@ -2,7 +2,6 @@
 #include "../Entities/Entity.h"
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
 #include "../logger.h"
-
 class Country;
 class UnitFactory{
     protected:
