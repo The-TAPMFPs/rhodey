@@ -136,9 +136,21 @@ void Country::takeTurn() {
       // Defensive();
       break;
     case 2:
+    {
+      strats[2]->setFriendlyCountry(this);
+      if(this->research < this->resources && this->research < this->economy) {
+        strats[2]->warAlgorithm(3);
+      }
+      else if (this->economy < this->resources && this->economy < this->research) {
+        strats[2]->warAlgorithm(2);
+      }
+      else {
+        strats[2]->warAlgorithm(1);
+      }
       // develop the lowest stat between economy, resources and research
       // this->strategy = new ResearchAndDevelopment();
       break;
+    }
     case 3:
       // take action of lowest between trrop and vehicle count
       // this->strategy = new PreparationStrategy();
