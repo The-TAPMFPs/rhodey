@@ -10,7 +10,7 @@
 
 
 /**
- * \fn UUID generateUUID ()
+ * \fn UUID uuid::generateUUID ()
  * \brief multiplies two numbers.
  *
  * \return a unique identifier
@@ -35,7 +35,7 @@ std::string uuid::generateName()
 
 //
 /**
- * \fn UUID randomInt (int min, int max)
+ * \fn UUID uuid::randomInt (int min, int max)
  * \brief generates and returns uniformly distributed random int in range [min, max] inclusive.
  *
  * \param min maximunm value that can be returned

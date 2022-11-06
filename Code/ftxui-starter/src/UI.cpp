@@ -19,7 +19,7 @@ int clamp(int val, int min, int max)
 }
 
 /**
- * \fn int UI (War* war)
+ * \fn int UI::UI (War* war)
  * \brief constructs a new UI object
  *
  * \param war the current war
@@ -29,7 +29,7 @@ UI::UI(War* war)
 {}
 
 /**
- * \fn void render ()
+ * \fn void UI::render ()
  * \brief constructs the main part of the War during the HOSTILITES Phase
  */
 void UI::render()
@@ -377,7 +377,7 @@ Element cutSceneDecorator(Element buttons)
 }
 
 /**
- * \fn void executeDispute ()
+ * \fn void UI::executeDispute ()
  * \brief displayes a cutscene for a War State
  */
 void UI::executeDispute()
@@ -408,7 +408,7 @@ void UI::executeDispute()
 }
 
 /**
- * \fn void startSim ()
+ * \fn void UI::startSim ()
  * \brief the lifetime of the Simuation Runs here. Iterates over cutscnees and the WarSimuation until the war is over
  */
 void UI::startSim()

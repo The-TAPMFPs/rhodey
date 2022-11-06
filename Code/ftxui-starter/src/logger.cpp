@@ -1,14 +1,14 @@
 #include "logger.h"
 
 /**
- * \property message
+ * \property Logger::message
  * \brief The First Message of the Simulation log
  */
 std::string Logger::message = "ACTIONS WILL APPEAR HERE";
 
 
 /**
- * \fn void log (std::string message)
+ * \fn void Logger::log (std::string message)
  * \brief logs a message to the simulation log
  *
  * \param message the message to be logged
@@ -19,7 +19,7 @@ void Logger::log(std::string message)
 }
 
 /**
- * \fn std::string getMsg ()
+ * \fn std::string Logger::getMsg ()
  * \brief gets the current message of the simulation log
  *
  * \return the current message of the simulation log
