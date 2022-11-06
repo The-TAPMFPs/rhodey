@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.14)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_BUILD_TYPE Debug)
+add_definitions(-DUNIT_TEST)
 
 # --- Fetch FTXUI --------------------------------------------------------------
 include(FetchContent)
@@ -26,6 +27,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 # ------------------------------------------------------------------------------
 
+
 project(ftxui-starter
   LANGUAGES CXX
   VERSION 1.0.0
@@ -36,6 +38,9 @@ project(ftxui-starter
 # This is a bit of a hack, but we can clean it up later
 # Get all .cpp files, set SRC_FILES variable
 file(GLOB_RECURSE SRC_FILES
+  src/UI.cpp
+  src/uuid.cpp
+  src/logger.cpp
   #===== Add new folders here!=====#
   src/Country/*.cpp
   src/Country/BattleStrategy/*.cpp
@@ -65,9 +70,9 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     ${SRC_FILES}
     )
-target_include_directories(${PROJECT_NAME} PUBLIC src)
 
-target_link_libraries(ftxui-starter
+target_include_directories(${PROJECT_NAME} PUBLIC src)
+target_link_libraries(${PROJECT_NAME}
   PRIVATE ftxui::screen
   PRIVATE ftxui::dom
   PRIVATE ftxui::component
@@ -100,8 +105,18 @@ target_link_libraries(Map_UnitTest
   GTest::gtest_main
 )
 # ------------------------------------------------------------------------------
-
-
+# ------------TESTING-----------------------------------------------------------
+enable_testing()
+add_executable(
+  WarPhase_UnitTest
+  src/WarPhase_UnitTest.cpp
+  ${SRC_FILES}
+)
+target_include_directories(WarPhase_UnitTest PUBLIC src)
+target_link_libraries(WarPhase_UnitTest
+  PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
+  GTest::gtest_main
+)
 # --- Emscripten build (can ignore) --------------------------------------------
 if (EMSCRIPTEN)
   string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS")

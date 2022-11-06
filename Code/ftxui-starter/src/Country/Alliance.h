@@ -23,5 +23,6 @@ class Alliance {
 		std::vector<std::string> getAllianceNames();
 		std::vector<Country *>* getMembers();
 		bool isTeamA() {return teamA;}
+		Country* getMemberModuloSize(int modIndex);
 };
 

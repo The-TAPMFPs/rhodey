@@ -23,7 +23,6 @@ class Country {
     //===== STATS =====//
     int population;   // The number of citizens in the country
     double economy;   // The GDP
-    double morale;    // The general morale of the country's citizens
     double resources;  // TODO: Reconsider this since it may be redundant with `economy`
     double research; // The amount of research points the country has
     double aggressiveness; // The aggressiveness of the country
@@ -54,6 +53,7 @@ class Country {
     // TODO vehicleFactories vector<VehicleFactory *>
     Alliance* allies;
   public:
+    double morale;    // The general morale of the country's citizens
     Country(std::string name);
     ~Country();
     std::string getName();

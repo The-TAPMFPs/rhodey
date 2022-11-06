@@ -26,10 +26,6 @@ UI::UI(War* war)
  : war(war)
 {}
 
-void gameLoop()
-{
-}
-
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -138,11 +134,11 @@ void UI::render()
         // selectedRegion = new Region("test", mouseX, mouseY);
       }
     }
-    else if(e == Event::Custom)
-    {
-      war->step();
-    }
-    war->onEvent(e);
+    // else if(e == Event::Custom)
+    // {
+    //   war->step();
+    // }
+    // war->onEvent(e);
 
     return false;
   });
@@ -182,13 +178,7 @@ void UI::render()
 #pragma endregion
 
 
-#pragma region RIGHT_PANEL
-  //CREATE BUTTON
-  std::string button_label = "Quit";
-  std::function<void()> on_button_clicked_;
-  auto button = Button(&button_label, screen.ExitLoopClosure());
-  // button = Wrap("Button", button);
-
+#pragma region COUNTRY_DATA_PANEL
   //COUNTRY MANAGEMENT
   std::vector<std::string> tab_values{
       "Team A",
@@ -221,64 +211,79 @@ void UI::render()
     std::vector<std::string> stats;
     if(tab_selected == 0) {
       stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
-      Logger::log("tab 1");
     } else {
       stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
-      Logger::log("tab 2");
     }
 
-    std::vector<Element> twoByTwoElems;
-    for(int i = 0; i < stats.size(); i += 2) {
-      auto elem = vbox({
-        text(stats[i]) | borderLight,
-        text(stats[i + 1]) | borderLight,
-      });
-
-      twoByTwoElems.push_back(elem);
+    ftxui::Elements statsElements;
+    for(int i = 0; i < stats.size(); i++) {
+      auto elem = text(stats[i]) | border | size(Direction::WIDTH, Constraint::GREATER_THAN, 40);
+      statsElements.push_back(elem);
     };
 
-    std::vector<Element> tabContainerElems {
-      tab_container->Render(),
-      separator(),
-    };
-    tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
+    FlexboxConfig statsFlexboxConfig;
+    statsFlexboxConfig.direction =        FlexboxConfig::Direction::Column;
+    statsFlexboxConfig.wrap =             FlexboxConfig::Wrap::NoWrap;
+    statsFlexboxConfig.justify_content =  FlexboxConfig::JustifyContent::SpaceAround;
+    statsFlexboxConfig.align_items =      FlexboxConfig::AlignItems::Stretch;
+    statsFlexboxConfig.align_content =    FlexboxConfig::AlignContent::SpaceEvenly;
 
     return vbox({
-      text("WAR START STATE") | center,
+      text("Conflict") | center,
       separator(),
       vbox({
         tab_toggle->Render(),
         separator(),
-        hbox(tabContainerElems),
-      }) | border,
-      separator(),
-      text(Logger::getMsg()) | center,
+        hbox({
+          tab_container->Render() | size(Direction::WIDTH, Constraint::GREATER_THAN, 20),
+          separator(),
+          flexbox(statsElements, statsFlexboxConfig),
+        })
+      })
     });
   });
 
   //PANEL LAYOUT
-  auto rightPanelLayout = Container::Vertical({
-      button,
+  auto countryDataPanelLayout = Container::Vertical({
       countryManager
   });
 
   //=====RIGHT PANEL=====//
 
-  auto right = Renderer(rightPanelLayout, [&] {
+  auto countryData = Renderer(countryDataPanelLayout, [&] {
       return vbox({
         countryManager->Render(),
-        separator(),
-        button->Render()
       });
   });
 #pragma endregion
 
 
 #pragma region INFO_PANEL
+  //CREATE BUTTON
+  std::string button_label = "Quit";
+  std::function<void()> on_button_clicked_;
+  auto button = Button(&button_label, screen.ExitLoopClosure());
+
+  auto infoPanelLayout = Container::Horizontal({
+    button
+  });
+
   //=====INFO PANEL=====//
-  auto info = Renderer([] {
-      return text("ADDITIONAL DATA") | center;
+  auto info = Renderer(infoPanelLayout, [&] {
+      return hbox({
+        filler(),
+        vbox({
+          text("=====LOG=====") | center,
+          text(Logger::getMsg()) | center,
+        }),
+        filler(),
+        separator(),
+        button->Render()
+        | size(Direction::WIDTH, Constraint::GREATER_THAN, 10)
+        | size(Direction::HEIGHT, Constraint::EQUAL, 1)
+      });
     });
+
 #pragma endregion
 
 
@@ -286,15 +291,26 @@ void UI::render()
   //Default starting sizes for each panel
   int left_size = 50;
   int map_size = 25;
-  int bottom_size = 2;
+  int bottom_size = 3;
 
   auto mapContainer = ResizableSplitTop(map, regionData, &map_size);
-  auto container = ResizableSplitLeft(mapContainer, right, &left_size);
+  auto container = ResizableSplitLeft(mapContainer, countryData, &left_size);
   container = ResizableSplitBottom(info, container, &bottom_size);
 
   //=====MAIN PANEL=====//
   auto renderer = Renderer(container, [&] { return container->Render() | border; }); //The global container renderer
 #pragma endregion
+
+  //Catch event from parallel thread and call simulation loop
+  renderer |= CatchEvent([&](Event e) {
+    if(e == Event::Custom)
+    {
+      war->step();
+    }
+    war->onEvent(e);
+
+    return false;
+  });
 
   screen.Loop(renderer);
 
@@ -319,88 +335,59 @@ Element cutSceneDecorator(Element buttons)
     buttons | center
   });
 
-  return page |= border;
+  if(War::warStateThumbnail.empty()) //No thumbnail available
+  {
+    return page;
+  }
+
+  auto c = Canvas(150, 100);
+  int i = 0;
+  for(auto line = War::warStateThumbnail.begin(); line != War::warStateThumbnail.end(); line++, i++)
+  {
+    c.DrawText(0, i*4, line->data(), War::warStateThumbnailColor);
+  }
+
+  auto thumb = vbox({
+    filler(),
+    canvas(c) | center | border,
+    filler()
+  });
+
+  auto result = hbox({
+    filler(),
+    page,
+    filler(),
+    thumb
+  });
+
+  return result |= border;
 }
 
-void executeDispute()
+void UI::executeDispute()
 {
   auto screen = ScreenInteractive::Fullscreen();
 
-  auto nextButton = Button("Next", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
+  // std::atomic<bool> refresh_ui_continue = true;
+  // std::thread refresh_ui([&] {
+  //   while (refresh_ui_continue) {
+  //     using namespace std::chrono_literals;
+  //     const auto refresh_time = 1.0s / 10.0;
+  //     std::this_thread::sleep_for(refresh_time);
+  //     screen.PostEvent(Event::Custom);
+  //   }
+  // });
+
+  auto nextButton = Button("Next", screen.ExitLoopClosure(), ButtonOption::Animated(War::warStateThumbnailColor));
+
+  // page |= CatchEvent([&](Event e) {
+  //   if(e == Event::Custom) {
+  //     // War::warStateThumbnailFrameCount++;
+  //   }
+
+    // return false;
+  // });
 
   screen.Loop(nextButton | cutSceneDecorator);
-}
-
-void UI::simSetup() {
-  auto screen = ScreenInteractive::Fullscreen();
-
-  std::vector<std::string> tab_values{
-      "Team A",
-      "Team B",
-  };
-
-  int tab_selected = 0;
-  auto tab_toggle = Toggle(&tab_values, &tab_selected);
-
-  std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
-  int countryA_selected = 0;
-
-  std::vector<std::string> countries_on_sideB = war->teamB->getAllianceNames();
-  int countryB_selected = 0;
-
-  auto tab_container = Container::Tab(
-    {
-      Dropdown(&countries_on_sideA, &countryA_selected),
-      Dropdown(&countries_on_sideB, &countryB_selected),
-    },
-    &tab_selected);
-
-  auto doneButton = Button("START", screen.ExitLoopClosure(), ButtonOption::Animated(Color::Red));
-
-  auto container = Container::Vertical({
-    tab_toggle,
-    tab_container,
-    doneButton,
-  });
-
-  auto renderer = Renderer(container, [&] {
-
-    std::vector<std::string> stats;
-    if(tab_selected == 0) {
-      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
-    } else {
-      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
-    }
-
-    std::vector<Element> twoByTwoElems;
-    for(int i = 0; i < stats.size(); i += 2) {
-      auto elem = vbox({
-        text(stats[i]) | borderLight,
-        text(stats[i + 1]) | borderLight,
-      });
-
-      twoByTwoElems.push_back(elem);
-    };
-
-    std::vector<Element> tabContainerElems {
-      tab_container->Render(),
-      separator(),
-    };
-    tabContainerElems.insert(tabContainerElems.end(), twoByTwoElems.begin(), twoByTwoElems.end());
-
-    return vbox({
-      text("WAR START STATE") | center,
-      separator(),
-      vbox({
-        tab_toggle->Render(),
-        separator(),
-        hbox(tabContainerElems),
-      }) | border,
-      doneButton->Render() | center | flex,
-    }) | border;
-  });
-
-  screen.Loop(renderer);
 }
 
 void UI::startSim()
@@ -410,8 +397,6 @@ void UI::startSim()
 
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
-
-  // simSetup();
 
   int i = 0;
   while(!war->isOver()) {
