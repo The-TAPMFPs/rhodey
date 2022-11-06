@@ -213,48 +213,48 @@ void Country::setNumEnemyRegions(int numEnemyRegions) {
   this->numEnemyRegions = numEnemyRegions;
 }
 
-double getPopulation() {
-  return population;
+double Country::getPopulation() {
+  return this->population;
 }
 
-double getEconomy() {
-  return economy;
+double Country::getEconomy() {
+  return this->economy;
 }
 
-double getMorale() {
-  return morale;
+double Country::getMorale() {
+  return this->morale;
 }
 
-double getResources() {
-  return resources;
+double Country::getResources() {
+  return this->resources;
 }
 
-double getResearch() {
-  return research;
+double Country::getResearch() {
+  return this->research;
 }
 
-double getAggressiveness() {
-  return aggressiveness;
+double Country::getAggressiveness() {
+  return this->aggressiveness;
 }
 
-double getGoalRating() {
-  return goalRating;
+double Country::getGoalRating() {
+  return this->goalRating;
 }
 
-int getNumSpies() {
-  return numSpies;
+int Country::getNumSpies() {
+  return this->numSpies;
 }
 
-int getNumTroops() {
-  return numTroops;
+int Country::getNumTroops() {
+  return this->numTroops;
 }
 
-int getNumVehicles() {
-  return numVehicles;
+int Country::getNumVehicles() {
+  return this->numVehicles;
 }
 
-int getNumEnemyRegions() {
-  return numEnemyRegions;
+int Country::getNumEnemyRegions() {
+  return this->numEnemyRegions;
 }
 
 

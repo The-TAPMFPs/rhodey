@@ -21,7 +21,7 @@ void ResearchAndDevelopment::warAlgorithm(int rad){
 }
 
 void ResearchAndDevelopment::developResources(){
-    //this->country->setResources(this->country->getResources());
+    this->country->setResources(this->country->getResources());
 }
 
 void ResearchAndDevelopment::developEconomy(){
