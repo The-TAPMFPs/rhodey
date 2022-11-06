@@ -32,7 +32,9 @@ Country::Country(std::string name) : name(name) {
 }
 
 Country::~Country(){
-    delete strats;
+    for (int count = 0; count < 5; count++) {
+	delete strats[count];
+    }
 }
 
 std::string Country::getName() {

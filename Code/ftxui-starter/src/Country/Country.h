@@ -2,8 +2,8 @@
 
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
-#include "BattleStrategy/BattleStrategy.h"
 #include "../MapRegions/Map.h"
+#include "BattleStrategy/BattleStrategy.h"
 #include "BattleStrategy/Offensive.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
 #include "BattleStrategy/Defensive.h"
@@ -13,10 +13,7 @@
 
 
 //Predefine classes to resolve circular dependencies:
-class Region;
 class Alliance;
-class BattleStrategy;
-
 class Country {
   private:
     std::string name;
@@ -57,6 +54,7 @@ class Country {
     Alliance* allies;
   public:
     Country(std::string name);
+    ~Country();
     std::string getName();
     void takeTurn();
     void generatePersonalityMatrix();
@@ -88,14 +86,6 @@ class Country {
     void setNumTroops(int numTroops);
     void setNumVehicles(int numVehicles);
     void setNumEnemyRegions(int numEnemyRegions);
-    
-
-
-
-
-
-
-
 };
 
 

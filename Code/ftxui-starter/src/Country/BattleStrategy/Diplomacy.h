@@ -1,6 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "logger.h"
+#include "../Country.h"
+#include "../../logger.h"
 #include <string>
 
 enum _dip {suDip, ptDip};
@@ -9,7 +10,7 @@ class Diplomacy : public BattleStrategy {
         _dip dip;
         Country* myCountry;
         Country* enemyCountry;
-        
+
     public:
         Diplomacy();
         void warAlgorithm(int dip);

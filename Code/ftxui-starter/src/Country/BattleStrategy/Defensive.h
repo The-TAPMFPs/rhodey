@@ -1,5 +1,6 @@
 #pragma once
 #include "BattleStrategy.h"
+#include "../Country.h"
 
 
 enum _def {redDef, recDef};

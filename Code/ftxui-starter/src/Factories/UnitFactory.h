@@ -1,12 +1,9 @@
 #pragma once
-#include "Entities/Entity.h"
-#include <string>
-#include <vector>
+#include "../Entities/Entity.h"
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
 #include "../logger.h"
-#include "../Country/Country.h"
 
-
+class Country;
 class UnitFactory{
     protected:
         std::string _name;
@@ -22,6 +19,6 @@ class UnitFactory{
     public:
         virtual ~UnitFactory();
         virtual Entity* makeUnit() = 0;
-        
-        
+
+
 };

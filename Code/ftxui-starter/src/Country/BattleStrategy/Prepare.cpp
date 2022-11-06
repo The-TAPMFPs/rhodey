@@ -16,10 +16,10 @@ void Prepare::warAlgorithm(int prep){
     return;
 }
 
-void Prepare::setNameNumCont(std::string name, int num, Country * con){
+void Prepare::setNameAndNum(std::string name, int num, Country *con){
     _name = name;
     _num = num;
-    _con = con
+    _con = con;
 }
 
 void Prepare::setVehicle(std::string name, int num, VEHICLE_TYPE veh, Country * con){

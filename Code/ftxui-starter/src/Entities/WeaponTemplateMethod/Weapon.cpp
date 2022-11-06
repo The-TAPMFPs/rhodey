@@ -10,7 +10,7 @@ Weapon::Weapon(int damage, std::string name) {
     this->WeaponName = name;
     this->WeaponType = "";
 }
-//research level 1 
+//research level 1
 SMG::SMG():Weapon(0,"SMG"){
     this->damage=10+rand()%25;
 }
@@ -37,7 +37,7 @@ Sniper50::Sniper50(): Weapon(0,"Sniper50"){
     this->damage=90 + rand( )%100;
     this->WeaponType = "anti-armour";
 }
-Ak47::AK47(): Weapon(0, "AK47"){
+AK47::AK47(): Weapon(0, "AK47"){
 
 }
 

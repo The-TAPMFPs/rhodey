@@ -23,12 +23,12 @@ void Diplomacy::setMyCountry(Country* myCountry){
 
 void Diplomacy::setEnemyCountry(Country* enemyCountry){
     this->enemyCountry = enemyCountry;
-    
+
 }
 
 void Diplomacy::proposeTreaty(){
     std::string temp;
-    temp = Country->getName() + " proposed a treaty with " + enemyCountry->getName();
+    temp = myCountry->getName() + " proposed a treaty with " + enemyCountry->getName();
     Logger::log(temp);
     //Have a treaty function in the country
 }
@@ -37,5 +37,5 @@ void Diplomacy::surrender(){
     std::string temp;
     temp = myCountry->getName() + " surrended to " + enemyCountry->getName();
     Logger::log(temp);
-    //Have a surrender function in the country 
+    //Have a surrender function in the country
 }

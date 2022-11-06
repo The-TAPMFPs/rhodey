@@ -1,10 +1,13 @@
 #pragma once
 #include "BattleStrategy.h"
+#include "../Country.h"
+#include "../../Factories/VehicleFactory.h"
+#include "../../Factories/TroopFactory.h"
 
 enum _prep {recP, bvP};
 
 class Prepare : public BattleStrategy {
-    
+
     private:
         _prep prep;
         Region* friendlyRegion;
