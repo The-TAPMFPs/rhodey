@@ -33,7 +33,7 @@ Country::Country(std::string name) : name(name) {
 
 Country::~Country(){
     for (int count = 0; count < 5; count++) {
-	delete strats[count];
+	    delete strats[count];
     }
 }
 
@@ -62,12 +62,12 @@ void Country::generatePersonalityMatrix() {
       0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2],
       diploVals[3], 0, 0, 0;  // diplomacy
 
-  delete offensiveVals;
-  delete defensiveVals;
-  delete developVals;
-  delete prepVals;
-  delete intelVals;
-  delete diploVals;
+  delete[] offensiveVals;
+  delete[] defensiveVals;
+  delete[] developVals;
+  delete[] prepVals;
+  delete[] intelVals;
+  delete[] diploVals;
 
   this->personalityMatrix = pm;
 }
