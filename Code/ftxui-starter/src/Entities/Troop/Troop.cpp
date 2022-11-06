@@ -17,7 +17,7 @@ Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * wea
 
 int Troop::weaknesses(int damage, Weapon& weapon) {
     int potentialDamage = damage * log10(damage* weapon.getDamage());
-    if (weapon.getType() == "AntiVehicle") {
+    if (weapon.getType() == ANTI_TANK) {
 	potentialDamage = this->HP/damage;
     }
     return potentialDamage;

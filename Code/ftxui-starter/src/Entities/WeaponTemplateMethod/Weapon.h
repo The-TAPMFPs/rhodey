@@ -3,16 +3,18 @@
 
 using namespace std;
 
+enum WEAPON_TYPE {SMALL_ARMS, TANK_ROUND, ANTI_TANK, ANTI_AIR, CANNON, HIGH_CAL, BOMB, ROCKET};
+
 class Weapon {
  protected:
   string WeaponName;
   int damage = 0;
-  string WeaponType;
+  WEAPON_TYPE WeaponType;
 
  public:
   Weapon(int damage, string weaponName);
   int getDamage();
-  string getType();
+  WEAPON_TYPE getType();
   string getName();
 };
 
@@ -68,4 +70,14 @@ class Cannon:public Weapon{
 class TestWeapon : public Weapon {
     public:
 	TestWeapon();
+};
+
+class DualBurette : public Weapon{
+    public:
+	DualBurette();
+};
+
+class AK47 : public Weapon{
+    public:
+	AK47();
 };

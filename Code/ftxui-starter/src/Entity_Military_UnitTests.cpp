@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <cmath>
+#include <vector>
 #include "Country/Alliance.h"
 #include "Country/Country.h"
 #include "Entities/Entity.h"
@@ -103,8 +104,6 @@ struct OccupancyTableTest : testing::Test {
     }
 
     ~OccupancyTableTest() {
-	delete friendly;
-	delete hostile;
 	delete theMap;
 	delete table;
 	delete country1;
@@ -168,8 +167,6 @@ struct BattleTest : testing::Test {
     }
 
     ~BattleTest() {
-	delete friendly;
-	delete hostile;
 	delete theMap;
 	delete table;
 	delete country1;
@@ -393,8 +390,15 @@ TEST_F(BattleTest, RunBattle) {
 
 TEST_F(BattleTest, BigBattle) {
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new Cannon()};
     this->table->addEntity((Entity *) new Tank("7th Heavy Armour Division", 50, tankWeapons, country1), aRegion);
-    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, tankWeapons, country1), aRegion);
+    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, bomberfriends, country1), aRegion);
+    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, country2), aRegion);
+    this->testBattle = new Battle(this->aRegion, this->table);
+    this->testBattle->takeTurn();
+    std::vector<Entity *> v = {friendly};
+    EXPECT_EQ(this->table->getEntities(aRegion), v);
 }
 //==============================END BattleTest============================//
 //==========================================================================//
