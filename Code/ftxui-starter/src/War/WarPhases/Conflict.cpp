@@ -1,5 +1,10 @@
 #include "Conflict.h"
 
+/**
+ * \fn Conflict ()
+ * \brief constructor for the Conflict class
+ *
+ */
 Conflict::Conflict() {
   War::warState = "Conflict";
   War::warStateDesc = "Currently in Conflict State <- This should be changed";
@@ -32,10 +37,22 @@ Conflict::Conflict() {
   warPhase = phase::CONFLICT;
 }
 
+/**
+ * \fn handleWarChange (War* war)
+ * \brief transitions the current war to a new WarState
+ *
+ * \param war the war that will have its state changed
+ */
 void Conflict::handleWarChange(War* war) {
   war->transitionTo(new PostWar());
 }
 
+/**
+ * \fn string getCurrentWarState()
+ * \brief gets what is to be displayed as the title of a cutscene of the current war phase
+ *
+ * \return the title of the current war phase
+ */
 std::string Conflict::getCurrentWarState() {
   return "Currently in Conflict State";
 }

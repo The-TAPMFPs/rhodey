@@ -4,28 +4,34 @@
 #include <cmath>
 #include <chrono>
 
-// Display a component nicely with a title on the left.
-//TODO: Remove since we probably won't need this
-Component Wrap(std::string name, Component component) {
-  return Renderer(component, [name, component] {
-    return hbox({
-               text(name) | size(WIDTH, EQUAL, 10),
-               separator(),
-               component->Render() | xflex,
-           }) |
-           xflex;
-  });
-}
-
+/**
+ * \fn int clamp (int val, int min, int max)
+ * \brief makes sure a value is within a range
+ *
+ * \param val value to be clamped
+ * \param min minimum value that can be returned
+ * \param max maximum value that can be returned
+ * \return  return the clamp of min and max on val
+ */
 int clamp(int val, int min, int max)
 {
   return std::max(std::min(val, max), min);
 }
 
+/**
+ * \fn int UI (War* war)
+ * \brief constructs a new UI object
+ *
+ * \param war the current war
+ */
 UI::UI(War* war)
  : war(war)
 {}
 
+/**
+ * \fn void render ()
+ * \brief constructs the main part of the War during the HOSTILITES Phase
+ */
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -319,6 +325,13 @@ void UI::render()
   refresh_ui.join();
 }
 
+/**
+ * \fn Element cutSceneDecorator (Element buttons)
+ * \brief decorates a cutscene UI page with graphics and a descption
+ *
+ * \param buttons the buttons to be displayed on the page
+ * \return the decorated element
+ */
 Element cutSceneDecorator(Element buttons)
 {
   auto desc = vbox({
@@ -363,6 +376,10 @@ Element cutSceneDecorator(Element buttons)
   return result |= border;
 }
 
+/**
+ * \fn void executeDispute ()
+ * \brief displayes a cutscene for a War State
+ */
 void UI::executeDispute()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -390,6 +407,10 @@ void UI::executeDispute()
   screen.Loop(nextButton | cutSceneDecorator);
 }
 
+/**
+ * \fn void startSim ()
+ * \brief the lifetime of the Simuation Runs here. Iterates over cutscnees and the WarSimuation until the war is over
+ */
 void UI::startSim()
 {
   bool running = true;

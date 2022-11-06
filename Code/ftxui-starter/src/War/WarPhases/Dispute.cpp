@@ -1,5 +1,10 @@
 #include "Dispute.h"
 
+/**
+ * \fn Dispute ()
+ * \brief constructor for the Dispute class
+ *
+ */
 Dispute::Dispute() {
   War::warState = "Dispute";
   War::warStateDesc = "The war in Asia began when Japan invaded China on July 7, 1937. The war began in Europe when Germany invaded Poland on September 1, 1939. France and the United Kingdom reacted by declaring war on Germany. By 1941, much of Europe was under German control, including France. Only the British remained fighting against the Axis in North Africa";
@@ -33,10 +38,22 @@ Dispute::Dispute() {
   warPhase = phase::DISPUTE;
 }
 
+/**
+ * \fn handleWarChange (War* war)
+ * \brief transitions the current war to a new WarState
+ *
+ * \param war the war that will have its state changed
+ */
 void Dispute::handleWarChange(War* war) {
   war->transitionTo(new Hostilities());
 }
 
+/**
+ * \fn string getCurrentWarState()
+ * \brief gets what is to be displayed as the title of a cutscene of the current war phase
+ *
+ * \return the title of the current war phase
+ */
 std::string Dispute::getCurrentWarState() {
   return "Currently in Dispute State";
 }
