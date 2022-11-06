@@ -6,10 +6,10 @@ AirVehicle::AirVehicle(string name, int numberOfTroops, int HP, int Damage,
 
 int AirVehicle::weaknesses(int damage,Weapon & weapon) {
     int totalDamage = damage;
-    if (weapon.getType() == "anti-air") {
+    if (weapon.getType() == ANTI_AIR || weapon.getType() == CANNON) {
 	totalDamage = totalDamage*1.2;
     }
-    if (weapon.getType() == "missile") {
+    if (weapon.getType() == ROCKET) {
 	totalDamage = totalDamage*1.4;
     }
     return totalDamage;

@@ -3,9 +3,9 @@
 
 int main(int argc,char* argv[]) {
 
-    WarPhase* startPhase = new Dispute();
+    // WarPhase* startPhase = new Dispute();
 
-    War* war = new War(startPhase);
+    War* war = new War();
 
     UI* ui = new UI(war);
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Region.h"
 #include "../Entities/Entity.h"
+#include "../Country/Country.h"
 #include "Map.h"
 #include <map>
 

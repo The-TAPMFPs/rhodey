@@ -28,3 +28,19 @@ bool Alliance::containsCountry(Country* country)
 {
     return std::find(members.begin(), members.end(), country) != members.end();
 }
+std::vector<std::string> Alliance::getAllianceNames() {
+    std::vector<std::string> names;
+    for (Country* country : members) {
+        names.push_back(country->getName());
+    }
+    return names;
+}
+
+//For round-robin selection of a country from the alliance
+Country* Alliance::getMemberModuloSize(int modIndex) {
+    if(!this->members.empty())
+    {
+        return this->members[modIndex%this->members.size()];
+    }
+    return nullptr;
+}

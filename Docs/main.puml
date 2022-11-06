@@ -124,17 +124,6 @@ rectangle "War " as War {
 note top of War #lightgreen : SINGLETON
 
 
-
-
-
-rectangle Military {
-    class Military {
-        - BattleGroups: vector<Forces*>
-        - Spies: vector<SpyAgency*>
-        {abstract} + move(): void
-        ~Military()
-    }
-
     class Forces {
         - name: string
         - army: Army*
@@ -145,37 +134,6 @@ rectangle Military {
         ~Military()
     }
 
-    class Army {
-        - name: string
-        - numSoldiers: int
-        - numCommanders: int
-        - numTanks: int
-        - numTrucks: int
-        - units: vector<Entity*>
-        + move(): void
-        ~Army()
-    }
-
-    class Navy {
-        - name: string
-        - numCargoShips: int
-        - numWarShips: int
-        - numCarriers: int
-        - numSubmarines: int
-        - numFighters: int
-        - units: vector<Entity*>
-        + move(): void
-        ~Navy()
-    }
-
-    class AirForce {
-        - name: string
-        - numFighters: int
-        - numBombers: int
-        - units: vector<Entity*>
-        + move(): void
-        ~AirForce()
-    }
 
     rectangle Spies {
 
@@ -205,22 +163,29 @@ rectangle "Factories" {
     class UnitFactory{
         # name: string
         # num: int
-        + unitFactory(name : string, int : num)
+        # _con : Country*
+        # w1 : vector<Weapon*>*
+        # w2 : vector<Weapon*>*
+        # w3 : vector<Weapon*>*
+        # w4 : vector<Weapon*>*
+        # w5 : vector<Weapon*>*
+        # w6 : vector<Weapon*>*
+        # e : Entity*
         ~ unitFactory()
         + {abstract} makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
 
     }
 
     class VehicleFactory {
-        + VehicleFactory(name : string, int : num, vehicle : VehicleType)
+        + VehicleFactory(name : string, int : num, vehicle : VehicleType, con : Country*)
         ~ VehicleFactory()
-        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
+        + makeUnit(): Entity*
     }
 
     class TroopFactory {
-        + TroopFactory(name : string, int : num)
+        + TroopFactory(name : string, int : num, con : Country*)
         ~ TruckFactory()
-        + makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
+        + makeUnit(): Entity*
     }
 
     enum VehicleType {
@@ -243,7 +208,9 @@ rectangle "Factories" {
         Sniper50
         Pistol
         AR
-        SMG 
+        SMG
+        DualBuretter
+        Ak47 
         Bomb
         Cannon 
         Torpedo
@@ -379,21 +346,6 @@ rectangle "Entities" {
         {abstract} + clone(): Troop
     }
 
-    class Soldier {
-        + Soldier()
-        + attack(): void
-        + defend(): void
-        + clone(): Troop
-    }
-
-    class Commander {
-        + Commander()
-        + attack(): void
-        + defend(): void
-        + command(): void
-        + clone(): Troop
-    }
-
     class Weapon {
         - weaponName: string
         - dmg: int
@@ -405,39 +357,84 @@ note bottom #lightgreen : TEMPLATE METHOD
 '==== Different strategy states ===='
 rectangle "Strategy States" as StratStates {
     class BattleStrategy {
-        {abstract} + warAlgorithm()
+        # uf : TroopFactory* 
+        # vf : VehicelFactory* 
+        # _con : Country* 
+        {abstract} + warAlgorithm(enum : int) 
+        {abstract} ~BatttleStrategy
     }
 
     class DefensiveStrategy {
-        + warAlgorithm()
+        - def : enum 
+        - friendlyRegion : Region* 
+        - enemyRegion : Region* 
+        - _name : string 
+        - num : int 
+        + DefensiveStrategy()
+        ~ DefensiveStrategy()
+        + warAlgorithm(def : int)
         + redistributeTroops(): void
         + recruitTroops(): void
+        + setNameNumCont(name : string, num : int, con : Country *): void
+        + setDef(def : enum) : void
+        + setFriendlyRegion(friendlyRegion : Region*): void
+        + setEnemyRegion(friendlyRegion : Region*): void
     }
     
     class OffensiveStrategy {
-        + warAlgorithm()
+        - off : enum 
+        - friendlyRegion : Region* 
+        - enemyRegion : Region*
+        + OffensiveStrategy() 
+        ~ OffensiveStrategy()
+        + warAlgorithm(def : int)
         + redistributeTroops(): void
         + attack(): void
+        + setFriendlyRegion(friendlyRegion : Region*): void
+        + setEnemyRegion(friendlyRegion : Region*): void
     }
 
     class ResearchStrategy {
-        + warAlgorithm()
-        + researchTroops(): void
-        + researchVehicles(): void
-        + researchWeapons(): void
+        - rad : enum
+        - country : Country*
+        + ResearchStrategy()
+        ~ ResearchStrategy()
+        + warAlgorithm(rad : int)
+        + developResources(): void
+        + developEconomy(): void
+        + research(): void
+        + setCountry(country : Country*): void
     }
 
     class PrepareStrategy {
-        + warAlgorithm()
-        + redistributeTroops(): void
+        - prep : enum 
+        - friendlyRegion : Region* 
+        - enemyRegion : Region*
+        - _name : string 
+        - _num : int 
+        - _veh : enum
+        + PrepareStrategy()
+        ~ PrepareStrategy()
+        + warAlgorithm(prep : int)
         + recruitTroops(): void
         + buildVehicles(): void
+        + setFriendlyRegion(friendlyRegion : Region*): void
+        + setEnemyRegion(friendlyRegion : Region*): void
+        + setNameNumCont(name : string, num : int, con : Country *): void
+        + setVehicle(name : string, num : int, con : Country *, con : enum): void
     }
 
     class DiplomacyStrategy{
-        + warAlgorithm()
+        - dip : enum
+        - myCountry : Country*
+        - enemyCountry : COuntry*
+        + DiplomacyStrategy()
+        ~ DiplomacyStrategy
+        + warAlgorithm(dip : int)
         + proposeTreaty(): void
         + surrender(): void
+        + setMyCountry(myCountry : Country*) : void
+        + setEnemyCoutnry(enemyCountry : Country*) : void
     }
 }
 note right of StratStates #lightgreen : STRATEGY
@@ -472,8 +469,6 @@ Simulation o- Simulation
 Entity o- Weapon
 Entity <|-- Troop
 Entity <|-- Vehicle
-Troop <|-- Soldier
-Troop <|-- Commander
 Vehicle <|-- GroundVehicle
 Vehicle <|-- AirVehicle
 Vehicle <|-- WaterVehicle
@@ -488,7 +483,8 @@ WaterVehicle <|-- Submarine
 WaterVehicle <|-- Carrier
 
 
-
+UnitFactory <|-- VehicleFactory
+UnitFactory <|-- TroopFactory
 VehicleFactory ..> Truck : <<instantiates>>
 VehicleFactory ..> Tank : <<instantiates>>
 VehicleFactory ..> Warship : <<instantiates>>
@@ -497,24 +493,17 @@ VehicleFactory ..> Carrier : <<instantiates>>
 VehicleFactory ..> CargoShip : <<instantiates>>
 VehicleFactory ..> Bomber : <<instantiates>>
 VehicleFactory ..> CargoPlane : <<instantiates>>
-TroopFactory   ..> Soldier : <<instantiates>>
-TroopFactory   ..> Commander : <<instantiates>>
+TroopFactory   ..> Troop : <<instantiates>>
+DefensiveStrategy ..> TroopFactory : <<instantiates>>
+PrepareStrategy ..> TroopFactory : <<instantiates>>
+PrepareStrategy ..> VehicleFactory : <<instantiates>>
 
 War ..> WarMemento
 caretaker o-- WarMemento
 WarMemento o-- WarState
 
-Forces o-- Army
-Forces o-- Navy
-Forces o-- AirForce
+Forces o-- Entity
 
-Military o-- Forces
-
-Army o-- Entity
-Navy o-- Entity
-AirForce o-- Entity
-
-Country *-- Military
 Country o-- VehicleFactory
 Country o-- TroopFactory
 
@@ -528,7 +517,7 @@ War o-- Alliance
 BattleStrategy o-- Country
 DefensiveStrategy <|-- BattleStrategy
 OffensiveStrategy <|-- BattleStrategy
-ResearchiveStrategy <|-- BattleStrategy
+ResearchStrategy <|-- BattleStrategy
 PrepareStrategy <|-- BattleStrategy
 DiplomacyStrategy <|-- BattleStrategy
 

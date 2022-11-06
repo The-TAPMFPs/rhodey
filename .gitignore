@@ -1,3 +1,4 @@
 Code/ftxui-starter/build/*
 .vscode
 out/Docs/main/*
+Doxygen/html/*

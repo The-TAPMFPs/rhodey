@@ -1,16 +1,18 @@
 #include "War.h"
-#include "WarPhases/Conflict.h"
+#include "WarPhases/Dispute.h"
 
-War::War(WarPhase* warPhase)
-  : warPhase(warPhase)
-{
-  // TransitionTo(warPhase); //REMOVED: for now, re-add later
+std::string War::warState = "UNSET_WAR_STATE";
+std::string War::warStateDesc = "UNSET_WAR_STATE_DESC";
+std::vector<std::string> War::warStateThumbnail;
+ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
+
+War::War() : frameCount(0), warPhase(new Dispute()) {
 
   this->warPhase = new Conflict();
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
 
-  //TODO: Replace with properly initialized data
+  // TODO: Replace with properly initialized data
   teamA->add(new Country("country A"));
   teamA->add(new Country("country B"));
   teamA->add(new Country("country C"));
@@ -42,6 +44,17 @@ std::vector<Country*> War::getAllCountries()
 //The main simulation loop
 void War::step()
 {
+  //Get alliance/country whose turn it is now
+  Alliance* team = (frameCount%2?this->teamA:this->teamB);
+  Country* c = team->getMemberModuloSize(frameCount/2);
+
+  if(c != nullptr)
+  {
+    c->morale = frameCount;
+    // c->takeTurn(); //TODO: Fix Floating point exception
+  }
+
+  frameCount++;
 }
 
 //Called when there is an input event from the UI
@@ -51,9 +64,8 @@ bool War::onEvent(ftxui::Event e)
 }
 
 void War::transitionTo(WarPhase* warPhase) {
-  //TODO: Fix, something is segfaulting in here!
-  if (this->warPhase)
-  {
+  // TODO: Fix, something is segfaulting in here!
+  if (this->warPhase) {
     delete this->warPhase;
   }
 
@@ -78,8 +90,11 @@ void War::start() {
   // TODO start the war
 }
 
-MapData War::getCurrentMapData()
-{
+bool War::isOver() {
+  return warPhase == NULL;
+}
+
+MapData War::getCurrentMapData() {
   return this->map->getCurrentMapData();
 }
 
