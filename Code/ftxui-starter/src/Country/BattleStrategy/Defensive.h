@@ -11,6 +11,10 @@ class Defensive : public BattleStrategy {
     public:
         Defensive();
         void warAlgorithm(int def);
+        std::string _name;
+        int _num;
+        void setNameAndNum(std::string name, int num);
+        void setDef(_def def);
         void redistributeTroops();
         void recruitTroops();
         void setFriendlyRegion(Region* friendlyRegion);

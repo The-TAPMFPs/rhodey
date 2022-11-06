@@ -61,12 +61,24 @@ void Country::generatePersonalityMatrix() {
 
 Eigen::MatrixXd Country::generateValueMatrix() {
   Eigen::MatrixXd valMatrix(18, 1);
-  valMatrix << numTroops / (0.3 * population),
-      1 - (numTroops / (0.3 * population)), numVehicles / (numTroops / 10),
-      1 - (numVehicles / (numTroops / 10)), economy, 1 - economy, resources,
-      1 - resources, morale, 1 - morale, numSpies / (numEnemyRegions / 5),
-      1 - (numSpies / (numEnemyRegions / 5)), aggressiveness,
-      1 - aggressiveness, goalRating, 1 - goalRating, research, 1 - research;
+  valMatrix << ((population==0) ? 0 : numTroops / (0.3 * population)),
+    ((numTroops == 0) ? 1 : 1 - (numTroops / (0.3 * population))),
+      ((numTroops==0) ? 0 : numVehicles / (numTroops / 10)),
+      ((numTroops==0) ? 1 : 1 - (numVehicles / (numTroops / 10))),
+      economy,
+      1 - economy,
+      resources,
+      1 - resources,
+      morale,
+      1 - morale,
+      ((numEnemyRegions == 0) ? 1 :numSpies / (numEnemyRegions / 5)),
+      ((numEnemyRegions == 0) ? 0 : 1 - (numSpies / (numEnemyRegions / 5))),
+      aggressiveness,
+      1 - aggressiveness,
+      goalRating,
+      1 - goalRating,
+      research,
+      1 - research;
 
   return valMatrix;
 }

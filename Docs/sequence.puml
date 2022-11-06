@@ -6,45 +6,48 @@ alt Conflict
     loop Until end of war
         Battle -> BattleStrategy
         alt PrepareStrategy
-            alt redistributeTroops
-                BattleStrategy --> Battle : redistributeTroops()
-            else recruitTroops
-                BattleStrategy -> UnitFactory : recruitTroops(name : string , num : int, weapon : vector<Weapon*>*)
+            BattleStrategy -> PrepareStrategy : changeState()
+            alt recruitTroops
+                PrepareStrategy -> UnitFactory : recruitTroops(name : string , num : int, weapon : vector<Weapon*>*)
                 UnitFactory -> TroopFactory 
                 TroopFactory -> Troop : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
             else buildVehicles
-                BattleStrategy -> UnitFactory : buildVehicles(name : string , num : int, weapon : vector<Weapon*>*)
+                PrepareStrategy -> UnitFactory : buildVehicles(name : string , num : int, weapon : vector<Weapon*>*)
                 UnitFactory -> VehicleFactory
                 VehicleFactory -> Vehicle : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
             end
         else ResearchStrategy
+            BattleStrategy -> ResearchStrategy : changeState()
             alt researchTroops
-                BattleStrategy --> Battle : researchTroops()
+                ResearchStrategy --> Battle : researchTroops()
             else researchVehicles
-                BattleStrategy --> Battle : researchVehicles()
+                ResearchStrategy --> Battle : researchVehicles()
             else researchWeapons
-                BattleStrategy --> Battle : researchWeapons()
+                ResearchStrategy --> Battle : researchWeapons()
             end
         else OffensiveStrategy
+            BattleStrategy -> OffensiveStrategy : changeState()
             alt redistributeTroops
-                BattleStrategy --> Battle : redistributeTroops()
+                OffensiveStrategy --> Battle : redistributeTroops()
             else attack
-                BattleStrategy --> Battle : attack()
+                OffensiveStrategy --> Battle : attack()
             end
         else DefensiveStrategy
+            BattleStrategy -> DefensiveStrategy : changeState()
             alt redistributeTroops
-                BattleStrategy --> Battle : redistributeTroops()
+                DefensiveStrategy --> Battle : redistributeTroops()
             else recruitTroops
-                BattleStrategy -> UnitFactory : recruitTroops()
+                DefensiveStrategy -> UnitFactory : recruitTroops()
                 UnitFactory -> TroopFactory 
                 TroopFactory -> Troop : makeUnit(name : string , num : int, weapon : vector<Weapon*>*)
                 Troop -> Battle
             end
         else DiplomacyStrategy
+            BattleStrategy -> DiplomacyStrategy : changeState()
             alt proposeTreaty
-                BattleStrategy --> Battle : proposeTreaty()
+                DiplomacyStrategy--> Battle : proposeTreaty()
             else surrender
-                BattleStrategy --> Battle : surrender()
+                DiplomacyStrategy --> Battle : surrender()
             end
         end
     end

@@ -11,6 +11,10 @@
 class Region;
 
 class BattleStrategy {
+    protected:
+        TroopFactory * uf;
+        VehicleFactory * vf;
+        Country * _con;
     public:
         virtual void warAlgorithm(int enumInput) = 0;
         virtual ~BattleStrategy();

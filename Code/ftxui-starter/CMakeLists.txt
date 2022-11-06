@@ -1,4 +1,6 @@
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required (VERSION 3.14)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_BUILD_TYPE Debug)
 
 # --- Fetch FTXUI --------------------------------------------------------------
 include(FetchContent)
@@ -14,6 +16,14 @@ if(NOT ftxui_POPULATED)
   FetchContent_Populate(ftxui)
   add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
+# --- Fetch GTEST ------------------------------------------------------------------
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 # ------------------------------------------------------------------------------
 
 project(ftxui-starter
@@ -26,9 +36,7 @@ project(ftxui-starter
 # This is a bit of a hack, but we can clean it up later
 # Get all .cpp files, set SRC_FILES variable
 file(GLOB_RECURSE SRC_FILES
-  src/main.cpp
-  src/UI.cpp
-  src/uuid.cpp
+  src/*.cpp
 
   #===== Add new folders here!=====#
   src/Country/*.cpp
@@ -49,7 +57,10 @@ file(GLOB_RECURSE SRC_FILES
 )
 
 # Create the `ftxui-starter` executable in build/, add all .cpp files
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+    ${SRC_FILES}
+    )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(ftxui-starter
@@ -58,6 +69,19 @@ target_link_libraries(ftxui-starter
   PRIVATE ftxui::component
 )
 
+enable_testing()
+add_executable(
+    Entity_Military_UnitTests
+    src/Entity_Military_UnitTests.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Entity_Military_UnitTests PUBLIC src)
+target_link_libraries(Entity_Military_UnitTests
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
 # ------------------------------------------------------------------------------
 
 
@@ -72,3 +96,5 @@ if (EMSCRIPTEN)
   endforeach(file)
 endif()
 # ------------------------------------------------------------------------------
+include(GoogleTest)
+gtest_discover_tests(Entity_Military_UnitTests)

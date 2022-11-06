@@ -17,4 +17,9 @@ class Prepare : public BattleStrategy {
         void recruitTroops();
         void setFriendlyRegion(Region* friendlyRegion);
         void setEnemyRegion(Region* enemyRegion);
+        std::string _name;
+        int _num;
+        VEHICLE_TYPE _veh;
+        void setNameAndNum(std::string name, int num);
+        void setVehicle(std::string name, int num, VEHICLE_TYPE veh);
 };
