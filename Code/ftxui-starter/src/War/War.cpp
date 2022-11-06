@@ -2,19 +2,19 @@
 #include "WarPhases/Dispute.h"
 
 /**
- * \property string warState
+ * \property string War::warState
  * \brief The current state of the war
  */
 /**
- * \property string warStateDesc
+ * \property string War::warStateDesc
  * \brief Description of the events of the current war state
  */
 /**
- * \property std::vector<string> warStateThumbnail
+ * \property std::vector<string> War::warStateThumbnail
  * \brief A graphic to decorate the current cutscene
  */
 /**
- * \property ftxui::Color warStateThumbnailColor
+ * \property ftxui::Color War::warStateThumbnailColor
  * \brief The colour of the graphic to decorate the current cutscene
  */
 std::string War::warState = "UNSET_WAR_STATE";
@@ -23,7 +23,7 @@ std::vector<std::string> War::warStateThumbnail;
 ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 
 /**
- * \fn War ()
+ * \fn War::War ()
  * \brief constructor for the War class, adds countries. Defualt War State is 'Dispute' State
  *
  */
@@ -45,7 +45,7 @@ War::War(): frameCount(0), warPhase(new Dispute()) {
 }
 
 /**
- * \fn War ()
+ * \fn War::War ()
  * \brief constructor for the War class, adds countries to the war.
  *
  * \param warPhase sets the war phase of the war
@@ -69,7 +69,7 @@ War::War(WarPhase* warPhase) : warPhase(warPhase) {
 }
 
 /**
- * \fn ~War ()
+ * \fn War::~War ()
  * \brief destructor for the War class. Deletes the map, warPhase and teams, but not the War.
  *
  */
@@ -80,7 +80,7 @@ War::~War() {
 }
 
 /**
- * \fn void step ()
+ * \fn void War::step ()
  * \brief The main simulation loop, Simulates a "turn" of the war
  */
 void War::step()
@@ -99,7 +99,7 @@ void War::step()
 }
 
 /**
- * \fn bool onEvent (Event e)
+ * \fn bool War::onEvent (Event e)
  * \brief Called when there is an input event from the UI
  * 
  * \param e The event that occured
@@ -111,7 +111,7 @@ bool War::onEvent(ftxui::Event e)
 }
 
 /**
- * \fn void transitionTo (WarPhase* warPhase)
+ * \fn void War::transitionTo (WarPhase* warPhase)
  * \brief Transitions the war to the specified war phase
  * 
  * \param warPhase The new war phase
@@ -126,7 +126,7 @@ void War::transitionTo(WarPhase* warPhase) {
 }
 
 /**
- * \fn void addCountryToSideA (Country* country)
+ * \fn void War::addCountryToSideA (Country* country)
  * \brief Adds a country to the side A of the war
  * 
  * \param country The country to add
@@ -136,7 +136,7 @@ void War::addCountryToSideA(Country* country) {
 }
 
 /**
- * \fn void addCountryToSideB (Country* country)
+ * \fn void War::addCountryToSideB (Country* country)
  * \brief Adds a country to the side B of the war
  * 
  * \param country The country to add
@@ -146,7 +146,7 @@ void War::addCountryToSideB(Country* country) {
 }
 
 /**
- * \fn void changeState ()
+ * \fn void War::changeState ()
  * \brief handles a change in the state of the war
  * 
  */
@@ -155,7 +155,7 @@ void War::changeState() {
 }
 
 /**
- * \fn void printSides ()
+ * \fn void War::printSides ()
  * \brief Prints the 2 sides of the war
  * 
  */
@@ -166,7 +166,7 @@ void War::start() {
 }
 
 /**
- * \fn boolean isOver ()
+ * \fn boolean War::isOver ()
  * \brief Checks if the war is over
  * 
  * \return true if the war is over, false otherwise
@@ -176,7 +176,7 @@ bool War::isOver() {
 }
 
 /**
- * \fn MapData getCurrentMapData ()
+ * \fn MapData War::getCurrentMapData ()
  * \brief gets a struct representing the current map
  * 
  * \return a MapData struct representing the current map
@@ -186,7 +186,7 @@ MapData War::getCurrentMapData() {
 }
 
 /**
- * \fn Region* getRegionAt (int x, int y)
+ * \fn Region* War::getRegionAt (int x, int y)
  * \brief gets the region at the specified coordinates
  * 
  * \return the region at the specified coordinates

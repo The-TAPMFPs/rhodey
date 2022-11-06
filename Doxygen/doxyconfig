@@ -12,6 +12,7 @@
 PROJECT_NAME           = "Doxygen Comment Example"
 PROJECT_NUMBER         = "Version 1.0"
 INPUT                  = ../Code/ftxui-starter/src
+RECURSIVE              = YES
 TAB_SIZE               = 4
 JAVADOC_AUTOBRIEF      = YES
 EXTRACT_ALL            = YES
