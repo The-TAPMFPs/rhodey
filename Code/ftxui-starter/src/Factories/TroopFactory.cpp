@@ -38,14 +38,12 @@ Entity* TroopFactory::makeUnit(){
 	convert << _num << " troops with SMGs and Pistols were recruited.";
         temp = convert.str();
         Logger::log(temp);
-        return e;
     }
     else if(_con->getResearch() < 0.5){
         e = new Troop(_name, _num, w2, _con);
         convert << _num << " troops with ARs, Pistols and Snipers were recruited.";
         temp = convert.str();
         Logger::log(temp);
-        return e;
     }
     else if(_con->getResearch() < 0.8){
         switch(i){
@@ -54,13 +52,11 @@ Entity* TroopFactory::makeUnit(){
                 convert << _num << " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
-                return e;
             case 2:
                 e = new Troop(_name, _num, w4, _con);
                 convert << _num << " troops with ARs, SMGs, Snipers and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
-                return e;
         }
     }
     else if(_con->getResearch() <= 1){
@@ -70,15 +66,14 @@ Entity* TroopFactory::makeUnit(){
 		convert << _num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
-                return e;
             case 2:
                 e = new Troop(_name, _num, w6, _con);
                 convert << _num << " troops with AK47s, Dual Burettes, Bazooka and Sniper50s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
-                return e;
         }
     }
+    return e;
 }
 
 

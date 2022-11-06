@@ -2,7 +2,7 @@
 
 Bomber::Bomber(string name, int numberOfTroops, vector<Weapon*>* weapons,
 	Country * country) : AirVehicle(name, numberOfTroops, 100, 42, weapons,
-	    country) {
+	    country, "Bomber") {
 	this->terrianHandling = 50;
 	this->capacity = 30;
 };

@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include "./WeaponTemplateMethod/Weapon.h"
-#include <bits/stdc++.h>
 #include "../uuid.h"
 using namespace std;
 

@@ -15,6 +15,7 @@
 //Predefine classes to resolve circular dependencies:
 class Alliance;
 class Country {
+    friend class Alliance;
   private:
     std::string name;
     BattleStrategy* strategy;

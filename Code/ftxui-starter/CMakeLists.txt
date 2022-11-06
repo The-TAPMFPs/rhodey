@@ -36,11 +36,15 @@ project(ftxui-starter
 # This is a bit of a hack, but we can clean it up later
 # Get all .cpp files, set SRC_FILES variable
 file(GLOB_RECURSE SRC_FILES
-  src/*.cpp
-
   #===== Add new folders here!=====#
   src/Country/*.cpp
   src/Country/BattleStrategy/*.cpp
+
+  src/Factories/*.cpp
+  src/Military/*.cpp
+  src/UI.cpp
+  src/uuid.cpp
+  src/logger.cpp
 
   src/Entities/*.cpp
   src/Entities/Troop/*.cpp
@@ -82,6 +86,19 @@ target_link_libraries(Entity_Military_UnitTests
   PRIVATE ftxui::component
   GTest::gtest_main
 )
+
+add_executable(
+    Map_UnitTest
+    src/Map_UnitTest.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Map_UnitTest PUBLIC src)
+target_link_libraries(Map_UnitTest
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
 # ------------------------------------------------------------------------------
 
 
@@ -97,4 +114,4 @@ if (EMSCRIPTEN)
 endif()
 # ------------------------------------------------------------------------------
 include(GoogleTest)
-gtest_discover_tests(Entity_Military_UnitTests)
+gtest_discover_tests(Entity_Military_UnitTests Map_UnitTest)
