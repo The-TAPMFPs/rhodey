@@ -1,9 +1,7 @@
 #include "UI.h"
 #include "War/WarPhases/Dispute.h"
 
-using namespace ftxui;
-
-int main(int argc, const char* argv[]) {
+int main(int argc,char* argv[]) {
 
     WarPhase* startPhase = new Dispute();
 

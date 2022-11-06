@@ -7,6 +7,7 @@ class CargoPlane :public AirVehicle{
     protected:
 	Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon);
     public:
-    CargoPlane(string name, int numberOfTroops, vector<Weapon *> * weapons);
+    CargoPlane(string name, int numberOfTroops, vector<Weapon *> * weapons,
+	    Country * country);
 
 };
