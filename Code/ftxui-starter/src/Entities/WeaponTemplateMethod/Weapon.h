@@ -46,6 +46,16 @@ class SMG : public Weapon{
     SMG();
 };
 
+class DualBurette : public Weapon{
+    public:
+    DualBurette();
+};
+
+class AK47 : public Weapon{
+    public:
+    AK47();
+};
+
 class Torpedo:public Weapon{
     Torpedo();
 };

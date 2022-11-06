@@ -10,7 +10,6 @@ class Prepare : public BattleStrategy {
         Region* friendlyRegion;
         Region* enemyRegion;
     public:
-        
         Prepare();
         void warAlgorithm(int prep);
         void buildVehicles();
@@ -20,6 +19,6 @@ class Prepare : public BattleStrategy {
         std::string _name;
         int _num;
         VEHICLE_TYPE _veh;
-        void setNameAndNum(std::string name, int num);
-        void setVehicle(std::string name, int num, VEHICLE_TYPE veh);
+        void setNameAndNum(std::string name, int num, Country * con);
+        void setVehicle(std::string name, int num, VEHICLE_TYPE veh, Country * con);
 };

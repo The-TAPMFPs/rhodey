@@ -3,13 +3,15 @@
 #include <string>
 #include <vector>
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
-#include "logger.h"
+#include "../logger.h"
+#include "../Country/Country.h"
 
 
 class UnitFactory{
     protected:
         std::string _name;
         int _num;
+        Country * _con;
         vector<Weapon *> * w1;
         vector<Weapon *> * w2;
         vector<Weapon *> * w3;

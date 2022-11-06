@@ -7,6 +7,7 @@
 #include "../../Factories/TroopFactory.h"
 #include "../../Factories/VehicleFactory.h"
 #include "../Country.h"
+#include "../../logger.h"
 
 class Region;
 
