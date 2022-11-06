@@ -171,6 +171,10 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
     float sum = 0.0f;
 
     int distance = dist(from, to);
+    if(distance == 0)
+    {
+        return 0;
+    }
 
     for(int t = 0; t <= distance; t++)
     {

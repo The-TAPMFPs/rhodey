@@ -109,3 +109,8 @@ Alliance* War::getSideCountryIsOn(Country* country)
   return teamA->containsCountry(country) ? teamA :
         (teamB->containsCountry(country) ? teamB : nullptr);
 }
+
+float War::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
+{
+  return this->map->getTravelDifficulty(from, to, teamA);
+}
