@@ -17,25 +17,25 @@ void Diplomacy::warAlgorithm(int dip){
     return;
 }
 
-void Diplomacy::surrender(){
-    //cout 
-}
-
-void Diplomacy::proposeTreaty(){
-    
-}
-
 void Diplomacy::setMyCountry(Country* myCountry){
     this->myCountry = myCountry;
 }
 
 void Diplomacy::setEnemyCountry(Country* enemyCountry){
     this->enemyCountry = enemyCountry;
-    std::string temp;
-    Logger::log("");
+    
 }
 
 void Diplomacy::proposeTreaty(){
     std::string temp;
-    Logger::log("");
+    temp = Country->getName() + " proposed a treaty with " + enemyCountry->getName();
+    Logger::log(temp);
+    //Have a treaty function in the country
+}
+
+void Diplomacy::surrender(){
+    std::string temp;
+    temp = myCountry->getName() + " surrended to " + enemyCountry->getName();
+    Logger::log(temp);
+    //Have a surrender function in the country 
 }

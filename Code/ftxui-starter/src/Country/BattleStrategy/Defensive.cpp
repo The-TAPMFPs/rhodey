@@ -18,9 +18,10 @@ void Defensive::warAlgorithm(int def){
     return;
 }
 
-void Defensive::setNameAndNum(std::string name, int num){
+void Defensive::setNameNumCont(std::string name, int num, Country * con){
     _name = name;
     _num = num;
+    _con = con;
 }
 
 void Defensive::setDef(_def def){
@@ -32,7 +33,7 @@ void Defensive::redistributeTroops(){
 }
 
 void Defensive::recruitTroops(){
-    uf = new TroopFactory(_name, _num);
+    uf = new TroopFactory(_name, _num, _con);
     uf->makeUnit();
     delete uf;
 }
