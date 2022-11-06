@@ -30,6 +30,7 @@ Dispute::Dispute() {
 "                       `\"Y8baa,      ,d888P,ad8P\"'",
 "                            ``\"\"YYba8888P\"\"''"
   };
+  warPhase = phase::DISPUTE;
 }
 
 void Dispute::handleWarChange(War* war) {

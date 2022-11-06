@@ -29,6 +29,7 @@ Conflict::Conflict() {
 "                                (___|___)",
 "                                 ^^^ ^^^"
   };
+  warPhase = phase::CONFLICT;
 }
 
 void Conflict::handleWarChange(War* war) {

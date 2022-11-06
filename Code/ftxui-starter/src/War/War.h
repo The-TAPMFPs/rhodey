@@ -10,7 +10,11 @@
 class WarPhase;
 
 class War {
+#ifdef UNIT_TEST
+    public:
+#else
     private:
+#endif
         WarPhase* warPhase;
         Map* map;
         int frameCount;
@@ -24,7 +28,6 @@ class War {
         static std::vector<std::string> warStateThumbnail;
         static int warStateThumbnailFrameCount;
         static ftxui::Color warStateThumbnailColor;
-
         War();
         War(WarPhase* warPhase);
         ~War();
