@@ -1,4 +1,5 @@
 cmake_minimum_required (VERSION 3.11)
+# set(CMAKE_BUILD_TYPE DEBUG)
 
 # --- Fetch FTXUI --------------------------------------------------------------
 include(FetchContent)
@@ -26,9 +27,7 @@ project(ftxui-starter
 # This is a bit of a hack, but we can clean it up later
 # Get all .cpp files, set SRC_FILES variable
 file(GLOB_RECURSE SRC_FILES
-  src/main.cpp
-  src/UI.cpp
-  src/uuid.cpp
+  src/*.cpp
 
   #===== Add new folders here!=====#
   src/Country/*.cpp

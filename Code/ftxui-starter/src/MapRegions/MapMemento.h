@@ -7,11 +7,9 @@ class MapMemento
 {
     private:
         MapData* md;
-        MapData* getState();
-        MapData* setState();
-        friend class Map;
-    public:
         MapMemento(MapData);
         virtual ~MapMemento();
-        
+        MapData* getState();
+        void setState(MapData md);
+        friend class Map;
 };
