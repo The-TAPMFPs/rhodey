@@ -9,6 +9,7 @@ class Diplomacy : public BattleStrategy {
         _dip dip;
         Country* myCountry;
         Country* enemyCountry;
+        
     public:
         Diplomacy();
         void warAlgorithm(int dip);

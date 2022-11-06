@@ -168,3 +168,94 @@ std::vector<std::string> Country::getFormattedStats() {
       "Goal Rating: " + std::to_string(goalRating),
       "Number of Spies: " + std::to_string(numSpies)};
 }
+
+void Country::setPopulation(int population) {
+  this->population = population;
+}
+
+void Country::setEconomy(double economy) {
+  this->economy = economy;
+}
+
+void Country::setMorale(double morale) {
+  this->morale = morale;
+}
+
+void Country::setResources(double resources) {
+  this->resources = resources;
+}
+
+void Country::setResearch(double research) {
+  this->research = research;
+}
+
+void Country::setAggressiveness(double aggressiveness) {
+  this->aggressiveness = aggressiveness;
+}
+
+void Country::setGoalRating(double goalRating) {
+  this->goalRating = goalRating;
+}
+
+void Country::setNumSpies(int numSpies) {
+  this->numSpies = numSpies;
+}
+
+void Country::setNumTroops(int numTroops) {
+  this->numTroops = numTroops;
+}
+
+void Country::setNumVehicles(int numVehicles) {
+  this->numVehicles = numVehicles;
+}
+
+void Country::setNumEnemyRegions(int numEnemyRegions) {
+  this->numEnemyRegions = numEnemyRegions;
+}
+
+double getPopulation() {
+  return population;
+}
+
+double getEconomy() {
+  return economy;
+}
+
+double getMorale() {
+  return morale;
+}
+
+double getResources() {
+  return resources;
+}
+
+double getResearch() {
+  return research;
+}
+
+double getAggressiveness() {
+  return aggressiveness;
+}
+
+double getGoalRating() {
+  return goalRating;
+}
+
+int getNumSpies() {
+  return numSpies;
+}
+
+int getNumTroops() {
+  return numTroops;
+}
+
+int getNumVehicles() {
+  return numVehicles;
+}
+
+int getNumEnemyRegions() {
+  return numEnemyRegions;
+}
+
+
+
