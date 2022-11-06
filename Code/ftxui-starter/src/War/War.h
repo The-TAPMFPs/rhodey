@@ -26,6 +26,8 @@ class War {
         void transitionTo(WarPhase* warPhase);
         void addCountryToSideA(Country* country);
         void addCountryToSideB(Country* country);
+        Alliance* getSideCountryIsOn(Country* country);
+        std::vector<Country*> getAllCountries();
         void changeState();
         void start();
         MapData getCurrentMapData();

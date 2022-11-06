@@ -64,16 +64,16 @@ void UI::render()
     for(int i = 0; i < mapW; i++) {
       for(int j = 0; j < mapH; j++) {
         {
-          int colIntensity = (255*m.travelFieldA[i][j]);
+          int colIntensity = (255*m.travelFieldB[i][j]);
           auto col = Color(0, colIntensity, colIntensity);
 
-          if(100*m.travelFieldA[i][j] > mapHeight - 3 &&
-             100*m.travelFieldA[i][j] < mapHeight + 3)
+          if(100*m.travelFieldB[i][j] > mapHeight - 3 &&
+             100*m.travelFieldB[i][j] < mapHeight + 3)
           {
             auto col = Color::White;
           }
           
-          int x = 100*m.travelFieldA[i][j];
+          int x = 100*m.travelFieldB[i][j];
 
           if(x%5==0 || x%5==1) //Draw terrain banding
           {
@@ -165,6 +165,7 @@ void UI::render()
         text("Region Data") | center,
         separator(),
         text(selectedRegion->getRegionName()) | center,
+        text(selectedRegion->getPossessor()->getName()) | center,
         text(std::to_string(selectedRegion->getCoords().x)),
         text(std::to_string(selectedRegion->getCoords().y))
       });

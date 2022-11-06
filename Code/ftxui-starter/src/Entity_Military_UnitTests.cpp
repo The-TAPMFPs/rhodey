@@ -84,10 +84,10 @@ struct OccupancyTableTest : testing::Test {
 	this->friendly2 = new Troop("My Other Squad", 50, weapons2, this->country1);
 	this->hostile = new Troop("Enemy Squad", 50, enemyWeapons, this->country2);
 
-	this->theMap = new Map();
+	this->theMap = new Map({this->country1, this->country2});
 	this->table = new OccupancyTable(this->theMap);
 	this->friendlies = new Alliance("Friendlyies",true);
-	this->baddies = new Alliance("Bad Guys");
+	this->baddies = new Alliance("Bad Guys", false);
 	this->friendlies->add(country1);
 	this->baddies->add(country2);
 
@@ -144,7 +144,7 @@ struct BattleTest : testing::Test {
 	enemyWeapons->push_back(new TestWeapon());
 	// setup
 	this->friendlies = new Alliance("Friendlyies",true);
-	this->baddies = new Alliance("Bad Guys");
+	this->baddies = new Alliance("Bad Guys", false);
 	this->country1 = new Country("Friends");
 	this->country2 = new Country("Enemys");
 	this->friendlies->add(country1);
@@ -153,7 +153,7 @@ struct BattleTest : testing::Test {
 	this->friendly2 = new Troop("My Other Squad", 50, weapons2, this->country1);
 	this->hostile = new Troop("Enemy Squad", 50, enemyWeapons, this->country2);
 
-	this->theMap = new Map();
+	this->theMap = new Map({country1, country2});
 	this->table = new OccupancyTable(this->theMap);
 
 	std::vector<MapCoords> regions = theMap->getRegionLocations();

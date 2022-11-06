@@ -7,8 +7,8 @@ War::War(WarPhase* warPhase)
   // TransitionTo(warPhase); //REMOVED: for now, re-add later
 
   this->warPhase = new Conflict();
-  teamA = new Alliance("Side A");
-  teamB = new Alliance("Side B");
+  teamA = new Alliance("Side A", true);
+  teamB = new Alliance("Side B", false);
 
   //TODO: Replace with properly initialized data
   teamA->add(new Country("country A"));
@@ -20,12 +20,23 @@ War::War(WarPhase* warPhase)
   teamB->add(new Country("country G"));
   teamB->add(new Country("country H"));
 
-  map = new Map();
+  map = new Map(getAllCountries());
 }
 
 War::~War() {
   delete warPhase;
   delete teamA, teamB;
+}
+
+//Returns a homogenous vector of all countries from both alliances
+std::vector<Country*> War::getAllCountries()
+{
+  std::vector<Country*> membersA = teamA->getMembers(), membersB = teamB->getMembers();
+  std::vector<Country*> res;
+  res.insert(res.end(), membersA.begin(), membersA.end());
+  res.insert(res.end(), membersB.begin(), membersB.end());
+
+  return res;
 }
 
 //The main simulation loop
@@ -75,4 +86,11 @@ MapData War::getCurrentMapData()
 Region* War::getRegionAt(int x, int y)
 {
   return this->map->getRegionAt(x, y);
+}
+
+//Returns null if the Country is not bound to an alliance
+Alliance* War::getSideCountryIsOn(Country* country)
+{
+  return teamA->containsCountry(country) ? teamA :
+        (teamB->containsCountry(country) ? teamB : nullptr);
 }

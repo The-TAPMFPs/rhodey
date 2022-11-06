@@ -8,6 +8,8 @@ struct RegionToEntities {
     std::vector<Entity *> entities;
 };
 
+class Map;
+
 class OccupancyTable {
     private:
 	map<UUID, Region *> entityToRegion;
