@@ -10,7 +10,7 @@ class Intel : public BattleStrategy {
         Country* enemyCountry;
 
     public:
-        Intel();
+        Intel(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int intel);
         void setMyCountry(Country* myCountry);

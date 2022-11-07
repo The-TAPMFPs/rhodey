@@ -1,7 +1,6 @@
 #include "Prepare.h"
 
-Prepare::Prepare(){
-}
+Prepare::Prepare(Map* map) : BattleStrategy(map){}
 
 void Prepare::warAlgorithm(int prep){
     this->prep =(_prep) prep;

@@ -10,7 +10,7 @@ class ResearchAndDevelopment : public BattleStrategy {
         Country* friendlyCountry;
     public:
 
-        ResearchAndDevelopment();
+        ResearchAndDevelopment(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int rad);
         void developResources();

@@ -1,8 +1,6 @@
 #include "ResearchAndDevelopment.h"
 
-ResearchAndDevelopment::ResearchAndDevelopment(){
-    
-}
+ResearchAndDevelopment::ResearchAndDevelopment(Map* map) : BattleStrategy(map){}
 
 void ResearchAndDevelopment::warAlgorithm(int rad){
     this->rad =(_rad) rad;
@@ -32,26 +30,25 @@ void ResearchAndDevelopment::doStrategy(Country* country){
     else {
         developResources();
     }
-    Logger::log("Message here on what the country does");
 }
 
 void ResearchAndDevelopment::developResources(){
     srand((unsigned)time(NULL));
     double change = (((double) rand() / RAND_MAX) * 0.10-0.01) + 0.01;
     this->friendlyCountry->setResources(this->friendlyCountry->getResources() + change);
-    Logger::log("Resources increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
+    Logger::log("Resources increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName() + "\n");
 }
 
 void ResearchAndDevelopment::developEconomy(){
     srand((unsigned)time(NULL));
     double change = (((double) rand() / RAND_MAX) * 0.10-0.01) + 0.01;
     this->friendlyCountry->setEconomy(this->friendlyCountry->getEconomy() + change);
-    Logger::log("Economy increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
+    Logger::log("Economy increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName() + "\n");
 }
 
 void ResearchAndDevelopment::research(){
     srand((unsigned)time(NULL));
     double change = (((double) rand() / RAND_MAX) * 0.10-0.01) + 0.01;
     this->friendlyCountry->setResearch(this->friendlyCountry->getResearch() + change);
-    Logger::log("Research increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
+    Logger::log("Research increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName() + "\n");
 }

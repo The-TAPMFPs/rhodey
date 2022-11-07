@@ -5,6 +5,7 @@
 #include "BattleStrategy/Intel.h"
 #include "BattleStrategy/Prepare.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
+#include "../MapRegions/Map.h"
 
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
@@ -31,6 +32,11 @@ Country::Country(std::string name) : name(name) {
     strategy = NULL;
     generatePersonalityMatrix();
 }
+
+Country::Country(std::string name, Map* map) : Country(name) {
+  this->map = map;
+}
+
 
 Country::~Country(){
     delete this->strategy;
@@ -135,25 +141,25 @@ void Country::decideStrategy() {
   switch (maxIndex)
   {
   case 0:
-    this->strategy = new Offensive();
+    this->strategy = new Offensive(map);
     break;
   case 1:
-    this->strategy = new Defensive();
+    this->strategy = new Defensive(map);
     break;
   case 2:
-    this->strategy = new ResearchAndDevelopment();
+    this->strategy = new ResearchAndDevelopment(map);
     break;
   case 3:
-    this->strategy = new Prepare();
+    this->strategy = new Prepare(map);
     break;
   case 4:
-    this->strategy = new Intel();
+    this->strategy = new Intel(map);
     break;
   case 5:
-    this->strategy = new Diplomacy();
+    this->strategy = new Diplomacy(map);
     break;
   default:
-    this->strategy = new ResearchAndDevelopment();
+    this->strategy = new ResearchAndDevelopment(map);
     break;
   }
 }

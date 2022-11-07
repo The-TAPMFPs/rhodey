@@ -17,7 +17,7 @@ class Prepare : public BattleStrategy {
         int _num;
         VEHICLE_TYPE _veh;
     public:
-        Prepare();
+        Prepare(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int prep);
         void buildVehicles();
