@@ -12,6 +12,7 @@
 #include "../Entities/Vehicle/WaterVehicle/Warship.h"
 #include "../Entities/Troop/Troop.h"
 #include "../logger.h"
+
 enum VEHICLE_TYPE {truck, tank, carrier, cargoship, warship, submarine, fighterjet, bomber, cargoplane};
 class Country;
 class UnitFactory{
@@ -19,6 +20,7 @@ class UnitFactory{
         std::string _name;
         int _num;
         Country * _con;
+        VEHICLE_TYPE currVehicleType;
         vector<Weapon *> * w1;
         vector<Weapon *> * w2;
         vector<Weapon *> * w3;

@@ -16,8 +16,9 @@
  * @param type An enum of the types of vehicles
  * @param con Country of Troops
  */
-VehicleFactory::VehicleFactory(std::string name, int num, VEHICLE_TYPE type, Country * con) :
-UnitFactory(name, num, type, con){
+VehicleFactory::VehicleFactory(std::string name, int num, VEHICLE_TYPE type, Country * con)
+ : UnitFactory(name, num, type, con)
+{
   _name = name;
   _num = num;
   _con = con;

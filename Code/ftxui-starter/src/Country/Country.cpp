@@ -7,6 +7,8 @@
 #include "BattleStrategy/Prepare.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
 
+class Observable;
+
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
   return 0;
@@ -164,7 +166,7 @@ void Country::takeTurn() {
   decideStrategy();
   this->strategy->doStrategy(this);
 
-  alertSpyCountries();
+  // alertSpyCountries();
 }
 
 std::vector<std::string> Country::getFormattedStats() {

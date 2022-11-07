@@ -17,7 +17,8 @@
  * @param con Country of Troops 
  */
 TroopFactory::TroopFactory(std::string name, int num, Country * con) :
-UnitFactory(name, num, con){
+    UnitFactory(name, num, con)
+{
     _name = name;
     _num = num;
     _con = con;
