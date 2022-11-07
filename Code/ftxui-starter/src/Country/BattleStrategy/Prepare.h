@@ -6,11 +6,8 @@
 
 // class BattleStrategy;
 
-enum _prep {recP, bvP};
-
 class Prepare : public BattleStrategy {
     private:
-        _prep prep;
         Region* friendlyRegion;
         Region* enemyRegion;
         std::string _name;
@@ -19,7 +16,6 @@ class Prepare : public BattleStrategy {
     public:
         Prepare(Map* map);
         void doStrategy(Country* country);
-        void warAlgorithm(int prep);
         void buildVehicles();
         void recruitTroops();
         void setFriendlyRegion(Region* friendlyRegion);

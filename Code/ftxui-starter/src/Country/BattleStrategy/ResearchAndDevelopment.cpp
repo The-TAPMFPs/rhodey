@@ -2,21 +2,21 @@
 
 ResearchAndDevelopment::ResearchAndDevelopment(Map* map) : BattleStrategy(map){}
 
-void ResearchAndDevelopment::warAlgorithm(int rad){
-    this->rad =(_rad) rad;
-    switch(rad){
-        case drRD:
-            developResources();
-            break;
-        case deRD:
-            developEconomy();
-            break;
-        case rRD:
-            research();
-            break;
-    }
-    return;
-}
+// void ResearchAndDevelopment::warAlgorithm(int rad){
+//     this->rad =(_rad) rad;
+//     switch(rad){
+//         case drRD:
+//             developResources();
+//             break;
+//         case deRD:
+//             developEconomy();
+//             break;
+//         case rRD:
+//             research();
+//             break;
+//     }
+//     return;
+// }
 
 void ResearchAndDevelopment::doStrategy(Country* country){
     // develop the lowest stat between economy, resources and research

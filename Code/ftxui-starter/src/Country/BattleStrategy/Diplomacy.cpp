@@ -2,19 +2,19 @@
 
 Diplomacy::Diplomacy(Map* map) : BattleStrategy(map){}
 
-void Diplomacy::warAlgorithm(int dip){
-    this->dip =(_dip) dip;
+// void Diplomacy::warAlgorithm(int dip){
+//     this->dip =(_dip) dip;
 
-    switch(dip){
-        case suDip:
-            surrender();
-            break;
-        case ptDip:
-            proposeTreaty();
-            break;
-    }
-    return;
-}
+//     switch(dip){
+//         case suDip:
+//             surrender();
+//             break;
+//         case ptDip:
+//             proposeTreaty();
+//             break;
+//     }
+//     return;
+// }
 
 void Diplomacy::doStrategy(Country* country){
     Logger::log("Do the diplomacy strategy");

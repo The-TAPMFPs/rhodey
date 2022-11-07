@@ -1,5 +1,7 @@
 #include "Intel.h"
 
+Intel::Intel() : BattleStrategy(NULL) {  }
+
 Intel::Intel(Map* map) : BattleStrategy(map){}
 
 void Intel::doStrategy(Country* country){
@@ -19,10 +21,6 @@ void Intel::doStrategy(Country* country){
         countriesBeingSpiedOn->push_back(std::pair<Country*, double>(enemyToSpyOn, 0));
         Logger::log(country->name + " is now spying on: " + enemyToSpyOn->name);
     } 
-}
-
-void Intel::warAlgorithm(int intel){
-    // dumb function
 }
 
 void Intel::setMyCountry(Country* myCountry){

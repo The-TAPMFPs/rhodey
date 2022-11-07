@@ -2,18 +2,18 @@
 
 Prepare::Prepare(Map* map) : BattleStrategy(map){}
 
-void Prepare::warAlgorithm(int prep){
-    this->prep =(_prep) prep;
-    switch(prep){
-        case recP:
-            recruitTroops();
-            break;
-        case bvP:
-            buildVehicles();
-            break;
-    }
-    return;
-}
+// void Prepare::warAlgorithm(int prep){
+//     this->prep =(_prep) prep;
+//     switch(prep){
+//         case recP:
+//             recruitTroops();
+//             break;
+//         case bvP:
+//             buildVehicles();
+//             break;
+//     }
+//     return;
+// }
 
 void Prepare::doStrategy(Country* country){
     // take action of lowest between trrop and vehicle count
