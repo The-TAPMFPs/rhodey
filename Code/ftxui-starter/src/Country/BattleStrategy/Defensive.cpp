@@ -78,9 +78,9 @@ void Defensive::redistributeTroops(){
  * 
  */
 void Defensive::recruitTroops(){
-    // uf = new TroopFactory(_name, _num, _con);
-    // uf->makeUnit();
-    // delete uf;
+    uf = new TroopFactory(_name, _num, _con);
+    uf->makeUnit();
+    delete uf;
 }
 
 /**

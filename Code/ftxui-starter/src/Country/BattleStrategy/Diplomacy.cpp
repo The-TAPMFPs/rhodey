@@ -34,9 +34,29 @@ void Diplomacy::warAlgorithm(int dip){
     return;
 }
 
+/**
+ * @fn void doStrategy(Country* country)
+ * @brief Determines whether a country should propose a treaty or surrender based on there 
+ population, economy, morale, resources, research.
+ * 
+ * @param country 
+ */
 
 void Diplomacy::doStrategy(Country* country){
+    int temp = 0;
     Logger::log("Do the diplomacy strategy");
+    if(myCountry->getPopulation() < enemyCountry->getPopulation()){temp++;}
+    if(myCountry->getEconomy() < enemyCountry->getEconomy()){temp++;}
+    if(myCountry->getMorale() < enemyCountry->getEconomy()){temp++;}
+    if(myCountry->getResources() < enemyCountry->getResources()){temp++;}
+    if(myCountry->getResearch() < enemyCountry->getResources()){temp++;}
+
+    if(temp = 3){
+        proposeTreaty();
+    }
+    else if(temp > 3){
+        surrender();
+    }
 }
 
 /**
@@ -66,7 +86,6 @@ void Diplomacy::setEnemyCountry(Country* enemyCountry){
  */
 void Diplomacy::proposeTreaty(){
     Logger::log(myCountry->getName() + " proposed a treaty with " + enemyCountry->getName());
-    //Have a treaty function in the country
 }
 
 /**
@@ -76,5 +95,4 @@ void Diplomacy::proposeTreaty(){
  */
 void Diplomacy::surrender(){
     Logger::log(myCountry->getName() + " surrended to " + enemyCountry->getName());
-    //Have a surrender function in the country
 }
