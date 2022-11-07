@@ -8,31 +8,12 @@
  */
 
 /**
- * @fn Diplomacy()
+ * @fn Diplomacy(Map* map)
  * @brief The constructor for the Diplomacy class
- */
-Diplomacy::Diplomacy(){
-}
-
-/**
- * @fn void warAlgorithm(int dip)
- * @brief Decides on which strategy algorithm to use based on an enum.
  * 
- * @param dip An int that is converted to an enum and switched to decide on the strategy.
+ * @param map allows access to the map
  */
-void Diplomacy::warAlgorithm(int dip){
-    this->dip =(_dip) dip;
-
-    switch(dip){
-        case suDip:
-            surrender();
-            break;
-        case ptDip:
-            proposeTreaty();
-            break;
-    }
-    return;
-}
+Diplomacy::Diplomacy(Map* map) : BattleStrategy(map){}
 
 /**
  * @fn void doStrategy(Country* country)

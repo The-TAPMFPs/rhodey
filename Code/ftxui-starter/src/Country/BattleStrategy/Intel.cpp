@@ -1,7 +1,6 @@
 #include "Intel.h"
 
-Intel::Intel(){
-}
+Intel::Intel(Map* map) : BattleStrategy(map){}
 
 void Intel::doStrategy(Country* country){
     int enemyToSPyOnIndex = uuid::randomInt(0, country->allies->getEnemyAlliance()->numCountries());
@@ -20,10 +19,6 @@ void Intel::doStrategy(Country* country){
         countriesBeingSpiedOn->push_back(std::pair<Country*, double>(enemyToSpyOn, 0));
         Logger::log(country->name + " is now spying on :" + enemyToSpyOn->name);
     } 
-}
-
-void Intel::warAlgorithm(int intel){
-    // dumb function
 }
 
 void Intel::setMyCountry(Country* myCountry){

@@ -8,31 +8,12 @@
  */
 
 /**
- * @fn Prepare()
+ * @fn Prepare(Map* map)
  * @brief The constructor for the Prepare class.
  * 
+ * @param map allows access to the map
  */
-Prepare::Prepare(){
-}
-
-/**
- * @fn void warAlgorithm(int prep)
- * @brief Decides on which strategy algorithm to use based on an enum.
- * 
- * @param prep An int that is converted to an enum and switched to decide on the strategy.
- */
-void Prepare::warAlgorithm(int prep){
-    this->prep =(_prep) prep;
-    switch(prep){
-        case recP:
-            recruitTroops();
-            break;
-        case bvP:
-            buildVehicles();
-            break;
-    }
-    return;
-}
+Prepare::Prepare(Map* map) : BattleStrategy(map){}
 
 
 void Prepare::doStrategy(Country* country){
