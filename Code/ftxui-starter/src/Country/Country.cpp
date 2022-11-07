@@ -28,6 +28,7 @@ Country::Country(std::string name) : name(name) {
     numTroops = 0;
     numVehicles = 0;
     numEnemyRegions = 0;
+    strategy = NULL;
     generatePersonalityMatrix();
 }
 
