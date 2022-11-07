@@ -30,6 +30,13 @@ void Observable::alertSpyCountries(){
  * \param countryBeingSpiedOn the country that is beign spied on
 */
 void Observable::recieveIntel(Country* countryBeingSpiedOn){
-    Logger::log(((Country*)(this))->getName() + " Recieved intel from " + countryBeingSpiedOn->getName());
-    ((Country*)this)->setKnowledgeOfEnemy(((Country*)this)->getKnowledgeOfEnemy() + 0.1);
+    Logger::log(((Country*)(this))->getName() + " Recieved intel from: " + countryBeingSpiedOn->getName());
+
+    std::vector<std::pair<Country*, double>>* countriesBeingSpiedOn = ((Country*)(this))->getCountriesBeingSpiedOn();
+    
+    for(int i = 0; i < countriesBeingSpiedOn->size(); i++){
+        if((*countriesBeingSpiedOn)[i].first == countryBeingSpiedOn){
+            (*countriesBeingSpiedOn)[i].second += 0.1;
+        }
+    }
 }

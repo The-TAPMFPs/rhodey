@@ -29,7 +29,6 @@ Country::Country(std::string name) : name(name) {
     numTroops = 0;
     numVehicles = 0;
     numEnemyRegions = 0;
-    knowledgeOfEnemy = 0;
     generatePersonalityMatrix();
 }
 
@@ -180,6 +179,10 @@ std::vector<std::string> Country::getFormattedStats() {
       "Number of Spies: " + std::to_string(numSpies)};
 }
 
+std::vector<std::pair<Country*, double>>* Country::getCountriesBeingSpiedOn() {
+  return &countriesBeingSpiedOn;
+}
+
 void Country::setPopulation(int population) {
   this->population = population;
 }
@@ -222,10 +225,6 @@ void Country::setNumVehicles(int numVehicles) {
 
 void Country::setNumEnemyRegions(int numEnemyRegions) {
   this->numEnemyRegions = numEnemyRegions;
-}
-
-void Country::setKnowledgeOfEnemy(double knowledgeOfEnemy) {
-  this->knowledgeOfEnemy = knowledgeOfEnemy;
 }
 
 int Country::getPopulation() {
@@ -271,9 +270,4 @@ int Country::getNumVehicles() {
 int Country::getNumEnemyRegions() {
   return this->numEnemyRegions;
 }
-
-double Country::getKnowledgeOfEnemy() {
-  return this->knowledgeOfEnemy;
-}
-
 
