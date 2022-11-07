@@ -73,6 +73,9 @@ class Map {
         float getTravelDifficulty(MapCoords from, MapCoords to, bool weAreTeamA);
 
         float getEnemyRatioInRegion(Region* region, bool teamA);
+        std::vector<Region*> getRegionsOwnedBy(Country* country);
+        std::vector<Region*> getRegionsOwnedBy(bool teamA);
+        Region* getRegionWithHighestEnemyRatio(bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento* makeMemento();
