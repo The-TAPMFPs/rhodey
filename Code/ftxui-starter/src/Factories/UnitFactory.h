@@ -12,6 +12,7 @@
 #include "../Entities/Vehicle/WaterVehicle/Warship.h"
 #include "../Entities/Troop/Troop.h"
 #include "../logger.h"
+enum VEHICLE_TYPE {truck, tank, carrier, cargoship, warship, submarine, fighterjet, bomber, cargoplane};
 class Country;
 class UnitFactory{
     protected:
