@@ -21,10 +21,6 @@ void Intel::doStrategy(Country* country){
     } 
 }
 
-void Intel::warAlgorithm(int intel){
-    // dumb function
-}
-
 void Intel::setMyCountry(Country* myCountry){
     this->myCountry = myCountry;
 }
