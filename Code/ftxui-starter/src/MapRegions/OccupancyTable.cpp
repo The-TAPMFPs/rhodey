@@ -1,9 +1,17 @@
+/**
+ * \file OccupancyTable.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 #include "OccupancyTable.h"
 #include <exception>
 #include <map>
 #include <utility>
 #include <vector>
-
+/**
+ * \fn OccupancyTable::OccupancyTable(Map * InitialMap )
+ * \brief 
+*/
 OccupancyTable::OccupancyTable(Map * InitialMap ) {
     std::map<UUID, Region *>::iterator i;
     for (i = InitialMap->regions.begin(); i!=InitialMap->regions.end(); ++i) {

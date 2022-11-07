@@ -3,8 +3,9 @@
 //Map is 100x100, tiles are 2x4, therefore possible region locations (0,0) to (49, 24)
 /**
  * \fn void Region::Region ()
- * \brief construction a region with a with the name of its UUID on with a random locaiton on the map
- *
+ * \brief constructs a region with a with the name of its UUID on with a random locaiton on the map
+ * \param name() the uuid of the region 
+ * \param coords() the co-ordinates od the region
  */
 Region::Region()
  : uuid(uuid::generateUUID()), name("R_" + uuid), coords({ uuid::randomInt(0, 49), uuid::randomInt(0, 24) })
@@ -54,6 +55,7 @@ std::string Region::getRegionName() {
 /**
  * \fn void Region::setRegionName (std::string name)
  * \brief sets the name of the region
+ * \param name the name of the region
 */
 void Region::setRegionName(std::string name) {
   this->name = name;
@@ -61,7 +63,7 @@ void Region::setRegionName(std::string name) {
 
 /**
  * \fn MapCoords Region::getCoords ()
- * 
+ * \brief get coords of a region 
  * \return the coordinates of the region
 */
 MapCoords Region::getCoords() {
@@ -70,7 +72,7 @@ MapCoords Region::getCoords() {
 
 /**
  * \fn void Region::setRegionCoords (int xCoord, int yCoord)
- * 
+ * \brief sets the region co-ordinates 
  * \param xCoord the x coordinate of the region
  * \param yCoord the y coordinate of the region
 */
@@ -80,7 +82,7 @@ void Region::setRegionCoords(int xCoord, int yCoord) {
 
 /**
  * \fn Country* Region::getPossessor()
- * 
+ * \brief gets the possessor of a country 
  * \return the owner Country of the region
 */
 Country* Region::getPossessor()
