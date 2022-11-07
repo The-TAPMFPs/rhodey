@@ -2,7 +2,7 @@
 
 /**
  * \fn MapMemento::~MapMemento ()
- * deletes the map memento member
+ * \brief deletes the map memento member
 */
 MapMemento::~MapMemento()
 {
@@ -11,8 +11,9 @@ MapMemento::~MapMemento()
 
 /**
  * \fn MapMemento::MapMemento (MapData md)
- * 
+ * \brief creates new MapMemento 
  * \param md the map data to be stored in the memento
+ * 
 */
 MapMemento::MapMemento(MapData md){
     this->md = &md;
@@ -20,7 +21,7 @@ MapMemento::MapMemento(MapData md){
 
 /**
  *\fn MapData* MapMemnto::getState ()
-
+ * \brief gets the state of the currently stored memento
  * \return the map data pointer stored in the memento
 */
 MapData* MapMemento::getState() {
@@ -30,7 +31,7 @@ MapData* MapMemento::getState() {
 
 /**
  * \fn void MapMemento::setState (MapData md)
- * 
+ * \brief sets the state of the new memento
  * \param md the map data to be stored in the memento
 */
 void MapMemento::setState(MapData md) {
