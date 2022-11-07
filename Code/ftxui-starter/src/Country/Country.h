@@ -3,8 +3,8 @@
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
 #include "../MapRegions/Map.h"
-
 #include "../MapRegions/Region.h"
+#include "Observable.h"
 
 // #include "../Factories/TroopFactory.h"
 // #include "../Factories/VehicleFactory.h"
@@ -14,8 +14,9 @@
 class Alliance;
 class BattleStrategy;
 
-class Country {
+class Country : public Observable {
     friend class Alliance;
+    friend class Intel;
   private:
     std::string name;
     BattleStrategy* strategy;
@@ -28,10 +29,10 @@ class Country {
     double aggressiveness; // The aggressiveness of the country
     double goalRating; // The rating of the country's goal
     double numSpies;
+    double knowledgeOfEnemy;
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-
 
     //===== CHARACTER MATRIX =====//
 
@@ -71,6 +72,7 @@ class Country {
     double getGoalRating();
     double getAggressiveness();
     double getResources();
+    double getKnowledgeOfEnemy();
     int getNumSpies();
     int getNumTroops();
     int getNumVehicles();
@@ -86,6 +88,7 @@ class Country {
     void setNumTroops(int numTroops);
     void setNumVehicles(int numVehicles);
     void setNumEnemyRegions(int numEnemyRegions);
+    void setKnowledgeOfEnemy(double knowledgeOfEnemy);
 };
 
 
