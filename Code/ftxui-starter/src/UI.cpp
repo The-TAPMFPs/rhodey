@@ -3,6 +3,8 @@
 #include "War/War.h"
 #include <cmath>
 #include <chrono>
+#include <sstream>
+#include <iomanip>
 
 // Display a component nicely with a title on the left.
 //TODO: Remove since we probably won't need this
@@ -90,7 +92,7 @@ void UI::render()
       int x = r->x*2;
       int y = r->y*4;
 
-      if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y)
+      if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y) //If mouse over region
       {
         std::string regionName = "REGION";
         int nameLen = regionName.length()*2;
@@ -101,7 +103,7 @@ void UI::render()
 
         c.DrawText(clampX, clampY, regionName, Color::Red3);
       }
-      else
+      else //Mouse not hovered over region
       {
         c.DrawText(x, y, "R", Color::Red);
 
@@ -112,12 +114,26 @@ void UI::render()
         }
       }
 
-      //Draw selected region marker
+      //Draw travel difficulties from selected region
       if(selectedRegion != nullptr)
       {
-        MapCoords coords = selectedRegion->getCoords();
-        c.DrawText(coords.x*2, coords.y*4, "R", Color::Gold1);
+        bool diffForTeamA = selectedRegion->getPossessor()->getAlliance()->isTeamA();
+        // float travelDifficulty = diffForTeamA ? 10.5 : 0;
+        float travelDifficulty = war->getTravelDifficulty(selectedRegion->getCoords(), {r->x, r->y}, diffForTeamA);
+
+        //Round to 2 decimal places
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(2) << travelDifficulty;
+
+        c.DrawText(x, y+4, ss.str(), Color::Cyan1);
       }
+    }
+
+    //Draw selected region marker
+    if(selectedRegion != nullptr)
+    {
+      MapCoords coords = selectedRegion->getCoords();
+      c.DrawText(coords.x*2, coords.y*4, "R", Color::Gold1);
     }
 
     return canvas(c);
@@ -165,6 +181,7 @@ void UI::render()
         text("Region Data") | center,
         separator(),
         text(selectedRegion->getRegionName()) | center,
+        text(selectedRegion->getPossessor()->getName()) | center,
         text(std::to_string(selectedRegion->getCoords().x)),
         text(std::to_string(selectedRegion->getCoords().y))
       });
@@ -212,9 +229,9 @@ void UI::render()
 
     std::vector<std::string> stats;
     if(tab_selected == 0) {
-      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+      stats = war->teamA->getMembers().at(countryA_selected)->getFormattedStats();
     } else {
-      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+      stats = war->teamB->getMembers().at(countryB_selected)->getFormattedStats();
     }
 
     ftxui::Elements statsElements;
