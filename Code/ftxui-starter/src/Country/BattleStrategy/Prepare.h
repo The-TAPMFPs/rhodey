@@ -4,6 +4,8 @@
 #include "../../Factories/VehicleFactory.h"
 #include "../../Factories/TroopFactory.h"
 
+// class BattleStrategy;
+
 enum _prep {recP, bvP};
 
 class Prepare : public BattleStrategy {
@@ -16,6 +18,7 @@ class Prepare : public BattleStrategy {
         VEHICLE_TYPE _veh;
     public:
         Prepare();
+        void doStrategy(Country* country);
         void warAlgorithm(int prep);
         void buildVehicles();
         void recruitTroops();

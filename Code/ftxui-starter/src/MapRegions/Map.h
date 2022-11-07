@@ -8,6 +8,8 @@
 #include "Region.h"
 #include "MapMemento.h"
 #include "../Country/Country.h"
+// #include "../War/War.h"
+// #include "OccupancyTable.h"
 #include "OccupancyTable.h"
 
 

@@ -17,6 +17,10 @@ void Offensive::warAlgorithm(int off){
     return;
 }
 
+void Offensive::doStrategy(Country* country){
+    Logger::log("Do the offensive strategy");
+}
+
 void Offensive::redistributeTroops(){
 
 }
