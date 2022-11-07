@@ -12,7 +12,7 @@ class Defensive : public BattleStrategy {
         std::string _name;
         int _num;
     public:
-        Defensive();
+        Defensive(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int def);
         void setNameNumCont(std::string name, int num, Country * con);

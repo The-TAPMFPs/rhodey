@@ -11,7 +11,7 @@ class Diplomacy : public BattleStrategy {
         Country* enemyCountry;
 
     public:
-        Diplomacy();
+        Diplomacy(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int dip);
         void surrender();

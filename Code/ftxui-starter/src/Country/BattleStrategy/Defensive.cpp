@@ -1,8 +1,6 @@
 #include "Defensive.h"
 
-Defensive::Defensive(){
-    
-}
+Defensive::Defensive(Map* map) : BattleStrategy(map){}
 
 void Defensive::warAlgorithm(int def){
     this->def =(_def) def;
@@ -35,6 +33,9 @@ void Defensive::setDef(_def def){
 }
 
 void Defensive::redistributeTroops(){
+    OccupancyTable* occTable = map->getOccupancyTable();
+    occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    delete occTable;
     
 }
 

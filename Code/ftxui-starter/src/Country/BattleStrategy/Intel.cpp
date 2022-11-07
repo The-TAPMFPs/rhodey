@@ -1,7 +1,6 @@
 #include "Intel.h"
 
-Intel::Intel(){
-}
+Intel::Intel(Map* map) : BattleStrategy(map){}
 
 void Intel::doStrategy(Country* country){
     int enemyToSPyOnIndex = uuid::randomInt(0, country->allies->getEnemyAlliance()->numCountries());

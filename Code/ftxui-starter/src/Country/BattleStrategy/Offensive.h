@@ -13,7 +13,7 @@ class Offensive : public BattleStrategy {
 
     public:
 
-        Offensive();
+        Offensive(Map* map);
         void doStrategy(Country* country);
         void warAlgorithm(int off);
         void redistributeTroops();

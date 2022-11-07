@@ -1,7 +1,6 @@
 #include "Diplomacy.h"
 
-Diplomacy::Diplomacy(){
-}
+Diplomacy::Diplomacy(Map* map) : BattleStrategy(map){}
 
 void Diplomacy::warAlgorithm(int dip){
     this->dip =(_dip) dip;

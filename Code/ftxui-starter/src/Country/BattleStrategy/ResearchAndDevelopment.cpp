@@ -1,8 +1,6 @@
 #include "ResearchAndDevelopment.h"
 
-ResearchAndDevelopment::ResearchAndDevelopment(){
-    
-}
+ResearchAndDevelopment::ResearchAndDevelopment(Map* map) : BattleStrategy(map){}
 
 void ResearchAndDevelopment::warAlgorithm(int rad){
     this->rad =(_rad) rad;
