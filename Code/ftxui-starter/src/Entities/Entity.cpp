@@ -83,7 +83,7 @@ void Entity::defend(int damage, Weapon &weapon, bool testing) {
     if (testing) {
 	potentialDamage = potentialDamage*0.5;
     } else {
-	potentialDamage = potentialDamage*float(float(uuid::randomInt(600, 800))/1000);
+	potentialDamage = potentialDamage*float(float(uuid::randomInt(300, 700))/1000);
     }
     potentialDamage = potentialDamage*(std::log(weapon.getDamage())/std::log(20));
     potentialDamage = this->weaknesses(potentialDamage, weapon);

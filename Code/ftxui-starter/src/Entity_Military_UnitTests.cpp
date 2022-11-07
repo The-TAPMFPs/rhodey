@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <vector>
 #include "Country/Alliance.h"
 #include "Country/Country.h"
 #include "Entities/Entity.h"
@@ -12,7 +13,7 @@
 #include "Entities/Vehicle/GroundVehicle/Tank.h"
 #include "Entities/Vehicle/GroundVehicle/Truck.h"
 #include "Entities/Vehicle/AirVehicle/Bomber.h"
-
+#include "Entities/Vehicle/AirVehicle/Fighterjet.h"
 struct EntitityTest : testing::Test {
     Entity * friendly;
     Entity * hostile;
@@ -448,6 +449,64 @@ TEST_F(BattleTest, BigBattle) {
     v = {friendly, myTank,myBomber,theirBomber};
     EXPECT_EQ(this->table->getEntities(aRegion), v);
     EXPECT_NE(v.at(1)->getName(), "Enemy Squad");
+}
+
+TEST_F(BattleTest, VeryBigBattle) {
+    // Weapons ===============================================================
+    std::vector<Weapon *> * tankWeapons =
+	new std::vector<Weapon*>{new TestBomb()};
+    std::vector<Weapon *> * fighterWeapons =
+	new std::vector<Weapon*>{new TestBomb(), new TestBomb()};
+    std::vector<Weapon *> * baddiesbombs =
+	new std::vector<Weapon*>{new TestBomb()};
+    std::vector<Weapon *> * enemyTankWeapons =
+	new std::vector<Weapon * >{new TestBomb()};
+
+    std::vector<Weapon *> * friendlyTroops1Weapons =
+	new std::vector<Weapon *>{new TestWeapon(),new TestWeapon(),
+	    new TestWeapon(),new TestWeapon()};
+    std::vector<Weapon *> * friendlyTroops2Weapons =
+	new std::vector<Weapon *>{new TestWeapon(),new TestWeapon(),
+	    new TestWeapon()};
+    std::vector<Weapon *> * badTroops1Weapons =
+	new std::vector<Weapon *>{new TestWeapon(),new TestWeapon(),
+	    new TestWeapon(),new TestWeapon()};
+    std::vector<Weapon *> * badTroops2Weapons =
+	new std::vector<Weapon *>{new TestWeapon(),new TestWeapon(),
+	    new TestWeapon()};
+
+    // Entities ==============================================================
+    Tank * friendlyTank = new Tank("Armour",10,tankWeapons,country1);
+    Fighterjet * friendlyFighterjet = new Fighterjet("Air Force",3,fighterWeapons,country1);
+    Troop * friendlyTroop1 =  new Troop("5th Battalion",1000,friendlyTroops1Weapons,country1);
+    Troop * friendlyTroop2 =  new Troop("4th Battalion",500,friendlyTroops2Weapons,country1);
+
+    Tank * badTanks = new Tank("Armour",15,enemyTankWeapons,country2);
+    Bomber * badBomber = new Bomber("Air Force",5,baddiesbombs,country2);
+    Troop * badTroop1 =  new Troop("5th Battalion",1200,badTroops1Weapons,country2);
+    Troop * badTroop2 =  new Troop("4th Battalion",500,badTroops2Weapons,country2);
+
+    this->table->addEntity((Entity*)friendlyTank, bRegion);
+    this->table->addEntity((Entity*)friendlyFighterjet, bRegion);
+    this->table->addEntity((Entity*)friendlyTroop1, bRegion);
+    this->table->addEntity((Entity*)friendlyTroop2, bRegion);
+    this->table->addEntity((Entity*)badTroop1, bRegion);
+    this->table->addEntity((Entity*)badTroop2, bRegion);
+    this->table->addEntity((Entity*)badTanks, bRegion);
+    this->table->addEntity((Entity*)badBomber, bRegion);
+    EXPECT_EQ(this->table->getEntities(bRegion).size(), 8);
+
+    // Battle
+    Battle * newBattle = new Battle(bRegion,this->table,true);
+    int count = 0;
+    while (newBattle->takeTurn()) {
+	count++;
+    }
+    EXPECT_EQ(count,36);
+    std::vector<Entity *> all = this->table->getEntities(bRegion);
+    for (auto itr = all.begin(); itr != all.end(); ++itr) {
+	EXPECT_EQ((*itr)->getCountry(), country2);
+    }
 }
 //==============================END BattleTest============================//
 //==========================================================================//

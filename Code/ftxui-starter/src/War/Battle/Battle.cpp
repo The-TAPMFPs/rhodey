@@ -30,6 +30,11 @@ void Battle::checkReinforcements() {
 }
 
 
+/**
+  * @brief Simulates a exchange of fire in a battle.
+  * @return bool if true then it means that the battle is not finnished,
+  * if false then the battle is finnished and someone is victorious.
+*/
 bool Battle::takeTurn() {
     this->checkReinforcements();
     if (!testing) {
@@ -89,10 +94,6 @@ bool Battle::takeTurn() {
 	}
     }
     this->table->cleanUp();
-
-    if (totalCountTeamA <= 0 || totalCountTeamB <= 0) {
-	return false;
-    }
 
     return true;
 }

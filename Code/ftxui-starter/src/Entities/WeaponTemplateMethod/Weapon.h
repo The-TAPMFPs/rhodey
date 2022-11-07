@@ -13,6 +13,7 @@ class Weapon {
 
  public:
   Weapon(int damage, string weaponName);
+  virtual ~Weapon();
   int getDamage();
   WEAPON_TYPE getType();
   string getName();

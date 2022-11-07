@@ -60,12 +60,18 @@ std::vector<Entity *> OccupancyTable::getEntities(Region * region) {
 
 void OccupancyTable::cleanUp() {
     for (auto outer = this->regionToEntties.begin(); outer != this->regionToEntties.end(); ++outer) {
-	for (auto itr = outer->second->entities.begin(); itr != outer->second->entities.end(); ++itr) {
-
-	    if ((*itr)->getAmount() <= 0) {
-		auto todelete = this->entityToRegion.find((*itr)->getUUID());
+	// for each region
+	for (int itr = 0; itr < outer->second->entities.size(); ++itr) {
+	    // check regions entities
+	    if (outer->second->entities[itr]->getAmount() <= 0) {
+		// if a entitiy has less than 0 health.
+		// erase it from our table.
+		auto todelete = this->entityToRegion.find(outer->second->entities[itr]->getUUID());
 		this->entityToRegion.erase(todelete);
-		outer->second->entities.erase(itr);
+		// erase it from our thing here aswell.
+
+		delete outer->second->entities.at(itr);
+		outer->second->entities.erase(outer->second->entities.begin() + itr);
 	    }
 	}
     }

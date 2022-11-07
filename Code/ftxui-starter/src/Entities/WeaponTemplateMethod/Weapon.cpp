@@ -10,6 +10,7 @@ Weapon::Weapon(int damage, std::string name) {
     this->damage = damage;
     this->WeaponName = name;
 }
+Weapon::~Weapon(){};
 //research level 1
 Pistol::Pistol(): Weapon(0,"Pistol"){
     this->damage=5+rand()%15;
@@ -148,7 +149,9 @@ void TankCannon::outputFlair() {
     Logger::log(out.str());
 }
 
-TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){}
+TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){
+    this->WeaponType = SMALL_ARMS;
+}
 void TestWeapon::outputFlair(){
 
 }
