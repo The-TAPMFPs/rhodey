@@ -1,10 +1,13 @@
 #pragma once
 
+#include <vector>
+#include <utility>
+
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
 #include "../MapRegions/Map.h"
-
 #include "../MapRegions/Region.h"
+#include "Observable.h"
 
 // #include "../Factories/TroopFactory.h"
 // #include "../Factories/VehicleFactory.h"
@@ -14,9 +17,14 @@
 class Alliance;
 class BattleStrategy;
 
-class Country {
+class Country : public Observable {
     friend class Alliance;
-  private:
+    friend class Intel;
+#ifdef UNIT_TEST
+    public:
+#else
+    private:
+#endif
     std::string name;
     BattleStrategy* strategy;
 
@@ -31,7 +39,6 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-
 
     //===== CHARACTER MATRIX =====//
 
@@ -51,6 +58,7 @@ class Country {
     // TODO trainingFacilities vector<TroopFactory *>
     // TODO vehicleFactories vector<VehicleFactory *>
     Alliance* allies;
+    std::vector<std::pair<Country*, double>> countriesBeingSpiedOn;
   public:
     double morale;    // The general morale of the country's citizens
     Country(std::string name);
@@ -64,6 +72,7 @@ class Country {
     void decideStrategy();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
+    std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();
     double getMorale();
     double getEconomy();
     int getPopulation();

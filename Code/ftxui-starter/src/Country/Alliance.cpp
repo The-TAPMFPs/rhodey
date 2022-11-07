@@ -17,6 +17,10 @@ void Alliance::print() {
     std::cout << std::endl;
 }
 
+void Alliance::setEnemyAlliance(Alliance* enemyAlliance) {
+    this->enemyAlliance = enemyAlliance;
+}
+
 std::vector<Country*> Alliance::getMembers()
 {
     return this->members;
@@ -43,4 +47,8 @@ Country* Alliance::getMemberModuloSize(int modIndex) {
         return this->members[modIndex%this->members.size()];
     }
     return nullptr;
+}
+
+Country* Alliance::getIthCountry(int index) {
+    return this->members[index];
 }

@@ -256,6 +256,10 @@ TEST_F(EntitityTest, AttackAgainstDifferentTypes) {
     EXPECT_LE(tank->getAmount(), 0);
 }
 
+TEST_F(EntitityTest, CountryKnowledgeTest) {
+    country1->spyOnCountry(country2);
+}
+
 //============================END EntityTest================================//
 //==========================================================================//
 

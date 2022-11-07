@@ -161,7 +161,12 @@ TestBomb::TestBomb() : Weapon(30,"Test Bomb") {
 void TestBomb::outputFlair(){
 
 }
-Mg160::Mg160():(0,"Mg160"){
+Mg160::Mg160():Weapon(0,"Mg160"){
     this->damage=25+rand()%30;
+    this->WeaponType = CANNON;
 }
-TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){}
+void Mg160::outputFlair() {
+    std::stringstream out;
+    out << "The sound of explosions followed by real explosions rocks the battle field" << std::endl;
+    Logger::log(out.str());
+}
