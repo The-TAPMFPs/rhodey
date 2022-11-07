@@ -2,6 +2,16 @@
 #include <exception>
 #include <iostream>
 
+/**
+  * @brief Initializes the Values for a Entity
+  * @param name - Name of the Entity
+  * @param type - The Entity Type
+  * @param HP - The Amount HP that Each Entity has
+  * @param Damage - The Amount of Base Damage that the entity should do.
+  * @param weapon - A vector of different weapons that the entity owns.
+  * @param country - The country that the entity is alligned with.
+  * @return Entity *
+*/
 Entity::Entity(string name, string type, int HP, int Damage,
 	vector<Weapon*> * weapon, Country * country) {
     this->name = name;
@@ -14,6 +24,9 @@ Entity::Entity(string name, string type, int HP, int Damage,
     this->country = country;
 }
 
+/**
+  * @brief destroys the Entity
+*/
 Entity::~Entity() {
     int initial = this->weapons->size();
     for (int count = 0; count < initial; count++) {
@@ -23,6 +36,11 @@ Entity::~Entity() {
     delete this->weapons;
 }
 
+/**
+  * @brief Attacks the entity that is passed to this entity.
+  * @param defender - The Entity that this class is going to attack.
+  * @return void
+*/
 void Entity::attack(Entity & defender) {
     if (this->HP <= 0) {
 	return;
@@ -34,11 +52,23 @@ void Entity::attack(Entity & defender) {
     }
 }
 
+/**
+  * @brief Updates the HP of the entities.
+  * @warning This function should be called after both sides of a battle have finnished all of their attacks.
+  * @return void
+*/
 void Entity::update() {
     this->HP = this->HP - this->DamageDone;
     this->DamageDone = 0;
 }
 
+/**
+  * @brief Defends against a attacker, calculates that damage taken and stores it.
+  * @param damage - The incomming damage from the attacker.
+  * @param weapon - The current weapon that the attacker is using to attack.
+  * @warning This function is reserved for calling withing the attack method. It should not be called anywhere else.
+  * @return void
+*/
 void Entity::defend(int damage, Weapon &weapon) {
     int potentialDamage = damage;
     if (this->getAndSetDefense()) {
@@ -49,6 +79,11 @@ void Entity::defend(int damage, Weapon &weapon) {
     this->DamageDone = potentialDamage;
 }
 
+/**
+  * @brief Stores and returns the current value of the defending flag and then flips it.
+  * @warning This function is reserved for calling withing the attack method. It should not be called anywhere else.
+  * @return Previous value of defense flag.
+*/
 bool Entity::getAndSetDefense() {
     bool currentValue = this->defending;
     if (this->defending == true) {
@@ -59,10 +94,20 @@ bool Entity::getAndSetDefense() {
     return currentValue;
 }
 
+/**
+  * @brief Adds a weapon to a entity.
+  * @param weapon - New Weapon to Add to a Entity.
+  * @return void
+*/
 void Entity::assignWeapon(Weapon &weapon) {
     this->weapons->push_back(&(weapon));
 }
 
+/**
+  * @brief Stores and returns the current value of the defending flag and then flips it.
+  * @param weapon - New Weapon to Add to a Entity.
+  * @return Previous value of defense flag.
+*/
 Entity * Entity::split(int numberOfEntities) {
     if (numberOfEntities*3 > this->HP) {
 	return nullptr;
