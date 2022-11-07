@@ -1,19 +1,42 @@
+/**
+ * \file Battle.h
+ * \brief Header File for the Battle class.
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \version 1.0
+ * \date 6 November 2022
+ */
 #pragma once
 
-#include "../../Country/Country.h"
-#include "../../MapRegions/Region.h"
-#include "../../Military/Forces.h"
 #include <vector>
+#include "../../MapRegions/OccupancyTable.h"
 
 class Battle{
     private:
-        Country* _country;
-        Region* _region;
-        std::vector<Forces*> _attackingForces;
-        std::vector<Forces*> _defendingForces;
+        Region * _region;
+	OccupancyTable * table;
+        std::vector<Entity *> teamA;
+        std::vector<Entity *> teamB;
+	void checkReinforcements();
     public:
-        Battle(std::vector<Forces*> attackingForces, std::vector<Forces*> defendingForces, Region* country, Country* region);
-        void start();
-        void end();
+	/**
+	 * \fn Battle::Battle(Region *, OccupancyTable *)
+	 * \brief Creates a Battle.
+	 *
+	 * \param a Region where the battle will take place.
+	 * \param b OccupancyTable of the Simulation
+	 * \return  Nothing
+	 */
+        Battle(Region* region, OccupancyTable *);
+	/**
+	 * \fn Battle::takeTurn()
+	 * \brief Simulates one turn of battle.
+	 *
+	 * \return  If the battle has concluded, then it will return false. if there are still troops
+	 * fighting then it will return true.
+	 */
+	bool takeTurn();
+	Region * getRegion() {return this->_region;};
+	std::vector<Entity *> getTeamA() {return this->teamA;}
+	std::vector<Entity *> getTeamB() {return this->teamB;}
         ~Battle();
 };

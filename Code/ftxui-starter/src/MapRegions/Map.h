@@ -18,10 +18,17 @@ struct MapData
     unsigned int width, height;
 };
 
+struct HeightMap
+{
+    scalarField2D travelFieldA;
+    scalarField2D travelFieldB;
+};
+
 
 class MapMemento;
 
 class Map {
+    friend class OccupancyTable;
     private:
         std::map<UUID, Region*> regions;
         //The travel distance fields are 2D scalar fields that determine
@@ -47,7 +54,7 @@ class Map {
         float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
-        MapMemento makeMemento();
-        void SetMemento (MapMemento mem);
+        MapMemento* makeMemento();
+        void setMemento (MapMemento* mem);
 
 };

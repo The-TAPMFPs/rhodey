@@ -1,9 +1,11 @@
 #include "Alliance.h"
 
-Alliance::Alliance(std::string name) : name(name) {}
+Alliance::Alliance(std::string name, bool teamA) : name(name), teamA(teamA){}
+
 
 void Alliance::add(Country* country) {
     members.push_back(country);
+    country->allies = this;
 }
 
 void Alliance::print() {

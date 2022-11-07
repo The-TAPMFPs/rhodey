@@ -12,13 +12,17 @@ class Country;
 class Alliance {
     private:
 		std::string name;
+		bool teamA = false;
 		std::vector<Country *> members;
+		static int first;
 
     public:
-		Alliance(std::string name);
+		Alliance(std::string name, bool teamA = false);
 		void add(Country*);
 		void print();
 		std::vector<std::string> getAllianceNames();
 		std::vector<Country *>* getMembers();
 		Country* getMemberModuloSize(int modIndex);
+		bool isTeamA() {return teamA;}
 };
+

@@ -1,7 +1,6 @@
-cmake_minimum_required (VERSION 3.11)
-# set(CMAKE_BUILD_TYPE DEBUG)
-
-add_definitions(-DUNIT_TEST)
+cmake_minimum_required (VERSION 3.14)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_BUILD_TYPE Debug)
 
 # --- Fetch FTXUI --------------------------------------------------------------
 include(FetchContent)
@@ -46,6 +45,12 @@ file(GLOB_RECURSE SRC_FILES
   src/Country/*.cpp
   src/Country/BattleStrategy/*.cpp
 
+  src/Factories/*.cpp
+  src/Military/*.cpp
+  src/UI.cpp
+  src/uuid.cpp
+  src/logger.cpp
+
   src/Entities/*.cpp
   src/Entities/Troop/*.cpp
   src/Entities/Vehicle/*.cpp
@@ -87,6 +92,33 @@ target_link_libraries(WarPhase_UnitTest
   GTest::gtest_main
 )
 
+enable_testing()
+add_executable(
+    Entity_Military_UnitTests
+    src/Entity_Military_UnitTests.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Entity_Military_UnitTests PUBLIC src)
+target_link_libraries(Entity_Military_UnitTests
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
+
+add_executable(
+    Map_UnitTest
+    src/Map_UnitTest.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Map_UnitTest PUBLIC src)
+target_link_libraries(Map_UnitTest
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
+# ------------------------------------------------------------------------------
 
 
 # --- Emscripten build (can ignore) --------------------------------------------
@@ -100,3 +132,5 @@ if (EMSCRIPTEN)
   endforeach(file)
 endif()
 # ------------------------------------------------------------------------------
+include(GoogleTest)
+gtest_discover_tests(Entity_Military_UnitTests Map_UnitTest)
