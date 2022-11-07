@@ -84,3 +84,7 @@ class TestWeapon : public Weapon {
     public:
 	TestWeapon();
 };
+class TestBomb : public Weapon {
+    public:
+	TestBomb();
+};

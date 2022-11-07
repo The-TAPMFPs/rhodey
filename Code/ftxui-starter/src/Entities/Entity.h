@@ -6,6 +6,7 @@
  * \date 6 November 2022
  */
 #pragma once
+#include <cmath>
 #include <string>
 #include <vector>
 #include "./WeaponTemplateMethod/Weapon.h"
@@ -24,7 +25,7 @@ class Entity{
 				//   flips it.
 	virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
 	virtual int weaknesses(int damage,Weapon & weapon)=0;
-	void defend(int damage, Weapon & weapon); /// Do not use this method
+	void defend(int damage, Weapon & weapon, bool testing = false); /// Do not use this method
 
 
 	string name;
@@ -53,7 +54,7 @@ class Entity{
 	virtual int getTerrainHandling()=0;
 
 
-	void attack(Entity & defender);
+	void attack(Entity & defender, bool testing = false);
 	void assignWeapon(Weapon & weapon);
 	void update();
 
@@ -61,7 +62,7 @@ class Entity{
 	  Gets the current amount of entities.
 	  @returns Amount of entities
 	*/
-	int getAmount() {return HP/HPScalling;}
+	int getAmount();
 	/**
 	  @returns Returns the Country with which this entity is alligned.
 	*/

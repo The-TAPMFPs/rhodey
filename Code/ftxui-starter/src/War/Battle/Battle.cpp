@@ -1,6 +1,6 @@
 #include "Battle.h"
 
-Battle::Battle(Region* region, OccupancyTable * table) {
+Battle::Battle(Region* region, OccupancyTable * table, bool testing) {
     this->_region = region;
     this->table = table;
     std::vector<Entity *> allEntitities = table->getEntities(region);
@@ -11,6 +11,7 @@ Battle::Battle(Region* region, OccupancyTable * table) {
 	    teamB.push_back((*itr));
 	}
     }
+    this->testing = testing;
 }
 
 void Battle::checkReinforcements() {
@@ -28,8 +29,10 @@ void Battle::checkReinforcements() {
 
 bool Battle::takeTurn() {
     this->checkReinforcements();
-    std::shuffle(this->teamA.begin(), this->teamA.end(), gen); // gen is the generator from uuid.h
-    std::shuffle(this->teamB.begin(), this->teamB.end(), gen); // gen is the generator from uuid.h
+    if (!testing) {
+	std::shuffle(this->teamA.begin(), this->teamA.end(), gen); // gen is the generator from uuid.h
+	std::shuffle(this->teamB.begin(), this->teamB.end(), gen); // gen is the generator from uuid.h
+    }
     int teamACount = this->teamA.size();
     int teamBCount = this->teamB.size();
     int totalCountTeamA = 0;
@@ -40,8 +43,8 @@ bool Battle::takeTurn() {
     }
     if (teamACount < teamBCount) {
 	for (int count = 0; count < teamBCount; count++) {
-	    this->teamA.at(count%teamACount)->attack(* this->teamB.at(count));
-	    this->teamB.at(count)->attack(* this->teamA.at(count%teamACount));
+	    this->teamA.at(count%teamACount)->attack(* this->teamB.at(count),testing);
+	    this->teamB.at(count)->attack(* this->teamA.at(count%teamACount), testing);
 
 	    this->teamA.at(count%teamACount)->update();
 	    this->teamB.at(count)->update();
@@ -50,8 +53,8 @@ bool Battle::takeTurn() {
 	}
     } else {
 	for (int count = 0; count < teamACount; count++) {
-	    this->teamA.at(count)->attack(* this->teamB.at(count%teamBCount));
-	    this->teamB.at(count%teamBCount)->attack(* this->teamA.at(count));
+	    this->teamA.at(count)->attack(* this->teamB.at(count%teamBCount), testing);
+	    this->teamB.at(count%teamBCount)->attack(* this->teamA.at(count), testing);
 
 	    this->teamA.at(count)->update();
 	    this->teamB.at(count%teamBCount)->update();

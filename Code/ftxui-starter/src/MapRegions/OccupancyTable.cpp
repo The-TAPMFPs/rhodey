@@ -34,7 +34,7 @@ Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
 	if ((*itr)->getName() == entity->getName()) {
 	    try {
 		(*itr)->absorb(entity);
-	    }catch(exception e) {
+	    }catch(WrongType e) {
 		continue;
 	    }
 	    return region;

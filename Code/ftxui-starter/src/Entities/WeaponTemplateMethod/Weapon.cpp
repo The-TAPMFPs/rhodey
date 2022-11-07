@@ -34,7 +34,7 @@ Bazooka::Bazooka() : Weapon(0, "Bazooka") {
     this->WeaponType = ANTI_TANK;
 }
 
-Sniper50::Sniper50(): Weapon(0,"Sniper50"){
+Sniper50::Sniper50(): Weapon(0,"50 cal. Sniper"){
     this->damage=90 + rand( )%100;
     this->WeaponType = HIGH_CAL;
 }
@@ -67,3 +67,6 @@ Missile::Missile():Weapon(0,"Missile"){
 }
 
 TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){}
+TestBomb::TestBomb() : Weapon(30,"Test Bomb") {
+    this->WeaponType = BOMB;
+}

@@ -19,7 +19,11 @@ Entity::Entity(string name, string type, int HP, int Damage,
     this->HP = HP;
     this->Damage = Damage;
     this->defending = false;
-    this->weapons = weapon;
+    if (weapon == NULL) {
+	this->weapons = new std::vector<Weapon *>;
+    } else {
+	this->weapons = weapon;
+    }
     this->uuid = uuid::generateUUID();
     this->country = country;
 }
@@ -41,14 +45,16 @@ Entity::~Entity() {
   * @param defender - The Entity that this class is going to attack.
   * @return void
 */
-void Entity::attack(Entity & defender) {
+void Entity::attack(Entity & defender, bool testing) {
     if (this->HP <= 0) {
 	return;
     }
     int totalDamage = 0;
-    totalDamage = (this->Damage*this->getAmount())/this->weapons->size();
+    if (this->weapons->size() != 0) {
+	totalDamage = (this->Damage*this->getAmount())/this->weapons->size();
+    }
     for (int count = 0; count < this->weapons->size(); count++) {
-	defender.defend(totalDamage, * this->weapons->at(count));
+	defender.defend(totalDamage, * this->weapons->at(count),testing);
     }
 }
 
@@ -69,12 +75,17 @@ void Entity::update() {
   * @warning This function is reserved for calling withing the attack method. It should not be called anywhere else.
   * @return void
 */
-void Entity::defend(int damage, Weapon &weapon) {
+void Entity::defend(int damage, Weapon &weapon, bool testing) {
     int potentialDamage = damage;
     if (this->getAndSetDefense()) {
 	potentialDamage = potentialDamage*0.7;
     }
-    potentialDamage = potentialDamage/this->HPScalling;
+    if (testing) {
+	potentialDamage = potentialDamage*0.5;
+    } else {
+	potentialDamage = potentialDamage*float(float(uuid::randomInt(600, 800))/1000);
+    }
+    potentialDamage = potentialDamage*(std::log(weapon.getDamage())/std::log(20));
     potentialDamage = this->weaknesses(potentialDamage, weapon);
     this->DamageDone = potentialDamage;
 }
@@ -109,12 +120,15 @@ void Entity::assignWeapon(Weapon &weapon) {
   * @return Previous value of defense flag.
 */
 Entity * Entity::split(int numberOfEntities) {
-    if (numberOfEntities*3 > this->HP) {
+    if (numberOfEntities*this->HPScalling > this->HP) {
 	return nullptr;
     }
 
     int numberOfWeaponsToTransfer = int (this->weapons->size() *
-	    double (double (numberOfEntities)*3)/(double(this->HP)));
+	    double (double (numberOfEntities)*HPScalling)/(double(this->HP)));
+    if (numberOfWeaponsToTransfer > this->weapons->size()) {
+	numberOfWeaponsToTransfer = this->weapons->size();
+    }
     vector<Weapon *> * newWeapons = new vector<Weapon*>;
     for (int count = 0; count < numberOfWeaponsToTransfer; count++) {
 	newWeapons->push_back(this->weapons->back());
@@ -122,7 +136,7 @@ Entity * Entity::split(int numberOfEntities) {
     }
 
     Entity * toReturn = this->splitType(this->name, numberOfEntities, newWeapons);
-    this->HP = this->HP - numberOfEntities*3;
+    this->HP = this->HP - numberOfEntities*this->HPScalling;
     return toReturn;
 }
 
@@ -150,4 +164,11 @@ void Entity::absorb(Entity *entity) {
     } else {
 	throw WrongType();
     }
+}
+
+int Entity::getAmount() {
+    if (HP > 0 && HP <= HPScalling) {
+	return 1;
+    }
+    return HP/HPScalling;
 }

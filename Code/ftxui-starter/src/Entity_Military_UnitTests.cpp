@@ -1,6 +1,4 @@
 #include <gtest/gtest.h>
-#include <cmath>
-#include <vector>
 #include "Country/Alliance.h"
 #include "Country/Country.h"
 #include "Entities/Entity.h"
@@ -12,6 +10,7 @@
 #include "War/Battle/Battle.h"
 #include "gtest/gtest.h"
 #include "Entities/Vehicle/GroundVehicle/Tank.h"
+#include "Entities/Vehicle/GroundVehicle/Truck.h"
 #include "Entities/Vehicle/AirVehicle/Bomber.h"
 
 struct EntitityTest : testing::Test {
@@ -186,44 +185,44 @@ TEST_F(EntitityTest, Initialize) {
 }
 
 TEST_F(EntitityTest, attackTest1) {
-    hostile->attack(*friendly);
-    friendly->attack(*hostile);
+    hostile->attack(*friendly,true);
+    friendly->attack(*hostile,true);
     EXPECT_EQ(friendly->getAmount(), 100);
     EXPECT_EQ(friendly->getDefenseStatus(), false);
     EXPECT_EQ(hostile->getAmount(), 50);
     friendly->update();
     hostile->update();
-    EXPECT_EQ(friendly->getAmount(), 87);
-    EXPECT_EQ(hostile->getAmount(), 20);
+    EXPECT_EQ(friendly->getAmount(), 93);
+    EXPECT_EQ(hostile->getAmount(), 37);
 
 
     this->reset(100,100);
-    hostile->attack(*friendly);
-    friendly->attack(*hostile);
+    hostile->attack(*friendly,true);
+    friendly->attack(*hostile, true);
     friendly->update();
     hostile->update();
-    EXPECT_EQ(friendly->getAmount(), 70);
-    EXPECT_EQ(hostile->getAmount(), 70);
+    EXPECT_EQ(friendly->getAmount(), 87);
+    EXPECT_EQ(hostile->getAmount(), 87);
 
 
 
     this->reset(10000,9000);
-    hostile->attack(*friendly);
-    friendly->attack(*hostile);
+    hostile->attack(*friendly,true);
+    friendly->attack(*hostile,true);
     friendly->update();
     hostile->update();
-    EXPECT_EQ(friendly->getAmount(), 5277);
-    EXPECT_EQ(hostile->getAmount(), 3698);
+    EXPECT_EQ(friendly->getAmount(), 8789);
+    EXPECT_EQ(hostile->getAmount(), 7655);
     friendly->update();
     hostile->update();
-    EXPECT_EQ(friendly->getAmount(), 5277);
-    EXPECT_EQ(hostile->getAmount(), 3698);
-    hostile->attack(*friendly);
-    friendly->attack(*hostile);
+    EXPECT_EQ(friendly->getAmount(), 8789);
+    EXPECT_EQ(hostile->getAmount(), 7655);
+    hostile->attack(*friendly,true);
+    friendly->attack(*hostile,true);
     friendly->update();
     hostile->update();
-    EXPECT_EQ(friendly->getAmount(), 3503);
-    EXPECT_EQ(hostile->getAmount(), 1073);
+    EXPECT_EQ(friendly->getAmount(), 7760);
+    EXPECT_EQ(hostile->getAmount(), 6473);
 
     this->reset(100,50);
 }
@@ -236,6 +235,24 @@ TEST_F(EntitityTest, SplitAndMerge) {
     EXPECT_EQ(splitup->getAmount(), 0);
     EXPECT_EQ(friendly->getAmount(), 100);
     delete splitup;
+}
+
+TEST_F(EntitityTest, AttackAgainstDifferentTypes) {
+    std::vector<Weapon * > * v = new std::vector<Weapon *>{new TestWeapon()};
+    std::vector<Weapon * > * v2 = new std::vector<Weapon *>{new AK47()};
+    Entity * tank = (Entity *) new Tank("Armour",2,v,country1);
+    Entity * enemyTank = (Entity *) new Tank("Armour", 1, v2, country2);
+    for (int count = 0; count < 10000; count++) {
+	enemyTank->attack(*tank,true);
+	tank->update();
+    }
+    EXPECT_EQ(tank->getAmount(), 2);
+    enemyTank->assignWeapon(*(new Cannon()));
+    for (int count = 0; count < 10000; count++) {
+	enemyTank->attack(*tank,true);
+	tank->update();
+    }
+    EXPECT_LE(tank->getAmount(), 0);
 }
 
 //============================END EntityTest================================//
@@ -334,6 +351,38 @@ TEST_F(OccupancyTableTest, MulitpleMoveOfSameType) {
     entities = this->table->getEntities(bRegion);
     EXPECT_EQ(entities.at(0)->getAmount(), 6);
     EXPECT_EQ(entities.at(1)->getAmount(), 3);
+    EXPECT_EQ(entities.size(), 2);
+}
+
+TEST_F(OccupancyTableTest, MulitpleMoveOfDifferentTypes) {
+    Entity * carConvoy = (Entity *) new Truck("Convoy", 6, NULL, country1);
+    this->table->addEntity(carConvoy, aRegion);
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    std::vector<Entity *> v = this->table->getEntities(bRegion);
+    EXPECT_EQ(v.size(), 2);
+    EXPECT_EQ(v.at(0)->getAmount(),2);
+    EXPECT_EQ(v.at(1)->getAmount(),37);
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    EXPECT_EQ(v.at(0)->getAmount(),4);
+    EXPECT_EQ(v.at(1)->getAmount(),77);
+
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    EXPECT_EQ(v.at(0)->getAmount(),4);
+    EXPECT_NE(v.at(0),carConvoy);
+    EXPECT_EQ(v.at(1)->getAmount(),87);
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+
+    EXPECT_EQ(v.at(0)->getAmount(),5);
+    EXPECT_NE(v.at(0),carConvoy);
+    EXPECT_EQ(v.at(1)->getAmount(),95);
+
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    this->table->moveEntity({carConvoy,friendly}, bRegion);
+    v = this->table->getEntities(bRegion);
+    EXPECT_EQ(v.at(0),carConvoy);
+    EXPECT_EQ(v.at(0)->getAmount(),6);
+    EXPECT_EQ(v.at(1)->getAmount(),100);
 }
 
 //============================END OccupancyTableTest========================//
@@ -351,42 +400,54 @@ TEST_F(BattleTest, InitializeToRegion) {
 }
 
 TEST_F(BattleTest, RunBattleBetweenJustTwo) {
-    this->testBattle = new Battle(this->aRegion, this->table);
+    this->testBattle = new Battle(this->aRegion, this->table,true);
     EXPECT_EQ(friendly->getAmount(), 100);
     EXPECT_EQ(hostile->getAmount(), 50);
     this->testBattle->takeTurn();
-    EXPECT_EQ(friendly->getAmount(), 87);
-    EXPECT_EQ(hostile->getAmount(), 20);
+    EXPECT_EQ(friendly->getAmount(), 93);
+    EXPECT_EQ(hostile->getAmount(), 37);
 }
 
 TEST_F(BattleTest, RunBattle) {
-    this->testBattle = new Battle(this->aRegion, this->table);
+    this->testBattle = new Battle(this->aRegion, this->table,true);
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new TestWeapon(), new TestWeapon()};
     Entity * friendly2 = new Troop("Other One", 50, tankWeapons, country1);
     this->table->addEntity(friendly2, aRegion);
     this->testBattle->takeTurn();
 
     // have to check due to randomness
-    if (friendly->getAmount() == 92) {
-	EXPECT_EQ(friendly2->getAmount(), 37);
+    if (friendly->getAmount() == 94) {
+	EXPECT_EQ(friendly2->getAmount(), 43);
     } else {
-	EXPECT_EQ(friendly2->getAmount(), 46);
-	EXPECT_EQ(friendly->getAmount(), 87);
+	EXPECT_EQ(friendly2->getAmount(), 45);
+	EXPECT_EQ(friendly->getAmount(), 93);
     }
-    EXPECT_EQ(hostile->getAmount(), 8);
+    EXPECT_EQ(hostile->getAmount(), 30);
 }
 
 TEST_F(BattleTest, BigBattle) {
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
-    std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new Cannon()};
-    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new Cannon()};
-    this->table->addEntity((Entity *) new Tank("My Squad", 1, tankWeapons, this->country1), aRegion);
-    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, bomberfriends, this->country1), aRegion);
-    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, this->country2), aRegion);
-    std::vector<Entity *> v = {friendly, hostile};
+    std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new TestBomb()};
+    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
+    Entity * myTank = (Entity *) new Tank("My Squad", 1, tankWeapons, this->country1);
+    Entity * myBomber = (Entity *) new Bomber("7th AirForce Division", 2, bomberfriends, this->country1);
+    Entity * theirBomber =(Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, this->country2);
+    this->table->addEntity(myTank,aRegion);
+    this->table->addEntity(myBomber,aRegion);
+    this->table->addEntity(theirBomber,aRegion);
+    std::vector<Entity *> v = {friendly, hostile, myTank,myBomber,theirBomber};
     EXPECT_EQ(this->table->getEntities(aRegion), v);
-    this->testBattle = new Battle(this->aRegion, this->table);
+    this->testBattle = new Battle(this->aRegion, this->table,true);
     this->testBattle->takeTurn();
+    EXPECT_EQ(this->table->getEntities(aRegion), v);
+    v = this->table->getEntities(aRegion);
+    EXPECT_EQ(v.at(1)->getAmount(), 21);
+    EXPECT_EQ(v.at(1)->getName(), "Enemy Squad");
+    this->testBattle->takeTurn();
+    this->testBattle->takeTurn();
+    v = {friendly, myTank,myBomber,theirBomber};
+    EXPECT_EQ(this->table->getEntities(aRegion), v);
+    EXPECT_NE(v.at(1)->getName(), "Enemy Squad");
 }
 //==============================END BattleTest============================//
 //==========================================================================//
