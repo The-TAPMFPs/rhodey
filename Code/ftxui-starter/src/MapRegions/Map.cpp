@@ -278,6 +278,11 @@ float Map::getEnemyRatioInRegion(Region* region, bool weAreTeamA)
     return ((float)numEnemies)/totalEntities;
 }
 
+OccupancyTable* Map::getOccupancyTable()
+{
+    return this->occupancyTable;
+}
+
 //Get all regions owned by the specified alliance
 std::vector<Region*> Map::getRegionsOwnedBy(bool teamA)
 {
