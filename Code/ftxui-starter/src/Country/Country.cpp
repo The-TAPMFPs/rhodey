@@ -33,6 +33,7 @@ Country::Country(std::string name) : name(name) {
 
 Country::~Country(){
     delete this->strategy;
+    personalityMatrix.resize(0,0);
 }
 
 std::string Country::getName() {
@@ -122,6 +123,10 @@ void Country::decideStrategy() {
       maxIndex = i;
     }
   }
+
+  valMatrix.resize(0,0);
+  pm.resize(0,0);
+  result.resize(0,0);
   
   if(this->strategy != NULL) {
     delete this->strategy;
