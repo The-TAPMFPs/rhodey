@@ -3,8 +3,13 @@
 
 #include <map>
 #include <vector>
+#include <cmath>
+#include <set>
 #include "Region.h"
 #include "MapMemento.h"
+#include "Country/Country.h"
+// #include "../War/War.h"
+// #include "OccupancyTable.h"
 
 
 typedef float** scalarField2D;
@@ -25,25 +30,35 @@ struct HeightMap
 };
 
 
+// class OccupancyTable;
 class MapMemento;
+// class War;
 
 class Map {
     friend class OccupancyTable;
     private:
         std::map<UUID, Region*> regions;
+        // War* war;
         //The travel distance fields are 2D scalar fields that determine
         //The difficulty of crossing any particular square on the map
         scalarField2D travelDifficultyField_allianceA;
         scalarField2D travelDifficultyField_allianceB;
 
+        // OccupancyTable* occupancyTable;
+
         static float distToRegion(int x, int y, Region* r);
+        // void randomInitializeRegions(int numRegions);
+        void randomInitializeRegions(int numRegions, std::vector<Country*> allCountries);
+        void recalculateTravelFields();
 
     public:
         static const unsigned int numRegions = 10;
         static const unsigned int mapW = 100, mapH = 100;
 
 
-        Map();
+        // Map(War* war);
+        Map(std::vector<Country*> allCountries);
+        ~Map();
         std::vector<Region*> getAllAvailableRegionsForAttack(Country *);
 
         scalarField2D getTravelFieldA();

@@ -65,7 +65,7 @@ War::War(WarPhase* warPhase) : warPhase(warPhase) {
   teamB->add(new Country("country G"));
   teamB->add(new Country("country H"));
 
-  map = new Map();
+  map = new Map(getAllCountries());
 }
 
 /**
@@ -79,10 +79,22 @@ War::~War() {
   delete teamA, teamB;
 }
 
+
+//Returns a homogenous vector of all countries from both alliances
+std::vector<Country*> War::getAllCountries()
+{
+  std::vector<Country*> membersA = teamA->getMembers(), membersB = teamB->getMembers();
+  std::vector<Country*> res;
+  res.insert(res.end(), membersA.begin(), membersA.end());
+  res.insert(res.end(), membersB.begin(), membersB.end());
+
+  return res;
+}
 /**
  * \fn void War::step ()
  * \brief The main simulation loop, Simulates a "turn" of the war
  */
+//The main simulation loop
 void War::step()
 {
   //Get alliance/country whose turn it is now
@@ -194,4 +206,16 @@ MapData War::getCurrentMapData() {
 Region* War::getRegionAt(int x, int y)
 {
   return this->map->getRegionAt(x, y);
+}
+
+//Returns null if the Country is not bound to an alliance
+Alliance* War::getSideCountryIsOn(Country* country)
+{
+  return teamA->containsCountry(country) ? teamA :
+        (teamB->containsCountry(country) ? teamB : nullptr);
+}
+
+float War::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
+{
+  return this->map->getTravelDifficulty(from, to, teamA);
 }

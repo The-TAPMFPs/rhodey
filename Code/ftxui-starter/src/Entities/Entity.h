@@ -4,7 +4,9 @@
 #include "./WeaponTemplateMethod/Weapon.h"
 #include "../uuid.h"
 using namespace std;
+
 class Country;
+
 class Entity{
 
     protected:

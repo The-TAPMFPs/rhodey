@@ -1,24 +1,37 @@
 #include "Map.h"
-#include <cmath>
 
-Map::Map()
+Map::Map(std::vector<Country*> allCountries)
 {
-    //Randomly initialize regions
-    this->regions = std::map<UUID, Region*>();
+    // this->occupancyTable = new OccupancyTable(this);
 
-        Region* r = new Region(0,0);
-        //TODO: Check position is not already taken
-        regions.emplace(r->getUUID(), r);
+    // Region* r = new Region(0,0);
+    // //TODO: Check position is not already taken
+    // regions.emplace(r->getUUID(), r);
 
-        r = new Region(49,24);
-        regions.emplace(r->getUUID(), r);
+    // r = new Region(49,24);
+    // regions.emplace(r->getUUID(), r);
+
     //Initialize travel difficulty field to 0's
+    this->randomInitializeRegions(this->numRegions, allCountries);
+
+    //Create travel difficulty fields
     this->travelDifficultyField_allianceA = new float*[mapW];
     this->travelDifficultyField_allianceB = new float*[mapW];
     for(int x = 0; x < mapW; x++)
     {
         this->travelDifficultyField_allianceA[x] = new float[mapH];
         this->travelDifficultyField_allianceB[x] = new float[mapH];
+    }
+
+    this->recalculateTravelFields();
+}
+
+//Call this whenever the outcome of a battle changes a Region's occupancy
+void Map::recalculateTravelFields()
+{
+    //Reset all points to 0
+    for(int x = 0; x < mapW; x++)
+    {
         for(int y = 0; y < mapH; y++)
         {
             this->travelDifficultyField_allianceA[x][y] = 0.0f;
@@ -27,15 +40,13 @@ Map::Map()
     }
 
     //Fill field based on region proximity
-    for(auto r = regions.begin(); r != regions.end(); r++)
+    for(auto r = this->regions.begin(); r != this->regions.end(); r++)
     {
         for(int x = 0; x < mapW; x++)
         {
             for(int y = 0; y < mapH; y++)
             {
-                //TODO: Determine whether the country is part of team A or B
-                // if(r->second->getPossessor().allies)
-                if(true)
+                if(r->second->getPossessor()->getAlliance()->isTeamA())
                 {
                     this->travelDifficultyField_allianceA[x][y] += 1.0f/distToRegion(x, y, r->second);
                 }
@@ -45,6 +56,34 @@ Map::Map()
                 }
             }
         }
+    }
+}
+
+void Map::randomInitializeRegions(int numRegions, std::vector<Country*> allCountries)
+{
+    if(allCountries.size() == 0) { return; } //No countries, therefore cannot make regions
+    for(auto r = this->regions.begin(); r != this->regions.end(); r++) { delete r->second; } //Delete any old regions
+
+    //Randomly initialize regions
+    this->regions = std::map<UUID, Region*>();
+
+    std::set<MapCoords> coords;
+
+    //Insert regions in such a way that no two regions have the same coordinates
+    for(int i = 0; i < numRegions; i++)
+    {
+        MapCoords toTryInsert = { uuid::randomInt(0, 49), uuid::randomInt(0, 24) };
+
+        while(coords.count(toTryInsert)) //While there is a collision
+        {
+            toTryInsert = {uuid::randomInt(0, 49), uuid::randomInt(0, 24)};
+        }
+        coords.insert(toTryInsert);
+
+        Country* possessor = allCountries[uuid::randomInt(0, allCountries.size()-1)];
+
+        Region* r = new Region(toTryInsert.x, toTryInsert.y, possessor);
+        regions.emplace(r->getUUID(), r);
     }
 }
 
@@ -132,6 +171,10 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
     float sum = 0.0f;
 
     int distance = dist(from, to);
+    if(distance == 0)
+    {
+        return 0;
+    }
 
     for(int t = 0; t <= distance; t++)
     {
@@ -157,4 +200,16 @@ void Map::setMemento(MapMemento* mem){
     this->travelDifficultyField_allianceA = mem->getState()->travelFieldA;
     this->travelDifficultyField_allianceB = mem->getState()->travelFieldB;
     delete mem; // this is fine becuase it is a stack and the recieved memento should not be accessed again
+}
+
+Map::~Map()
+{
+    //Deallocate travel fields
+    for(int x = 0; x < mapW; x++)
+    {
+        delete [] this->travelDifficultyField_allianceA[x];
+        delete [] this->travelDifficultyField_allianceB[x];
+    }
+    delete [] this->travelDifficultyField_allianceA;
+    delete [] this->travelDifficultyField_allianceA;
 }

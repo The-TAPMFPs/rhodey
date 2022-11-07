@@ -18,8 +18,12 @@ OccupancyTable::OccupancyTable(Map * InitialMap ) {
 OccupancyTable::~OccupancyTable() {
     std::map<UUID, RegionToEntities *>::iterator i;
     for (i = this->regionToEntties.begin(); i!=this->regionToEntties.end(); ++i) {
-	delete i->second;
+	for (auto itr = i->second->entities.begin(); itr != i->second->entities.end(); ++itr) {
+	    delete *itr;
+	}
+	i->second->entities.clear();
     }
+
 }
 Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
     std::vector<Entity *> current = this->getEntities(region);

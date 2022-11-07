@@ -29,7 +29,6 @@ class War {
         static int warStateThumbnailFrameCount;
         static ftxui::Color warStateThumbnailColor;
         War();
-        War(WarPhase* warPhase);
         ~War();
 
         void step(); //The main game loop
@@ -38,9 +37,12 @@ class War {
         void transitionTo(WarPhase* warPhase);
         void addCountryToSideA(Country* country);
         void addCountryToSideB(Country* country);
+        Alliance* getSideCountryIsOn(Country* country);
+        std::vector<Country*> getAllCountries();
         void changeState();
         void start();
         bool isOver();
         MapData getCurrentMapData();
         Region* getRegionAt(int x, int y);
+        float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
 };
