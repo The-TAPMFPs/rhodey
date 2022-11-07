@@ -16,15 +16,20 @@ class Alliance {
 		bool teamA = false;
 		std::vector<Country *> members;
 		static int first;
+		Alliance* enemyAlliance;
 
     public:
 		Alliance(std::string name, bool teamA);
 		void add(Country*);
 		void print();
+		void setEnemyAlliance(Alliance* enemyAlliance);
 		std::vector<Country*> getMembers();
 		bool isTeamA() {return teamA;}
 		bool containsCountry(Country* country);
 		std::vector<std::string> getAllianceNames();
 		Country* getMemberModuloSize(int modIndex);
+		Country* getIthCountry(int index);
+		Alliance* getEnemyAlliance() {return enemyAlliance;}
+		int numCountries() {return members.size();}
 };
 

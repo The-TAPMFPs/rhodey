@@ -160,6 +160,8 @@ void Country::decideStrategy() {
 void Country::takeTurn() {
   decideStrategy();
   this->strategy->doStrategy(this);
+
+  alertSpyCountries();
 }
 
 std::vector<std::string> Country::getFormattedStats() {
@@ -172,6 +174,10 @@ std::vector<std::string> Country::getFormattedStats() {
       "Aggressiveness: " + std::to_string(aggressiveness),
       "Goal Rating: " + std::to_string(goalRating),
       "Number of Spies: " + std::to_string(numSpies)};
+}
+
+std::vector<std::pair<Country*, double>>* Country::getCountriesBeingSpiedOn() {
+  return &countriesBeingSpiedOn;
 }
 
 void Country::setPopulation(int population) {
@@ -261,6 +267,4 @@ int Country::getNumVehicles() {
 int Country::getNumEnemyRegions() {
   return this->numEnemyRegions;
 }
-
-
 
