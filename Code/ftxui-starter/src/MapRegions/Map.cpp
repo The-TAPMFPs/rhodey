@@ -147,16 +147,6 @@ MapData Map::getCurrentMapData()
 
 }
 
-//Returns the linearly interpolated point between two mapCoords
-//t in [0, 1] inclusive
-MapCoords lerp(MapCoords a, MapCoords b, float t)
-{
-    int dx = (a.x - b.x) * t;
-    int dy = (a.y - b.y) * t;
-
-    return {b.x + dx, b.y + dy};
-}
-
 int dist(MapCoords a, MapCoords b)
 {
     int dx = a.x-b.x;
@@ -165,27 +155,91 @@ int dist(MapCoords a, MapCoords b)
     return sqrt(dx*dx + dy*dy);
 }
 
+float sumLineLow(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int yi = 1;
+
+    if (dy < 0)
+    {
+        yi = -1;
+        dy = -dy;
+    }
+    int D = (2 * dy) - dx;
+    int y = y0;
+
+    for(int x = x0; x <= x1; x++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            y = y + yi;
+            D = D + (2 * (dy - dx));
+        }
+        else
+        {
+            D = D + 2*dy;
+        }
+    }
+    return res;
+}
+
+float sumLineHigh(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int xi = 1;
+
+    if (dx < 0)
+    {
+        xi = -1;
+        dx = -dx;
+    }
+    int D = (2 * dx) - dy;
+    int x = x0;
+
+    for(int y = y0; y <= y1; y++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            x = x + xi;
+            D = D + (2 * (dx - dy));
+        }
+        else
+        {
+            D = D + 2*dx;
+        }
+    }
+    return res;
+}
+
+float sumBrensenhamLine(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float sum = 0;
+
+    if (std::abs(y1 - y0) < std::abs(x1 - x0))
+    {
+        if (x0 > x1) { sum += sumLineLow(x1, y1, x0, y0, field); }
+        else { sum += sumLineLow(x0, y0, x1, y1, field); }
+    }
+    else
+    {
+        if (y0 > y1) { sum += sumLineHigh(x1, y1, x0, y0, field); }
+        else { sum += sumLineHigh(x0, y0, x1, y1, field); }
+    }
+    return sum;
+}
+
 //Get a measure of the difficulty for a country from teamA/teamB to travel linearly between two points on the map
 float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
 {
-    float sum = 0.0f;
-
-    int distance = dist(from, to);
-    if(distance == 0)
-    {
-        return 0;
-    }
-
-    for(int t = 0; t <= distance; t++)
-    {
-        MapCoords samplePt = lerp(from, to, ((float)t)/distance);
-
-        sum += teamA ?
-                    this->travelDifficultyField_allianceA[samplePt.x][samplePt.y]:
-                    this->travelDifficultyField_allianceB[samplePt.x][samplePt.y];
-    }
-
-    return sum;
+    scalarField2D field = teamA ? travelDifficultyField_allianceA : travelDifficultyField_allianceB;
+    if(from.x == to.x && from.y == to.y) { return 0; }
+    return sumBrensenhamLine(from.x, from.y, to.x, to.y, field) + dist(from, to)*0.1;
 }
 
 MapMemento* Map::makeMemento()
