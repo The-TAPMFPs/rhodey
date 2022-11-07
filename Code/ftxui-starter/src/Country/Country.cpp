@@ -28,11 +28,12 @@ Country::Country(std::string name) : name(name) {
     strats[1] = new Defensive();
     strats[2] = new ResearchAndDevelopment();
     strats[3] = new Prepare();
-    strats[4] = new Diplomacy();
+    strats[4] = new Intel();
+    strats[5] = new Diplomacy();
 }
 
 Country::~Country(){
-    for (int count = 0; count < 5; count++) {
+    for (int count = 0; count < 6; count++) {
 	    delete strats[count];
     }
 }
@@ -50,17 +51,12 @@ void Country::generatePersonalityMatrix() {
   double* intelVals = generateRandomNums(1);
   double* diploVals = generateRandomNums(4);
 
-  pm << offensiveVals[0], 0, offensiveVals[1], 0, 0, 0, 0, 0, 0,
-      offensiveVals[2], 0, 0, offensiveVals[3], 0, 0, 0, 0, 0,  // offensive
-      defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2],
-      0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
-      0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0,
-      0, developVals[2],  // development
-      0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0,  // preparation
+  pm << offensiveVals[0], 0, offensiveVals[1], 0, 0, 0, 0, 0, 0, offensiveVals[2], 0, 0, offensiveVals[3], 0, 0, 0, 0, 0,  // offensive
+      defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2], 0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
+      0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, developVals[2],  // development
+      0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // preparation
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
-      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2],
-      diploVals[3], 0, 0, 0;  // diplomacy
+      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], diploVals[3], 0, 0, 0;  // diplomacy
 
   delete[] offensiveVals;
   delete[] defensiveVals;

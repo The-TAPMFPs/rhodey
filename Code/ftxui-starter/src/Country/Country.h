@@ -8,6 +8,7 @@
 #include "BattleStrategy/ResearchAndDevelopment.h"
 #include "BattleStrategy/Defensive.h"
 #include "BattleStrategy/Prepare.h"
+#include "BattleStrategy/Intel.h"
 #include "BattleStrategy/Diplomacy.h"
 
 
@@ -32,7 +33,7 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-    BattleStrategy* strats[5];
+    BattleStrategy* strats[6];
 
 
     //===== CHARACTER MATRIX =====//
