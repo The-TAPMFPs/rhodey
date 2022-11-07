@@ -1,18 +1,16 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "../Country.h"
 
-enum _rad {drRD, deRD, rRD};
+// class BattleStrategy;
+
 class ResearchAndDevelopment : public BattleStrategy {
     private:
-        _rad rad;
         Country* friendlyCountry;
     public:
 
-        ResearchAndDevelopment();
-        void warAlgorithm(int rad);
+        ResearchAndDevelopment(Map* map);
+        void doStrategy(Country* country);
         void developResources();
         void developEconomy();
         void research();
-        void setFriendlyCountry(Country* friendly);
 };

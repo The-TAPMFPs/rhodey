@@ -1,4 +1,6 @@
 #include "BattleStrategy.h"
 
-BattleStrategy::BattleStrategy() {}
+BattleStrategy::BattleStrategy(Map* map) {
+    this->map = map;
+}
 BattleStrategy::~BattleStrategy() {}

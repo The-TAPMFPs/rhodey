@@ -10,6 +10,7 @@
 #include "../Country/Country.h"
 // #include "../War/War.h"
 // #include "OccupancyTable.h"
+#include "OccupancyTable.h"
 
 
 class Country;
@@ -34,6 +35,7 @@ struct HeightMap
 // class OccupancyTable;
 class MapMemento;
 // class War;
+class OccupancyTable;
 
 class Map {
     friend class OccupancyTable;
@@ -44,6 +46,7 @@ class Map {
         //The difficulty of crossing any particular square on the map
         scalarField2D travelDifficultyField_allianceA;
         scalarField2D travelDifficultyField_allianceB;
+        OccupancyTable* occupancyTable;
 
         // OccupancyTable* occupancyTable;
 
@@ -67,7 +70,13 @@ class Map {
         std::vector<MapCoords> getRegionLocations();
         MapData getCurrentMapData();
         Region* getRegionAt(int x, int y);
-        float getTravelDifficulty(MapCoords from, MapCoords to, bool teamA);
+        float getTravelDifficulty(MapCoords from, MapCoords to, bool weAreTeamA);
+
+        OccupancyTable* getOccupancyTable();
+        float getEnemyRatioInRegion(Region* region, bool teamA);
+        std::vector<Region*> getRegionsOwnedBy(Country* country);
+        std::vector<Region*> getRegionsOwnedBy(bool teamA);
+        Region* getRegionWithHighestEnemyRatio(bool teamA);
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento* makeMemento();

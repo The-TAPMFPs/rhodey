@@ -11,6 +11,8 @@ War::War() : frameCount(0), warPhase(new Dispute()) {
   this->warPhase = new Conflict();
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
+  teamA->setEnemyAlliance(teamB);
+  teamB->setEnemyAlliance(teamA);
 
   // TODO: Replace with properly initialized data
   teamA->add(new Country("country A"));
@@ -94,15 +96,6 @@ bool War::isOver() {
   return warPhase == NULL;
 }
 
-MapData War::getCurrentMapData() {
-  return this->map->getCurrentMapData();
-}
-
-Region* War::getRegionAt(int x, int y)
-{
-  return this->map->getRegionAt(x, y);
-}
-
 //Returns null if the Country is not bound to an alliance
 Alliance* War::getSideCountryIsOn(Country* country)
 {
@@ -110,7 +103,7 @@ Alliance* War::getSideCountryIsOn(Country* country)
         (teamB->containsCountry(country) ? teamB : nullptr);
 }
 
-float War::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
+Map* War::getMap()
 {
-  return this->map->getTravelDifficulty(from, to, teamA);
+  return this->map;
 }

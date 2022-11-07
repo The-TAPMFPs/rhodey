@@ -1,22 +1,32 @@
 #pragma once
 
+#include <vector>
+#include <utility>
+
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
-#include "../MapRegions/Map.h"
-#include "BattleStrategy/BattleStrategy.h"
-#include "BattleStrategy/Offensive.h"
-#include "BattleStrategy/ResearchAndDevelopment.h"
-#include "BattleStrategy/Defensive.h"
-#include "BattleStrategy/Prepare.h"
-#include "BattleStrategy/Diplomacy.h"
+#include "Observable.h"
 
-
+// #include "../Factories/TroopFactory.h"
+// #include "../Factories/VehicleFactory.h"
 
 //Predefine classes to resolve circular dependencies:
+
 class Alliance;
-class Country {
+class BattleStrategy;
+class Map;
+class Region;
+
+class Country : public Observable {
     friend class Alliance;
-  private:
+    friend class Intel;
+#ifdef UNIT_TEST
+    public:
+#else
+    private:
+#endif
+
+    Map* map;
     std::string name;
     BattleStrategy* strategy;
 
@@ -31,8 +41,6 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-    BattleStrategy* strats[5];
-
 
     //===== CHARACTER MATRIX =====//
 
@@ -52,9 +60,11 @@ class Country {
     // TODO trainingFacilities vector<TroopFactory *>
     // TODO vehicleFactories vector<VehicleFactory *>
     Alliance* allies;
+    std::vector<std::pair<Country*, double>> countriesBeingSpiedOn;
   public:
     double morale;    // The general morale of the country's citizens
     Country(std::string name);
+    Country(std::string name, Map* map);
     ~Country();
     std::string getName();
     void takeTurn();
@@ -62,9 +72,10 @@ class Country {
     Eigen::MatrixXd generateValueMatrix();
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
-    int nextStrategy();
+    void decideStrategy();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
+    std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();
     double getMorale();
     double getEconomy();
     int getPopulation();

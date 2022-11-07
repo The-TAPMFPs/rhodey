@@ -2,16 +2,17 @@
 
 Map::Map(std::vector<Country*> allCountries, bool testing)
 {
-    // this->occupancyTable = new OccupancyTable(this);
+    //Randomly initialize regions
+    this->regions = std::map<UUID, Region*>();
 
 
     if (testing) {
-	Region* r = new Region(0,0,allCountries[0]);
+	Region* r = new Region("Region A", 0,0,allCountries[0]);
     // //TODO: Check position is not already taken
 	regions.emplace(r->getUUID(), r);
-	r = new Region(49,24,allCountries[0]);
+	r = new Region("Region B",49,24,allCountries[0]);
 	regions.emplace(r->getUUID(), r);
-	r = new Region(30,10,allCountries[1]);
+	r = new Region("Region C", 30,10,allCountries[1]);
 	regions.emplace(r->getUUID(), r);
     } else {
 	//Initialize travel difficulty field to 0's
@@ -28,6 +29,7 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
     }
 
     this->recalculateTravelFields();
+    this->occupancyTable = new OccupancyTable(this);
 }
 
 //Call this whenever the outcome of a battle changes a Region's occupancy
@@ -50,14 +52,17 @@ void Map::recalculateTravelFields()
         {
             for(int y = 0; y < mapH; y++)
             {
-                if(r->second->getPossessor()->getAlliance()->isTeamA())
-                {
-                    this->travelDifficultyField_allianceA[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
-                else
-                {
-                    this->travelDifficultyField_allianceB[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
+                float regionDist = distToRegion(x, y, r->second);
+                if(regionDist == 0) { regionDist = 1; }
+
+                    if(r->second->getPossessor()->getAlliance()->isTeamA())
+                    {
+                        this->travelDifficultyField_allianceA[x][y] += 1.0f/regionDist;
+                    }
+                    else
+                    {
+                        this->travelDifficultyField_allianceB[x][y] += 1.0f/regionDist;
+                    }
             }
         }
     }
@@ -151,16 +156,6 @@ MapData Map::getCurrentMapData()
 
 }
 
-//Returns the linearly interpolated point between two mapCoords
-//t in [0, 1] inclusive
-MapCoords lerp(MapCoords a, MapCoords b, float t)
-{
-    int dx = (a.x - b.x) * t;
-    int dy = (a.y - b.y) * t;
-
-    return {b.x + dx, b.y + dy};
-}
-
 int dist(MapCoords a, MapCoords b)
 {
     int dx = a.x-b.x;
@@ -169,27 +164,172 @@ int dist(MapCoords a, MapCoords b)
     return sqrt(dx*dx + dy*dy);
 }
 
+float sumLineLow(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int yi = 1;
+
+    if (dy < 0)
+    {
+        yi = -1;
+        dy = -dy;
+    }
+    int D = (2 * dy) - dx;
+    int y = y0;
+
+    for(int x = x0; x <= x1; x++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            y = y + yi;
+            D = D + (2 * (dy - dx));
+        }
+        else
+        {
+            D = D + 2*dy;
+        }
+    }
+    return res;
+}
+
+float sumLineHigh(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int xi = 1;
+
+    if (dx < 0)
+    {
+        xi = -1;
+        dx = -dx;
+    }
+    int D = (2 * dx) - dy;
+    int x = x0;
+
+    for(int y = y0; y <= y1; y++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            x = x + xi;
+            D = D + (2 * (dx - dy));
+        }
+        else
+        {
+            D = D + 2*dx;
+        }
+    }
+    return res;
+}
+
+float sumBrensenhamLine(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float sum = 0;
+
+    if (std::abs(y1 - y0) < std::abs(x1 - x0))
+    {
+        if (x0 > x1) { sum += sumLineLow(x1, y1, x0, y0, field); }
+        else { sum += sumLineLow(x0, y0, x1, y1, field); }
+    }
+    else
+    {
+        if (y0 > y1) { sum += sumLineHigh(x1, y1, x0, y0, field); }
+        else { sum += sumLineHigh(x0, y0, x1, y1, field); }
+    }
+    return sum;
+}
+
 //Get a measure of the difficulty for a country from teamA/teamB to travel linearly between two points on the map
 float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
 {
-    float sum = 0.0f;
+    scalarField2D field = teamA ? travelDifficultyField_allianceA : travelDifficultyField_allianceB;
+    if(from.x == to.x && from.y == to.y) { return 0; }
+    return sumBrensenhamLine(from.x, from.y, to.x, to.y, field)*12 + dist(from, to);
+}
 
-    int distance = dist(from, to);
-    if(distance == 0)
+//Returns the fraction of enemies out of the total troops in the region
+float Map::getEnemyRatioInRegion(Region* region, bool weAreTeamA)
+{
+    int numEnemies = 0;
+    int totalEntities = 0;
+
+    std::vector<Entity*> entities = this->occupancyTable->getEntities(region);
+    for(auto e = entities.begin(); e != entities.end(); e++)
     {
-        return 0;
+        if((*e)->getCountry()->getAlliance()->isTeamA() != weAreTeamA) //Enemy troops
+        {
+            int enemyAmount = (*e)->getAmount();
+            numEnemies += enemyAmount;
+            totalEntities += enemyAmount;
+        }
+        else //Friendly troops
+        {
+            int friendAmount = (*e)->getAmount();
+            totalEntities += friendAmount;
+        }
     }
 
-    for(int t = 0; t <= distance; t++)
+    if(totalEntities == 0) { return 0; }
+
+    return ((float)numEnemies)/totalEntities;
+}
+
+OccupancyTable* Map::getOccupancyTable()
+{
+    return this->occupancyTable;
+}
+
+//Get all regions owned by the specified alliance
+std::vector<Region*> Map::getRegionsOwnedBy(bool teamA)
+{
+    std::vector<Region*> res;
+    for(auto r = regions.begin(); r != regions.end(); r++)
     {
-        MapCoords samplePt = lerp(from, to, ((float)t)/distance);
-
-        sum += teamA ?
-                    this->travelDifficultyField_allianceA[samplePt.x][samplePt.y]:
-                    this->travelDifficultyField_allianceB[samplePt.x][samplePt.y];
+        if(r->second->getPossessor()->getAlliance()->isTeamA() == teamA)
+        {
+            res.push_back(r->second);
+        }
     }
+    return res;
+}
 
-    return sum;
+//Get all regions owned by the specified country
+std::vector<Region*> Map::getRegionsOwnedBy(Country* country)
+{
+    std::vector<Region*> res;
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor() == country)
+        {
+            res.push_back(r->second);
+        }
+    }
+    return res;
+}
+
+Region* Map::getRegionWithHighestEnemyRatio(bool teamA)
+{
+    Region* maxRegion = nullptr;
+    float max = 0.0;
+    if(regions.size() > 0) { maxRegion = regions.begin()->second; }
+
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor()->getAlliance()->isTeamA() == teamA) //If region is owned by our team
+        {
+            float ratio = getEnemyRatioInRegion(r->second, teamA);
+            if(ratio > max)
+            {
+                max = ratio;
+                maxRegion = r->second;
+            }
+        }
+    }
+    return maxRegion;
 }
 
 MapMemento* Map::makeMemento()

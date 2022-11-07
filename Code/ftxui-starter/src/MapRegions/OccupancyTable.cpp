@@ -32,7 +32,11 @@ Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
 	    return region;
 	}
 	if ((*itr)->getName() == entity->getName()) {
-	    (*itr)->absorb(entity);
+	    try {
+		(*itr)->absorb(entity);
+	    }catch(exception e) {
+		continue;
+	    }
 	    return region;
 	}
     }
@@ -88,10 +92,10 @@ bool OccupancyTable::moveEntity(Entity * entity, Region * region) {
 	    currentlocation->getCoords(), region->getCoords(), player);
 
     double proportionToTransport = float(entity->getTerrainHandling())/difficulty;
-    float numberToTransport = entity->getAmount()*proportionToTransport + 10;
+    float numberToTransport = (float(entity->getCarryingCapacity())/entity->getAmount())*proportionToTransport;
 
     // if we can transport all of them
-    if (numberToTransport >= entity->getAmount()) {
+    if (numberToTransport >= 1) {
 	this->entityToRegion.at(entity->getUUID()) = region;
 	this->regionToEntties.at(region->getUUID())->entities.push_back(entity);
 
@@ -114,7 +118,7 @@ bool OccupancyTable::moveEntity(Entity * entity, Region * region) {
     }
 
     // if there is not enough to transport all of them
-    Entity * splitGroup = entity->split(int(numberToTransport));
+    Entity * splitGroup = entity->split(int(numberToTransport*entity->getAmount()));
     this->addEntity(splitGroup, region);
     return false;
 }
@@ -144,9 +148,9 @@ bool OccupancyTable::moveEntity(vector<Entity *> entities, Region * region) {
 	    currentlocation->getCoords(), region->getCoords(), firstAlly);
 
     avg = avg/entities.size();
-    double amoutToTransport = double(capacity)/double(total);
+    double proportionOfTransport = double(capacity)/double(total);
     double distanceModify = float(avg)/difficulty;
-    amoutToTransport = amoutToTransport * distanceModify;
+    double amoutToTransport = proportionOfTransport * distanceModify;
 
 
     if (amoutToTransport >= 1) {

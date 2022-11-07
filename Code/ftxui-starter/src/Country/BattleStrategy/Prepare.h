@@ -4,19 +4,18 @@
 #include "../../Factories/VehicleFactory.h"
 #include "../../Factories/TroopFactory.h"
 
-enum _prep {recP, bvP};
+// class BattleStrategy;
 
 class Prepare : public BattleStrategy {
     private:
-        _prep prep;
         Region* friendlyRegion;
         Region* enemyRegion;
         std::string _name;
         int _num;
         VEHICLE_TYPE _veh;
     public:
-        Prepare();
-        void warAlgorithm(int prep);
+        Prepare(Map* map);
+        void doStrategy(Country* country);
         void buildVehicles();
         void recruitTroops();
         void setFriendlyRegion(Region* friendlyRegion);
