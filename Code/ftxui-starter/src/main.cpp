@@ -5,9 +5,7 @@ using namespace ftxui;
 
 int main(int argc, const char* argv[]) {
 
-    WarPhase* startPhase = new Dispute();
-
-    War* war = new War(startPhase);
+    War* war = new War();
 
     UI* ui = new UI(war);
 

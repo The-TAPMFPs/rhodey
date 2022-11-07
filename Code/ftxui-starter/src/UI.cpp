@@ -212,9 +212,9 @@ void UI::render()
 
     std::vector<std::string> stats;
     if(tab_selected == 0) {
-      stats = war->teamA->getMembers()->at(countryA_selected)->getFormattedStats();
+      stats = war->teamA->getMembers().at(countryA_selected)->getFormattedStats();
     } else {
-      stats = war->teamB->getMembers()->at(countryB_selected)->getFormattedStats();
+      stats = war->teamB->getMembers().at(countryB_selected)->getFormattedStats();
     }
 
     ftxui::Elements statsElements;

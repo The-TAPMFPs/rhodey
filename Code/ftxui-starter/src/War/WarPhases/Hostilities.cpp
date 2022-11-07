@@ -2,7 +2,7 @@
 
 Hostilities::Hostilities() {
   War::warState = "Hostilities";
-  War::warStateDesc = "Currently in Hostilities, Sim will start Now <- This should be changed";
+  War::warStateDesc = War::narrative.hostilities;
   War::warStateThumbnailColor = ftxui::Color::Red1;
   War::warStateThumbnail = {
 "",

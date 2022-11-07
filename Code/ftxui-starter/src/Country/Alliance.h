@@ -19,6 +19,6 @@ class Alliance {
 		void add(Country*);
 		void print();
 		std::vector<std::string> getAllianceNames();
-		std::vector<Country *>* getMembers();
+		std::vector<Country *> getMembers();
 		Country* getMemberModuloSize(int modIndex);
 };

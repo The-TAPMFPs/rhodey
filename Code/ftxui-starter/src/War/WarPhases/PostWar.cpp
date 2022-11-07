@@ -2,7 +2,7 @@
 
 PostWar::PostWar() {
   War::warState = "PostWar";
-  War::warStateDesc = "Currently in PostWar State <- This should be changed";
+  War::warStateDesc = War::narrative.postWar;
   War::warStateThumbnailColor = ftxui::Color::Aquamarine1;
   War::warStateThumbnail = {
 "",
