@@ -6,13 +6,14 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
 
 
     if (testing) {
-	Region* r = new Region(0,0,allCountries[0]);
-    // //TODO: Check position is not already taken
-	regions.emplace(r->getUUID(), r);
-	r = new Region(49,24,allCountries[0]);
-	regions.emplace(r->getUUID(), r);
-	r = new Region(30,10,allCountries[1]);
-	regions.emplace(r->getUUID(), r);
+        Region* r = new Region(0,0,allCountries[0]);
+        regions.emplace(r->getUUID(), r);
+
+        r = new Region(49,24,allCountries[0]);
+        regions.emplace(r->getUUID(), r);
+
+        r = new Region(30,10,allCountries[1]);
+        regions.emplace(r->getUUID(), r);
     } else {
 	//Initialize travel difficulty field to 0's
 	this->randomInitializeRegions(this->numRegions, allCountries);
@@ -50,14 +51,17 @@ void Map::recalculateTravelFields()
         {
             for(int y = 0; y < mapH; y++)
             {
-                if(r->second->getPossessor()->getAlliance()->isTeamA())
-                {
-                    this->travelDifficultyField_allianceA[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
-                else
-                {
-                    this->travelDifficultyField_allianceB[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
+                float regionDist = distToRegion(x, y, r->second);
+                if(regionDist == 0) { regionDist = 1; }
+
+                    if(r->second->getPossessor()->getAlliance()->isTeamA())
+                    {
+                        this->travelDifficultyField_allianceA[x][y] += 1.0f/regionDist;
+                    }
+                    else
+                    {
+                        this->travelDifficultyField_allianceB[x][y] += 1.0f/regionDist;
+                    }
             }
         }
     }

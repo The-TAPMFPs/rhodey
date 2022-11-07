@@ -246,7 +246,7 @@ void UI::render()
         // int c_b = (x*53 + y*19)%255;
         // for(auto l = line.begin(); l != line.end(); l++)
         // {
-        //   c.DrawPoint(l->x, l->y, true, Color(c_r, c_g, c_b));
+        //   c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
         // }
 
         c.DrawText(x, y+4, ss.str(), Color::Cyan1);
