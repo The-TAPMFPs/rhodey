@@ -94,3 +94,13 @@ struct WrongType : public exception {
       return "The Entitys that you are trying to merge are of different types.";
    }
 };
+struct SameEntity : public exception {
+   const char * what () const throw () {
+      return "The Entitys that you are trying to merge are the same entity.";
+   }
+};
+struct DifferentAlliances : public exception {
+   const char * what () const throw () {
+      return "The Entitys that you are trying to merge are from different countries.";
+   }
+};

@@ -126,9 +126,17 @@ Entity * Entity::split(int numberOfEntities) {
     return toReturn;
 }
 
+/**
+  * @brief Stores and returns the current value of the defending flag and then flips it.
+  * @throws WrongType - The entities that you are trying to merge into one are of different types.
+  * @return Previous value of defense flag.
+*/
 void Entity::absorb(Entity *entity) {
+    // merge checks
     if ((long int) entity == (long int) this) {
-	return;
+	throw WrongType();
+    } else if (long(entity->getCountry()) != long(this->country)) {
+	throw WrongType();
     }
     if (entity->getType() == this->type) {
 	this->HP = this->HP + entity->HP;

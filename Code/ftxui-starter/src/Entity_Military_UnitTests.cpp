@@ -30,7 +30,7 @@ struct EntitityTest : testing::Test {
 	enemyWeapons->push_back(new TestWeapon());
 	this->country1 = new Country("Friends");
 	this->country2 = new Country("Enemys");
-	this->friendly = new Troop("My Squad", 100, weapons, this->country1);
+	this->friendly = new Troop("My Squad", 100,  weapons, this->country1);
 	this->hostile = new Troop("Enemy Squad", 50, enemyWeapons, this->country2);
     }
     ~EntitityTest() {
@@ -118,7 +118,6 @@ struct OccupancyTableTest : testing::Test {
 
 struct BattleTest : testing::Test {
     Entity * friendly;
-    Entity * friendly2;
     Entity * hostile;
     Country * country1;
     Country * country2;
@@ -149,7 +148,6 @@ struct BattleTest : testing::Test {
 	this->friendlies->add(country1);
 	this->baddies->add(country2);
 	this->friendly = new Troop("My Squad", 100, weapons, this->country1);
-	this->friendly2 = new Troop("My Other Squad", 50, weapons2, this->country1);
 	this->hostile = new Troop("Enemy Squad", 50, enemyWeapons, this->country2);
 
 	this->theMap = new Map({country1, country2},true);
@@ -163,7 +161,6 @@ struct BattleTest : testing::Test {
 	this->table->addEntity(this->friendly, aRegion);
 	this->table->addEntity(this->hostile, aRegion);
 	this->table->addEntity(this->hostile, aRegion);
-	this->table->addEntity(this->friendly2, aRegion);
     }
 
     ~BattleTest() {
@@ -273,19 +270,27 @@ TEST_F(OccupancyTableTest, EntitiesAtRegion) {
     EXPECT_EQ(this->table->getEntities(aRegion), entities);
 }
 
+TEST_F(OccupancyTableTest, CheckThatCantMergeWithWrongType) {
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    this->table->addEntity((Entity *) new Tank("My Squad", 1, tankWeapons, country1), aRegion);
+    vector<Entity *> entities = this->table->getEntities(aRegion);
+    EXPECT_EQ(entities.size(),4);
+
+};
 // Test if moving a single entity between regions works as expected.
 TEST_F(OccupancyTableTest, MoveSingleEntity) {
     // Check that movement is correct
     float expected = proportionOfTransport(aRegion, bRegion, friendly);
     this->table->moveEntity(friendly, bRegion);
     vector<Entity*> entities = this->table->getEntities(bRegion);
-    EXPECT_EQ(entities.at(0)->getAmount(), 10);
+    EXPECT_EQ(entities.at(0)->getAmount(), 2);
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(hostile, bRegion);
     entities = this->table->getEntities(bRegion);
-    EXPECT_EQ(entities.at(0)->getAmount(), 20);
-    EXPECT_EQ(entities.at(1)->getAmount(), 50);
-    EXPECT_EQ(friendly->getAmount(), 80);
+    EXPECT_EQ(entities.size(), 2);
+    EXPECT_EQ(entities.at(0)->getAmount(), 4);
+    EXPECT_EQ(entities.at(1)->getAmount(), 2);
+    EXPECT_EQ(friendly->getAmount(), 96);
     // Check that entities are not the same one.
     EXPECT_NE(entities.at(0), friendly);
 
@@ -293,8 +298,6 @@ TEST_F(OccupancyTableTest, MoveSingleEntity) {
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(friendly, bRegion);
-    entities = this->table->getEntities(bRegion);
-    EXPECT_EQ(entities.size(), 2);
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(friendly, bRegion);
@@ -304,45 +307,35 @@ TEST_F(OccupancyTableTest, MoveSingleEntity) {
     this->table->moveEntity(friendly, bRegion);
     this->table->moveEntity(friendly, bRegion);
     entities = this->table->getEntities(bRegion);
-    EXPECT_EQ(this->friendly->getAmount(), 100);
+    EXPECT_EQ(this->friendly->getAmount(), 76);
     EXPECT_EQ(entities.size(), 2);
-    EXPECT_EQ(entities.at(0)->getAmount(), 50);
-    EXPECT_EQ(entities.at(1)->getAmount(), 100);
-    EXPECT_EQ(entities.at(1), friendly);
+    EXPECT_EQ(entities.at(0)->getAmount(), 24);
+    EXPECT_EQ(entities.at(1)->getAmount(), 2);
 }
 
 TEST_F(OccupancyTableTest, CheckMulipleMoveConditions) {
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(friendly, bRegion);
+    std::vector<Weapon *> * v = new std::vector<Weapon*>{new TestWeapon};
+    Entity * newEnt = new Troop("test", 10,v,this->country1);
+    this->table->addEntity(newEnt, bRegion);
     // check if from different places cant move together
-    EXPECT_ANY_THROW(this->table->moveEntity({friendly, friendly2}, bRegion));
+    EXPECT_ANY_THROW(this->table->moveEntity({friendly, newEnt}, bRegion));
     // check if opposing factions can't move together
     EXPECT_ANY_THROW(this->table->moveEntity({hostile, friendly2}, bRegion));
 }
 
 TEST_F(OccupancyTableTest, MulitpleMoveOfSameType) {
-    // TODO: Waiting for dino to fix his function
     this->table->moveEntity({friendly, friendly2}, bRegion);
     vector<Entity *> entities = this->table->getEntities(bRegion);
-    //EXPECT_EQ(entities.size(), 2);
+    EXPECT_EQ(entities.size(), 2);
+    entities = this->table->getEntities(aRegion);
+    EXPECT_EQ(entities.size(), 3);
+    this->table->moveEntity({friendly, friendly2}, bRegion);
+    this->table->moveEntity({friendly, friendly2}, bRegion);
+    entities = this->table->getEntities(bRegion);
+    EXPECT_EQ(entities.at(0)->getAmount(), 6);
+    EXPECT_EQ(entities.at(1)->getAmount(), 3);
 }
 
-TEST_F(OccupancyTableTest, Attacking) {
-    this->table->moveEntity(friendly, bRegion);
-    this->table->moveEntity(hostile, bRegion);
-    vector<Entity *> entities = this->table->getEntities(bRegion);
-    EXPECT_EQ(entities.at(0)->getAmount(), 10);
-    EXPECT_EQ(entities.at(1)->getAmount(), 50);
-
-};
 //============================END OccupancyTableTest========================//
 //==========================================================================//
 
@@ -351,21 +344,13 @@ TEST_F(OccupancyTableTest, Attacking) {
 TEST_F(BattleTest, InitializeToRegion) {
     this->testBattle = new Battle(this->aRegion, this->table);
     EXPECT_EQ(this->testBattle->getRegion(), this->aRegion);
-    std::vector<Entity *> teamA = {friendly, friendly2};
+    std::vector<Entity *> teamA = {friendly};
     std::vector<Entity *> teamB = {hostile};
     EXPECT_EQ(this->testBattle->getTeamA(), teamA);
     EXPECT_EQ(this->testBattle->getTeamB(), teamB);
 }
 
 TEST_F(BattleTest, RunBattleBetweenJustTwo) {
-    this->table->moveEntity(friendly2, bRegion);
-    this->table->moveEntity(friendly2, bRegion);
-    this->table->moveEntity(friendly2, bRegion);
-    this->table->moveEntity(friendly2, bRegion);
-    this->table->moveEntity(friendly2, bRegion);
-    std::vector<Entity *> v = {friendly, hostile};
-
-    EXPECT_EQ(this->table->getEntities(aRegion), v);
     this->testBattle = new Battle(this->aRegion, this->table);
     EXPECT_EQ(friendly->getAmount(), 100);
     EXPECT_EQ(hostile->getAmount(), 50);
@@ -376,6 +361,9 @@ TEST_F(BattleTest, RunBattleBetweenJustTwo) {
 
 TEST_F(BattleTest, RunBattle) {
     this->testBattle = new Battle(this->aRegion, this->table);
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new TestWeapon(), new TestWeapon()};
+    Entity * friendly2 = new Troop("Other One", 50, tankWeapons, country1);
+    this->table->addEntity(friendly2, aRegion);
     this->testBattle->takeTurn();
 
     // have to check due to randomness
@@ -392,13 +380,13 @@ TEST_F(BattleTest, BigBattle) {
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
     std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new Cannon()};
     std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new Cannon()};
-    this->table->addEntity((Entity *) new Tank("7th Heavy Armour Division", 50, tankWeapons, country1), aRegion);
-    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, bomberfriends, country1), aRegion);
-    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, country2), aRegion);
+    this->table->addEntity((Entity *) new Tank("My Squad", 1, tankWeapons, this->country1), aRegion);
+    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, bomberfriends, this->country1), aRegion);
+    this->table->addEntity((Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, this->country2), aRegion);
+    std::vector<Entity *> v = {friendly, hostile};
+    EXPECT_EQ(this->table->getEntities(aRegion), v);
     this->testBattle = new Battle(this->aRegion, this->table);
     this->testBattle->takeTurn();
-    std::vector<Entity *> v = {friendly};
-    //EXPECT_EQ(this->table->getEntities(aRegion), v);
 }
 //==============================END BattleTest============================//
 //==========================================================================//
