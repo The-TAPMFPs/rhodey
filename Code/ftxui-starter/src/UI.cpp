@@ -51,6 +51,7 @@ void UI::render()
   int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
   int mapHeight = 40;
+  int tab_selected = 0; //Tab toggle for Country data panel
   Region* selectedRegion = nullptr;
 
   MapData m = war->getCurrentMapData();
@@ -58,19 +59,21 @@ void UI::render()
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
 
+    scalarField2D field = tab_selected == 0 ? m.travelFieldA : m.travelFieldB;
+
     for(int i = 0; i < mapW; i++) {
       for(int j = 0; j < mapH; j++) {
         {
-          int colIntensity = (255*m.travelFieldA[i][j]);
+          int colIntensity = (255*field[i][j]);
           auto col = Color(0, colIntensity, colIntensity);
 
-          if(100*m.travelFieldA[i][j] > mapHeight - 3 &&
-             100*m.travelFieldA[i][j] < mapHeight + 3)
+          if(100*field[i][j] > mapHeight - 3 &&
+             100*field[i][j] < mapHeight + 3)
           {
             auto col = Color::White;
           }
           
-          int x = 100*m.travelFieldA[i][j];
+          int x = 100*field[i][j];
 
           if(x%5==0 || x%5==1) //Draw terrain banding
           {
@@ -185,7 +188,6 @@ void UI::render()
       "Team B",
   };
 
-  int tab_selected = 0;
   auto tab_toggle = Toggle(&tab_values, &tab_selected);
 
   std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
