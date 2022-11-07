@@ -1,4 +1,10 @@
 #include "Country.h"
+#include "BattleStrategy/Defensive.h"
+#include "BattleStrategy/Diplomacy.h"
+#include "BattleStrategy/Offensive.h"
+#include "BattleStrategy/Intel.h"
+#include "BattleStrategy/Prepare.h"
+#include "BattleStrategy/ResearchAndDevelopment.h"
 
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
@@ -23,13 +29,6 @@ Country::Country(std::string name) : name(name) {
     numVehicles = 0;
     numEnemyRegions = 0;
     generatePersonalityMatrix();
-
-    strats[0] = new Offensive();
-    strats[1] = new Defensive();
-    strats[2] = new ResearchAndDevelopment();
-    strats[3] = new Prepare();
-    strats[4] = new Intel();
-    strats[5] = new Diplomacy();
 }
 
 Country::~Country(){
@@ -113,7 +112,7 @@ void Country::setStrategy(BattleStrategy* strategy) {
   this->strategy = strategy;
 }
 
-int Country::nextStrategy() {
+void Country::decideStrategy() {
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;
@@ -125,57 +124,39 @@ int Country::nextStrategy() {
       maxIndex = i;
     }
   }
-  return maxIndex;
+  
+  if(this->strategy != NULL) {
+    delete this->strategy;
+  }
+  switch (maxIndex)
+  {
+  case 0:
+    this->strategy = new Defensive();
+    break;
+  case 1:
+    this->strategy = new ResearchAndDevelopment();
+    break;
+  case 2:
+    this->strategy = new Prepare();
+    break;
+  case 3:
+    this->strategy = new Offensive();
+    break;
+  case 4:
+    this->strategy = new Diplomacy();
+    break;
+  case 5:
+    this->strategy = new Intel();
+    break;
+  default:
+    this->strategy = new Offensive();
+    break;
+  }
 }
 
 void Country::takeTurn() {
-  int nextStrat = nextStrategy();
-
-  switch (nextStrat) {
-    case 0:
-
-      // loop through regions, check if there is an enemy region in which we
-      // have a 90% troop ratio to enemies if so, attack else move troops to
-      // region with least enemy troops and easy to get there
-
-      break;
-    case 1:
-      // if there is a non contesting region, move those troops to a contesting
-      // region if no contesting region then recruit this->strategy = new
-      // Defensive();
-      break;
-    case 2:
-    {
-      strats[2]->setFriendlyCountry(this);
-      if(this->research < this->resources && this->research < this->economy) {
-        strats[2]->warAlgorithm(3);
-      }
-      else if (this->economy < this->resources && this->economy < this->research) {
-        strats[2]->warAlgorithm(2);
-      }
-      else {
-        strats[2]->warAlgorithm(1);
-      }
-      // develop the lowest stat between economy, resources and research
-      // this->strategy = new ResearchAndDevelopment();
-      break;
-    }
-    case 3:
-      // take action of lowest between trrop and vehicle count
-      // this->strategy = new PreparationStrategy();
-      break;
-    case 4:
-      // create spy on an enemy region with most enemy or friendly troops
-      // this->strategy = new IntelligenceStrategy();
-      break;
-    case 5:
-      // if goal rating is high and aggressivness is low then propose treaty,
-      // else surrender() this->strategy = new DiplomacyStrategy();
-      break;
-    default:
-      // this->strategy = new Offensive(red);
-      break;
-  }
+  this->strategy->doStrategy(this);
+  decideStrategy();
 }
 
 std::vector<std::string> Country::getFormattedStats() {

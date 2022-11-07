@@ -1,6 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "../Country.h"
+
+// class BattleStrategy;
 
 enum _rad {drRD, deRD, rRD};
 class ResearchAndDevelopment : public BattleStrategy {
@@ -10,9 +11,9 @@ class ResearchAndDevelopment : public BattleStrategy {
     public:
 
         ResearchAndDevelopment();
+        void doStrategy(Country* country);
         void warAlgorithm(int rad);
         void developResources();
         void developEconomy();
         void research();
-        void setFriendlyCountry(Country* friendly);
 };

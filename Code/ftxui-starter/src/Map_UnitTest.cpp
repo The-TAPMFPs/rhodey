@@ -6,8 +6,8 @@ struct MapTest : testing::Test {
     Map* testMap1, *testMap2;
 
     MapTest() {
-        testMap1 = new Map();
-        testMap2 = new Map();
+        testMap1 = new Map({});
+        testMap2 = new Map({});
     }
 
     ~MapTest() {

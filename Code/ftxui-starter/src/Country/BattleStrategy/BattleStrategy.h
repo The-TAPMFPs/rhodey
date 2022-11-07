@@ -2,7 +2,9 @@
 //The chosen strategy for each Country is decided within the Coutry based on its statistics at that time
 #pragma once
 #include "../../MapRegions/Region.h"
-// #include "../Country.h"
+#include "../../Factories/TroopFactory.h"
+#include "../../Factories/VehicleFactory.h"
+#include "../Country.h"
 #include "../../logger.h"
 
 class Country;
@@ -10,7 +12,7 @@ class TroopFactory;
 class VehicleFactory;
 
 class BattleStrategy {
-    protected:
+protected:
         TroopFactory * uf;
         VehicleFactory * vf;
         Country * _con;
@@ -18,12 +20,12 @@ class BattleStrategy {
         Country* enemyCountry;
         Region* friendlyRegion;
         Region* enemyRegion;
-    public:
+public:
 	BattleStrategy();
-        virtual void warAlgorithm(int enumInput) = 0;
-        virtual void setFriendlyRegion(Region* friendlyRegion){}
-        virtual void setEnemyRegion(Region* enemyRegion){}
-        virtual void setFriendlyCountry(Country* friendly){}
-        virtual void setEnemyCountry(Country* enemy){}
-        virtual ~BattleStrategy();
+    virtual void doStrategy(Country* country) = 0;
+    virtual void warAlgorithm(int enumInput) = 0;
+    virtual void setFriendlyRegion(Region* friendlyRegion){}
+    virtual void setEnemyRegion(Region* enemyRegion){}
+    virtual void setEnemyCountry(Country* enemy){}
+    virtual ~BattleStrategy();
 };

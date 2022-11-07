@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "../Country.h"
 
+// class BattleStrategy;
 
 enum _def {redDef, recDef};
 class Defensive : public BattleStrategy {
@@ -13,6 +13,7 @@ class Defensive : public BattleStrategy {
         int _num;
     public:
         Defensive();
+        void doStrategy(Country* country);
         void warAlgorithm(int def);
         void setNameNumCont(std::string name, int num, Country * con);
         void setDef(_def def);
