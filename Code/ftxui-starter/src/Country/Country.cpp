@@ -1,5 +1,6 @@
 #include "Country.h"
 #include "BattleStrategy/Defensive.h"
+#include "BattleStrategy/BattleStrategy.h"
 #include "BattleStrategy/Diplomacy.h"
 #include "BattleStrategy/Offensive.h"
 #include "BattleStrategy/Intel.h"
@@ -32,7 +33,9 @@ Country::Country(std::string name) : name(name) {
 }
 
 Country::~Country(){
-    delete this->strategy;
+    if (this->strategy != NULL) {
+	//delete this->strategy;
+    }
     personalityMatrix.resize(0,0);
 }
 
@@ -127,7 +130,7 @@ void Country::decideStrategy() {
   valMatrix.resize(0,0);
   pm.resize(0,0);
   result.resize(0,0);
-  
+
   if(this->strategy != NULL) {
     delete this->strategy;
   }
