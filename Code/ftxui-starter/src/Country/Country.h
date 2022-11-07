@@ -2,6 +2,8 @@
 
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
+#include "../MapRegions/Map.h"
+
 #include "../MapRegions/Region.h"
 
 // #include "../Factories/TroopFactory.h"
@@ -29,7 +31,7 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-    BattleStrategy* strats[5];
+    BattleStrategy* strats[6];
 
 
     //===== CHARACTER MATRIX =====//

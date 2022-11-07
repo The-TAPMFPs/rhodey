@@ -2,6 +2,7 @@
 #include "BattleStrategy/Defensive.h"
 #include "BattleStrategy/Diplomacy.h"
 #include "BattleStrategy/Offensive.h"
+#include "BattleStrategy/Intel.h"
 #include "BattleStrategy/Prepare.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
 
@@ -31,8 +32,8 @@ Country::Country(std::string name) : name(name) {
 }
 
 Country::~Country(){
-    for (int count = 0; count < 5; count++) {
-	delete strats[count];
+    for (int count = 0; count < 6; count++) {
+	    delete strats[count];
     }
 }
 
@@ -49,24 +50,19 @@ void Country::generatePersonalityMatrix() {
   double* intelVals = generateRandomNums(1);
   double* diploVals = generateRandomNums(4);
 
-  pm << offensiveVals[0], 0, offensiveVals[1], 0, 0, 0, 0, 0, 0,
-      offensiveVals[2], 0, 0, offensiveVals[3], 0, 0, 0, 0, 0,  // offensive
-      defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2],
-      0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
-      0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0,
-      0, developVals[2],  // development
-      0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0,  // preparation
+  pm << offensiveVals[0], 0, offensiveVals[1], 0, 0, 0, 0, 0, 0, offensiveVals[2], 0, 0, offensiveVals[3], 0, 0, 0, 0, 0,  // offensive
+      defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2], 0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
+      0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, developVals[2],  // development
+      0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // preparation
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
-      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2],
-      diploVals[3], 0, 0, 0;  // diplomacy
+      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], diploVals[3], 0, 0, 0;  // diplomacy
 
-  delete offensiveVals;
-  delete defensiveVals;
-  delete developVals;
-  delete prepVals;
-  delete intelVals;
-  delete diploVals;
+  delete[] offensiveVals;
+  delete[] defensiveVals;
+  delete[] developVals;
+  delete[] prepVals;
+  delete[] intelVals;
+  delete[] diploVals;
 
   this->personalityMatrix = pm;
 }
@@ -148,6 +144,9 @@ void Country::decideStrategy() {
     break;
   case 4:
     this->strategy = new Diplomacy();
+    break;
+  case 5:
+    this->strategy = new Intel();
     break;
   default:
     this->strategy = new Offensive();
