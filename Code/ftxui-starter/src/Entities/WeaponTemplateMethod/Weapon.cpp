@@ -161,3 +161,7 @@ TestBomb::TestBomb() : Weapon(30,"Test Bomb") {
 void TestBomb::outputFlair(){
 
 }
+Mg160::Mg160():(0,"Mg160"){
+    this->damage=25+rand()%30;
+}
+TestWeapon::TestWeapon():Weapon(10, "TestWeapon"){}

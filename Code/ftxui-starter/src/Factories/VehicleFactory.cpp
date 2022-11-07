@@ -21,17 +21,12 @@ UnitFactory(name, num, type, con){
   _name = name;
   _num = num;
   _con = con;
-  Mg160* mg; /**<Reference to different weapon MG160 object>*/
-  Bomb* bom; /**<Reference to different weapon Bomb object>*/
-  Cannon* can; /**<Reference to different weapon Cannon object>*/
-  Torpedo* tor; /**<Reference to different weapon Torpedo object>*/
-  Missile* mis; /**<Reference to different weapon Missle object>*/
   w1 = new vector<Weapon*> {}; /**<Vector which contains a set of references to weapon objects>*/
-  w2 = new vector<Weapon*> {mg, can}; /**<Vector which contains a set of references to weapon objects>*/
-  w3 = new vector<Weapon*> {mg, can, mis}; /**<Vector which contains a set of references to weapon objects>*/
-  w4 = new vector<Weapon*> {tor, mis}; /**<Vector which contains a set of references to weapon objects>*/
-  w5 = new vector<Weapon*> {mg}; /**<Vector which contains a set of references to weapon objects>*/
-  w6 = new vector<Weapon*> {bom, mg}; /**<Vector which contains a set of references to weapon objects>*/
+  w2 = new vector<Weapon*> {new Mg160(), new Cannon()}; /**<Vector which contains a set of references to weapon objects>*/
+  w3 = new vector<Weapon*> {new Mg160(), new Cannon(), new Missile()}; /**<Vector which contains a set of references to weapon objects>*/
+  w4 = new vector<Weapon*> {new Torpedo(), new Missile()}; /**<Vector which contains a set of references to weapon objects>*/
+  w5 = new vector<Weapon*> {new Mg160()}; /**<Vector which contains a set of references to weapon objects>*/
+  w6 = new vector<Weapon*> {new Bomb(), new Mg160()}; /**<Vector which contains a set of references to weapon objects>*/
 }
 
 /**
@@ -52,54 +47,64 @@ Entity* VehicleFactory::makeUnit() {
   switch (currVehicleType) {
     case truck:
       e = (Entity*)new Truck(_name, _num, w1, _con);
+      w1 = new vector<Weapon*> {};
       convert << _num << " trucks were made.";
       temp = convert.str();
       Logger::log(temp);
       break;
     case tank:
       e = (Entity*)new Tank(_name, _num, w2, _con);
+      w2 = new vector<Weapon*> {new Mg160(), new Cannon()};
       convert << _num << " tanks were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case carrier:
       e = (Entity*)new Carrier(_name, _num, w1, _con);
+       w1 = new vector<Weapon*> {};
       convert << _num << " carriers were made.";
       temp = convert.str();
       Logger::log(temp);
       break;
     case cargoship:
       e = (Entity*)new CargoShip(_name, _num, w1, _con);
+       w1 = new vector<Weapon*> {};
       convert << _num << " cargoships were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case warship:
       e = (Entity*)new Warship(_name, _num, w3, _con);
+      w3 = new vector<Weapon*> {new Mg160(), new Cannon(), new Missile()};
       convert << _num << " warships were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case submarine:
       e = (Entity*)new Submarine(_name, _num, w4, _con);
+      w4 = new vector<Weapon*> {new Torpedo(), new Missile()};
       convert << _num << " submarines were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case fighterjet:
-      e = (Entity*)new Fighterjet(_name, _num, w1, _con);
+      e = (Entity*)new Fighterjet(_name, _num, w5, _con);
+      w5 = new vector<Weapon*> {new Mg160()};
+       w1 = new vector<Weapon*> {};
       convert << _num << " fighterjets were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case bomber:
       e = (Entity*)new Bomber(_name, _num, w6, _con);
+      w6 = new vector<Weapon*> {new Bomb(), new Mg160()};
       convert << _num << " bombers were made.";
         temp = convert.str();
       Logger::log(temp);
       break;
     case cargoplane:
       e = (Entity*)new CargoPlane(_name, _num, w1, _con);
+       w1 = new vector<Weapon*> {};
       convert << _num << " cargo planes were made.";
         temp = convert.str();
       Logger::log(temp);
