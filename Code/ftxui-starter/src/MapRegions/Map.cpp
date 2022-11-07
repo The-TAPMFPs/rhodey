@@ -278,6 +278,55 @@ float Map::getEnemyRatioInRegion(Region* region, bool weAreTeamA)
     return ((float)numEnemies)/totalEntities;
 }
 
+//Get all regions owned by the specified alliance
+std::vector<Region*> Map::getRegionsOwnedBy(bool teamA)
+{
+    std::vector<Region*> res;
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor()->getAlliance()->isTeamA() == teamA)
+        {
+            res.push_back(r->second);
+        }
+    }
+    return res;
+}
+
+//Get all regions owned by the specified country
+std::vector<Region*> Map::getRegionsOwnedBy(Country* country)
+{
+    std::vector<Region*> res;
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor() == country)
+        {
+            res.push_back(r->second);
+        }
+    }
+    return res;
+}
+
+Region* Map::getRegionWithHighestEnemyRatio(bool teamA)
+{
+    Region* maxRegion = nullptr;
+    float max = 0.0;
+    if(regions.size() > 0) { maxRegion = regions.begin()->second; }
+
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor()->getAlliance()->isTeamA() == teamA) //If region is owned by our team
+        {
+            float ratio = getEnemyRatioInRegion(r->second, teamA);
+            if(ratio > max)
+            {
+                max = ratio;
+                maxRegion = r->second;
+            }
+        }
+    }
+    return maxRegion;
+}
+
 MapMemento* Map::makeMemento()
 {
     HeightMap hm = {
