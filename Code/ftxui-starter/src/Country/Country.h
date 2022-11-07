@@ -2,18 +2,16 @@
 
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
-#include "../MapRegions/Map.h"
-#include "BattleStrategy/BattleStrategy.h"
-#include "BattleStrategy/Offensive.h"
-#include "BattleStrategy/ResearchAndDevelopment.h"
-#include "BattleStrategy/Defensive.h"
-#include "BattleStrategy/Prepare.h"
-#include "BattleStrategy/Diplomacy.h"
+#include "../MapRegions/Region.h"
 
-
+// #include "../Factories/TroopFactory.h"
+// #include "../Factories/VehicleFactory.h"
 
 //Predefine classes to resolve circular dependencies:
+
 class Alliance;
+class BattleStrategy;
+
 class Country {
     friend class Alliance;
   private:
@@ -62,7 +60,7 @@ class Country {
     Eigen::MatrixXd generateValueMatrix();
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
-    int nextStrategy();
+    void decideStrategy();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
     double getMorale();

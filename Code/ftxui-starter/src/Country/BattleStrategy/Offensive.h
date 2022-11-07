@@ -1,6 +1,7 @@
 #pragma once
 #include "BattleStrategy.h"
-#include "../Country.h"
+
+// class BattleStrategy;
 
 enum _off {redOff, attOff};
 
@@ -13,6 +14,7 @@ class Offensive : public BattleStrategy {
     public:
 
         Offensive();
+        void doStrategy(Country* country);
         void warAlgorithm(int off);
         void redistributeTroops();
         void attack();
