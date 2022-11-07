@@ -8,31 +8,13 @@
  */
 
 /**
- * @fn Defensive()
+ * @fn Defensive(Map* map)
  * @brief The constructor for the Defensive class
  * 
+ * @param map allows access to the map
  */
-Defensive::Defensive(){}
+Defensive::Defensive(Map* map) : BattleStrategy(map){}
 
-/**
- * @fn void warAlgorithm(int def)
- * @brief Decides on which strategy algorithm to use based on an enum.
- * 
- * @param def An int that is converted to an enum and switched to decide on the strategy.
- */
-void Defensive::warAlgorithm(int def){
-    this->def =(_def) def;
-
-    switch(def){
-        case redDef:
-            redistributeTroops();
-            break;
-        case recDef:
-            recruitTroops();
-            break;
-    }
-    return;
-}
 
 void Defensive::doStrategy(Country* country){
     // if there is a non contesting region, move those troops to a contesting
@@ -53,22 +35,10 @@ void Defensive::setNameNumCont(std::string name, int num, Country * con){
     _con = con;
 }
 
-/**
- * @fn void setDef(_def def)
- * @brief A setter for the enum def.
- * 
- * @param def An enum that determines the defensive strategy.
- */
-void Defensive::setDef(_def def){
-    this->def = def;
-}
-
-/**
- * @fn void redistributeTroops
- * @brief Moves troops from one position to another in order to improve defense.
- * 
- */
 void Defensive::redistributeTroops(){
+    OccupancyTable* occTable = map->getOccupancyTable();
+    occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    delete occTable;
     
 }
 
@@ -78,9 +48,9 @@ void Defensive::redistributeTroops(){
  * 
  */
 void Defensive::recruitTroops(){
-    // uf = new TroopFactory(_name, _num, _con);
-    // uf->makeUnit();
-    // delete uf;
+    uf = new TroopFactory(_name, _num, _con);
+    uf->makeUnit();
+    delete uf;
 }
 
 /**

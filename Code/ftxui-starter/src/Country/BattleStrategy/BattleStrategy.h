@@ -6,6 +6,8 @@
 #include "../../Factories/VehicleFactory.h"
 #include "../Country.h"
 #include "../../logger.h"
+#include "../../MapRegions/Map.h"
+#include "../../War/Battle/Battle.h"
 
 class Country;
 class UnitFactory;
@@ -20,10 +22,10 @@ class BattleStrategy {
         Country* enemyCountry;
         Region* friendlyRegion;
         Region* enemyRegion;
+        Map* map;
 public:
-	BattleStrategy();
+	BattleStrategy(Map* map);
     virtual void doStrategy(Country* country) = 0;
-    virtual void warAlgorithm(int enumInput) = 0;
     virtual void setFriendlyRegion(Region* friendlyRegion){}
     virtual void setEnemyRegion(Region* enemyRegion){}
     virtual void setEnemyCountry(Country* enemy){}

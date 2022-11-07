@@ -8,36 +8,17 @@
  */
 
 /**
- * @fn Offensive()
+ * @fn Offensive(Map* map)
  * @brief The constructor for the Offensive class.
- * 
+ *
+ * @param map allows access to the map
  */
-Offensive::Offensive(){
-    
-}
-
-/**
- * @fn void warAlgorithm(int off)
- * @brief Decides on which strategy algorithm to use based on an enum.
- * 
- * @param off An int that is converted to an enum and switched to decide on the strategy.
- */
-void Offensive::warAlgorithm(int off){
-    this->off =(_off) off;
-    switch(off){
-        case redOff:
-            redistributeTroops();
-            break;
-        case attOff:
-            attack();
-            break;
-    }
-    return;
-}
+Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
 
 void Offensive::doStrategy(Country* country){
-    Logger::log("Do the offensive strategy");
+    //enemyRergion = region with highest friendly ratio
+    //friendlyRegion = region with lowest enemy ratio
 }
 
 /**
@@ -46,7 +27,10 @@ void Offensive::doStrategy(Country* country){
  * 
  */
 void Offensive::redistributeTroops(){
-
+    //move troops from region with lowest enemy troop count to region with highest friendly ratio
+    OccupancyTable* occTable = map->getOccupancyTable();
+    occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    delete occTable;
 }
 
 /**
@@ -55,7 +39,14 @@ void Offensive::redistributeTroops(){
  * 
  */
 void Offensive::attack(){
+    OccupancyTable* occTable = map->getOccupancyTable();
+    Battle* battle = new Battle(enemyRegion, occTable);
+    while(battle->takeTurn()){
 
+    }
+
+    delete battle;
+    delete occTable;
 }
 
 /**

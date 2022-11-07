@@ -8,10 +8,14 @@
  */
 
 /**
- * @fn BattleStrategy()
+ * @fn BattleStrategy(Map* map)
  * @brief The constructor of the BattleStrategy class.
+ * 
+ * @param map allows access to the map
  */ 
-BattleStrategy::BattleStrategy() {}
+BattleStrategy::BattleStrategy(Map* map) {
+    this->map = map;
+}
 
 /**
  * @fn ~BattleStrategy()
