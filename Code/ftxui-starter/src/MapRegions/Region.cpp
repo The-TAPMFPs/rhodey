@@ -1,4 +1,11 @@
+
 #include "Region.h"
+/**
+ * \file Region.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
+
 
 //Map is 100x100, tiles are 2x4, therefore possible region locations (0,0) to (49, 24)
 /**

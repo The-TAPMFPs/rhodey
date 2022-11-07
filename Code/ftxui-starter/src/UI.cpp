@@ -5,7 +5,11 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-
+/**
+ * \file UI.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 /**
  * \fn int clamp (int val, int min, int max)
  * \brief makes sure a value is within a range
@@ -21,7 +25,7 @@ int clamp(int val, int min, int max)
 }
 
 /**
- * \fn int UI::UI (War* war)
+ * \fn void UI:UI (War* war)
  * \brief constructs a new UI object
  *
  * \param war the current war
@@ -36,7 +40,7 @@ UI::UI(War* war)
  */
 void UI::render()
 {
-  auto screen = ScreenInteractive::Fullscreen();
+  auto screen = ScreenInteractive::Fullscreen();/**ftxui function that lets the terminal know that we want to utilize the full screen*/
 
   int mouseX = 0, mouseY = 0;
 
@@ -46,8 +50,8 @@ void UI::render()
   std::thread refresh_ui([&] {
     while (refresh_ui_continue) {
       using namespace std::chrono_literals;
-      const auto refresh_time = 1.0s / 60.0;
-      std::this_thread::sleep_for(refresh_time);
+      const auto refresh_time = 1.0s / 60.0;/**the refresh time , 60 frames per second , can be adjusted */
+      std::this_thread::sleep_for(refresh_time);/**sleep thread for the duration of the variable refresh_time*/
       screen.PostEvent(Event::Custom);
     }
   });
@@ -56,12 +60,12 @@ void UI::render()
 
 #pragma region MAP_PANEL
   //GAME MAP
-  int mapW = 100, mapH = 100;
-  int camX = 0, camY = 0;
-  int mapHeight = 40;
-  Region* selectedRegion = nullptr;
+  int mapW = 100, mapH = 100;/**variables that set the maps width and height */
+  int camX = 0, camY = 0;/***/
+  int mapHeight = 40;/**variable that stores the map height */
+  Region* selectedRegion = nullptr;/**a variable that points to a Region and it initialized to null*/
 
-  MapData m = war->getCurrentMapData();
+  MapData m = war->getCurrentMapData();/**a MapData object that stores the wars current map data*/
 
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
@@ -95,7 +99,7 @@ void UI::render()
       int x = r->x*2;
       int y = r->y*4;
 
-      if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y) //If mouse over region
+      if(clamp(mouseX, 0, 99) == x && clamp(mouseY, 0, 99) == y) /**if mouse curser if hovering over a region then...*/
       {
         std::string regionName = "REGION";
         int nameLen = regionName.length()*2;

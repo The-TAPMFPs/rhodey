@@ -1,3 +1,8 @@
+/**
+ * \file DisputeSettled.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 #include "DisputeSettled.h"
 
 /**

@@ -1,8 +1,14 @@
+/**
+ * \file Conflict.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 #include "Conflict.h"
 
 /**
- * \fn Conflict ()
+ * \fn void Conflict::Conflict
  * \brief constructor for the Conflict class
+ * 
  *
  */
 Conflict::Conflict() {

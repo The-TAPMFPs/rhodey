@@ -1,3 +1,8 @@
+/**
+ * \file War.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 #include "War.h"
 #include "WarPhases/Dispute.h"
 

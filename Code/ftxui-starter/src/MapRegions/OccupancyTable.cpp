@@ -1,13 +1,14 @@
-/**
- * \file OccupancyTable.cpp
- * \author The TransactionAwarePersistenceManagerFactoryProxies
- * \date 7 November 2022
- */
+
 #include "OccupancyTable.h"
 #include <exception>
 #include <map>
 #include <utility>
 #include <vector>
+/**
+ * \file OccupancyTable.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 /**
  * \fn OccupancyTable::OccupancyTable(Map * InitialMap )
  * \brief 

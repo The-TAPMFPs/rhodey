@@ -1,3 +1,4 @@
+
 #include "Vehicle.h"
 
 Vehicle::Vehicle(string name, int numberOfTroops, int HP, int Damage,

@@ -1,3 +1,8 @@
+/**
+ * \file Hostilities.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
 #include "Hostilities.h"
 
 /**
