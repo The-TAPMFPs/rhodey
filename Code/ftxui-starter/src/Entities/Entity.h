@@ -58,6 +58,7 @@ class Entity{
 	void assignWeapon(Weapon & weapon);
 	void update();
 
+	vector<Weapon*>* getWeapon(){return weapons;}
 	/**
 	  Gets the current amount of entities.
 	  @returns Amount of entities

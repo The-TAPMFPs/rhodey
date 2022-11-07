@@ -90,14 +90,3 @@ void ResearchAndDevelopment::research(){
     Logger::log("Research increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
 
 }
-
-
-/**
- * @fn void setFriendlyCountry(Country* friendly)
- * @brief a setter for the friendlyCountry variable.
- * 
- * @param friendly holds a reference to the country which called the algorithm.
- */
-void ResearchAndDevelopment::setFriendlyCountry(Country* friendly){
-    this->friendlyCountry = friendly;
-}
