@@ -21,24 +21,12 @@ UnitFactory(name, num, con){
     _name = name;
     _num = num;
     _con = con;
-    //level 1
-    SMG* smg; /**<Reference to different weapon SMG object>*/
-    Pistol* pis; /**<Reference to different weapon Pistol object>*/
-    //level 2
-    AR* ar; /**<Reference to different weapon AR object>*/
-    Sniper* sni; /**<Reference to different weapon Sniper object>*/
-    //level 3
-    DualBurette* db; /**<Reference to different weapon DualBurette object>*/
-    Bazooka* baz; /**<Reference to different weapon Bazooka object>*/
-    //level 4
-    Sniper50* s50; /**<Reference to different weapon Sniper50 object>*/
-    AK47* ak; /**<Reference to different weapon AK47 object>*/
-    w1 =  new vector<Weapon *> {smg, pis}; /**<Vector which contains a set of references to weapon objects>*/
-    w2 = new vector<Weapon *> {ar, pis, sni}; /**<Vector which contains a set of references to weapon objects>*/
-    w3 = new vector<Weapon *> {ar, smg, db, baz}; /**<Vector which contains a set of references to weapon objects>*/
-    w4 = new vector<Weapon *> {ar, pis, sni, baz}; /**<Vector which contains a set of references to weapon objects>*/
-    w5 = new vector<Weapon *> {ar, db, s50, ak}; /**<Vector which contains a set of references to weapon objects>*/
-    w6 = new vector<Weapon *> {ak, db, baz, s50}; /**<Vector which contains a set of references to weapon objects>*/
+    w1 =  new vector<Weapon *> {new SMG(), new Pistol()}; /**<Vector which contains a set of references to weapon objects>*/
+    w2 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper()}; /**<Vector which contains a set of references to weapon objects>*/
+    w3 = new vector<Weapon *> {new AR(), new SMG(), new DualBurette(), new Bazooka()}; /**<Vector which contains a set of references to weapon objects>*/
+    w4 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper(), new Bazooka()}; /**<Vector which contains a set of references to weapon objects>*/
+    w5 = new vector<Weapon *> {new AR(), new DualBurette(), new Sniper50(), new AK47()}; /**<Vector which contains a set of references to weapon objects>*/
+    w6 = new vector<Weapon *> {new AK47(), new DualBurette(), new Bazooka(), new Sniper50()}; /**<Vector which contains a set of references to weapon objects>*/
 }
 /**
  * @fn ~TroopFactory()
@@ -59,12 +47,14 @@ Entity* TroopFactory::makeUnit(){
     Troop * e;
     if(_con->getResearch() < 0.2){
         e = new Troop(_name, _num, w1, _con);
-	convert << _num << " troops with SMGs and Pistols were recruited.";
+        w1 =  new vector<Weapon *> {new SMG(), new Pistol()};
+	    convert << _num << " troops with SMGs and Pistols were recruited.";
         temp = convert.str();
         Logger::log(temp);
     }
     else if(_con->getResearch() < 0.5){
         e = new Troop(_name, _num, w2, _con);
+        w2 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper()};
         convert << _num << " troops with ARs, Pistols and Snipers were recruited.";
         temp = convert.str();
         Logger::log(temp);
@@ -73,12 +63,14 @@ Entity* TroopFactory::makeUnit(){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w3, _con);
+                w3 = new vector<Weapon *> {new AR(), new SMG(), new DualBurette(), new Bazooka()};
                 convert << _num << " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
                 break;
             case 2:
                 e = new Troop(_name, _num, w4, _con);
+                w4 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper(), new Bazooka()};
                 convert << _num << " troops with ARs, SMGs, Snipers and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
@@ -89,12 +81,14 @@ Entity* TroopFactory::makeUnit(){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w5, _con);
+                w5 = new vector<Weapon *> {new AR(), new DualBurette(), new Sniper50(), new AK47()};
 		        convert << _num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
                 break;
             case 2:
                 e = new Troop(_name, _num, w6, _con);
+                w6 = new vector<Weapon *> {new AK47(), new DualBurette(), new Bazooka(), new Sniper50()};
                 convert << _num << " troops with AK47s, Dual Burettes, Bazooka and Sniper50s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
