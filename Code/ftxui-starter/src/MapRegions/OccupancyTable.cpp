@@ -58,6 +58,18 @@ std::vector<Entity *> OccupancyTable::getEntities(Region * region) {
     return newvector;
 }
 
+void OccupancyTable::cleanUp() {
+    for (auto outer = this->regionToEntties.begin(); outer != this->regionToEntties.end(); ++outer) {
+	for (auto itr = outer->second->entities.begin(); itr != outer->second->entities.end(); ++itr) {
+
+	    if ((*itr)->getAmount() <= 0) {
+		auto todelete = this->entityToRegion.find((*itr)->getUUID());
+		this->entityToRegion.erase(todelete);
+		outer->second->entities.erase(itr);
+	    }
+	}
+    }
+}
 
 std::vector<Entity *> OccupancyTable::getEntities(UUID region) {
     vector<Entity *> initVector = this->regionToEntties.at(region)->entities;

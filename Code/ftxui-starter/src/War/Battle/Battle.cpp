@@ -1,4 +1,6 @@
 #include "Battle.h"
+#include <sstream>
+#include "../../logger.h"
 
 Battle::Battle(Region* region, OccupancyTable * table, bool testing) {
     this->_region = region;
@@ -27,6 +29,7 @@ void Battle::checkReinforcements() {
     }
 }
 
+
 bool Battle::takeTurn() {
     this->checkReinforcements();
     if (!testing) {
@@ -37,22 +40,45 @@ bool Battle::takeTurn() {
     int teamBCount = this->teamB.size();
     int totalCountTeamA = 0;
     int totalCountTeamB = 0;
+    std::stringstream out;
 
     if (teamACount == 0 || teamBCount == 0) {
 	return false;
     }
     if (teamACount < teamBCount) {
 	for (int count = 0; count < teamBCount; count++) {
+	    // [Entity] from [Country] and [Entity] from [Country] clash together.
+	    out << this->teamA.at(count%teamACount)->getName() << " from " <<
+		this->teamA.at(count%teamACount)->getCountry()->getName()
+		<< " and " << this->teamB.at(count)->getName() << " from "
+		<< this->teamB.at(count)->getCountry()->getName() << "clash." << std::endl;
+
+	    Logger::log(out.str());
+	    out.clear();
+
 	    this->teamA.at(count%teamACount)->attack(* this->teamB.at(count),testing);
 	    this->teamB.at(count)->attack(* this->teamA.at(count%teamACount), testing);
 
 	    this->teamA.at(count%teamACount)->update();
 	    this->teamB.at(count)->update();
+
 	    totalCountTeamA += this->teamA.at(count%teamACount)->getAmount();
 	    totalCountTeamB += this->teamB.at(count)->getAmount();
+	    Logger::log("----------------------------------------------------");
 	}
     } else {
 	for (int count = 0; count < teamACount; count++) {
+	    // [Entity] from [Country] and [Entity] from [Country] clash together.
+	    out << this->teamA.at(count)->getName() << " from " <<
+		this->teamA.at(count)->getCountry()->getName()
+		<< " and " << this->teamB.at(count%teamBCount)->getName()
+		<< " from "
+		<< this->teamB.at(count%teamBCount)->getCountry()->getName()
+		<< "clash." << std::endl;
+
+	    Logger::log(out.str());
+	    out.clear();
+
 	    this->teamA.at(count)->attack(* this->teamB.at(count%teamBCount), testing);
 	    this->teamB.at(count%teamBCount)->attack(* this->teamA.at(count), testing);
 
@@ -62,8 +88,9 @@ bool Battle::takeTurn() {
 	    totalCountTeamB += this->teamB.at(count%teamBCount)->getAmount();
 	}
     }
+    this->table->cleanUp();
 
-    if (totalCountTeamA == 0 || totalCountTeamB == 0) {
+    if (totalCountTeamA <= 0 || totalCountTeamB <= 0) {
 	return false;
     }
 
