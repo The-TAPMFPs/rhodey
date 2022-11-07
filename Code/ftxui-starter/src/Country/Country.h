@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+#include <utility>
+
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
 #include "../MapRegions/Map.h"
@@ -17,7 +20,11 @@ class BattleStrategy;
 class Country : public Observable {
     friend class Alliance;
     friend class Intel;
-  private:
+#ifdef UNIT_TEST
+    public:
+#else
+    private:
+#endif
     std::string name;
     BattleStrategy* strategy;
 
@@ -29,7 +36,6 @@ class Country : public Observable {
     double aggressiveness; // The aggressiveness of the country
     double goalRating; // The rating of the country's goal
     double numSpies;
-    double knowledgeOfEnemy;
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
@@ -52,6 +58,7 @@ class Country : public Observable {
     // TODO trainingFacilities vector<TroopFactory *>
     // TODO vehicleFactories vector<VehicleFactory *>
     Alliance* allies;
+    std::vector<std::pair<Country*, double>> countriesBeingSpiedOn;
   public:
     double morale;    // The general morale of the country's citizens
     Country(std::string name);
@@ -65,6 +72,7 @@ class Country : public Observable {
     void decideStrategy();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
+    std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();
     double getMorale();
     double getEconomy();
     int getPopulation();
@@ -72,7 +80,6 @@ class Country : public Observable {
     double getGoalRating();
     double getAggressiveness();
     double getResources();
-    double getKnowledgeOfEnemy();
     int getNumSpies();
     int getNumTroops();
     int getNumVehicles();
@@ -88,7 +95,6 @@ class Country : public Observable {
     void setNumTroops(int numTroops);
     void setNumVehicles(int numVehicles);
     void setNumEnemyRegions(int numEnemyRegions);
-    void setKnowledgeOfEnemy(double knowledgeOfEnemy);
 };
 
 
