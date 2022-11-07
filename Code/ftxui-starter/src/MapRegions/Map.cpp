@@ -2,7 +2,8 @@
 
 Map::Map(std::vector<Country*> allCountries, bool testing)
 {
-    // this->occupancyTable = new OccupancyTable(this);
+    //Randomly initialize regions
+    this->regions = std::map<UUID, Region*>();
 
 
     if (testing) {
@@ -28,6 +29,7 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
     }
 
     this->recalculateTravelFields();
+    this->occupancyTable = new OccupancyTable(this);
 }
 
 //Call this whenever the outcome of a battle changes a Region's occupancy
@@ -247,6 +249,33 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
     scalarField2D field = teamA ? travelDifficultyField_allianceA : travelDifficultyField_allianceB;
     if(from.x == to.x && from.y == to.y) { return 0; }
     return sumBrensenhamLine(from.x, from.y, to.x, to.y, field)*12 + dist(from, to);
+}
+
+//Returns the fraction of enemies out of the total troops in the region
+float Map::getEnemyRatioInRegion(Region* region, bool weAreTeamA)
+{
+    int numEnemies = 0;
+    int totalEntities = 0;
+
+    std::vector<Entity*> entities = this->occupancyTable->getEntities(region);
+    for(auto e = entities.begin(); e != entities.end(); e++)
+    {
+        if((*e)->getCountry()->getAlliance()->isTeamA() != weAreTeamA) //Enemy troops
+        {
+            int enemyAmount = (*e)->getAmount();
+            numEnemies += enemyAmount;
+            totalEntities += enemyAmount;
+        }
+        else //Friendly troops
+        {
+            int friendAmount = (*e)->getAmount();
+            totalEntities += friendAmount;
+        }
+    }
+
+    if(totalEntities == 0) { return 0; }
+
+    return ((float)numEnemies)/totalEntities;
 }
 
 MapMemento* Map::makeMemento()

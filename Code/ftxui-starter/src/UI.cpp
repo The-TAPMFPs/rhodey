@@ -141,6 +141,8 @@ std::vector<MapCoords> brensenhamLine(int x0, int y0, int x1, int y1)
     return line;
 }
 
+// Flexbox Config: [https://arthursonzogni.github.io/FTXUI/examples/?file=component/flexbox_gallery]
+// Element Positioning: [Code\ftxui-starter\build\_deps\ftxui-src\include\ftxui\dom\elements.hpp]
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -166,9 +168,11 @@ void UI::render()
   int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
   int mapHeight = 40;
+  int tab_selected = 0;
   Region* selectedRegion = nullptr;
 
-  MapData m = war->getCurrentMapData();
+  Map* warMap = war->getMap();
+  MapData m = warMap->getCurrentMapData();
 
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
@@ -229,7 +233,7 @@ void UI::render()
       {
         bool diffForTeamA = selectedRegion->getPossessor()->getAlliance()->isTeamA();
         // float travelDifficulty = diffForTeamA ? 10.5 : 0;
-        float travelDifficulty = war->getTravelDifficulty(selectedRegion->getCoords(), {r->x, r->y}, diffForTeamA);
+        float travelDifficulty = warMap->getTravelDifficulty(selectedRegion->getCoords(), {r->x, r->y}, diffForTeamA);
 
         //Round to 2 decimal places
         std::stringstream ss;
@@ -273,7 +277,7 @@ void UI::render()
       if(e.mouse().button == Mouse::Left &&
          e.mouse().motion == Mouse::Pressed)
       {
-        selectedRegion = war->getRegionAt(mouseX/2, mouseY/4);
+        selectedRegion = warMap->getRegionAt(mouseX/2, mouseY/4);
         // selectedRegion = new Region("test", mouseX, mouseY);
       }
     }
@@ -306,8 +310,9 @@ void UI::render()
         separator(),
         text(selectedRegion->getRegionName()) | center,
         text(selectedRegion->getPossessor()->getName()) | center,
-        text(std::to_string(selectedRegion->getCoords().x)),
-        text(std::to_string(selectedRegion->getCoords().y))
+        text("Enemy ratio: " + std::to_string(warMap->getEnemyRatioInRegion(selectedRegion, tab_selected))) | center,
+        text("X: " + std::to_string(selectedRegion->getCoords().x)),
+        text("Y: " + std::to_string(selectedRegion->getCoords().y))
       });
     }
     else
@@ -329,7 +334,6 @@ void UI::render()
       "Team B",
   };
 
-  int tab_selected = 0;
   auto tab_toggle = Toggle(&tab_values, &tab_selected);
 
   std::vector<std::string> countries_on_sideA = war->teamA->getAllianceNames();
