@@ -34,6 +34,11 @@ void Defensive::warAlgorithm(int def){
     return;
 }
 
+void Defensive::doStrategy(Country* country){
+    // if there is a non contesting region, move those troops to a contesting
+      // region if no contesting region then recruit this->strategy = new
+      // Defensive();
+}
 /**
  * @fn void setNameNumCont(string name, int num, Country * con)
  * @brief A setter for the name, num and country of troops that will be made.
@@ -73,9 +78,9 @@ void Defensive::redistributeTroops(){
  * 
  */
 void Defensive::recruitTroops(){
-    uf = new TroopFactory(_name, _num, _con);
-    uf->makeUnit();
-    delete uf;
+    // uf = new TroopFactory(_name, _num, _con);
+    // uf->makeUnit();
+    // delete uf;
 }
 
 /**

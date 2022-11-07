@@ -34,6 +34,12 @@ void Prepare::warAlgorithm(int prep){
     return;
 }
 
+
+void Prepare::doStrategy(Country* country){
+    // take action of lowest between trrop and vehicle count
+    Logger::log("Do the prepare strategy");
+}
+
 /**
  * @fn void setNameNumCont(string name, int num, Country * con)
  * @brief A setter for the name, num and country of troops that will be made.

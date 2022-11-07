@@ -17,6 +17,17 @@ void Alliance::print() {
     std::cout << std::endl;
 }
 
+std::vector<Country*> Alliance::getMembers()
+{
+    return this->members;
+}
+
+//Returns true if the specified country is a member
+//of this alliance; false otherwise
+bool Alliance::containsCountry(Country* country)
+{
+    return std::find(members.begin(), members.end(), country) != members.end();
+}
 std::vector<std::string> Alliance::getAllianceNames() {
     std::vector<std::string> names;
     for (Country* country : members) {
@@ -25,6 +36,11 @@ std::vector<std::string> Alliance::getAllianceNames() {
     return names;
 }
 
-std::vector<Country*>* Alliance::getMembers() {
-    return &members;
+//For round-robin selection of a country from the alliance
+Country* Alliance::getMemberModuloSize(int modIndex) {
+    if(!this->members.empty())
+    {
+        return this->members[modIndex%this->members.size()];
+    }
+    return nullptr;
 }

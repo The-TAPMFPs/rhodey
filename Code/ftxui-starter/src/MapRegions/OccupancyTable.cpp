@@ -18,8 +18,12 @@ OccupancyTable::OccupancyTable(Map * InitialMap ) {
 OccupancyTable::~OccupancyTable() {
     std::map<UUID, RegionToEntities *>::iterator i;
     for (i = this->regionToEntties.begin(); i!=this->regionToEntties.end(); ++i) {
-	delete i->second;
+	for (auto itr = i->second->entities.begin(); itr != i->second->entities.end(); ++itr) {
+	    delete *itr;
+	}
+	i->second->entities.clear();
     }
+
 }
 Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
     std::vector<Entity *> current = this->getEntities(region);
@@ -28,7 +32,11 @@ Region * OccupancyTable::addEntity(Entity * entity, Region * region)  {
 	    return region;
 	}
 	if ((*itr)->getName() == entity->getName()) {
-	    (*itr)->absorb(entity);
+	    try {
+		(*itr)->absorb(entity);
+	    }catch(WrongType e) {
+		continue;
+	    }
 	    return region;
 	}
     }
@@ -50,6 +58,24 @@ std::vector<Entity *> OccupancyTable::getEntities(Region * region) {
     return newvector;
 }
 
+void OccupancyTable::cleanUp() {
+    for (auto outer = this->regionToEntties.begin(); outer != this->regionToEntties.end(); ++outer) {
+	// for each region
+	for (int itr = 0; itr < outer->second->entities.size(); ++itr) {
+	    // check regions entities
+	    if (outer->second->entities[itr]->getAmount() <= 0) {
+		// if a entitiy has less than 0 health.
+		// erase it from our table.
+		auto todelete = this->entityToRegion.find(outer->second->entities[itr]->getUUID());
+		this->entityToRegion.erase(todelete);
+		// erase it from our thing here aswell.
+
+		delete outer->second->entities.at(itr);
+		outer->second->entities.erase(outer->second->entities.begin() + itr);
+	    }
+	}
+    }
+}
 
 std::vector<Entity *> OccupancyTable::getEntities(UUID region) {
     vector<Entity *> initVector = this->regionToEntties.at(region)->entities;
@@ -84,10 +110,10 @@ bool OccupancyTable::moveEntity(Entity * entity, Region * region) {
 	    currentlocation->getCoords(), region->getCoords(), player);
 
     double proportionToTransport = float(entity->getTerrainHandling())/difficulty;
-    float numberToTransport = entity->getAmount()*proportionToTransport + 10;
+    float numberToTransport = (float(entity->getCarryingCapacity())/entity->getAmount())*proportionToTransport;
 
     // if we can transport all of them
-    if (numberToTransport >= entity->getAmount()) {
+    if (numberToTransport >= 1) {
 	this->entityToRegion.at(entity->getUUID()) = region;
 	this->regionToEntties.at(region->getUUID())->entities.push_back(entity);
 
@@ -110,7 +136,7 @@ bool OccupancyTable::moveEntity(Entity * entity, Region * region) {
     }
 
     // if there is not enough to transport all of them
-    Entity * splitGroup = entity->split(int(numberToTransport));
+    Entity * splitGroup = entity->split(int(numberToTransport*entity->getAmount()));
     this->addEntity(splitGroup, region);
     return false;
 }
@@ -140,9 +166,9 @@ bool OccupancyTable::moveEntity(vector<Entity *> entities, Region * region) {
 	    currentlocation->getCoords(), region->getCoords(), firstAlly);
 
     avg = avg/entities.size();
-    double amoutToTransport = double(capacity)/double(total);
+    double proportionOfTransport = double(capacity)/double(total);
     double distanceModify = float(avg)/difficulty;
-    amoutToTransport = amoutToTransport * distanceModify;
+    double amoutToTransport = proportionOfTransport * distanceModify;
 
 
     if (amoutToTransport >= 1) {

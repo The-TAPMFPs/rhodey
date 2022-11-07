@@ -9,6 +9,8 @@ struct RegionToEntities {
     std::vector<Entity *> entities;
 };
 
+class Map;
+
 class OccupancyTable {
     private:
 	map<UUID, Region *> entityToRegion;
@@ -24,4 +26,5 @@ class OccupancyTable {
 	Region * getRegion(UUID entity);
 	bool moveEntity(Entity * entity, Region * region);
 	bool moveEntity(vector<Entity *> entity, Region * region);
+	void cleanUp();
 };

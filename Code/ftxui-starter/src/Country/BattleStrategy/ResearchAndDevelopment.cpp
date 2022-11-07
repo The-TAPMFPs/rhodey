@@ -38,6 +38,22 @@ void ResearchAndDevelopment::warAlgorithm(int rad){
     return;
 }
 
+
+void ResearchAndDevelopment::doStrategy(Country* country){
+    // develop the lowest stat between economy, resources and research
+    friendlyCountry = country;
+    if(country->getResearch() < country->getResources() && country->getResearch() < country->getEconomy()) {
+        research();
+    }
+    else if (country->getEconomy() < country->getResources() && country->getEconomy() < country->getResearch()) {
+        developEconomy();
+    }
+    else {
+        developResources();
+    }
+    Logger::log("Message here on what the country does");
+}
+
 /**
  * @fn void developResources()
  * @brief Researches resource development and improves it for a country.
@@ -48,7 +64,6 @@ void ResearchAndDevelopment::developResources(){
     double change = (((double) rand() / RAND_MAX) * 0.10-0.01) + 0.01; 
     this->friendlyCountry->setResources(this->friendlyCountry->getResources() + change);
     Logger::log("Resources increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
-
 }
 
 /**
@@ -61,7 +76,6 @@ void ResearchAndDevelopment::developEconomy(){
     double change = (((double) rand() / RAND_MAX) * 0.10-0.01) + 0.01;
     this->friendlyCountry->setEconomy(this->friendlyCountry->getEconomy() + change);
     Logger::log("Economy increased by " + std::to_string(change) + " for " + this->friendlyCountry->getName());
-
 }
 
 /**

@@ -34,6 +34,11 @@ void Diplomacy::warAlgorithm(int dip){
     return;
 }
 
+
+void Diplomacy::doStrategy(Country* country){
+    Logger::log("Do the diplomacy strategy");
+}
+
 /**
  * @fn void setMyCountry(Country* myCountry)
  * @brief a setter for the myCountry variable.
@@ -60,9 +65,7 @@ void Diplomacy::setEnemyCountry(Country* enemyCountry){
  * 
  */
 void Diplomacy::proposeTreaty(){
-    std::string temp; /**<A string to hold the message that a treaty was proposed*/
-    temp = myCountry->getName() + " proposed a treaty with " + enemyCountry->getName();
-    Logger::log(temp);
+    Logger::log(myCountry->getName() + " proposed a treaty with " + enemyCountry->getName());
     //Have a treaty function in the country
 }
 
@@ -72,8 +75,6 @@ void Diplomacy::proposeTreaty(){
  * 
  */
 void Diplomacy::surrender(){
-    std::string temp; /**<A string to hold the message that a country surrendered*/
-    temp = myCountry->getName() + " surrended to " + enemyCountry->getName();
-    Logger::log(temp);
+    Logger::log(myCountry->getName() + " surrended to " + enemyCountry->getName());
     //Have a surrender function in the country
 }

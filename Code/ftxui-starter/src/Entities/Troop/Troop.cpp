@@ -1,4 +1,5 @@
 #include "Troop.h"
+#include <cmath>
 
 Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country * country) :
     Entity(name, "Ground Infantry", numberOfTroops, 3, weapon, country) {
@@ -8,7 +9,7 @@ Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country 
 
 
 int Troop::getCarryingCapacity() {
-    return 1;
+    return this->getAmount();
 }
 
 Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * weapon) {
@@ -16,8 +17,8 @@ Entity * Troop::splitType(string name, int numberOfTroops, vector<Weapon*> * wea
 }
 
 int Troop::weaknesses(int damage, Weapon& weapon) {
-    int potentialDamage = damage * log10(damage* weapon.getDamage());
-    if (weapon.getType() == "AntiVehicle") {
+    int potentialDamage = damage;
+    if (weapon.getType() == ANTI_TANK) {
 	potentialDamage = this->HP/damage;
     }
     return potentialDamage;

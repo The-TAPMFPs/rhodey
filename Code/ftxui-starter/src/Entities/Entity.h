@@ -1,10 +1,23 @@
+/**
+ * \file Entity.h
+ * \brief Entity Object Header File.
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \version 1.0
+ * \date 6 November 2022
+ */
 #pragma once
+#include <cmath>
 #include <string>
 #include <vector>
 #include "./WeaponTemplateMethod/Weapon.h"
 #include "../uuid.h"
 using namespace std;
+
+
 class Country;
+/**
+ * @brief The Entity class is the base Class for all types of Entities.
+ */
 class Entity{
 
     protected:
@@ -12,7 +25,7 @@ class Entity{
 				//   flips it.
 	virtual Entity* splitType(string name, int numberOfTroops, vector<Weapon*> * weapon)=0;
 	virtual int weaknesses(int damage,Weapon & weapon)=0;
-	void defend(int damage, Weapon & weapon); /// Do not use this method
+	void defend(int damage, Weapon & weapon, bool testing = false); /// Do not use this method
 
 
 	string name;
@@ -27,7 +40,7 @@ class Entity{
 	int terrianHandling = 0;
 	UUID uuid = "";
 	Country * country;
-public:
+    public:
 	Entity(string name, string type, int HP, int Damage,
 		vector<Weapon*> * weapon, Country * country);
 	virtual ~Entity();
@@ -41,19 +54,15 @@ public:
 	virtual int getTerrainHandling()=0;
 
 
-	void attack(Entity & defender);
+	void attack(Entity & defender, bool testing = false);
 	void assignWeapon(Weapon & weapon);
-	/**
-	  Updates the HP of the entities.
-	  @warning This function should be called after both sides of a battle have finnished all of their attacks.
-	*/
 	void update();
 
 	/**
 	  Gets the current amount of entities.
 	  @returns Amount of entities
 	*/
-	int getAmount() {return HP/HPScalling;}
+	int getAmount();
 	/**
 	  @returns Returns the Country with which this entity is alligned.
 	*/
@@ -84,5 +93,15 @@ public:
 struct WrongType : public exception {
    const char * what () const throw () {
       return "The Entitys that you are trying to merge are of different types.";
+   }
+};
+struct SameEntity : public exception {
+   const char * what () const throw () {
+      return "The Entitys that you are trying to merge are the same entity.";
+   }
+};
+struct DifferentAlliances : public exception {
+   const char * what () const throw () {
+      return "The Entitys that you are trying to merge are from different countries.";
    }
 };

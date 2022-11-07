@@ -35,6 +35,11 @@ void Offensive::warAlgorithm(int off){
     return;
 }
 
+
+void Offensive::doStrategy(Country* country){
+    Logger::log("Do the offensive strategy");
+}
+
 /**
  * @fn void redistributeTroops
  * @brief Moves troops from one position to another in order to improve defense.

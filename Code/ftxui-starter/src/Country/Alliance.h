@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "Country.h"
+#include <algorithm>
 
 class Country;
 
@@ -17,11 +18,13 @@ class Alliance {
 		static int first;
 
     public:
-		Alliance(std::string name, bool teamA = false);
+		Alliance(std::string name, bool teamA);
 		void add(Country*);
 		void print();
-		std::vector<std::string> getAllianceNames();
-		std::vector<Country *>* getMembers();
+		std::vector<Country*> getMembers();
 		bool isTeamA() {return teamA;}
+		bool containsCountry(Country* country);
+		std::vector<std::string> getAllianceNames();
+		Country* getMemberModuloSize(int modIndex);
 };
 

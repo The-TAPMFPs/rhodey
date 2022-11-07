@@ -17,6 +17,7 @@ class Battle{
         std::vector<Entity *> teamA;
         std::vector<Entity *> teamB;
 	void checkReinforcements();
+	bool testing = false;
     public:
 	/**
 	 * \fn Battle::Battle(Region *, OccupancyTable *)
@@ -26,7 +27,7 @@ class Battle{
 	 * \param b OccupancyTable of the Simulation
 	 * \return  Nothing
 	 */
-        Battle(Region* region, OccupancyTable *);
+        Battle(Region* region, OccupancyTable *, bool testing = false);
 	/**
 	 * \fn Battle::takeTurn()
 	 * \brief Simulates one turn of battle.
