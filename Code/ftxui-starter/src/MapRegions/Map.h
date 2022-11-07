@@ -7,11 +7,12 @@
 #include <set>
 #include "Region.h"
 #include "MapMemento.h"
-#include "Country/Country.h"
+#include "../Country/Country.h"
 // #include "../War/War.h"
 // #include "OccupancyTable.h"
 
 
+class Country;
 typedef float** scalarField2D;
 
 struct MapData
@@ -57,7 +58,7 @@ class Map {
 
 
         // Map(War* war);
-        Map(std::vector<Country*> allCountries);
+        Map(std::vector<Country*> allCountries,bool testing = false);
         ~Map();
         std::vector<Region*> getAllAvailableRegionsForAttack(Country *);
 

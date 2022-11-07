@@ -1,18 +1,22 @@
 #include "Map.h"
 
-Map::Map(std::vector<Country*> allCountries)
+Map::Map(std::vector<Country*> allCountries, bool testing)
 {
     // this->occupancyTable = new OccupancyTable(this);
 
-    // Region* r = new Region(0,0);
+
+    if (testing) {
+	Region* r = new Region(0,0,allCountries[0]);
     // //TODO: Check position is not already taken
-    // regions.emplace(r->getUUID(), r);
-
-    // r = new Region(49,24);
-    // regions.emplace(r->getUUID(), r);
-
-    //Initialize travel difficulty field to 0's
-    this->randomInitializeRegions(this->numRegions, allCountries);
+	regions.emplace(r->getUUID(), r);
+	r = new Region(49,24,allCountries[0]);
+	regions.emplace(r->getUUID(), r);
+	r = new Region(30,10,allCountries[1]);
+	regions.emplace(r->getUUID(), r);
+    } else {
+	//Initialize travel difficulty field to 0's
+	this->randomInitializeRegions(this->numRegions, allCountries);
+    }
 
     //Create travel difficulty fields
     this->travelDifficultyField_allianceA = new float*[mapW];
@@ -204,12 +208,13 @@ void Map::setMemento(MapMemento* mem){
 
 Map::~Map()
 {
+    // For some reason it seems to be dealocating itself
     //Deallocate travel fields
-    for(int x = 0; x < mapW; x++)
-    {
-        delete [] this->travelDifficultyField_allianceA[x];
-        delete [] this->travelDifficultyField_allianceB[x];
-    }
-    delete [] this->travelDifficultyField_allianceA;
-    delete [] this->travelDifficultyField_allianceA;
+    // for(int x = 0; x < mapW; x++)
+    // {
+        // delete [] this->travelDifficultyField_allianceA[x];
+        // delete [] this->travelDifficultyField_allianceB[x];
+    // }
+    // delete [] this->travelDifficultyField_allianceA;
+    // delete [] this->travelDifficultyField_allianceA;
 }
