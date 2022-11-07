@@ -2,6 +2,24 @@
 #include <exception>
 #include <iostream>
 
+/**
+ * @file Entity.cpp
+ * @brief Construct a new Entity object
+ * @author The TransactionAwarePersistenceManagerFactoryProxies
+ * @date 06 November 2022 
+ */
+
+/**
+ * @fn Entity(string name, string type, int HP, int Damage, vector<Weapon*> * weapon, Country * country)
+ * @brief The constructor for the Entity class.
+ * 
+ * @param name The name of the Entity.
+ * @param type The type of Entity.
+ * @param HP The Health Points of the Entity.
+ * @param Damage The base damage of the Entity.
+ * @param weapon The Weapons that the entity has.
+ * @param country The country that owns the entity.
+ */
 Entity::Entity(string name, string type, int HP, int Damage,
 	vector<Weapon*> * weapon, Country * country) {
     this->name = name;
@@ -14,6 +32,11 @@ Entity::Entity(string name, string type, int HP, int Damage,
     this->country = country;
 }
 
+/**
+ * @fn ~Entity
+ * @brief The destructor of the Entity class. Deletes the object as well as the weapons vector.
+ * 
+ */
 Entity::~Entity() {
     int initial = this->weapons->size();
     for (int count = 0; count < initial; count++) {
@@ -23,6 +46,12 @@ Entity::~Entity() {
     delete this->weapons;
 }
 
+/**
+ * @fn void attack(Entity & defender)
+ * @brief 
+ * 
+ * @param defender 
+ */
 void Entity::attack(Entity & defender) {
     if (this->HP <= 0) {
 	return;

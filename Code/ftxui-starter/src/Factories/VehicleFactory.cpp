@@ -2,14 +2,13 @@
 
 /**
  * @file VehicelFactory.cpp
- * @brief Construct a new Vehicle Factory object
  * @author The TransactionAwarePersistenceManagerFactoryProxies
  * @date 06 November 2022 
  */
 
 /**
  * @fn TroopFactory (std::string name, int num, Country * con)
- * @brief The constructor of the TroopFactory class.
+ * @brief Construct a new Vehicle Factory :: Vehicle Factory object
  * 
  * @param name Troop Name 
  * @param num Amount of Troops
