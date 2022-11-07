@@ -188,7 +188,7 @@ void UI::render()
           {
             auto col = Color::White;
           }
-          
+
           int x = 100*m.travelFieldB[i][j];
 
           if(x%5==0 || x%5==1) //Draw terrain banding
@@ -240,18 +240,18 @@ void UI::render()
         ss << std::fixed << std::setprecision(2) << travelDifficulty;
 
         //Draw Bresenham lines
-        // MapCoords from = selectedRegion->getCoords();
-        // MapCoords to = {r->x, r->y};
-        // int x0 = from.x*2, x1 = to.x*2;
-        // int y0 = from.y*4, y1 = to.y*4;
-        // std::vector<MapCoords> line = brensenhamLine(x0, y0, x1, y1);
-        // int c_r = (x*13 + y*7)%255;
-        // int c_g = (x*19 + y*31)%255;
-        // int c_b = (x*53 + y*19)%255;
-        // for(auto l = line.begin(); l != line.end(); l++)
-        // {
-        //   c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
-        // }
+        MapCoords from = selectedRegion->getCoords();
+        MapCoords to = {r->x, r->y};
+        int x0 = from.x*2, x1 = to.x*2;
+        int y0 = from.y*4, y1 = to.y*4;
+        std::vector<MapCoords> line = brensenhamLine(x0, y0, x1, y1);
+        int c_r = (x*13 + y*7)%255;
+        int c_g = (x*19 + y*31)%255;
+        int c_b = (x*53 + y*19)%255;
+        for(auto l = line.begin(); l != line.end(); l++)
+        {
+	    c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
+        }
 
         c.DrawText(x, y+4, ss.str(), Color::Cyan1);
       }

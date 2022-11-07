@@ -2,20 +2,18 @@
 
 Map::Map(std::vector<Country*> allCountries, bool testing)
 {
-    this->occupancyTable = new OccupancyTable(this);
     //Randomly initialize regions
     this->regions = std::map<UUID, Region*>();
 
 
     if (testing) {
-        Region* r = new Region(0,0,allCountries[0]);
-        regions.emplace(r->getUUID(), r);
-
-        r = new Region(49,24,allCountries[0]);
-        regions.emplace(r->getUUID(), r);
-
-        r = new Region(30,10,allCountries[1]);
-        regions.emplace(r->getUUID(), r);
+	Region* r = new Region("Region A", 0,0,allCountries[0]);
+    // //TODO: Check position is not already taken
+	regions.emplace(r->getUUID(), r);
+	r = new Region("Region B",49,24,allCountries[0]);
+	regions.emplace(r->getUUID(), r);
+	r = new Region("Region C", 30,10,allCountries[1]);
+	regions.emplace(r->getUUID(), r);
     } else {
 	//Initialize travel difficulty field to 0's
 	this->randomInitializeRegions(this->numRegions, allCountries);
@@ -31,6 +29,7 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
     }
 
     this->recalculateTravelFields();
+    this->occupancyTable = new OccupancyTable(this);
 }
 
 //Call this whenever the outcome of a battle changes a Region's occupancy
@@ -249,7 +248,7 @@ float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
 {
     scalarField2D field = teamA ? travelDifficultyField_allianceA : travelDifficultyField_allianceB;
     if(from.x == to.x && from.y == to.y) { return 0; }
-    return sumBrensenhamLine(from.x, from.y, to.x, to.y, field) + dist(from, to)*0.1;
+    return sumBrensenhamLine(from.x, from.y, to.x, to.y, field)*12 + dist(from, to);
 }
 
 //Returns the fraction of enemies out of the total troops in the region
