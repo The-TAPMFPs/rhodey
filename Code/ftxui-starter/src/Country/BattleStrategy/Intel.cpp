@@ -3,6 +3,10 @@
 Intel::Intel(){
 }
 
+void Intel::doStrategy(Country* country){
+    // Do the strategy with the country
+}
+
 void Intel::warAlgorithm(int intel){
     
 }

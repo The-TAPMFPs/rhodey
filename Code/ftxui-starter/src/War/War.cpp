@@ -94,15 +94,6 @@ bool War::isOver() {
   return warPhase == NULL;
 }
 
-MapData War::getCurrentMapData() {
-  return this->map->getCurrentMapData();
-}
-
-Region* War::getRegionAt(int x, int y)
-{
-  return this->map->getRegionAt(x, y);
-}
-
 //Returns null if the Country is not bound to an alliance
 Alliance* War::getSideCountryIsOn(Country* country)
 {
@@ -110,7 +101,7 @@ Alliance* War::getSideCountryIsOn(Country* country)
         (teamB->containsCountry(country) ? teamB : nullptr);
 }
 
-float War::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
+Map* War::getMap()
 {
-  return this->map->getTravelDifficulty(from, to, teamA);
+  return this->map;
 }

@@ -11,6 +11,7 @@ class Intel : public BattleStrategy {
 
     public:
         Intel();
+        void doStrategy(Country* country);
         void warAlgorithm(int intel);
         void setMyCountry(Country* myCountry);
         void setEnemyCountry(Country* enemyCountry);
