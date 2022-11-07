@@ -1,3 +1,4 @@
+#include "Entities/WeaponTemplateMethod/Weapon.h"
 #include "gtest/gtest.h"
 #include "Factories/UnitFactory.h"
 #include "Factories/TroopFactory.h"
@@ -65,9 +66,9 @@ struct VehicleFactoryTest : testing::Test{
         delete uf1;
         delete uf2;
         delete uf3;
-        delete cunt; 
+        delete cunt;
     }
-}
+};
 
 //==========================================================================//
 //============================START EntityTest==============================//
@@ -76,5 +77,6 @@ TEST_F(TroopFactoryTest, test1){
     EXPECT_EQ(e1->getName(), "TroopFactory1");
     EXPECT_EQ(e1->getAmount(), 5000);
     EXPECT_EQ(e1->getCountry()->getName(), "WillyWonka");
-    EXPECT_EQ(e1->getWeapon(), {smg, pis});
+    std::vector<Weapon *> * v = new std::vector<Weapon*>{new SMG(), new Pistol()};
+    EXPECT_EQ(e1->getWeapon(), v);
 }
