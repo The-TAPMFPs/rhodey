@@ -81,9 +81,9 @@ void Prepare::recruitTroops(){
  * 
  */
 void Prepare::buildVehicles(){
-    vf = new VehicleFactory(_name, _num, _veh, _con);
-    vf->makeUnit();
-    delete vf;
+    uf = new VehicleFactory(_name, _num, _veh, _con);
+    uf->makeUnit();
+    delete uf;
 }
 
 /**

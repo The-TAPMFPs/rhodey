@@ -6,13 +6,13 @@
 #include "../../logger.h"
 
 class Country;
+class UnitFactory;
 class TroopFactory;
 class VehicleFactory;
 
 class BattleStrategy {
     protected:
-        TroopFactory * uf;
-        VehicleFactory * vf;
+        UnitFactory * uf;
         Country * _con;
         Country* friendlyCountry;
         Country* enemyCountry;
