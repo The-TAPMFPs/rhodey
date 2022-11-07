@@ -28,3 +28,10 @@ class OccupancyTable {
 	bool moveEntity(vector<Entity *> entity, Region * region);
 	void cleanUp();
 };
+
+
+struct IncompatibleMove : public exception {
+   const char * what () const throw () {
+      return "The entities that you are trying to move together cannot be moved together.";
+   }
+};

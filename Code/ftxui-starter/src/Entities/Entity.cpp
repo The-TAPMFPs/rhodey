@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "../Country/Country.h"
 #include <exception>
 #include <iostream>
 
@@ -52,6 +53,12 @@ void Entity::attack(Entity & defender, bool testing) {
     int totalDamage = 0;
     if (this->weapons->size() != 0) {
 	totalDamage = (this->Damage*this->getAmount())/this->weapons->size();
+    }
+    for (auto itr = this->country->getCountriesBeingSpiedOn()->begin();
+	    itr != this->country->getCountriesBeingSpiedOn()->end(); ++itr) {
+	if (long(itr->first) == long(this->country)) {
+	    totalDamage = totalDamage*(log(itr->second+70)/log(70));
+	}
     }
     for (int count = 0; count < this->weapons->size(); count++) {
 	defender.defend(totalDamage, * this->weapons->at(count),testing);
@@ -148,9 +155,9 @@ Entity * Entity::split(int numberOfEntities) {
 void Entity::absorb(Entity *entity) {
     // merge checks
     if ((long int) entity == (long int) this) {
-	throw WrongType();
+	throw SameEntity();
     } else if (long(entity->getCountry()) != long(this->country)) {
-	throw WrongType();
+	throw DifferentAlliances();
     }
     if (entity->getType() == this->type) {
 	this->HP = this->HP + entity->HP;
