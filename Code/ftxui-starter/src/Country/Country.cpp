@@ -32,9 +32,7 @@ Country::Country(std::string name) : name(name) {
 }
 
 Country::~Country(){
-    for (int count = 0; count < 6; count++) {
-	    delete strats[count];
-    }
+    delete this->strategy;
 }
 
 std::string Country::getName() {
@@ -131,32 +129,32 @@ void Country::decideStrategy() {
   switch (maxIndex)
   {
   case 0:
-    this->strategy = new Defensive();
+    this->strategy = new Offensive();
     break;
   case 1:
-    this->strategy = new ResearchAndDevelopment();
+    this->strategy = new Defensive();
     break;
   case 2:
-    this->strategy = new Prepare();
+    this->strategy = new ResearchAndDevelopment();
     break;
   case 3:
-    this->strategy = new Offensive();
+    this->strategy = new Prepare();
     break;
   case 4:
-    this->strategy = new Diplomacy();
-    break;
-  case 5:
     this->strategy = new Intel();
     break;
+  case 5:
+    this->strategy = new Diplomacy();
+    break;
   default:
-    this->strategy = new Offensive();
+    this->strategy = new ResearchAndDevelopment();
     break;
   }
 }
 
 void Country::takeTurn() {
-  this->strategy->doStrategy(this);
   decideStrategy();
+  this->strategy->doStrategy(this);
 }
 
 std::vector<std::string> Country::getFormattedStats() {

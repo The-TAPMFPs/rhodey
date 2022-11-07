@@ -31,7 +31,6 @@ class Country {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
-    BattleStrategy* strats[6];
 
 
     //===== CHARACTER MATRIX =====//
