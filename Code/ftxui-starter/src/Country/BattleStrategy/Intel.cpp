@@ -17,9 +17,10 @@ void Intel::doStrategy(Country* country){
     }
 
     if(!alreadyBeingSpiedOn){
-        enemyToSpyOn->spyOnCountry(country);
+        country->spyOnCountry(enemyToSpyOn);
+        country->setNumSpies(country->getNumSpies() + 1);
         countriesBeingSpiedOn->push_back(std::pair<Country*, double>(enemyToSpyOn, 0));
-        Logger::log(country->name + " is now spying on: " + enemyToSpyOn->name);
+        Logger::log(country->name + " is now spying on :" + enemyToSpyOn->name + "\n");
     } 
 }
 

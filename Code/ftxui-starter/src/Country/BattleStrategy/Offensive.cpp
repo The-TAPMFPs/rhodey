@@ -24,12 +24,14 @@ void Offensive::redistributeTroops(){
     //move troops from region with lowest enemy troop count to region with highest friendly ratio
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
     delete occTable;
 }
 
 void Offensive::attack(){
     OccupancyTable* occTable = map->getOccupancyTable();
     Battle* battle = new Battle(enemyRegion, occTable);
+    Logger::log(this->friendlyCountry->getName() + " has started a battle in" + enemyRegion->getRegionName() + "\n");
     while(battle->takeTurn()){
 
     }
@@ -44,4 +46,8 @@ void Offensive::setFriendlyRegion(Region* friendlyRegion){
 
 void Offensive::setEnemyRegion(Region* enemyRegion){
     this->enemyRegion = enemyRegion;
+}
+
+void Offensive::setFriendlyCountry(Country* friendlyCountry){
+    this->friendlyCountry = friendlyCountry;
 }
