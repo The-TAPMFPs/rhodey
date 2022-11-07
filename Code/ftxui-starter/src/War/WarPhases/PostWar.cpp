@@ -25,6 +25,7 @@ PostWar::PostWar() {
 "                                | |",
 "                                `-'"
   };
+  warPhase = phase::POST_WAR;
 }
 
 void PostWar::handleWarChange(War* war) {

@@ -25,6 +25,7 @@ Hostilities::Hostilities() {
 "|                                                                   BB-61/",
 " \\_______________________________________________________________________|"
   };
+  warPhase = phase::HOSTILITIES;
 }
 
 void Hostilities::handleWarChange(War* war) {

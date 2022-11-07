@@ -24,6 +24,7 @@ DisputeSettled::DisputeSettled() {
 "     \\%\\   /              \\%\\   /                  \\%\\   /",
 "       ~~~~                 ~~~~                     ~~~~"
   };
+  warPhase = phase::DISPUTE_SETTLED;
 }
 
 void DisputeSettled::handleWarChange(War* war) {

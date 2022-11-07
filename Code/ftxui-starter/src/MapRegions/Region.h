@@ -6,7 +6,7 @@
 #include <random>
 #include "../uuid.h"
 
-class Country; //Needed to resolve circular dependency
+class Country;
 
 struct MapCoords
 {
@@ -14,6 +14,13 @@ struct MapCoords
     int y;
 };
 
+//Define a total 
+inline bool operator<(const MapCoords& a, const MapCoords& b)
+{
+    //Coords are different if either the x-coords are different
+    //OR the y-coords are different
+    return a.x < b.x || a.y < b.y;
+}
 
 class Region {
     private:
@@ -24,9 +31,9 @@ class Region {
         // Battle* battle = nullptr;
 
     public:
-        Region();
-        Region(std::string name, int xCoord, int yCoord);
-        Region(int xCoord, int yCoord);
+        Region(Country* possessor);
+        Region(std::string name, int xCoord, int yCoord, Country* possessor);
+        Region(int xCoord, int yCoord, Country* possessor);
         UUID getUUID();
         std::string getRegionName();
         void setRegionName(std::string name);
