@@ -1,10 +1,11 @@
 #include "Offensive.h"
 
-Offensive::Offensive(_off off){
-    this->off = off;
+Offensive::Offensive(){
+    
 }
 
-void Offensive::warAlgorithm(){
+void Offensive::warAlgorithm(int off){
+    this->off =(_off) off;
     switch(off){
         case redOff:
             redistributeTroops();
@@ -22,4 +23,12 @@ void Offensive::redistributeTroops(){
 
 void Offensive::attack(){
 
+}
+
+void Offensive::setFriendlyRegion(Region* friendlyRegion){
+    this->friendlyRegion = friendlyRegion;
+}
+
+void Offensive::setEnemyRegion(Region* enemyRegion){
+    this->enemyRegion = enemyRegion;
 }

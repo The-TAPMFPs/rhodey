@@ -1,6 +1,6 @@
-cmake_minimum_required (VERSION 3.11)
-# set(CMAKE_BUILD_TYPE DEBUG)
-
+cmake_minimum_required (VERSION 3.14)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_BUILD_TYPE Debug)
 add_definitions(-DUNIT_TEST)
 
 # --- Fetch FTXUI --------------------------------------------------------------
@@ -41,10 +41,15 @@ file(GLOB_RECURSE SRC_FILES
   src/UI.cpp
   src/uuid.cpp
   src/logger.cpp
-
   #===== Add new folders here!=====#
   src/Country/*.cpp
   src/Country/BattleStrategy/*.cpp
+
+  src/Factories/*.cpp
+  src/Military/*.cpp
+  src/UI.cpp
+  src/uuid.cpp
+  src/logger.cpp
 
   src/Entities/*.cpp
   src/Entities/Troop/*.cpp
@@ -56,15 +61,19 @@ file(GLOB_RECURSE SRC_FILES
 
   src/MapRegions/*.cpp
 
+  # src/Military/*.cpp
+
   src/War/*.cpp
   src/War/WarPhases/*.cpp
+  src/War/Battle/*.cpp
 )
 
 # Create the `ftxui-starter` executable in build/, add all .cpp files
 add_executable(${PROJECT_NAME}
-  src/main.cpp
-  ${SRC_FILES}
-)
+    src/main.cpp
+    ${SRC_FILES}
+    )
+
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 target_link_libraries(${PROJECT_NAME}
   PRIVATE ftxui::screen
@@ -72,6 +81,33 @@ target_link_libraries(${PROJECT_NAME}
   PRIVATE ftxui::component
 )
 
+enable_testing()
+add_executable(
+    Entity_Military_UnitTests
+    src/Entity_Military_UnitTests.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Entity_Military_UnitTests PUBLIC src)
+target_link_libraries(Entity_Military_UnitTests
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
+
+add_executable(
+    Map_UnitTest
+    src/Map_UnitTest.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Map_UnitTest PUBLIC src)
+target_link_libraries(Map_UnitTest
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
+# ------------------------------------------------------------------------------
 # ------------TESTING-----------------------------------------------------------
 enable_testing()
 add_executable(
@@ -81,14 +117,9 @@ add_executable(
 )
 target_include_directories(WarPhase_UnitTest PUBLIC src)
 target_link_libraries(WarPhase_UnitTest
-  PRIVATE ftxui::screen
-  PRIVATE ftxui::dom
-  PRIVATE ftxui::component
+  PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
   GTest::gtest_main
 )
-
-
-
 # --- Emscripten build (can ignore) --------------------------------------------
 if (EMSCRIPTEN)
   string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS")
@@ -100,3 +131,5 @@ if (EMSCRIPTEN)
   endforeach(file)
 endif()
 # ------------------------------------------------------------------------------
+include(GoogleTest)
+gtest_discover_tests(Entity_Military_UnitTests Map_UnitTest)
