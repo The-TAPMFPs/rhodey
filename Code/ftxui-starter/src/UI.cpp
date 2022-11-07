@@ -28,6 +28,119 @@ UI::UI(War* war)
  : war(war)
 {}
 
+//Returns the linearly interpolated point between two mapCoords
+//t in [0, 1] inclusive
+MapCoords flerp(MapCoords a, MapCoords b, float t)
+{
+    int dx = (a.x - b.x) * t;
+    int dy = (a.y - b.y) * t;
+
+    return {b.x + dx, b.y + dy};
+}
+
+float fdist(MapCoords a, MapCoords b)
+{
+    int dx = a.x-b.x;
+    int dy = a.y-b.y;
+
+    return sqrt(dx*dx + dy*dy);
+}
+
+std::vector<MapCoords> plotLineLow(int x0, int y0, int x1, int y1)
+{
+    std::vector<MapCoords> res;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int yi = 1;
+
+    if (dy < 0)
+    {
+        yi = -1;
+        dy = -dy;
+    }
+    int D = (2 * dy) - dx;
+    int y = y0;
+
+    for(int x = x0; x <= x1; x++)
+    {
+        res.push_back({x, y});
+        if (D > 0)
+        {
+            y = y + yi;
+            D = D + (2 * (dy - dx));
+        }
+        else
+        {
+            D = D + 2*dy;
+        }
+    }
+    return res;
+}
+
+std::vector<MapCoords> plotLineHigh(int x0, int y0, int x1, int y1)
+{
+    std::vector<MapCoords> res;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int xi = 1;
+
+    if (dx < 0)
+    {
+        xi = -1;
+        dx = -dx;
+    }
+    int D = (2 * dx) - dy;
+    int x = x0;
+
+    for(int y = y0; y <= y1; y++)
+    {
+        res.push_back({x, y});
+        if (D > 0)
+        {
+            x = x + xi;
+            D = D + (2 * (dx - dy));
+        }
+        else
+        {
+            D = D + 2*dx;
+        }
+    }
+    return res;
+}
+
+std::vector<MapCoords> brensenhamLine(int x0, int y0, int x1, int y1)
+{
+    std::vector<MapCoords> line;
+
+    if (std::abs(y1 - y0) < std::abs(x1 - x0))
+    {
+        if (x0 > x1)
+        {
+            auto newLine = plotLineLow(x1, y1, x0, y0);
+            line.insert(line.end(), newLine.begin(), newLine.end());
+        }
+        else
+        {
+            auto newLine = plotLineLow(x0, y0, x1, y1);
+            line.insert(line.end(), newLine.begin(), newLine.end());
+        }
+    }
+    else
+    {
+        if (y0 > y1)
+        {
+            auto newLine = plotLineHigh(x1, y1, x0, y0);
+            line.insert(line.end(), newLine.begin(), newLine.end());
+        }
+        else
+        {
+            auto newLine = plotLineHigh(x0, y0, x1, y1);
+            line.insert(line.end(), newLine.begin(), newLine.end());
+        }
+    }
+    return line;
+}
+
 void UI::render()
 {
   auto screen = ScreenInteractive::Fullscreen();
@@ -121,6 +234,20 @@ void UI::render()
         //Round to 2 decimal places
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << travelDifficulty;
+
+        //Draw Bresenham lines
+        // MapCoords from = selectedRegion->getCoords();
+        // MapCoords to = {r->x, r->y};
+        // int x0 = from.x*2, x1 = to.x*2;
+        // int y0 = from.y*4, y1 = to.y*4;
+        // std::vector<MapCoords> line = brensenhamLine(x0, y0, x1, y1);
+        // int c_r = (x*13 + y*7)%255;
+        // int c_g = (x*19 + y*31)%255;
+        // int c_b = (x*53 + y*19)%255;
+        // for(auto l = line.begin(); l != line.end(); l++)
+        // {
+        //   c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
+        // }
 
         c.DrawText(x, y+4, ss.str(), Color::Cyan1);
       }

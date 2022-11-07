@@ -1,18 +1,23 @@
 #include "Map.h"
 
-Map::Map(std::vector<Country*> allCountries)
+Map::Map(std::vector<Country*> allCountries, bool testing)
 {
     // this->occupancyTable = new OccupancyTable(this);
 
-    // Region* r = new Region(0,0);
-    // //TODO: Check position is not already taken
-    // regions.emplace(r->getUUID(), r);
 
-    // r = new Region(49,24);
-    // regions.emplace(r->getUUID(), r);
+    if (testing) {
+        Region* r = new Region(0,0,allCountries[0]);
+        regions.emplace(r->getUUID(), r);
 
-    //Initialize travel difficulty field to 0's
-    this->randomInitializeRegions(this->numRegions, allCountries);
+        r = new Region(49,24,allCountries[0]);
+        regions.emplace(r->getUUID(), r);
+
+        r = new Region(30,10,allCountries[1]);
+        regions.emplace(r->getUUID(), r);
+    } else {
+	//Initialize travel difficulty field to 0's
+	this->randomInitializeRegions(this->numRegions, allCountries);
+    }
 
     //Create travel difficulty fields
     this->travelDifficultyField_allianceA = new float*[mapW];
@@ -46,14 +51,17 @@ void Map::recalculateTravelFields()
         {
             for(int y = 0; y < mapH; y++)
             {
-                if(r->second->getPossessor()->getAlliance()->isTeamA())
-                {
-                    this->travelDifficultyField_allianceA[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
-                else
-                {
-                    this->travelDifficultyField_allianceB[x][y] += 1.0f/distToRegion(x, y, r->second);
-                }
+                float regionDist = distToRegion(x, y, r->second);
+                if(regionDist == 0) { regionDist = 1; }
+
+                    if(r->second->getPossessor()->getAlliance()->isTeamA())
+                    {
+                        this->travelDifficultyField_allianceA[x][y] += 1.0f/regionDist;
+                    }
+                    else
+                    {
+                        this->travelDifficultyField_allianceB[x][y] += 1.0f/regionDist;
+                    }
             }
         }
     }
@@ -147,16 +155,6 @@ MapData Map::getCurrentMapData()
 
 }
 
-//Returns the linearly interpolated point between two mapCoords
-//t in [0, 1] inclusive
-MapCoords lerp(MapCoords a, MapCoords b, float t)
-{
-    int dx = (a.x - b.x) * t;
-    int dy = (a.y - b.y) * t;
-
-    return {b.x + dx, b.y + dy};
-}
-
 int dist(MapCoords a, MapCoords b)
 {
     int dx = a.x-b.x;
@@ -165,27 +163,91 @@ int dist(MapCoords a, MapCoords b)
     return sqrt(dx*dx + dy*dy);
 }
 
+float sumLineLow(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int yi = 1;
+
+    if (dy < 0)
+    {
+        yi = -1;
+        dy = -dy;
+    }
+    int D = (2 * dy) - dx;
+    int y = y0;
+
+    for(int x = x0; x <= x1; x++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            y = y + yi;
+            D = D + (2 * (dy - dx));
+        }
+        else
+        {
+            D = D + 2*dy;
+        }
+    }
+    return res;
+}
+
+float sumLineHigh(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float res = 0;
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int xi = 1;
+
+    if (dx < 0)
+    {
+        xi = -1;
+        dx = -dx;
+    }
+    int D = (2 * dx) - dy;
+    int x = x0;
+
+    for(int y = y0; y <= y1; y++)
+    {
+        res += field[x][y];
+        if (D > 0)
+        {
+            x = x + xi;
+            D = D + (2 * (dx - dy));
+        }
+        else
+        {
+            D = D + 2*dx;
+        }
+    }
+    return res;
+}
+
+float sumBrensenhamLine(int x0, int y0, int x1, int y1, scalarField2D field)
+{
+    float sum = 0;
+
+    if (std::abs(y1 - y0) < std::abs(x1 - x0))
+    {
+        if (x0 > x1) { sum += sumLineLow(x1, y1, x0, y0, field); }
+        else { sum += sumLineLow(x0, y0, x1, y1, field); }
+    }
+    else
+    {
+        if (y0 > y1) { sum += sumLineHigh(x1, y1, x0, y0, field); }
+        else { sum += sumLineHigh(x0, y0, x1, y1, field); }
+    }
+    return sum;
+}
+
 //Get a measure of the difficulty for a country from teamA/teamB to travel linearly between two points on the map
 float Map::getTravelDifficulty(MapCoords from, MapCoords to, bool teamA)
 {
-    float sum = 0.0f;
-
-    int distance = dist(from, to);
-    if(distance == 0)
-    {
-        return 0;
-    }
-
-    for(int t = 0; t <= distance; t++)
-    {
-        MapCoords samplePt = lerp(from, to, ((float)t)/distance);
-
-        sum += teamA ?
-                    this->travelDifficultyField_allianceA[samplePt.x][samplePt.y]:
-                    this->travelDifficultyField_allianceB[samplePt.x][samplePt.y];
-    }
-
-    return sum;
+    scalarField2D field = teamA ? travelDifficultyField_allianceA : travelDifficultyField_allianceB;
+    if(from.x == to.x && from.y == to.y) { return 0; }
+    return sumBrensenhamLine(from.x, from.y, to.x, to.y, field) + dist(from, to)*0.1;
 }
 
 MapMemento* Map::makeMemento()
@@ -204,12 +266,13 @@ void Map::setMemento(MapMemento* mem){
 
 Map::~Map()
 {
+    // For some reason it seems to be dealocating itself
     //Deallocate travel fields
-    for(int x = 0; x < mapW; x++)
-    {
-        delete [] this->travelDifficultyField_allianceA[x];
-        delete [] this->travelDifficultyField_allianceB[x];
-    }
-    delete [] this->travelDifficultyField_allianceA;
-    delete [] this->travelDifficultyField_allianceA;
+    // for(int x = 0; x < mapW; x++)
+    // {
+        // delete [] this->travelDifficultyField_allianceA[x];
+        // delete [] this->travelDifficultyField_allianceB[x];
+    // }
+    // delete [] this->travelDifficultyField_allianceA;
+    // delete [] this->travelDifficultyField_allianceA;
 }

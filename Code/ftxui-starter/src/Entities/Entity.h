@@ -1,3 +1,10 @@
+/**
+ * \file Entity.h
+ * \brief Entity Object Header File.
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \version 1.0
+ * \date 6 November 2022
+ */
 #pragma once
 #include <string>
 #include <vector>
@@ -5,8 +12,11 @@
 #include "../uuid.h"
 using namespace std;
 
-class Country;
 
+class Country;
+/**
+ * @brief The Entity class is the base Class for all types of Entities.
+ */
 class Entity{
 
     protected:
@@ -29,7 +39,7 @@ class Entity{
 	int terrianHandling = 0;
 	UUID uuid = "";
 	Country * country;
-public:
+    public:
 	Entity(string name, string type, int HP, int Damage,
 		vector<Weapon*> * weapon, Country * country);
 	virtual ~Entity();
@@ -45,10 +55,6 @@ public:
 
 	void attack(Entity & defender);
 	void assignWeapon(Weapon & weapon);
-	/**
-	  Updates the HP of the entities.
-	  @warning This function should be called after both sides of a battle have finnished all of their attacks.
-	*/
 	void update();
 
 	/**
