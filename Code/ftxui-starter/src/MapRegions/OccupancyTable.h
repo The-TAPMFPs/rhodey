@@ -26,6 +26,8 @@ class OccupancyTable {
 	Region * getRegion(UUID entity);
 	bool moveEntity(Entity * entity, Region * region);
 	bool moveEntity(vector<Entity *> entity, Region * region);
+	int getNumTroops(Country *);
+	int getNumVehicles(Country *);
 	void cleanUp();
 };
 

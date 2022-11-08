@@ -292,6 +292,22 @@ TEST_F(OccupancyTableTest, EntitiesAtRegion) {
     EXPECT_EQ(this->table->getEntities(aRegion), entities);
 }
 
+TEST_F(OccupancyTableTest,getNumTroops) {
+    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
+    Entity * theirBomber =(Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, this->country2);
+    EXPECT_EQ(this->table->getNumTroops(country2), this->hostile->getAmount());
+}
+
+TEST_F(OccupancyTableTest, getNumVehicles) {
+    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
+    std::vector<Weapon *> * baddiestankWeapons = new std::vector<Weapon*>{new TestBomb()};
+    Entity * theirBomber = (Entity *) new Bomber("7th AirForce Division", 2, baddiesbombs, this->country2);
+    Entity * tank = (Entity *) new Tank("7th AirForce Division", 6, baddiestankWeapons, this->country2);
+    this->table->addEntity(theirBomber, aRegion);
+    this->table->addEntity(tank, aRegion);
+    EXPECT_EQ(this->table->getNumVehicles(country2), tank->getAmount() + theirBomber->getAmount());
+}
+
 TEST_F(OccupancyTableTest, CheckThatCantMergeWithWrongType) {
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
     this->table->addEntity((Entity *) new Tank("My Squad", 1, tankWeapons, country1), aRegion);
@@ -430,6 +446,25 @@ TEST_F(BattleTest, RunBattle) {
     EXPECT_EQ(hostile->getAmount(), 30);
 }
 
+TEST_F(BattleTest, getLosser) {
+    Country * newCountry = new Country("COuntry C");
+    this->friendlies->add(newCountry);
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
+    Entity * myTank = (Entity *) new Tank("My Squad", 1, tankWeapons, newCountry);
+    Entity * theirBomber =(Entity *) new Bomber("7th AirForce Division", 100000, baddiesbombs, this->country2);
+    this->table->addEntity(myTank, aRegion);
+    this->table->addEntity(theirBomber,aRegion);
+    Battle * newBattle = new Battle(aRegion,this->table,true);
+    while (newBattle->takeTurn()) {};
+
+    std::vector<Country *> v = newBattle->getLossers();
+    std::vector<Entity *> shouldBeEmpty = newBattle->getTeamA();
+    EXPECT_EQ(shouldBeEmpty.size(), 0);
+    EXPECT_EQ(v.size(), 2);
+    EXPECT_EQ(v.at(1), this->country1);
+    EXPECT_EQ(v.at(0), newCountry);
+}
 TEST_F(BattleTest, BigBattle) {
     std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
     std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new TestBomb()};
@@ -454,6 +489,7 @@ TEST_F(BattleTest, BigBattle) {
     EXPECT_EQ(this->table->getEntities(aRegion), v);
     EXPECT_NE(v.at(1)->getName(), "Enemy Squad");
 }
+
 
 TEST_F(BattleTest, VeryBigBattle) {
     // Weapons ===============================================================

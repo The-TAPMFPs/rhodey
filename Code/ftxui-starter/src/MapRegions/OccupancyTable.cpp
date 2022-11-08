@@ -8,6 +8,9 @@
 #include <map>
 #include <utility>
 #include <vector>
+#include "Entities/Entity.h"
+#include "Entities/Troop/Troop.h"
+#include "Entities/Vehicle/Vehicle.h"
 
 /**
   * \fn OccupancyTable::OccupancyTable(Map * InitialMap )
@@ -286,4 +289,35 @@ bool OccupancyTable::moveEntity(vector<Entity *> entities, Region * region) {
     }
 
     return false;
+}
+
+int OccupancyTable::getNumTroops(Country * country) {
+    int total = 0;
+    for (auto itr = this->regionToEntties.begin(); itr != this->regionToEntties.end(); ++itr) {
+	std::vector<Entity *> entityVector = itr->second->entities;
+	for (auto entity = entityVector.begin(); entity != entityVector.end(); ++entity) {
+	    if (long((*entity)->getCountry()) == long(country)) {
+		Troop * troopCast = dynamic_cast<Troop*>((*entity));
+		if (troopCast != NULL) {
+		    total += troopCast->getAmount();
+		}
+	    }
+	}
+    }
+    return total;
+}
+
+int OccupancyTable::getNumVehicles(Country * country) {
+    int total = 0;
+    for (auto itr = this->regionToEntties.begin(); itr != this->regionToEntties.end(); ++itr) {
+	std::vector<Entity *> entityVector = itr->second->entities;
+	for (auto entity = entityVector.begin(); entity != entityVector.end(); ++entity) {
+	    if (long((*entity)->getCountry()) == long(country)) {
+		if ((*entity)->isVehicle()) {
+		    total += (*entity)->getAmount();
+		}
+	    }
+	}
+    }
+    return total;
 }
