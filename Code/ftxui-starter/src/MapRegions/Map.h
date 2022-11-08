@@ -74,9 +74,15 @@ class Map {
 
         OccupancyTable* getOccupancyTable();
         float getEnemyRatioInRegion(Region* region, bool teamA);
+
         std::vector<Region*> getRegionsOwnedBy(Country* country);
         std::vector<Region*> getRegionsOwnedBy(bool teamA);
-        Region* getRegionWithHighestEnemyRatio(bool teamA);
+
+        // Region* getFriendRegionWithHighestEnemyRatio(bool teamA);
+        // Region* getEnemyRegionWithHighestFriendRatio(bool teamA);
+        // Region* getFriendRegionWithLowestEnemyRatio(bool teamA);
+        Region* getTeamsRegionWithEnemyRatio(bool weAreTeamA, bool getEnemyRegion, bool highest);
+
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento* makeMemento();
