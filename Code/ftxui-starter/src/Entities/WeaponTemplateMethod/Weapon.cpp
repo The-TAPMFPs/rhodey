@@ -158,6 +158,16 @@ void TestWeapon::outputFlair(){
 TestBomb::TestBomb() : Weapon(30,"Test Bomb") {
     this->WeaponType = BOMB;
 }
+Mg160::Mg160() : Weapon(0, "MG160") {
+    this->damage = 30 + rand()%30;
+    this->WeaponType = HIGH_CAL;
+}
+void Mg160::outputFlair() {
+    std::stringstream out;
+    out << "The sound of Bullets Singing Over Heads Inbetween the" <<
+	" Thunderous claps of Gunfire Rumbles Across the Battle Field as MG160's show their furry" << std::endl;
+    Logger::log(out.str());
+}
 void TestBomb::outputFlair(){
 
 }

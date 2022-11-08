@@ -41,6 +41,7 @@ class Country : public Observable {
     int numTroops;
     int numVehicles;
     int numEnemyRegions;
+    Region * capital;
 
     //===== CHARACTER MATRIX =====//
 
@@ -84,6 +85,8 @@ class Country : public Observable {
     double getGoalRating();
     double getAggressiveness();
     double getResources();
+    Map * getMap() {return this->map;}
+    Region * getCapital() {return this->capital;}
     int getNumSpies();
     int getNumTroops();
     int getNumVehicles();
@@ -99,6 +102,7 @@ class Country : public Observable {
     void setNumTroops(int numTroops);
     void setNumVehicles(int numVehicles);
     void setNumEnemyRegions(int numEnemyRegions);
+    void setCapital(Region *);
 };
 
 
