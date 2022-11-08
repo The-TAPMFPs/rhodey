@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 3.14)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_BUILD_TYPE Debug)
 add_definitions(-DUNIT_TEST)
+set(CMAKE_EXPORT_COMPILE_COMMANDS)
 
 # --- Fetch FTXUI --------------------------------------------------------------
 include(FetchContent)
@@ -131,6 +132,16 @@ add_executable(
 )
 target_include_directories(WarPhase_UnitTest PUBLIC src)
 target_link_libraries(WarPhase_UnitTest
+  PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
+  GTest::gtest_main
+)
+add_executable(
+    Factory_UnitTest
+    src/Factory_UnitTest.cpp
+  ${SRC_FILES}
+)
+target_include_directories(Factory_UnitTest PUBLIC src)
+target_link_libraries(Factory_UnitTest
   PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
   GTest::gtest_main
 )

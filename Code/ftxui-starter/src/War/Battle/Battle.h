@@ -9,6 +9,8 @@
 
 #include <vector>
 #include "../../MapRegions/OccupancyTable.h"
+#include "Country/Country.h"
+#include <unordered_set>
 
 class Battle{
     private:
@@ -17,6 +19,9 @@ class Battle{
         std::vector<Entity *> teamA;
         std::vector<Entity *> teamB;
 	void checkReinforcements();
+	bool testing = false;
+	unordered_set<Country *> allianceAInvolved;
+	unordered_set<Country *> allianceBInvolved;
     public:
 	/**
 	 * \fn Battle::Battle(Region *, OccupancyTable *)
@@ -26,7 +31,7 @@ class Battle{
 	 * \param b OccupancyTable of the Simulation
 	 * \return  Nothing
 	 */
-        Battle(Region* region, OccupancyTable *);
+        Battle(Region* region, OccupancyTable *, bool testing = false);
 	/**
 	 * \fn Battle::takeTurn()
 	 * \brief Simulates one turn of battle.
@@ -38,5 +43,6 @@ class Battle{
 	Region * getRegion() {return this->_region;};
 	std::vector<Entity *> getTeamA() {return this->teamA;}
 	std::vector<Entity *> getTeamB() {return this->teamB;}
+	std::vector<Country *> getLossers();
         ~Battle();
 };

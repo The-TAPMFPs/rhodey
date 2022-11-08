@@ -31,5 +31,6 @@ class Alliance {
 		Country* getIthCountry(int index);
 		Alliance* getEnemyAlliance() {return enemyAlliance;}
 		int numCountries() {return members.size();}
+		std::string getName() {return name;}
 };
 

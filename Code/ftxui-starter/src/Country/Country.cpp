@@ -1,11 +1,14 @@
 #include "Country.h"
 #include "BattleStrategy/Defensive.h"
+#include "BattleStrategy/BattleStrategy.h"
 #include "BattleStrategy/Diplomacy.h"
 #include "BattleStrategy/Offensive.h"
 #include "BattleStrategy/Intel.h"
 #include "BattleStrategy/Prepare.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
 #include "../MapRegions/Map.h"
+
+class Observable;
 
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
@@ -39,7 +42,12 @@ Country::Country(std::string name, Map* map) : Country(name) {
 
 
 Country::~Country(){
-    delete this->strategy;
+    if (this->strategy != NULL) {
+	    delete strategy;
+    }
+    if (this->allies != NULL) {
+       delete allies;
+    }
     personalityMatrix.resize(0,0);
 }
 
@@ -119,6 +127,9 @@ void Country::setStrategy(BattleStrategy* strategy) {
 }
 
 void Country::decideStrategy() {
+  //set num troops
+  //set num vehicles
+  //set num enemy regions
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;
@@ -134,7 +145,7 @@ void Country::decideStrategy() {
   valMatrix.resize(0,0);
   pm.resize(0,0);
   result.resize(0,0);
-  
+
   if(this->strategy != NULL) {
     delete this->strategy;
   }
@@ -165,10 +176,28 @@ void Country::decideStrategy() {
 }
 
 void Country::takeTurn() {
+  validateValues();
   decideStrategy();
   this->strategy->doStrategy(this);
 
   alertSpyCountries();
+}
+
+void Country::validateValues() {
+
+  if(population < 0) { population = 0;}
+  if(economy < 0) { economy = 0;}
+  if(resources < 0) { resources = 0;}
+  if(morale < 0) { morale = 0;}
+  if(aggressiveness < 0) { aggressiveness = 0;}
+  if(goalRating < 0) { goalRating = 0;}
+  if(research < 0) { research = 0;}
+  if(numTroops < 0) { numTroops = 0;}
+  if(numVehicles < 0) { numVehicles = 0;}
+  if(numSpies < 0) { numSpies = 0;}
+  if(numEnemyRegions < 0) { numEnemyRegions = 0;}
+
+
 }
 
 std::vector<std::string> Country::getFormattedStats() {
@@ -275,3 +304,6 @@ int Country::getNumEnemyRegions() {
   return this->numEnemyRegions;
 }
 
+void Country::setCapital(Region * capital) {
+    this->capital = capital;
+}

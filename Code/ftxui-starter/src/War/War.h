@@ -17,7 +17,7 @@ class War {
 #endif
         WarPhase* warPhase;
         Map* map;
-        int frameCount;
+        int stepCount;
 
     public:
         Alliance* teamA;
@@ -33,12 +33,15 @@ class War {
 
         void step(); //The main game loop
         bool onEvent(ftxui::Event e);
+        int getStepCount();
 
         void transitionTo(WarPhase* warPhase);
         void addCountryToSideA(Country* country);
         void addCountryToSideB(Country* country);
         Alliance* getSideCountryIsOn(Country* country);
         std::vector<Country*> getAllCountries();
+        Country* getCountryInAllianceWithHighestTroopCount(bool teamA);
+        Country* getCountryInAllianceWithHighestVehicleCount(bool teamA);
         void changeState();
         void start();
         bool isOver();
