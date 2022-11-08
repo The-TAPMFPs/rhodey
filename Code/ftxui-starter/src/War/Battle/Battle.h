@@ -44,5 +44,6 @@ class Battle{
 	std::vector<Entity *> getTeamA() {return this->teamA;}
 	std::vector<Entity *> getTeamB() {return this->teamB;}
 	std::vector<Country *> getLossers();
+	std::vector<Country *> getWinners();
         ~Battle();
 };
