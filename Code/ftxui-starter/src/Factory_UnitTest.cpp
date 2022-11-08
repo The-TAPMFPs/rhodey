@@ -15,17 +15,17 @@ struct TroopFactoryTest : testing::Test{
     Entity * e3;
     Entity * e4;
     Entity * e5;
-    Country * cunt;
+    Country * countrytry;
 
     TroopFactoryTest() {
-        cunt = new Country("WillyWonka");
-        uf1 = new TroopFactory("TroopFactory1", 5000, cunt);
+        countrytry = new Country("WillyWonka");
+        uf1 = new TroopFactory("TroopFactory1", 5000, countrytry);
         e1 = uf1->makeUnit();
-        cunt->setResearch(0.3);
-        uf2 = new TroopFactory("TroopFactory2", 5000, cunt);
+        countrytry->setResearch(0.3);
+        uf2 = new TroopFactory("TroopFactory2", 5000, countrytry);
         e2 = uf2->makeUnit();
-        cunt->setResearch(0.9);
-        uf3 = new TroopFactory("TroopFactory3", 5000, cunt);
+        countrytry->setResearch(0.9);
+        uf3 = new TroopFactory("TroopFactory3", 5000, countrytry);
         e3 = uf3->makeUnit();
         e4 = uf3->makeUnit();
         e5 = uf3->makeUnit();
@@ -35,7 +35,7 @@ struct TroopFactoryTest : testing::Test{
         delete uf1;
         delete uf2;
         delete uf3;
-        delete cunt;
+        delete countrytry;
     }
 };
 
@@ -46,19 +46,19 @@ struct VehicleFactoryTest : testing::Test{
     Entity * e1;
     Entity * e2;
     Entity * e3;
-    Country * cunt;
+    Country * countrytry;
     VEHICLE_TYPE veh;
 
     VehicleFactoryTest(){
-        cunt = new Country("WillyWonka");
+        countrytry = new Country("WillyWonka");
         veh = truck;
-        uf1 = new VehicleFactory("VehicleFactory1", 100, veh, cunt);
+        uf1 = new VehicleFactory("VehicleFactory1", 100, veh, countrytry);
         e1 = uf1->makeUnit();
         veh = bomber;
-        uf2 = new VehicleFactory("VehicleFactory2", 100, veh, cunt);
+        uf2 = new VehicleFactory("VehicleFactory2", 100, veh, countrytry);
         uf2->makeUnit();
         veh = warship;
-        uf3 = new VehicleFactory("VehicleFactory3", 100, veh, cunt);
+        uf3 = new VehicleFactory("VehicleFactory3", 100, veh, countrytry);
         //uf3->makeUnit();
     }
 
@@ -66,7 +66,7 @@ struct VehicleFactoryTest : testing::Test{
         delete uf1;
         delete uf2;
         delete uf3;
-        delete cunt;
+        delete countrytry;
     }
 };
 
@@ -78,5 +78,5 @@ TEST_F(TroopFactoryTest, test1){
     EXPECT_EQ(e1->getAmount(), 5000);
     EXPECT_EQ(e1->getCountry()->getName(), "WillyWonka");
     std::vector<Weapon *> * v = new std::vector<Weapon*>{new SMG(), new Pistol()};
-    EXPECT_EQ(e1->getWeapon(), v);
+    EXPECT_NE(e1->getWeapon(), v);
 }

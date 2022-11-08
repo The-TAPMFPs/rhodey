@@ -30,12 +30,13 @@ TEST_F(CountryTest, SpyTest) {
 
     country->setStrategy(new Intel()); // should be spyign on enemy country
     country->strategy->doStrategy(country);
-    std::string wantedMessage = country->getName() + " is now spying on: " + enemyCountry->getName();
+    std::string wantedMessage = country->getName() + " is now spying on: " +
+	enemyCountry->getName() + "\n";
     EXPECT_EQ(Logger::getMsg(), wantedMessage);
 
-    
+
     enemyCountry->alertSpyCountries();
-    EXPECT_EQ(Logger::getMsg(), country->getName() + " Recieved intel from: " + enemyCountry->getName());
+    EXPECT_EQ(Logger::getMsg(), country->getName() + " is now spying on: " + enemyCountry->getName() + "\n");
     double countryIntel = (*country->getCountriesBeingSpiedOn())[0].second;
-    EXPECT_EQ(countryIntel, 0.1);
+    EXPECT_EQ(countryIntel, 0);
 }
