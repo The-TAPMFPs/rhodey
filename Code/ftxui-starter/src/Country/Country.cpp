@@ -30,27 +30,14 @@ Country::Country(std::string name) : name(name) {
     goalRating = (((double) rand() / RAND_MAX) * 0.10-0.05) + 0.05;
     numSpies = 0;
     strategy = NULL;
-    OccupancyTable* occTable = map->getOccupancyTable();
-    numTroops = occTable->getNumTroops(this);
-    numVehicles = occTable->getNumVehicles(this);
-    numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
-
-    delete occTable;
-    
     generatePersonalityMatrix();
-}
-
-Country::Country(std::string name, Map* map) : Country(name) {
-  this->map = map;
 }
 
 
 Country::~Country(){
     if (this->strategy != NULL) {
-	    delete strategy;
     }
     if (this->allies != NULL) {
-       delete allies;
     }
     personalityMatrix.resize(0,0);
 }
@@ -313,4 +300,11 @@ int Country::getNumEnemyRegions() {
 
 void Country::setCapital(Region * capital) {
     this->capital = capital;
+}
+
+void Country::setMap(Map *map) {
+    OccupancyTable* occTable = map->getOccupancyTable();
+    numTroops = occTable->getNumTroops(this);
+    numVehicles = occTable->getNumVehicles(this);
+    numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
 }

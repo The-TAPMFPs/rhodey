@@ -65,7 +65,6 @@ class Country : public Observable {
   public:
     double morale;    // The general morale of the country's citizens
     Country(std::string name);
-    Country(std::string name, Map* map);
     ~Country();
     std::string getName();
     void takeTurn();
@@ -91,6 +90,7 @@ class Country : public Observable {
     int getNumTroops();
     int getNumVehicles();
     int getNumEnemyRegions();
+    void setMap(Map *map);
     void setMorale(double morale);
     void setEconomy(double economy);
     void setPopulation(int population);

@@ -30,6 +30,9 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
 
     this->recalculateTravelFields();
     this->occupancyTable = new OccupancyTable(this);
+    for (auto itr = allCountries.begin(); itr != allCountries.end(); ++itr) {
+	(*itr)->setMap(this);
+    }
 }
 
 //Call this whenever the outcome of a battle changes a Region's occupancy
