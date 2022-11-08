@@ -63,6 +63,10 @@ std::vector<std::string> Alliance::getAllianceNames() {
     return names;
 }
 
+std::vector<Country*> Alliance::getMembers() {
+    return members;
+}
+
 //For round-robin selection of a country from the alliance
 /**
  * \fn Country* Alliance::getMemberModuloSize(int modIndex)
