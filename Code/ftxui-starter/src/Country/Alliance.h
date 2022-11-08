@@ -25,6 +25,7 @@ class Alliance {
 		bool isTeamA() {return teamA;}
 		bool containsCountry(Country* country);
 		std::vector<std::string> getAllianceNames();
+		std::vector<Country *> getMembers();
 		Country* getMemberModuloSize(int modIndex);
 };
 

@@ -13,7 +13,7 @@
  */
 Conflict::Conflict() {
   War::warState = "Conflict";
-  War::warStateDesc = "Currently in Conflict State <- This should be changed";
+  War::warStateDesc = "The conflict has ended!"; //TODO: Summary of conflict
   War::warStateThumbnailColor = ftxui::Color::GreenYellow;
   War::warStateThumbnail = {
 "",
