@@ -184,7 +184,7 @@ void Country::takeTurn() {
 }
 
 void Country::validateValues() {
- 
+
   if(population < 0) { population = 0;}
   if(economy < 0) { economy = 0;}
   if(resources < 0) { resources = 0;}
@@ -197,7 +197,7 @@ void Country::validateValues() {
   if(numSpies < 0) { numSpies = 0;}
   if(numEnemyRegions < 0) { numEnemyRegions = 0;}
 
-  
+
 }
 
 std::vector<std::string> Country::getFormattedStats() {
@@ -304,3 +304,6 @@ int Country::getNumEnemyRegions() {
   return this->numEnemyRegions;
 }
 
+void Country::setCapital(Region * capital) {
+    this->capital = capital;
+}
