@@ -303,6 +303,7 @@ void Country::setCapital(Region * capital) {
 }
 
 void Country::setMap(Map *map) {
+    this->map = map;
     OccupancyTable* occTable = map->getOccupancyTable();
     numTroops = occTable->getNumTroops(this);
     numVehicles = occTable->getNumVehicles(this);
