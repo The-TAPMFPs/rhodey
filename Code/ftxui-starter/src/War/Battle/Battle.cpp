@@ -1,5 +1,16 @@
 #include "Battle.h"
+/**
+ * \file Battle.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 8 November 2022
+ */
 
+/**
+ * \fn Battle::Battle(Region* region, OccupancyTable * table)
+ * \brief the battle constructor which creates and initializes a new battle 
+ * \param region a pointer to a Region
+ * \param table a pointer to a OccupancyTable
+*/
 Battle::Battle(Region* region, OccupancyTable * table) {
     this->_region = region;
     this->table = table;
@@ -12,7 +23,10 @@ Battle::Battle(Region* region, OccupancyTable * table) {
 	}
     }
 }
-
+/**
+ * \fn void Battle::checkReinforcements()
+ * \brief a function that checks if certain teams have reinforcements , if not - fall back
+*/
 void Battle::checkReinforcements() {
     this->teamA.clear();
     this->teamB.clear();
@@ -25,7 +39,10 @@ void Battle::checkReinforcements() {
 	}
     }
 }
-
+/**
+ * \fn bool Battle::takeTurn()
+ * \brief this function implements the taking a turn functionality 
+*/
 bool Battle::takeTurn() {
     this->checkReinforcements();
     std::shuffle(this->teamA.begin(), this->teamA.end(), gen); // gen is the generator from uuid.h
@@ -66,6 +83,9 @@ bool Battle::takeTurn() {
 
     return true;
 }
-
+/**
+ * \fn Battle::~Battle()
+ * \brief a destructor that ends a battle*(deallocates memory)
+*/
 Battle::~Battle(){
 }

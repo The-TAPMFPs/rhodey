@@ -48,9 +48,9 @@ Entity::~Entity() {
 
 /**
  * @fn void attack(Entity & defender)
- * @brief 
+ * @brief the attack function 
  * 
- * @param defender 
+ * @param defender is the defender 
  */
 void Entity::attack(Entity & defender) {
     if (this->HP <= 0) {
@@ -62,12 +62,20 @@ void Entity::attack(Entity & defender) {
 	defender.defend(totalDamage, * this->weapons->at(count));
     }
 }
-
+/**
+ * \fn void Entity::update()
+ * \brief update function that updates the HP of an entity 
+*/
 void Entity::update() {
     this->HP = this->HP - this->DamageDone;
     this->DamageDone = 0;
 }
-
+/**
+ * \fn void Entity::defend(int damage, Weapon &weapon)
+ * \brief defend function that defends against an attack
+ * \param damage the damage being dealt that we should dampen/make smaller since we are defending
+ * \param weapon the weapon that is doing the damage
+*/
 void Entity::defend(int damage, Weapon &weapon) {
     int potentialDamage = damage;
     if (this->getAndSetDefense()) {
@@ -77,7 +85,11 @@ void Entity::defend(int damage, Weapon &weapon) {
     potentialDamage = this->weaknesses(potentialDamage, weapon);
     this->DamageDone = potentialDamage;
 }
-
+/**
+ * \fn bool Entity::getAndSetDefense()
+ * \brief function that determines if an entity is defending at a point in time 
+ * \return the status of defending 
+*/
 bool Entity::getAndSetDefense() {
     bool currentValue = this->defending;
     if (this->defending == true) {
@@ -87,11 +99,20 @@ bool Entity::getAndSetDefense() {
     }
     return currentValue;
 }
-
+/**
+ * \fn void Entity::assignWeapon(Weapon &weapon)
+ * \brief function that assigns a weapon to a particular entity
+ * \param weapon the weapon thatll be assigned to an entity 
+*/
 void Entity::assignWeapon(Weapon &weapon) {
     this->weapons->push_back(&(weapon));
 }
-
+/**
+ * \fn Entity * Entity::split(int numberOfEntities)
+ * \brief function that clones an entity
+ * \param numberOfEntities the number of entities we wish to clone
+ * \return  
+*/
 Entity * Entity::split(int numberOfEntities) {
     if (numberOfEntities*3 > this->HP) {
 	return nullptr;

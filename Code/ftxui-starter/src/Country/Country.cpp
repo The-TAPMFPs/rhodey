@@ -1,27 +1,44 @@
 #include "Country.h"
-
+/**
+ * \file Country.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 7 November 2022
+ */
+/**
+ * \fn unsigned int Country::sizeOfArmy()
+ * \brief calculate the size of the army 
+ * \return return the calculated size of the army 
+*/
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
   return 0;
 }
-unsigned int Country::prowessInRegion(Region* region) {
+/**
+ * \fn unsigned int Country::prowessInRegion(Region* region)
+ * \brief 
+*/
+unsigned int Country::prowessInRegion(Region* region) {//chris pls do the prowessInRegion func doxygen 
   return 0;
 }
-
+/**
+ * \fn Country::Country(std::string name)
+ * \brief constructor for the Country class which creates new Countries 
+ * \param name the name of a newly created country 
+*/
 Country::Country(std::string name) : name(name) {
-    double min=0.25, max=0.75;
+    double min=0.25, max=0.75;/**minimum and maximum allowed values (upper and lower bounds)*/
     srand((unsigned)time(NULL));
-    population = (int) (rand() % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
-    economy = (((double) rand() / RAND_MAX) * max-min) + min;
-    morale = (((double) rand() / RAND_MAX) * max-min) + min;
-    resources = (((double) rand() / RAND_MAX) * max-min) + min;
-    research = (((double) rand() / RAND_MAX) * max-min) + min;
-    aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
-    goalRating = 0;
-    numSpies = 0;
-    numTroops = 0;
-    numVehicles = 0;
-    numEnemyRegions = 0;
+    population = (int) (rand() % 500000-300000+1) + 3000000;/**the population which is generated is between 300k and 500k*/
+    economy = (((double) rand() / RAND_MAX) * max-min) + min;/**the economy(money) a country has is generated in this way */
+    morale = (((double) rand() / RAND_MAX) * max-min) + min;/**the variable that stores the morale of a country */
+    resources = (((double) rand() / RAND_MAX) * max-min) + min;/**the variable that keeps track of the resources of a country*/
+    research = (((double) rand() / RAND_MAX) * max-min) + min;/**variable that stores the amount of research a country has done */
+    aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;/**variable that stores the amount of aggression a country has */
+    goalRating = 0;/**goal rating variable that is initialized to 0*/
+    numSpies = 0;/**number of spies variable that is initialized to 0*/
+    numTroops = 0;/**number of troops variable that is initialized to 0*/
+    numVehicles = 0;/**number of vehicles varibale that is initialized to 0*/
+    numEnemyRegions = 0;/**number of enemy regions that is initially initialized to 0*/
     generatePersonalityMatrix();
 
     strats[0] = new Offensive();
@@ -30,13 +47,20 @@ Country::Country(std::string name) : name(name) {
     strats[3] = new Prepare();
     strats[4] = new Diplomacy();
 }
-
+/**
+ * \fn Country::~Country()
+ * \brief the Country destructor
+*/
 Country::~Country(){
     for (int count = 0; count < 5; count++) {
 	delete strats[count];
     }
 }
-
+/**
+ * \fn string Country::getName()
+ * \brief the function that gets a countries name 
+ * \return the function returns the country name 
+*/
 std::string Country::getName() {
   return this->name;
 }
@@ -193,91 +217,180 @@ std::vector<std::string> Country::getFormattedStats() {
       "Goal Rating: " + std::to_string(goalRating),
       "Number of Spies: " + std::to_string(numSpies)};
 }
-
+/**
+ * \fn void Country::setPopulation(int population)
+ * \brief sets the populaton of a country
+ * @param population is the population we want the country to be set to 
+*/
 void Country::setPopulation(int population) {
   this->population = population;
 }
-
+/**
+ * \fn void Country::setEconomy(double economy)
+ * \brief sets the economy(wealth) of a country
+ * @param economy is the ecnonomy(wealth) we want the country to be set to 
+*/
 void Country::setEconomy(double economy) {
   this->economy = economy;
 }
-
+/**
+ * \fn void Country::setMorale(double morale)
+ * \brief sets the morale of a country
+ * @param morale is the morale we want the country to be set to 
+*/
 void Country::setMorale(double morale) {
   this->morale = morale;
 }
-
+/**
+ * \fn void Country::setResources(double resources)
+ * \brief sets the resources of a country
+ * @param resources is the resources we want the country to be set to 
+*/
 void Country::setResources(double resources) {
   this->resources = resources;
 }
-
+/**
+ * \fn void Country::setResearch(double Research)
+ * \brief sets the Research of a country
+ * @param Research is the amount of Research we want the country to be set to 
+*/
 void Country::setResearch(double research) {
   this->research = research;
 }
-
+/**
+ * \fn void Country::setAggressiveness(double aggressiveness)
+ * \brief sets the aggressiveness of a country
+ * @param aggressiveness is the amount of aggressiveness we want the country to be set to 
+*/
 void Country::setAggressiveness(double aggressiveness) {
   this->aggressiveness = aggressiveness;
 }
-
+/**
+ * \fn void Country::setGoalRating(double goalRating)
+ * \brief sets the Goalrating of a country
+ * @param goalRating is the amount of goalRating we want the country to be set to 
+*/
 void Country::setGoalRating(double goalRating) {
   this->goalRating = goalRating;
 }
-
+/**
+ * \fn void Country::setNumSpies(int numSpies)
+ * \brief sets the number of spies of a country
+ * @param numSpies is the amount of spies we want the country to have 
+*/
 void Country::setNumSpies(int numSpies) {
   this->numSpies = numSpies;
 }
-
+/**
+ * \fn void Country::setNumTroops(int numTroops)
+ * \brief sets the number of Troops of a country
+ * @param numTroops is the amount of Troops we want the country to have 
+*/
 void Country::setNumTroops(int numTroops) {
   this->numTroops = numTroops;
 }
-
+/**
+ * \fn void Country::setNumVehicles(int numVehilces)
+ * \brief sets the number of Vehicles of a country
+ * @param numVehicles is the amount of vehicles we want the country to have 
+*/
 void Country::setNumVehicles(int numVehicles) {
   this->numVehicles = numVehicles;
 }
-
+/**
+ * \fn void Country::setNumEnemyRegions(int numEnemyRegions)
+ * \brief sets the number of EnemyRegions of a country
+ * @param numEnemyRegions is the amount of EnemyRegions we want the country to have 
+*/
 void Country::setNumEnemyRegions(int numEnemyRegions) {
   this->numEnemyRegions = numEnemyRegions;
 }
-
+/**
+ * \fn int Country::getPopulation()
+ * \brief the function that fetches the population of a country 
+ * \return the function returns the population of a country 
+*/
 int Country::getPopulation() {
   return this->population;
 }
-
+/**
+ * \fn int Country::getEconomy()
+ * \brief the function that fetches the Economy of a country 
+ * \return the function returns the Economy of a country 
+*/
 double Country::getEconomy() {
   return this->economy;
 }
 
+/**
+ * \fn int Country::getMorale()
+ * \brief the function that fetches the morale of a country 
+ * \return the function returns the morale of a country 
+*/
 double Country::getMorale() {
   return this->morale;
 }
-
+/**
+ * \fn int Country::getResources()
+ * \brief the function that fetches the Resources of a country 
+ * \return the function returns the Resources of a country 
+*/
 double Country::getResources() {
   return this->resources;
 }
-
+/**
+ * \fn int Country::getResearch()
+ * \brief the function that fetches the Research of a country 
+ * \return the function returns the Research of a country 
+*/
 double Country::getResearch() {
   return this->research;
 }
-
+/**
+ * \fn int Country::getAggressiveness()
+ * \brief the function that fetches the aggressiveness of a country 
+ * \return the function returns the aggressiveness of a country 
+*/
 double Country::getAggressiveness() {
   return this->aggressiveness;
 }
-
+/**
+ * \fn int Country::getGoalRating()
+ * \brief the function that fetches the GoalRating of a country 
+ * \return the function returns the GoalRating of a country 
+*/
 double Country::getGoalRating() {
   return this->goalRating;
 }
-
+/**
+ * \fn int Country::getNumSpies()
+ * \brief the function that fetches the number of spies of a country 
+ * \return the function returns the number of spies of a country 
+*/
 int Country::getNumSpies() {
   return this->numSpies;
 }
-
+/**
+ * \fn int Country::getNumTroops()
+ * \brief the function that fetches the number of troops  of a country 
+ * \return the function returns the number of troops of a country 
+*/
 int Country::getNumTroops() {
   return this->numTroops;
 }
-
+/**
+ * \fn int Country::getNumVehicles()
+ * \brief the function that fetches the number of vehicles of a country 
+ * \return the function returns the number of vehicles of a country 
+*/
 int Country::getNumVehicles() {
   return this->numVehicles;
 }
-
+/**
+ * \fn int Country::getNumEnemyRegions()
+ * \brief the function that fetches the number of enemy regions of a country 
+ * \return the function returns the number of enemy rehions of a country 
+*/
 int Country::getNumEnemyRegions() {
   return this->numEnemyRegions;
 }
