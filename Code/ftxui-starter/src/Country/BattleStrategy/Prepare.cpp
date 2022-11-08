@@ -17,8 +17,8 @@
  */
 Prepare::Prepare(Map* map, Country * country) : BattleStrategy(map){
     this->map = map;
-    this->troopFactory = new TroopFactory((country->getName() + "'s Training Facility"), 1000, country);
-    this->vehicleFactory = new VehicleFactory((country->getName() + "'s Factory"), 100, country);
+    this->troopFactory = new TroopFactory((country->getName() + "'s Training Facility"), 1000 * log10(country->getPopulation()), country);
+    this->vehicleFactory = new VehicleFactory((country->getName() + "'s Factory"), 100*log10(country->getEconomy()), country);
 }
 
 Prepare::~Prepare() {
