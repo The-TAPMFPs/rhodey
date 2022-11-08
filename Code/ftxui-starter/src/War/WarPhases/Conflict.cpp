@@ -3,7 +3,7 @@
 
 Conflict::Conflict() {
   War::warState = "Conflict";
-  War::warStateDesc = "The conflict has ended!"; //TODO: Summary of conflict
+  War::warStateDesc = War::narrative.conflict;
   War::warStateThumbnailColor = ftxui::Color::GreenYellow;
   War::warStateThumbnail = {
 "",

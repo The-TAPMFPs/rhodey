@@ -8,4 +8,5 @@ class Narrative {
         std::string hostilities;
         std::string postWar;
         std::string disputeSettled;
+        std::string conflict;
 };

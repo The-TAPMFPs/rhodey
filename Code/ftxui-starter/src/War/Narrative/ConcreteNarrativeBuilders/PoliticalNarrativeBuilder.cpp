@@ -30,3 +30,11 @@ void PoliticalNarrativeBuilder::setDisputeSettled(std::vector<std::string> count
         "The war is over " + countriesA[0] + " go home and so do " + countriesB[0] + " beliefs still stand, people never change, but the war is over." 
     });
 }
+
+void PoliticalNarrativeBuilder::setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+{
+    product.conflict = NarrativeBuilder::pickRandom({
+        "The radicization of political ideologies has lead to conflict!. " + countriesA[0] + " and " + countriesB[0] + 
+        "Both believe the other side is so wrong that they have forgotten the humanity of the other side."
+    });
+}

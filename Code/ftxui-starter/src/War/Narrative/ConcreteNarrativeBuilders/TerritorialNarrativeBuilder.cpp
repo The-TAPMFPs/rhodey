@@ -33,3 +33,10 @@ void TerritorialNarrativeBuilder::setDisputeSettled(std::vector<std::string> cou
         "After a great many casualties suffered, the war has finally been resolved and new country borders have been established."
     });
 }
+
+void TerritorialNarrativeBuilder::setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB) {
+    product.conflict = NarrativeBuilder::pickRandom({
+        "The People of ." + countriesA[0] + " are tired of being ruled by " + countriesB[0] + " and want their land back.",
+        "The " + countriesA[0] + "want to pilllage and burn the people of " + countriesB[0] + "'s land to the ground."
+    });
+}

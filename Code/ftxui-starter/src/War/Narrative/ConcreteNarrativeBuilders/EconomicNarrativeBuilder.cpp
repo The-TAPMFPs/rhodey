@@ -30,3 +30,11 @@ void EconomicNarrativeBuilder::setDisputeSettled(std::vector<std::string> countr
         " all go home, hopefully the future will hold prosperity."
     });
 }
+
+void EconomicNarrativeBuilder::setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+{
+    product.conflict = NarrativeBuilder::pickRandom({
+        "Both Sides are throwign all their rescources into other side." + countriesA[0] + " and " + countriesB[0] + 
+        " are both losing GPD. It appears that the one with the most money left in the end will win."
+    });
+}

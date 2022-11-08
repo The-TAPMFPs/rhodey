@@ -72,6 +72,7 @@ void NarrativeDirector::executeStandardMake(NarrativeBuilder* builder)
 
     builder->reset();
     builder->setDispute(countriesA, countriesB);
+    builder->setConflict(countriesA, countriesB);
     builder->setHostilities(countriesA, countriesB);
     builder->setPostWar(countriesA, countriesB);
     builder->setDisputeSettled(countriesA, countriesB);

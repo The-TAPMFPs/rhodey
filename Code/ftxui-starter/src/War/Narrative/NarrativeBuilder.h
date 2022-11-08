@@ -15,6 +15,7 @@ class NarrativeBuilder {
         //Conflict phase is determined by the simulation
         virtual void setPostWar(std::vector<std::string> countriesA, std::vector<std::string> countriesB) = 0;
         virtual void setDisputeSettled(std::vector<std::string> countriesA, std::vector<std::string> countriesB) = 0;
+        virtual void setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB) = 0;
         void reset();
         Narrative getResult();
 };

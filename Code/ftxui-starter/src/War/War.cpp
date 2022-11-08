@@ -12,25 +12,28 @@ ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 War::War(): stepCount(0) {
 
   std::string countryNames[] = { "Puvir Theblicri", "Ncentruba", "Slandswait", "Lei Serthernsal", "Ilis Ekeelingpa", "Jimamaarcoca", "Naikongpri", "Luar Jesintco Island", "Pusouthcoi", "Bulso Nanuazue", "Ribouand", "Western Khstantomemo", "Rosman", "Estanprus", "Negi", "Liakitts Andri", "Sloni Liebacastan", "Narugam", "Lecua Territories", "Honre", "Guila", "Masouthbourg", "Cathern Brulandspit", "There Dorrusjo", "United Ghagear", "Newmayotteca", "Francei", "Rabda", "Xemnam Gote", "Apupierre", "New Menga", "Tico", "Belibritishriaviet", "Tarbeniue Island", "Dora Lizely", "Janneslands", "Guaylipnia", "Folkdonablic Kingdom", "Chadgrothernblic", "Scotlo Ainited", "Coswa", "Corepeda", "Leran Niaporegui", "Riarygin", "Croaco Andrezi", "Popines Pupatu", "Nitedpuboruza", "Nearwan", "Tswanga", "Syu Landstan", "North Radianlkland", "Maverde", "Rigal", "Lyna Gianame", "Sierbaninsomas", "Ciali Aandso", "Georgeri Isles", "Ata Bani", "Masrkey Nesena", "Layki", "Zamaurina", "Chtenji Nemaco", "Linitedtu", "Biamar Tzerbo", "Kephi", "Tanand", "Wanni Wedia", "Tervathe", "Gualand Finrii", "Chellesra Nticardesh", "Toslands Dapuagreen", "Quei Seyimoa", "Dorstriaro", "Bunafasiabon", "Ribliclands", "Isslandsleone", "Saubai Ofriahrain", "Riasaintsri", "Withethai", "Morsaint Ire", "Statesne Kibabweti Isles", "Ngoslandla", "Tainorgogia", "Zeslands Fiadan", "Tudia Andbri", "Slandsguam Landrunslands", "Rebelbia", "Towaytvia", "Landtana", "Brali Rusland", "Lauwalesguya", "Zbelavidos", "Restan", "Northto", "Nyapo", "Tablic Hermence", "Vica", "Neu", "Soueng Lage", "Vaki Ngonorla" };
+  int CountryStartIndex = uuid::randomInt(0, 100);
 
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
   teamA->setEnemyAlliance(teamB);
   teamB->setEnemyAlliance(teamA);
 
-  // TODO: Replace with properly initialized data
-  teamA->add(new Country("country A"));
-  teamA->add(new Country("country B"));
-  teamA->add(new Country("country C"));
-  teamA->add(new Country("country D"));
-  teamB->add(new Country("country E"));
-  teamB->add(new Country("country F"));
-  teamB->add(new Country("country G"));
-  teamB->add(new Country("country H"));
+  teamA->add(new Country(countryNames[CountryStartIndex++]));
+  teamA->add(new Country(countryNames[CountryStartIndex++]));
+  teamA->add(new Country(countryNames[CountryStartIndex++]));
+  teamA->add(new Country(countryNames[CountryStartIndex++]));
+  teamA->add(new Country(countryNames[CountryStartIndex++]));
+
+  teamB->add(new Country(countryNames[CountryStartIndex++]));
+  teamB->add(new Country(countryNames[CountryStartIndex++]));
+  teamB->add(new Country(countryNames[CountryStartIndex++]));
+  teamB->add(new Country(countryNames[CountryStartIndex++]));
+  teamB->add(new Country(countryNames[CountryStartIndex++]));
 
   //Build war narrative
   NarrativeDirector* director = new NarrativeDirector(teamA, teamB);
-  switch(uuid::randomInt(0, 4))
+  switch(uuid::randomInt(0, 5))
   {
     case 0:
       this->narrative = director->makeEconomicNarrative();

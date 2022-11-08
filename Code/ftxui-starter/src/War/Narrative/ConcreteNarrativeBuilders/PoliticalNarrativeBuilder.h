@@ -7,4 +7,5 @@ class PoliticalNarrativeBuilder : public NarrativeBuilder {
         void setHostilities(std::vector<std::string> countriesA, std::vector<std::string> countriesB);
         void setPostWar(std::vector<std::string> countriesA, std::vector<std::string> countriesB);
         void setDisputeSettled(std::vector<std::string> countriesA, std::vector<std::string> countriesB);
+        void setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB);
 };

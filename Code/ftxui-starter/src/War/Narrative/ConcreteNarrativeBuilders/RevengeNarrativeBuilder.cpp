@@ -32,3 +32,9 @@ void RevengeNarrativeBuilder::setDisputeSettled(std::vector<std::string> countri
         "If wars can be started by lies they can be stopped by truth ~ Julian Assange" 
     });
 }
+
+void RevengeNarrativeBuilder::setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB) {
+    product.conflict = NarrativeBuilder::pickRandom({
+        countriesA[0] + " know what they are doing is wrong, but they thing this THIS time revenge against " + countriesB[0] + " will leave them satisfied."
+    });
+}

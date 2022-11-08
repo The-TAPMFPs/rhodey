@@ -31,3 +31,9 @@ void ReligiousNarrativeBuilder::setDisputeSettled(std::vector<std::string> count
         "Religious wars are basically people killing each other over who has the better imaginary friend ~ Napolean Dynamite"
     });
 }
+
+void ReligiousNarrativeBuilder::setConflict(std::vector<std::string> countriesA, std::vector<std::string> countriesB) {
+    product.conflict = NarrativeBuilder::pickRandom({
+        "The poeple of  " + countriesA[0] + " believe that their holy leader has is using them as toys against the enemy " + countriesB[0] + ". Toys that are being used to kill each other.",
+    });
+}
