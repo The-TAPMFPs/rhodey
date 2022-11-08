@@ -8,6 +8,7 @@
 #include "../../logger.h"
 #include "../../MapRegions/Map.h"
 #include "../../War/Battle/Battle.h"
+#include "../../Entities/Entity.h"
 
 class Country;
 class TroopFactory;
