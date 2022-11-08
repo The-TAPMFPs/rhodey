@@ -21,6 +21,7 @@ class War {
         int stepCount;
 
     public:
+        bool endWar = false;
         Alliance* teamA;
         Alliance* teamB;
 

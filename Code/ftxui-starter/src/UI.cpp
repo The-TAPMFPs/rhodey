@@ -510,10 +510,13 @@ void UI::render()
     {
       int scaledSpeed = std::pow(2, 7-simSpeed);
 
-      if(frameCount % scaledSpeed == 0 && !simPaused)
+      if((frameCount % scaledSpeed == 0 && !simPaused))
       {
         war->step();
       }
+      if(frameCount >= 3000) 
+        screen.ExitLoopClosure();
+
       frameCount++;
     }
     war->onEvent(e);

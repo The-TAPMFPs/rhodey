@@ -1,5 +1,6 @@
 #include "War.h"
 #include "WarPhases/Dispute.h"
+#include "logger.h"
 
 std::string War::warState = "UNSET_WAR_STATE";
 std::string War::warStateDesc = "UNSET_WAR_STATE_DESCRIPTION";
@@ -86,13 +87,61 @@ void War::step()
 {
   //Get alliance/country whose turn it is now
   Alliance* team = (stepCount%2?this->teamA:this->teamB);
+  Country* beingAttacked = team->getEnemyAlliance()->getIthCountry(uuid::randomInt(0, team->getEnemyAlliance()->getMembers().size()-1));
   Country* c = team->getMemberModuloSize(stepCount/2);
 
-  if(c != nullptr)
+  int takeTurnStrategy = uuid::randomInt(0, 6);
+  switch(takeTurnStrategy)
   {
-    c->takeTurn(); //TODO: Fix Floating point exception
+    case 0:
+      Logger::log("The " + beingAttacked->getName() + "s and the " + c->getName() + " are playing at the zolandian beach, it must be christmas\nMORALE OF BOTH SIDES GOES UP!!");
+      c->setMorale(c->getMorale() - 0.1);
+      beingAttacked->setMorale(beingAttacked->getMorale() - 0.1);
+      break;
+
+    case 1:
+      Logger::log("The land of " + c->getName() + "discovers xanax and all their stats goe up... THEIR ENEMIES TREMBLE!");
+      c->setEconomy(c->getEconomy() + 0.3);
+      c->setPopulation(c->getPopulation() + 0.3);
+      c->setAggressiveness(c->getAggressiveness() + 0.3);
+      break;
+
+    case 2:
+      Logger::log("Both " + c->getName() + " and is going to recruit troops to get reado fot the next battlel against " + beingAttacked->getName());
+      break;
+
+    case 3:
+      Logger::log("Because of the political party that " + c->getName() + " belive in, they didnt use masks and know everyone has teh floom vires\nMorale is low.");
+      c->setMorale(c->getMorale() - 0.1);
+      break;
+    
+    case 4:
+      Logger::log(beingAttacked->getName() + " is going to lose half of its population to a disease outbreak!");
+      Logger::log("The POWER OF RESEARCH!!");
+
+      beingAttacked->setPopulation(beingAttacked->getPopulation()/2);
+      break;
+    
+    case 5:
+      Logger::log(c->getName() + " is going to attack " + beingAttacked->getName() + "\n" + c->getName() + " wiped out " + std::to_string(uuid::randomInt(0, 100)) + beingAttacked->getName());
+
+      c->setMorale(c->getMorale() + 0.22 * (double)(uuid::randomInt(50, 150) * .01));
+      break;
+
+    default:
+      Logger::log("Country " + c->getName() + "  is deciding to Watch the enemy and make a move later");
+      c->setResources(c->getResources() + 0.22 * (double)(uuid::randomInt(50, 150) * .01));
+      break;
   }
 
+  // if(c != nullptr)
+  // {
+  //   c->takeTurn(); //TODO: Fix Floating point exception
+  // }
+
+  if (stepCount >= 400) {
+    this->endWar = true;
+  }
   this->stepCount++;
 }
 
