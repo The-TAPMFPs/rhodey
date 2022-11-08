@@ -1,5 +1,15 @@
 #include "PoliticalNarrativeBuilder.h"
-
+/**
+ * \file PoliticalNarrativeBuilder.cpp
+ * \author The TransactionAwarePersistenceManagerFactoryProxies
+ * \date 8 November 2022
+ */
+/**
+ * \fn void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+ * \brief the dispute reason between 2 countries/2 different alliances
+ * \param countriesA the first country 
+ * \param countriesB the second country
+*/
 void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.dispute = NarrativeBuilder::pickRandom({
@@ -7,7 +17,12 @@ void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, 
         "'s liberal ways. This has not gone unnoticed and tensions are beggining to grow.",
     });
 }
-
+/**
+ * \fn void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+ * \brief the Hostilities reason between 2 countries/2 different alliances
+ * \param countriesA the first country 
+ * \param countriesB the second country
+*/
 void PoliticalNarrativeBuilder::setHostilities(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.hostilities = NarrativeBuilder::pickRandom({
@@ -15,7 +30,12 @@ void PoliticalNarrativeBuilder::setHostilities(std::vector<std::string> countrie
         countriesA[0] + " repoonse is further aggrevation of the situation, military forces begin to surface on both sides."
     });
 }
-
+/**
+ * \fn void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+ * \brief the postwar narrative reason between 2 countries/2 different alliances
+ * \param countriesA the first country 
+ * \param countriesB the second country
+*/
 void PoliticalNarrativeBuilder::setPostWar(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.postWar = NarrativeBuilder::pickRandom({
@@ -23,7 +43,12 @@ void PoliticalNarrativeBuilder::setPostWar(std::vector<std::string> countriesA, 
         "know it, talks of peace begin, unity is possible."
     });
 }
-
+/**
+ * \fn void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
+ * \brief the dispute settled narrative reason between 2 countries/2 different alliances
+ * \param countriesA the first country 
+ * \param countriesB the second country
+*/
 void PoliticalNarrativeBuilder::setDisputeSettled(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.disputeSettled = NarrativeBuilder::pickRandom({
