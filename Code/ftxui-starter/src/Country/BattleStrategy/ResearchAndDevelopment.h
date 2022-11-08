@@ -10,7 +10,7 @@ class ResearchAndDevelopment : public BattleStrategy {
 
         ResearchAndDevelopment(Map* map);
         void doStrategy(Country* country);
-        void developResources();
-        void developEconomy();
-        void research();
+        // void developResources();
+        // void developEconomy();
+        // void research();
 };

@@ -16,7 +16,7 @@ class Intel : public BattleStrategy {
         Intel();
         Intel(Map* map);
         void doStrategy(Country* country);
-        void setMyCountry(Country* myCountry);
-        void setEnemyCountry(Country* enemyCountry);
+        // void setMyCountry(Country* myCountry);
+        // void setEnemyCountry(Country* enemyCountry);
 
 };

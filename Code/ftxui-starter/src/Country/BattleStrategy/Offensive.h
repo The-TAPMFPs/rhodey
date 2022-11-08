@@ -14,10 +14,10 @@ class Offensive : public BattleStrategy {
 
         Offensive(Map* map);
         void doStrategy(Country* country);
-        void redistributeTroops();
-        void attack();
-        void setFriendlyRegion(Region* friendlyRegion);
-        void setEnemyRegion(Region* enemyRegion);
-        void setFriendlyCountry(Country* friendlyCountry);
+        // void redistributeTroops();
+        // void attack();
+        // void setFriendlyRegion(Region* friendlyRegion);
+        // void setEnemyRegion(Region* enemyRegion);
+        // void setFriendlyCountry(Country* friendlyCountry);
 
 };

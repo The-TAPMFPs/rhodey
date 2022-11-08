@@ -12,9 +12,9 @@ class Defensive : public BattleStrategy {
     public:
         Defensive(Map* map);
         void doStrategy(Country* country);
-        void setNameNumCont(std::string name, int num, Country * con);
-        void redistributeTroops();
-        void recruitTroops();
-        void setFriendlyRegion(Region* friendlyRegion);
-        void setEnemyRegion(Region* enemyRegion);
+        // void setNameNumCont(std::string name, int num, Country * con);
+        // void redistributeTroops();
+        // void recruitTroops();
+        // void setFriendlyRegion(Region* friendlyRegion);
+        // void setEnemyRegion(Region* enemyRegion);
 };

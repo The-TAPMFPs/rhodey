@@ -16,10 +16,10 @@ class Prepare : public BattleStrategy {
     public:
         Prepare(Map* map);
         void doStrategy(Country* country);
-        void buildVehicles();
-        void recruitTroops();
-        void setFriendlyRegion(Region* friendlyRegion);
-        void setEnemyRegion(Region* enemyRegion);
-        void setNameNumCont(std::string name, int num, Country * con);
-        void setVehicle(std::string name, int num, VEHICLE_TYPE veh, Country * con);
+        // void buildVehicles();
+        // void recruitTroops();
+        // void setFriendlyRegion(Region* friendlyRegion);
+        // void setEnemyRegion(Region* enemyRegion);
+        // void setNameNumCont(std::string name, int num, Country * con);
+        // void setVehicle(std::string name, int num, VEHICLE_TYPE veh, Country * con);
 };

@@ -29,7 +29,7 @@ Country::Country(std::string name) : name(name) {
     aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
     goalRating = (((double) rand() / RAND_MAX) * 0.10-0.05) + 0.05;
     numSpies = 0;
-    strategy = NULL;
+    strategy = new Prepare(map);
     generatePersonalityMatrix();
 }
 
@@ -123,10 +123,11 @@ void Country::decideStrategy() {
   numVehicles = occTable->getNumVehicles(this);
   numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
 
-  // delete occTable;
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;
+
+  //Get max value in result vector
   int maxIndex = 0;
   double maxVal = 0;
   for (int i = 0; i < result.rows(); i++) {
@@ -145,36 +146,38 @@ void Country::decideStrategy() {
   }
   switch (maxIndex)
   {
-  case 0:
-    this->strategy = new Offensive(map);
-    break;
-  case 1:
-    this->strategy = new Defensive(map);
-    break;
-  case 2:
-    this->strategy = new ResearchAndDevelopment(map);
-    break;
-  case 3:
+    default:
+  // case 0:
+  //   this->strategy = new Offensive(map);
+  //   break;
+  // case 1:
+  //   this->strategy = new Defensive(map);
+  //   break;
+  // case 2:
+  //   this->strategy = new ResearchAndDevelopment(map);
+  //   break;
+  // case 3:
     this->strategy = new Prepare(map);
     break;
-  case 4:
-    this->strategy = new Intel(map);
-    break;
-  case 5:
-    this->strategy = new Diplomacy(map);
-    break;
-  default:
-    this->strategy = new ResearchAndDevelopment(map);
-    break;
+  // case 4:
+  //   this->strategy = new Intel(map);
+  //   break;
+  // case 5:
+  //   this->strategy = new Diplomacy(map);
+  //   break;
+  // default:
+  //   this->strategy = new ResearchAndDevelopment(map);
+  //   break;
   }
 }
 
 void Country::takeTurn() {
-  validateValues();
+  // validateValues();
+
   decideStrategy();
   this->strategy->doStrategy(this);
 
-  alertSpyCountries();
+  // alertSpyCountries();
 }
 
 void Country::validateValues() {

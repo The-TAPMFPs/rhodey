@@ -11,9 +11,9 @@ class Diplomacy : public BattleStrategy {
     public:
         Diplomacy(Map* map);
         void doStrategy(Country* country);
-        void surrender();
-        void proposeTreaty();
-        void setMyCountry(Country* myCountry);
-        void setEnemyCountry(Country* enemyCountry);
+        // void surrender();
+        // void proposeTreaty();
+        // void setMyCountry(Country* myCountry);
+        // void setEnemyCountry(Country* enemyCountry);
 
 };
