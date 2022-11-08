@@ -515,7 +515,9 @@ void UI::render()
         war->step();
       }
       if(frameCount >= 3000) 
-        screen.ExitLoopClosure();
+      {
+        (screen.ExitLoopClosure())();
+      }
 
       frameCount++;
     }
