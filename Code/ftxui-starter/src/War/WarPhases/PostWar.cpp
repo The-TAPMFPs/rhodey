@@ -1,4 +1,5 @@
 #include "PostWar.h"
+#include "DisputeSettled.h"
 
 PostWar::PostWar() {
   War::warState = "PostWar";

@@ -8,7 +8,6 @@ ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 
 War::War() : frameCount(0), warPhase(new Dispute()) {
 
-  this->warPhase = new Conflict();
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
   teamA->setEnemyAlliance(teamB);
