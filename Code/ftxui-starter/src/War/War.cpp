@@ -106,3 +106,47 @@ Map* War::getMap()
 {
   return this->map;
 }
+
+Country* War::getCountryInAllianceWithHighestTroopCount(bool teamA)
+{
+  vector<Country*> teamMembers = (teamA ? this->teamA : this->teamB)->getMembers();
+  OccupancyTable* oc = this->map->getOccupancyTable();
+
+  int max = -1;
+  Country* maxC = nullptr;
+
+  for(auto c = teamMembers.begin(); c != teamMembers.end(); c++)
+  {
+    int numT = oc->getNumTroops(*c);
+
+    if(numT > max)
+    {
+      max = numT;
+      maxC = *c;
+    }
+  }
+
+  return maxC;
+}
+
+Country* War::getCountryInAllianceWithHighestVehicleCount(bool teamA)
+{
+  vector<Country*> teamMembers = (teamA ? this->teamA : this->teamB)->getMembers();
+  OccupancyTable* oc = this->map->getOccupancyTable();
+
+  int max = -1;
+  Country* maxC = nullptr;
+
+  for(auto c = teamMembers.begin(); c != teamMembers.end(); c++)
+  {
+    int numV = oc->getNumVehicles(*c);
+
+    if(numV > max)
+    {
+      max = numV;
+      maxC = *c;
+    }
+  }
+
+  return maxC;
+}

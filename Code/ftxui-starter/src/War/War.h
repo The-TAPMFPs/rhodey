@@ -39,6 +39,8 @@ class War {
         void addCountryToSideB(Country* country);
         Alliance* getSideCountryIsOn(Country* country);
         std::vector<Country*> getAllCountries();
+        Country* getCountryInAllianceWithHighestTroopCount(bool teamA);
+        Country* getCountryInAllianceWithHighestVehicleCount(bool teamA);
         void changeState();
         void start();
         bool isOver();
