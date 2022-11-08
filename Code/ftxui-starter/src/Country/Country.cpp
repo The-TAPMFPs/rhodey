@@ -172,7 +172,7 @@ void Country::takeTurn() {
   decideStrategy();
   this->strategy->doStrategy(this);
 
-  // alertSpyCountries();
+  alertSpyCountries();
 }
 
 std::vector<std::string> Country::getFormattedStats() {
