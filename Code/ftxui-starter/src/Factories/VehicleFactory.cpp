@@ -80,6 +80,7 @@ VehicleFactory::~VehicleFactory() {
 Entity* VehicleFactory::makeUnit() {
   std::string temp; /**<A string to hold the message that the Vehicles were made.>*/
   std::stringstream convert; /**<A stringstream to concentate the intital message.>*/
+  VEHICLE_TYPE currVehicleType = VEHICLE_TYPE(uuid::randomInt(0, 8));
   switch (currVehicleType) {
     case truck:
       e = (Entity*)new Truck(_name, _num, w1, _con);

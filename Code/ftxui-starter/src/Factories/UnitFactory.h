@@ -13,14 +13,12 @@
 #include "../Entities/Troop/Troop.h"
 #include "../logger.h"
 
-enum VEHICLE_TYPE {truck, tank, carrier, cargoship, warship, submarine, fighterjet, bomber, cargoplane};
 class Country;
 class UnitFactory{
     protected:
         std::string _name;
         int _num;
         Country * _con;
-        VEHICLE_TYPE currVehicleType;
         vector<Weapon *> * w1;
         vector<Weapon *> * w2;
         vector<Weapon *> * w3;
@@ -30,7 +28,6 @@ class UnitFactory{
         Entity* e;
     public:
         UnitFactory(std::string name, int num, Country * con);
-        UnitFactory(std::string name, int num, VEHICLE_TYPE type, Country * con);
         virtual Entity* makeUnit() = 0;
 
 
