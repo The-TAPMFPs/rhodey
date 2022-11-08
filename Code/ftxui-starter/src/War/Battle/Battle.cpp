@@ -121,3 +121,18 @@ std::vector<Country *> Battle::getLossers() {
     }
     return toReturn;
 }
+
+std::vector<Country *> Battle::getWinners() {
+    std::vector<Country *> toReturn;
+    if (this->teamB.size() == 0) {
+	for (auto itr = this->allianceAInvolved.begin(); itr != this->allianceAInvolved.end(); ++itr) {
+	    toReturn.push_back((*itr));
+	}
+    }
+    if (this->teamA.size() == 0) {
+	for (auto itr = this->allianceBInvolved.begin(); itr != this->allianceBInvolved.end(); ++itr) {
+	    toReturn.push_back((*itr));
+	}
+    }
+    return toReturn;
+}
