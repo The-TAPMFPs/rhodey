@@ -79,6 +79,8 @@ class Map {
         std::vector<Region*> getRegionsOwnedBy(Country* country);
         std::vector<Region*> getRegionsOwnedBy(bool teamA);
 
+        std::vector<Entity*> getAllEntitiesInRegion(Region* region);
+
         // Region* getFriendRegionWithHighestEnemyRatio(bool teamA);
         // Region* getEnemyRegionWithHighestFriendRatio(bool teamA);
         // Region* getFriendRegionWithLowestEnemyRatio(bool teamA);

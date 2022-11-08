@@ -36,33 +36,33 @@ TroopFactory::TroopFactory(std::string name, int num, Country * con) :
  * @brief The Destructor of the TroopFactory class.
  */
 TroopFactory::~TroopFactory(){
-    for (int count = 0; count < w1->size(); count) {
+    for (int count = 0; count != w1->size();) {
 	delete w1->at(w1->size()-1);
 	w1->pop_back();
     }
     delete w1;
 
-    for (int count = 0; count < w2->size(); count) {
+    for (int count = 0; count != w2->size();) {
 	delete w2->at(w2->size()-1);
 	w2->pop_back();
     }
     delete w2;
-    for (int count = 0; count < w3->size(); count) {
+    for (int count = 0; count != w3->size();) {
 	delete w3->at(w3->size()-1);
 	w3->pop_back();
     }
-    delete w4;
-    for (int count = 0; count < w4->size(); count) {
+    delete w3;
+    for (int count = 0; count != w4->size();) {
 	delete w4->at(w4->size()-1);
 	w4->pop_back();
     }
     delete w4;
-    for (int count = 0; count < w5->size(); count) {
+    for (int count = 0; count != w5->size();) {
 	delete w5->at(w5->size()-1);
 	w5->pop_back();
     }
     delete w5;
-    for (int count = 0; count < w6->size(); count) {
+    for (int count = 0; count != w6->size();) {
 	delete w6->at(w6->size()-1);
 	w6->pop_back();
     }
