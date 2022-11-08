@@ -29,7 +29,7 @@ class UI {
 
     public:
         UI(War* war);
-        void executeDispute();
+        void executeCutscene();
         void render();
         void simSetup();
         void startSim();

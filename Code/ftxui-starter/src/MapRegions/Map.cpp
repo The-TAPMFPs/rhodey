@@ -408,3 +408,8 @@ Map::~Map()
     // delete [] this->travelDifficultyField_allianceA;
     // delete [] this->travelDifficultyField_allianceA;
 }
+
+std::vector<Entity*> Map::getAllEntitiesInRegion(Region* region)
+{
+  return occupancyTable->getEntities(region);
+}
