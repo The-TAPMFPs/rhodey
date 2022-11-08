@@ -17,8 +17,8 @@ void Observable::spyOnCountry(Country* country){
  * 
 */
 void Observable::alertSpyCountries(){
-    for(Country* countryThatIsSpyingOnMe : countriesThatAreSpyingOnMe){
-        countryThatIsSpyingOnMe->recieveIntel((Country*)this);
+    for(int i = 0; i < countriesThatAreSpyingOnMe.size(); i++){
+        countriesThatAreSpyingOnMe[i]->recieveIntel((Country*)this);
     }
 }
 

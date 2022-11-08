@@ -2,6 +2,19 @@
 
 Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
+// void Offensive::warAlgorithm(int off){
+//     this->off =(_off) off;
+//     switch(off){
+//         case redOff:
+//             redistributeTroops();
+//             break;
+//         case attOff:
+//             attack();
+//             break;
+//     }
+//     return;
+// }
+
 void Offensive::doStrategy(Country* country){
     //enemyRergion = region with highest friendly ratio
     //friendlyRegion = region with lowest enemy ratio

@@ -107,6 +107,20 @@ target_link_libraries(Map_UnitTest
   PRIVATE ftxui::component
   GTest::gtest_main
 )
+
+add_executable(
+    Country_UnitTest
+    src/Country_UnitTest.cpp
+    ${SRC_FILES}
+)
+target_include_directories(Country_UnitTest PUBLIC src)
+target_link_libraries(Country_UnitTest
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component
+  GTest::gtest_main
+)
+
 # ------------------------------------------------------------------------------
 # ------------TESTING-----------------------------------------------------------
 enable_testing()
