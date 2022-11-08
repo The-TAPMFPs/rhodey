@@ -49,12 +49,6 @@ void Offensive::attack(){
         (*it)->setMorale((*it)->getMorale() + mor);
         (*it)->setGoalRating((*it)->getGoalRating() + goal);
     }
-
-    
-
-    winner->getCountry()->setAggressiveness(winner->getCountry()->getAggressiveness() + agg);
-    winner->getCountry()->setMorale(winner->getCountry()->getMorale() + mor);
-    winner->getCountry()->setGoalRating(winner->getCountry()->getGoalRating() + goal);
     
 
 
