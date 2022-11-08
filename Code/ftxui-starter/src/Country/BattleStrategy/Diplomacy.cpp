@@ -22,7 +22,6 @@ Diplomacy::Diplomacy(Map* map) : BattleStrategy(map){}
  * 
  * @param country 
  */
-
 void Diplomacy::doStrategy(Country* country){
     int temp = 0;
     Logger::log("Do the diplomacy strategy");

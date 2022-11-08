@@ -15,7 +15,12 @@
  */
 Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
-
+/**
+ * @fn void doStrategy(Country* country)
+ * @brief determines which function should be used in this strategy.
+ * 
+ * @param country A reference to the country calling the strategy.
+ */
 void Offensive::doStrategy(Country* country){
     //enemyRergion = region with highest friendly ratio
     //friendlyRegion = region with lowest enemy ratio

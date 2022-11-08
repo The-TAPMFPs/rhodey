@@ -1,5 +1,18 @@
 #include "Intel.h"
 
+/**
+ * @file Intel.cpp
+ * @brief Construct a new Diplomacy Strategy object
+ * @author The TransactionAwarePersistenceManagerFactoryProxies
+ * @date 06 November 2022 
+ */
+
+/**
+ * @fn Intel(Map* map)
+ * @brief The constructor for the Intel class
+ * 
+ * @param map allows access to the map
+ */
 Intel::Intel(Map* map) : BattleStrategy(map){}
 
 void Intel::doStrategy(Country* country){
@@ -21,10 +34,22 @@ void Intel::doStrategy(Country* country){
     } 
 }
 
+/**
+ * @fn void setMyCountry(Country* myCountry)
+ * @brief a setter for the myCountry variable.
+ * 
+ * @param myCountry holds a reference to the country which called the algorithm.
+ */
 void Intel::setMyCountry(Country* myCountry){
     this->myCountry = myCountry;
 }
 
+/**
+ * @fn void setEnemyCountry(Country* enemyCountry)
+ * @brief a setter for the enemyCountry variable.
+ * 
+ * @param enemyCountry holds a reference an enemy country of the country which called the algorithm.
+ */
 void Intel::setEnemyCountry(Country* enemyCountry){
     this->enemyCountry = enemyCountry;
 

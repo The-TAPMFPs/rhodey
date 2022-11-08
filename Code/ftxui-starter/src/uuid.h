@@ -3,7 +3,7 @@
 #include <sstream>
 #include <random>
 
-//The UUID is used for uniquely referencing an entity when, for example, it is stored as a Memento
+//The UUID is used for uniquely referencing an object when, for example, it is stored as a Memento
 //Basically it replaces pointer values as a safer way of referencing objects over time
 typedef std::string UUID;
 

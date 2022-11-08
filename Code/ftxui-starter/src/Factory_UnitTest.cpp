@@ -80,3 +80,33 @@ TEST_F(TroopFactoryTest, test1){
     std::vector<Weapon *> * v = new std::vector<Weapon*>{new SMG(), new Pistol()};
     EXPECT_EQ(e1->getWeapon(), v);
 }
+
+TEST_F(TroopFactoryTest, test2){
+    EXPECT_EQ(e2->getName(), "TroopFactory2");
+    EXPECT_EQ(e2->getAmount(), 5000);
+    EXPECT_EQ(e2->getCountry()->getName(), "WillyWonka");
+    std::vector<Weapon *> * v =  new vector<Weapon *> {new AR(), new Pistol(), new Sniper()}
+    EXPECT_EQ(e2->getWeapon(), v);
+}
+
+TEST_F(TroopFactoryTest, test3){
+    std::vector<Weapon *> * v1 = new vector<Weapon *> {new AR(), new DualBurette(), new Sniper50(), new AK47()};
+    std::vector<Weapon *> * v2 = new vector<Weapon *> {new AK47(), new DualBurette(), new Bazooka(), new Sniper50()};
+    EXPECT_TRUE(e3->getWeapon() == v1 || e3->getWeapon() == v2);
+    EXPECT_TRUE(e4->getWeapon() == v1 || e4->getWeapon() == v2);
+}
+
+TEST_F(VehicleFactoryTest, test4){
+    EXPECT_EQ(e1->getName(), "VehicleFactory1");
+    EXPECT_EQ(e1->getType(), truck);
+}
+
+TEST_F(VehicleFactoryTest, test5){
+    EXPECT_EQ(e2->getName(), "VehicleFactory2");
+    EXPECT_EQ(e2->getType(), truck);
+}
+
+TEST_F(VehicleFactoryTest, test6){
+    EXPECT_EQ(e3->getName(), "VehicleFactory3");
+    EXPECT_EQ(e3->getType(), truck);
+}

@@ -8,52 +8,143 @@ skinparam linetype ortho
 ' ===== CLASSES =====
 
 rectangle UI as UI {
-    class UIView {
-        - controller: UIController*
-    }
-    class UIController {
-        - view: UIView*
-        - model: Simluation*
+    class UI {
+        - war : War*
+        + UI(war : War*)
+        + executeDispute() : void
+        + render() : void
+        + simSetup() : void
+        + startSim() : void
     }
 }
 note bottom of UI #lightblue : USER INTERFACE
 
 rectangle "AllianceGroups" {
     class Alliance {
-        - members: vector<Country*>
+        - name : string
+        - teamA = false : bool
+        - members : vector<Country *>
+        - first : static int
+        - enemyAlliance : Alliance*
+        + Alliance(name :; string, teamA : bool)
+        + add(Country* ) : void
+        + print() : void
+        + setEnemyAlliance(enemyAlliance : Alliance*) : void
+        + getMembers() : vector<Country*>
+        + isTeamA() : bool 
+        + containsCountry(country : Country*) : bool
+        + getAllianceNames() : vector<Country*>
+        + getMemberModuloSize(modIndex) : Country*
+        + getIthCountry(index : int) : Country*
+        + getEnemyAlliance() : Alliance*
+        + numCountries() : int
     }
-
-    ' class Conglomerate{
-        ' - name: string
-        ' + add(Conglomerate)*: void
-        ' + print(): void
-        ' + ~Conglomerate()
-    ' }
 
     class Country {
-        - sizeOfArmy: int
-        - population: int
-        - economy: double
-        - morale: double
-        - resolve: double
-        - supplies: double
-        - attrition: double
-        - forces: Military
-        - alliances: Alliance *
-        - Allies: vector<Countries*>
-        - trainingFacilitys: vector<TroopFactory*>
-        - vehicleFactories: vector<VehicleFactory*>
+        - map : Map*
+        - name : string
+        - strategy : BattleStrategy*
+        - population : int
+        - economy : double
+        - resources : double
+        - research : double
+        - aggressiveness : double
+        - goalRating : double
+        - numSpies : double
+        - numTroops : int
+        - numVehicles : int
+        - numEnemyRegions : int
+        + morale : double
+        + Country(name : string)
+        + Country(name : string, map : Map*)
+        ~Country
+        + getName() : string
+        + takeTurn() : void
+        + generatePersonalityMatrix() : void
+        + generateValueMatrix() : Eigen::MatrixXd
+        + generateRandomNums() : double*
+        + setStrategy() : void
+        + decideStrategy() : void
+        + getFormattedStats() : vector<std::string>
+        + getAlliance() : Alliance *
+        + getCountriesBeingSpiedOn() : vector<std::pair<Country*, double>>*
+        + getMorale() : double
+        + getEconomy() : double
+        + getPopulation() : int
+        + getResearch() : double
+        + getGoalRating() : double
+        + getAggressiveness() : double
+        + getResources() : double
+        + getNumSpies() : int
+        + getNumTroops() : int
+        + getNumVehicles() : int
+        + getNumEnemyRegions() : int
+        + setMorale(morale : double) : void
+        + setEconomy(economy : double) : void
+        + setPopulation(population : double) : void
+        + setResearch(research : double) : void
+        + setGoalRating(goalRating : double) : void
+        + setAggressiveness(aggressiveness : double) : void
+        + setResources(resources : double) : void
+        + setNumSpies(spies : double) : void
+        + setNumTroops(numTroops : double) : void
+        + setNumVehicles(numVehicles : double) : void
+        + setNumEnemyRegions(EnemyRegions : double) : void
     }
 
+    class Observable{
+        - countriesThatAreSpyingOnMe : vector<Country*>
+        - countryBeingSpiedOn : Country*
+        + spyOnCountry(country : Country*) : void
+        + alertSpyCountries() : void
+        + recieveIntel(countryBeingSpiedOn : Country*)
+    }
+}
+
+rectangle MapRegions{
     class Region {
         - name: string
-        - description: string
-        - terrain: string
-        - population: int
+        - uuid : UUID
+        - coords : MapCoords
+        - possessor : Country*
+        + Region(possessor : Country*)
+        + Region(name : string, xCoord : int, yCoord : int, possessor : Country*)
+        + Region(xCoord : int, yCoord : int, possessor : Country*)
+        + getUUID() : UUID
+        + getRegionName() : string
+        + getCoords() : MapCoords
+        + setRegionCoords(xCoord : int, yCoord : int) : void
+        + getPossessor() : Country*
+        + setPossessor(possessor : Country*) : void
     }
 
     class Map {
         - regions : std::map<regionUUID, Region*>
+        - travelDifficultyField_allianceA : scalarField2D
+        - travelDifficultyField_allianceB : scalarField2D
+        - occupancyTable : OccupancyTable*
+        - distToRegion(x : int, y : int, r : Region*) : static float
+        - randomInitializeRegions(numRegions : int, allCountries : vector<Country*>) : void
+        - recalculateTravelFields() : void 
+        + numRegions = 10 : static const unsigned int
+        + mapW = 100 : static const unsigned int
+        + mapH = 100 : static const unsigned int
+        + Map(allCountries : vector<Country*>, testing = false : bool)
+        ~Map()
+        + getAllAvailableRegionsForAttack(Country *) : vector<Region*>
+        + getTravelFieldA() : scalarField2D
+        + getTravelFieldB() : scalarField2D
+        + getRegionLocations() : vector<MapCoords>
+        + getCurrentMapData() : MapData
+        + getRegionAt(x : int, y : int) : Region*
+        + getTravelDifficulty(from : MapCoords, to : MapCoords, weAreTeamA : bool) : float
+        + getOccupancyTable() : OccupancyTable*
+        + getEnemyRatioInRegion(region : Region*, teamA : bool)
+        + getRegionsOwnedBy(country : Country*) : vector<Region*>
+        + getRegionsOwnedBy(teamA : bool) : vector<Region*>
+        + getRegionWithHighestEnemyRatio(teamA : bool) : Region*
+        + makeMemento() : MapMemento*
+        + setMemento(mem : MapMemento*) : void
     }
 }
 
@@ -76,83 +167,92 @@ rectangle "War " as War {
     }
 
     class War{
-        - participants: vector<Alliances*>
-        - reasonForWar: string
-        - reasonEndWar: string
-        - battles: vector<Battle*>
-        - state: WarPhases
-        + request(): void
-        + setState(phase: WarPhases): void
-        + makeMemento():WarMemento
-        + restoreBeforeState(WarMemento memento): void
+        - warPhase : WarPhase*
+        - map : Map*
+        - frameCount : int
+        + War()
+        ~ War()
+        + teamA : Alliance*
+        + teamB : Alliance*
+        + warState : static string
+        + warStateDesc : static string
+        + warStateThumbnail : static vector<string>
+        + warStateThumbnailFrameCount : static int
+        + warStateThumbnailColor : static ftxui::Color
+        + step() : void
+        + onEvent(e : ftxui::Event) : bool
+        + transitionTo(warPhase : WarPhase*);
+        + addCountryToSideA(country : Country*)
+        + addCountryToSideB(country : Country*)
+        + getSideCountryIsOn(country : Country*)
+        + getAllCountries() : vector<Country*>
+        + changeState() : void
+        + start() : void
+        + isOver() : bool
+        + getMap() : Map*
     }
 
 
 
     class WarPhases {
-        #war: War*
-        + handle(): void
-        {abstract} + changeState(): void
+        {abstract} + handleWarChange(war : War*) : void
+        {abstract} + getCurrentWarState() : string
+        + thumbnail : string
+        + warPhase : phase
     }
 
     class Dispute {
-        + handle(): void
-        + changeState(): void
+        + Dispute()
+        + handleWarChange(war : War*) : void
+        + getCurrentWarState() : string
     }
 
     class Conflict {
-        + handle(): void
-        + changeState(): void
+        + Conflict()
+        + handleWarChange(war : War*) : void
+        + getCurrentWarState() : string
     }
 
     class Hostilities {
-        + handle(): void
-        + changeState(): void
+        + Hostilities()
+        + handleWarChange(war : War*) : void
+        + getCurrentWarState() : string
     }
 
     class PostWar {
-        + handle(): void
-        + changeState(): void
+        + PostWar()
+        + handleWarChange(war : War*) : void
+        + getCurrentWarState() : string
     }
 
     class DisputeSettled {
-        + handle(): void
-        + changeState(): void
+        + DisputeSettled()
+        + handleWarChange(war : War*) : void
+        + getCurrentWarState() : string
     }
     note bottom #lightgreen : STATE
 }
 note top of War #lightgreen : SINGLETON
 
 
-    class Forces {
-        - name: string
-        - army: Army*
-        - navy: Navy*
-        - airforce: Airforce*
-        - Region: Region*
-        {abstract} + move(): void
-        ~Military()
+
+rectangle Spies {
+
+    class SpyAgency {
+        # workFor: vector<Country*>
+        # spyingOn: vector<Country*>
+        # status: string
+        + SpyAgency(spyingFor Country*, spyingOn Country*)
+        + update(): void
+        ~SpyAgency()
     }
 
-
-    rectangle Spies {
-
-        class SpyAgency {
-            # workFor: vector<Country*>
-            # spyingOn: vector<Country*>
-            # status: string
-            + SpyAgency(spyingFor Country*, spyingOn Country*)
-            + update(): void
-            ~SpyAgency()
-        }
-
-        class Spy {
-            {abstract} + update(): void
-        }
-
+    class Spy {
+        {abstract} + update(): void
     }
-    note right #lightgreen : OBSERVER
+
 }
+note right #lightgreen : OBSERVER
 
 
 
@@ -160,282 +260,346 @@ note top of War #lightgreen : SINGLETON
 
 '==== Factory method ===='
 rectangle "Factories" {
-    class UnitFactory{
-        # name: string
-        # num: int
-        # _con : Country*
-        # w1 : vector<Weapon*>*
-        # w2 : vector<Weapon*>*
-        # w3 : vector<Weapon*>*
-        # w4 : vector<Weapon*>*
-        # w5 : vector<Weapon*>*
-        # w6 : vector<Weapon*>*
-        # e : Entity*
-        ~ unitFactory()
-        + {abstract} makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
+class UnitFactory{
+    # name: string
+    # num: int
+    # _con : Country*
+    # w1 : vector<Weapon*>*
+    # w2 : vector<Weapon*>*
+    # w3 : vector<Weapon*>*
+    # w4 : vector<Weapon*>*
+    # w5 : vector<Weapon*>*
+    # w6 : vector<Weapon*>*
+    # e : Entity*
+    ~ unitFactory()
+    + {abstract} makeUnit(name : string, int : num, weapons : vector<Weapon*>*): Entity*
 
-    }
+}
 
-    class VehicleFactory {
-        + VehicleFactory(name : string, int : num, vehicle : VehicleType, con : Country*)
-        ~ VehicleFactory()
-        + makeUnit(): Entity*
-    }
+class VehicleFactory {
+    + VehicleFactory(name : string, int : num, vehicle : VehicleType, con : Country*)
+    ~ VehicleFactory()
+    + makeUnit(): Entity*
+}
 
-    class TroopFactory {
-        + TroopFactory(name : string, int : num, con : Country*)
-        ~ TruckFactory()
-        + makeUnit(): Entity*
-    }
+class TroopFactory {
+    + TroopFactory(name : string, int : num, con : Country*)
+    ~ TruckFactory()
+    + makeUnit(): Entity*
+}
 
-    enum VehicleType {
-        <<enumeration>>
-        Truck
-        Tank
-        Carrier
-        CargoShip
-        Warship
-        Submarine
-        FighterJet
-        Bomber
-        CargoPlane
-    }
+enum VehicleType {
+    <<enumeration>>
+    Truck
+    Tank
+    Carrier
+    CargoShip
+    Warship
+    Submarine
+    FighterJet
+    Bomber
+    CargoPlane
+}
 
-    enum WeaponType {
-        <<enumeration>>
-        Bazooka
-        Sniper
-        Sniper50
-        Pistol
-        AR
-        SMG
-        DualBuretter
-        Ak47 
-        Bomb
-        Cannon 
-        Torpedo
-        Missile
-        MG160
-    }
+enum WeaponType {
+    <<enumeration>>
+    Bazooka
+    Sniper
+    Sniper50
+    Pistol
+    AR
+    SMG
+    DualBuretter
+    Ak47
+    Bomb
+    Cannon
+    Torpedo
+    Missile
+    MG160
+}
 }
 note bottom #lightgreen : ABSTRACT FACTORY
 
 class Battle {
-    - country: Country*
-    - Region: Region*
-    - attackingForces: Forces**
-    - defendingForces: Forces**
-    + Battle(Forces~**, Forces~**, Region*, Country*)
-    + start(): void
-    + end(): void
-    ~Battle()
+- country: Country*
+- Region: Region*
+- attackingForces: Forces**
+- defendingForces: Forces**
++ Battle(Forces~**, Forces~**, Region*, Country*)
++ start(): void
++ end(): void
+~Battle()
 }
 
 
 '==== Entities ===='
 rectangle "Entities" {
 
-    class Entity {
-        - name: string
-        - hp: int
-        - dmg: int
-        - weapons: Weapon**
-        + Entity()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): Entity
-    }
-    note bottom #lightgreen : PROTOTYPE
+class Entity {
+    # name: string
+    # type : string
+    # bool defending
+    # hp: int
+    # dmg: int
+    # weapons : vector<Weapon*>*
+    # terrainHandling : int
+    # uuid : UUID
+    # country : Country*
+    # getAndSetDefense();
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    {abstract} # weaknesses(damage : int, weapon : Weapon &)
+    + Entity(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+    {abstract} ~ Entity()
+    {abstract} + getCarryingCapacity() : int
+    {abstract} + getTerrainHandling() : int
+    + attack(defender : Entity &) : void
+    + assignWeapon(weapon : Weapon &) : void
+    + update() : void
+    + getWeapon() : vector<Weapon*>*
+    + getAmount() : int
+    + getCountry() : COuntry *
+    + getDefenseStatus() : bool
+    + getName() : string
+    + getUUID() : UUID
+    + getType() : string
+    + split(numberOfEntities : int) : Entity*
+    + absorb(entity : Entity*) : void
+}
+note bottom #lightgreen : PROTOTYPE
 
-    class Vehicle {
-        - capacity: int
-        + Vehicle()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): Vehicle
-    }
+class Vehicle {
+    # capacity: int
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Vehicle(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+    + getCarryingCapacity() : int
+    + getTerrainHandling() : int
+}
 
-    class GroundVehicle {
-        + GroundVehicle()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): GroundVehicle
-    }
+class GroundVehicle {
+    {abstract} # weaknesses(damage : int, weapon : Weapon &)
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + GroundVehicle(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Truck {
-        + Truck()
-        + attack(): void
-        + defend(): void
-        + clone(): GroundVehicle
-    }
+class Truck {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Truck(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Tank {
-        + Tank()
-        + attack(): void
-        + defend(): void
-        + clone(): GroundVehicle
-    }
+class Tank {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Tank(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class AirVehicle {
-        + AirVehicle()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): AirVehicle
-    }
+class AirVehicle {
+    {abstract} # weaknesses(damage : int, weapon : Weapon &)
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + AirVehicle(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class FighterJet {
-        + FighterJet()
-        + attack(): void
-        + defend(): void
-        + clone(): AirVehicle
-    }
+class FighterJet {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + FighterJet(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Bomber {
-        + Bomber()
-        + attack(): void
-        + defend(): void
-        + clone(): AirVehicle
-    }
+class Bomber {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Bomber(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class CargoPlane {
-        + CargoPlane()
-        + attack(): void
-        + defend(): void
-        + clone(): AirVehicle
-    }
+class CargoPlane {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + CargoPlane(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class WaterVehicle {
-        + WaterVehicle()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): WaterVehicle
-    }
+class WaterVehicle {
+    {abstract} # weaknesses(damage : int, weapon : Weapon &)
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + WaterVehicle(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class CargoShip {
-        + CargoShip()
-        + attack(): void
-        + defend(): void
-        + clone(): WaterVehicle
-    }
+class CargoShip {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + class CargoShip(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Warship {
-        + Warship()
-        + attack(): void
-        + defend(): void
-        + clone(): WaterVehicle
-    }
+class Warship {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Warship(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Submarine {
-        + Submarine()
-        + attack(): void
-        + defend(): void
-        + clone(): WaterVehicle
-    }
+class Submarine {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Submarine(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Carrier {
-        + Carrier()
-        + attack(): void
-        + defend(): void
-        + clone(): WaterVehicle
-    }
+class Carrier {
+    # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Submarine(name : string, type : string, HP : int, damage : int, weapon : vector<Weapon*>*, country : Country*)
+}
 
-    class Troop {
-        + Troop()
-        {abstract} + attack(): void
-        {abstract} + defend(): void
-        {abstract} + clone(): Troop
-    }
+class Troop {
+    {abstract} # weaknesses(damage : int, weapon : Weapon &)
+    {abstract} # splitType(name : string, numberOfTroops : int, weapon : vector<Weapon*>*) : Entity*
+    + Troop(name : string, numberOfTroops : int, weapon vector<Weapon*>*, country* Country)
+    {abstract} + getCarryingCapacity() : int
+    {abstract} + getTerrainHandling() : int
+}
 
-    class Weapon {
-        - weaponName: string
-        - dmg: int
-    }
+class Weapon {
+    # weaponName : string
+    # damage : int
+    # WeaponType : WEAPON_TYPE
+    + Weapon(damage : int, weaponName : string)
+    {abstract} ~Weapon()
+    + getDamage() : int
+    + getType() : WEAPON_TYPE
+    + getName() : string
+    {abstract} + outputFlair() : void 
+}
+
+class Bazooka{ 
+    + Bazooka()
+    {abstract} + outputFlair() : void
+}
+class Sniper{ 
+    + Sniper()
+    {abstract} + outputFlair() : void
+}
+class Sniper50{ 
+    + Sniper50()
+    {abstract} + outputFlair() : void
+}
+class Pistol{ 
+    + Pistol()
+    {abstract} + outputFlair() : void
+} 
+class AR{ 
+    + AR()
+    {abstract} + outputFlair() : void
+}
+class SMG{ 
+    + SMG()
+    {abstract} + outputFlair() : void
+}
+class DualBurette{ 
+    + DualBurette()
+    {abstract} + outputFlair() : void
+}
+class AK47{ 
+    + AK47()
+    {abstract} + outputFlair() : void
+}
+class Torpedo{ 
+    + Torpedo()
+    {abstract} + outputFlair() : void
+}
+class Missile{ 
+    + Missile()
+    {abstract} + outputFlair() : void
+}
+class Bomb{ 
+    + Bomb()
+    {abstract} + outputFlair() : void
+}
+class Cannon{ 
+    + Cannon()
+    {abstract} + outputFlair() : void
+}
+class MG160{ 
+    + MG160()
+    {abstract} + outputFlair() : void
+}
+
+
+
+
 }
 note bottom #lightgreen : TEMPLATE METHOD
 
 
 '==== Different strategy states ===='
 rectangle "Strategy States" as StratStates {
-    class BattleStrategy {
-        # uf : TroopFactory* 
-        # vf : VehicelFactory* 
-        # _con : Country* 
-        {abstract} + warAlgorithm(enum : int) 
-        {abstract} ~BatttleStrategy
-    }
+class BattleStrategy {
+    # uf : TroopFactory*
+    # vf : VehicelFactory*
+    # _con : Country*
+    {abstract} + warAlgorithm(enum : int)
+    {abstract} ~BatttleStrategy
+}
 
-    class DefensiveStrategy {
-        - def : enum 
-        - friendlyRegion : Region* 
-        - enemyRegion : Region* 
-        - _name : string 
-        - num : int 
-        + DefensiveStrategy()
-        ~ DefensiveStrategy()
-        + warAlgorithm(def : int)
-        + redistributeTroops(): void
-        + recruitTroops(): void
-        + setNameNumCont(name : string, num : int, con : Country *): void
-        + setDef(def : enum) : void
-        + setFriendlyRegion(friendlyRegion : Region*): void
-        + setEnemyRegion(friendlyRegion : Region*): void
-    }
-    
-    class OffensiveStrategy {
-        - off : enum 
-        - friendlyRegion : Region* 
-        - enemyRegion : Region*
-        + OffensiveStrategy() 
-        ~ OffensiveStrategy()
-        + warAlgorithm(def : int)
-        + redistributeTroops(): void
-        + attack(): void
-        + setFriendlyRegion(friendlyRegion : Region*): void
-        + setEnemyRegion(friendlyRegion : Region*): void
-    }
+class DefensiveStrategy {
+    - def : enum
+    - friendlyRegion : Region*
+    - enemyRegion : Region*
+    - _name : string
+    - num : int
+    + DefensiveStrategy()
+    ~ DefensiveStrategy()
+    + warAlgorithm(def : int)
+    + redistributeTroops(): void
+    + recruitTroops(): void
+    + setNameNumCont(name : string, num : int, con : Country *): void
+    + setDef(def : enum) : void
+    + setFriendlyRegion(friendlyRegion : Region*): void
+    + setEnemyRegion(friendlyRegion : Region*): void
+}
 
-    class ResearchStrategy {
-        - rad : enum
-        - country : Country*
-        + ResearchStrategy()
-        ~ ResearchStrategy()
-        + warAlgorithm(rad : int)
-        + developResources(): void
-        + developEconomy(): void
-        + research(): void
-        + setCountry(country : Country*): void
-    }
+class OffensiveStrategy {
+    - off : enum
+    - friendlyRegion : Region*
+    - enemyRegion : Region*
+    + OffensiveStrategy()
+    ~ OffensiveStrategy()
+    + warAlgorithm(def : int)
+    + redistributeTroops(): void
+    + attack(): void
+    + setFriendlyRegion(friendlyRegion : Region*): void
+    + setEnemyRegion(friendlyRegion : Region*): void
+}
 
-    class PrepareStrategy {
-        - prep : enum 
-        - friendlyRegion : Region* 
-        - enemyRegion : Region*
-        - _name : string 
-        - _num : int 
-        - _veh : enum
-        + PrepareStrategy()
-        ~ PrepareStrategy()
-        + warAlgorithm(prep : int)
-        + recruitTroops(): void
-        + buildVehicles(): void
-        + setFriendlyRegion(friendlyRegion : Region*): void
-        + setEnemyRegion(friendlyRegion : Region*): void
-        + setNameNumCont(name : string, num : int, con : Country *): void
-        + setVehicle(name : string, num : int, con : Country *, con : enum): void
-    }
+class ResearchStrategy {
+    - rad : enum
+    - country : Country*
+    + ResearchStrategy()
+    ~ ResearchStrategy()
+    + warAlgorithm(rad : int)
+    + developResources(): void
+    + developEconomy(): void
+    + research(): void
+    + setCountry(country : Country*): void
+}
 
-    class DiplomacyStrategy{
-        - dip : enum
-        - myCountry : Country*
-        - enemyCountry : COuntry*
-        + DiplomacyStrategy()
-        ~ DiplomacyStrategy
-        + warAlgorithm(dip : int)
-        + proposeTreaty(): void
-        + surrender(): void
-        + setMyCountry(myCountry : Country*) : void
-        + setEnemyCoutnry(enemyCountry : Country*) : void
-    }
+class PrepareStrategy {
+    - prep : enum
+    - friendlyRegion : Region*
+    - enemyRegion : Region*
+    - _name : string
+    - _num : int
+    - _veh : enum
+    + PrepareStrategy()
+    ~ PrepareStrategy()
+    + warAlgorithm(prep : int)
+    + recruitTroops(): void
+    + buildVehicles(): void
+    + setFriendlyRegion(friendlyRegion : Region*): void
+    + setEnemyRegion(friendlyRegion : Region*): void
+    + setNameNumCont(name : string, num : int, con : Country *): void
+    + setVehicle(name : string, num : int, con : Country *, con : enum): void
+}
+
+class DiplomacyStrategy{
+    - dip : enum
+    - myCountry : Country*
+    - enemyCountry : COuntry*
+    + DiplomacyStrategy()
+    ~ DiplomacyStrategy
+    + warAlgorithm(dip : int)
+    + proposeTreaty(): void
+    + surrender(): void
+    + setMyCountry(myCountry : Country*) : void
+    + setEnemyCoutnry(enemyCountry : Country*) : void
+}
 }
 note right of StratStates #lightgreen : STRATEGY
 
@@ -443,22 +607,22 @@ note right of StratStates #lightgreen : STRATEGY
 
 
 rectangle "Mementos" as Mementos {
-    class WarMemento{
-        +getState()
-        -state: WarState*
-        ~Memento():virtual
-    }
-    class caretaker {
-        - warStates: vector<WarMemento>
-        + add(memento WarMemento):void
+class WarMemento{
+    +getState()
+    -state: WarState*
+    ~Memento():virtual
+}
+class caretaker {
+    - warStates: vector<WarMemento>
+    + add(memento WarMemento):void
 
-    }
+}
 
-    class WarState {
+class WarState {
 
-        - Vector<String>
-        - WarState(War* war)
-    }
+    - Vector<String>
+    - WarState(War* war)
+}
 }
 note top of Mementos #lightgreen : MEMENTO
 
@@ -541,5 +705,19 @@ UIView -u-o UIController
 UIController -d-o UIView
 UIController -r-o Simulation
 Simulation -r-o UIView
+
+Bazooka <|-- Weapon
+Sniper <|-- Weapon
+Sniper50 <|-- Weapon
+Pistol <|-- Weapon
+AR <|-- Weapon
+SMG <|-- Weapon
+DualBurette <|-- Weapon
+AK47 <|-- Weapon
+Torpedo <|-- Weapon
+Missile <|-- Weapon
+Bomb <|-- Weapon
+Cannon <|-- Weapon
+Mg160 <|-- Weapon
 
 @enduml

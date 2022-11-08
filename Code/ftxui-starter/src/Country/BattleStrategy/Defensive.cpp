@@ -15,7 +15,12 @@
  */
 Defensive::Defensive(Map* map) : BattleStrategy(map){}
 
-
+/**
+ * @fn void doStrategy(Country* country)
+ * @brief determines which function should be used in this strategy.
+ * 
+ * @param country A reference to the country calling the strategy.
+ */
 void Defensive::doStrategy(Country* country){
     // if there is a non contesting region, move those troops to a contesting
       // region if no contesting region then recruit this->strategy = new
@@ -35,6 +40,11 @@ void Defensive::setNameNumCont(std::string name, int num, Country * con){
     _con = con;
 }
 
+/**
+ * @fn void redistributeTroops()
+ * @brief Moves troops to a more defensive position.
+ * 
+ */
 void Defensive::redistributeTroops(){
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);

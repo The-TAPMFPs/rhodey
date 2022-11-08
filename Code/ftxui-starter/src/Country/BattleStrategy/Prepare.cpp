@@ -15,7 +15,12 @@
  */
 Prepare::Prepare(Map* map) : BattleStrategy(map){}
 
-
+/**
+ * @fn void doStrategy(Country* country)
+ * @brief determines which function should be used in this strategy.
+ * 
+ * @param country A reference to the country calling the strategy.
+ */
 void Prepare::doStrategy(Country* country){
     // take action of lowest between trrop and vehicle count
     Logger::log("Do the prepare strategy");
