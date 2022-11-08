@@ -1,22 +1,7 @@
 #include "Defensive.h"
 
-Defensive::Defensive(){
-    
-}
+Defensive::Defensive(Map* map) : BattleStrategy(map){}
 
-void Defensive::warAlgorithm(int def){
-    this->def =(_def) def;
-
-    switch(def){
-        case redDef:
-            redistributeTroops();
-            break;
-        case recDef:
-            recruitTroops();
-            break;
-    }
-    return;
-}
 
 void Defensive::doStrategy(Country* country){
     // if there is a non contesting region, move those troops to a contesting
@@ -30,11 +15,11 @@ void Defensive::setNameNumCont(std::string name, int num, Country * con){
     _con = con;
 }
 
-void Defensive::setDef(_def def){
-    this->def = def;
-}
-
 void Defensive::redistributeTroops(){
+    OccupancyTable* occTable = map->getOccupancyTable();
+    occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
+    delete occTable;
     
 }
 

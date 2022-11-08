@@ -6,6 +6,7 @@
 #include "BattleStrategy/Intel.h"
 #include "BattleStrategy/Prepare.h"
 #include "BattleStrategy/ResearchAndDevelopment.h"
+#include "../MapRegions/Map.h"
 
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
@@ -29,8 +30,14 @@ Country::Country(std::string name) : name(name) {
     numTroops = 0;
     numVehicles = 0;
     numEnemyRegions = 0;
+    strategy = NULL;
     generatePersonalityMatrix();
 }
+
+Country::Country(std::string name, Map* map) : Country(name) {
+  this->map = map;
+}
+
 
 Country::~Country(){
     if (this->strategy != NULL) {
@@ -115,6 +122,9 @@ void Country::setStrategy(BattleStrategy* strategy) {
 }
 
 void Country::decideStrategy() {
+  //set num troops
+  //set num vehicles
+  //set num enemy regions
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;
@@ -137,34 +147,52 @@ void Country::decideStrategy() {
   switch (maxIndex)
   {
   case 0:
-    this->strategy = new Offensive();
+    this->strategy = new Offensive(map);
     break;
   case 1:
-    this->strategy = new Defensive();
+    this->strategy = new Defensive(map);
     break;
   case 2:
-    this->strategy = new ResearchAndDevelopment();
+    this->strategy = new ResearchAndDevelopment(map);
     break;
   case 3:
-    this->strategy = new Prepare();
+    this->strategy = new Prepare(map);
     break;
   case 4:
-    this->strategy = new Intel();
+    this->strategy = new Intel(map);
     break;
   case 5:
-    this->strategy = new Diplomacy();
+    this->strategy = new Diplomacy(map);
     break;
   default:
-    this->strategy = new ResearchAndDevelopment();
+    this->strategy = new ResearchAndDevelopment(map);
     break;
   }
 }
 
 void Country::takeTurn() {
+  validateValues();
   decideStrategy();
   this->strategy->doStrategy(this);
 
   alertSpyCountries();
+}
+
+void Country::validateValues() {
+ 
+  if(population < 0) { population = 0;}
+  if(economy < 0) { economy = 0;}
+  if(resources < 0) { resources = 0;}
+  if(morale < 0) { morale = 0;}
+  if(aggressiveness < 0) { aggressiveness = 0;}
+  if(goalRating < 0) { goalRating = 0;}
+  if(research < 0) { research = 0;}
+  if(numTroops < 0) { numTroops = 0;}
+  if(numVehicles < 0) { numVehicles = 0;}
+  if(numSpies < 0) { numSpies = 0;}
+  if(numEnemyRegions < 0) { numEnemyRegions = 0;}
+
+  
 }
 
 std::vector<std::string> Country::getFormattedStats() {

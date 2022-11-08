@@ -1,4 +1,5 @@
 #include "Conflict.h"
+#include "Hostilities.h"
 
 Conflict::Conflict() {
   War::warState = "Conflict";
@@ -33,7 +34,7 @@ Conflict::Conflict() {
 }
 
 void Conflict::handleWarChange(War* war) {
-  war->transitionTo(new PostWar());
+  war->transitionTo(new Hostilities());
 }
 
 std::string Conflict::getCurrentWarState() {

@@ -5,8 +5,6 @@
 
 #include "../../../lib/eigen3/Eigen/Dense"
 #include "Alliance.h"
-#include "../MapRegions/Map.h"
-#include "../MapRegions/Region.h"
 #include "Observable.h"
 
 // #include "../Factories/TroopFactory.h"
@@ -16,6 +14,8 @@
 
 class Alliance;
 class BattleStrategy;
+class Map;
+class Region;
 
 class Country : public Observable {
     friend class Alliance;
@@ -25,6 +25,8 @@ class Country : public Observable {
 #else
     private:
 #endif
+
+    Map* map;
     std::string name;
     BattleStrategy* strategy;
 
@@ -62,6 +64,7 @@ class Country : public Observable {
   public:
     double morale;    // The general morale of the country's citizens
     Country(std::string name);
+    Country(std::string name, Map* map);
     ~Country();
     std::string getName();
     void takeTurn();
@@ -70,6 +73,7 @@ class Country : public Observable {
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
     void decideStrategy();
+    void validateValues();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
     std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();

@@ -21,9 +21,9 @@ TEST_F(WarPhaseTest, StatePatternTest) {
     // Testinng the progression of the States
     EXPECT_EQ(war->warPhase->warPhase, phase::DISPUTE);
     war->changeState();
-    EXPECT_EQ(war->warPhase->warPhase, phase::HOSTILITIES);
-    war->changeState();
     EXPECT_EQ(war->warPhase->warPhase, phase::CONFLICT);
+    war->changeState();
+    EXPECT_EQ(war->warPhase->warPhase, phase::HOSTILITIES);
     war->changeState();
     EXPECT_EQ(war->warPhase->warPhase, phase::POST_WAR);
     war->changeState();

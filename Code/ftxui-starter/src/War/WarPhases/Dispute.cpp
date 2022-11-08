@@ -1,4 +1,5 @@
 #include "Dispute.h"
+#include "Conflict.h"
 
 Dispute::Dispute() {
   War::warState = "Dispute";
@@ -34,7 +35,7 @@ Dispute::Dispute() {
 }
 
 void Dispute::handleWarChange(War* war) {
-  war->transitionTo(new Hostilities());
+  war->transitionTo(new Conflict());
 }
 
 std::string Dispute::getCurrentWarState() {
