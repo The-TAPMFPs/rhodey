@@ -169,6 +169,8 @@ void UI::render()
   int camX = 0, camY = 0;
   int mapHeight = 40;
   int tab_selected = 0; //Tab toggle for Country data panel
+  bool showMapDifficulties = false;
+  bool showMapLines = false;
   Region* selectedRegion = nullptr;
 
   Map* warMap = war->getMap();
@@ -231,7 +233,7 @@ void UI::render()
       }
 
       //Draw travel difficulties from selected region
-      if(selectedRegion != nullptr)
+      if((showMapLines || showMapDifficulties) && selectedRegion != nullptr)
       {
         bool diffForTeamA = selectedRegion->getPossessor()->getAlliance()->isTeamA();
         // float travelDifficulty = diffForTeamA ? 10.5 : 0;
@@ -241,19 +243,22 @@ void UI::render()
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << travelDifficulty;
 
-        //Draw Bresenham lines
-        // MapCoords from = selectedRegion->getCoords();
-        // MapCoords to = {r->x, r->y};
-        // int x0 = from.x*2, x1 = to.x*2;
-        // int y0 = from.y*4, y1 = to.y*4;
-        // std::vector<MapCoords> line = brensenhamLine(x0, y0, x1, y1);
-        // int c_r = (x*13 + y*7)%255;
-        // int c_g = (x*19 + y*31)%255;
-        // int c_b = (x*53 + y*19)%255;
-        // for(auto l = line.begin(); l != line.end(); l++)
-        // {
-        //   c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
-        // }
+        if(showMapLines)
+        {
+          //Draw Bresenham lines
+          MapCoords from = selectedRegion->getCoords();
+          MapCoords to = {r->x, r->y};
+          int x0 = from.x*2, x1 = to.x*2;
+          int y0 = from.y*4, y1 = to.y*4;
+          std::vector<MapCoords> line = brensenhamLine(x0, y0, x1, y1);
+          int c_r = (x*13 + y*7)%255;
+          int c_g = (x*19 + y*31)%255;
+          int c_b = (x*53 + y*19)%255;
+          for(auto l = line.begin(); l != line.end(); l++)
+          {
+            c.DrawBlock(l->x, l->y, true, Color(c_r, c_g, c_b));
+          }
+        }
 
         c.DrawText(x, y+4, ss.str(), Color::Cyan1);
       }
@@ -317,7 +322,7 @@ void UI::render()
       return vbox({
         text("Region Data") | center,
         separator(),
-        // text(selectedRegion->getRegionName()) | center,
+        text(selectedRegion->getRegionName()) | center,
         text(selectedRegion->getPossessor()->getName()) | center,
         text("Enemy ratio: " + std::to_string(warMap->getEnemyRatioInRegion(selectedRegion, tab_selected))) | center,
         text("X: " + std::to_string(selectedRegion->getCoords().x)),
@@ -369,8 +374,14 @@ void UI::render()
   int simSpeed = 7;
   int frameCount = 0;
   auto speedSlider = Slider("", &simSpeed, 0, 7, 1);
-  std::string pauseButtonText = "Pause";
 
+  std::string cbxDifficultiesLabel = "Travel Difficulties";
+  auto difficultyCheckbox = Checkbox(cbxDifficultiesLabel, &showMapDifficulties);
+
+  std::string cbxLinesLabel = "Map Lines";
+  auto linesCheckbox = Checkbox(cbxLinesLabel, &showMapLines);
+
+  std::string pauseButtonText = "Pause";
   bool simPaused = false;
   auto pauseButton = Button(&pauseButtonText, Closure([&] {
     simPaused = !simPaused;
@@ -417,7 +428,14 @@ void UI::render()
         | center
         | size(WIDTH, GREATER_THAN, 10),
         speedSlider->Render() | border,
-        pauseButton->Render()
+        pauseButton->Render(),
+      }),
+      hbox({
+        filler(),
+        linesCheckbox->Render(),
+        filler(),
+        difficultyCheckbox->Render(),
+        filler()
       })
     });
   });
@@ -426,7 +444,9 @@ void UI::render()
   auto countryDataPanelLayout = Container::Vertical({
       countryManager,
       speedSlider,
-      pauseButton
+      pauseButton,
+      linesCheckbox,
+      difficultyCheckbox
   });
 
   //=====RIGHT PANEL=====//
