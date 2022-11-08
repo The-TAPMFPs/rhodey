@@ -584,13 +584,4 @@ void UI::startSim()
     }
     i++;
   }
-<<<<<<< HEAD
-
-  // while(running)
-  {
-    frameCount++;
-  }
 }
-=======
-}
->>>>>>> feature/ui
