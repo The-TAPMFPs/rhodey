@@ -6,7 +6,7 @@ std::string War::warStateDesc = "UNSET_WAR_STATE_DESC";
 std::vector<std::string> War::warStateThumbnail;
 ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 
-War::War() : frameCount(0), warPhase(new Dispute()) {
+War::War(): stepCount(0), warPhase(new Dispute()) {
 
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
@@ -46,22 +46,26 @@ std::vector<Country*> War::getAllCountries()
 void War::step()
 {
   //Get alliance/country whose turn it is now
-  Alliance* team = (frameCount%2?this->teamA:this->teamB);
-  Country* c = team->getMemberModuloSize(frameCount/2);
+  Alliance* team = (stepCount%2?this->teamA:this->teamB);
+  Country* c = team->getMemberModuloSize(stepCount/2);
 
   if(c != nullptr)
   {
-    c->morale = frameCount;
     // c->takeTurn(); //TODO: Fix Floating point exception
   }
 
-  frameCount++;
+  this->stepCount++;
 }
 
 //Called when there is an input event from the UI
 bool War::onEvent(ftxui::Event e)
 {
   return false;
+}
+
+int War::getStepCount()
+{
+  return this->stepCount;
 }
 
 void War::transitionTo(WarPhase* warPhase) {

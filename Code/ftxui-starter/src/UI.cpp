@@ -168,7 +168,7 @@ void UI::render()
   int mapW = 100, mapH = 100;
   int camX = 0, camY = 0;
   int mapHeight = 40;
-  int tab_selected = 0;
+  int tab_selected = 0; //Tab toggle for Country data panel
   Region* selectedRegion = nullptr;
 
   Map* warMap = war->getMap();
@@ -177,19 +177,21 @@ void UI::render()
   auto mapRenderer = Renderer([&] {
     auto c = Canvas(mapW, mapH);
 
+    scalarField2D field = tab_selected == 0 ? m.travelFieldA : m.travelFieldB;
+
     for(int i = 0; i < mapW; i++) {
       for(int j = 0; j < mapH; j++) {
         {
-          int colIntensity = (255*m.travelFieldB[i][j]);
+          int colIntensity = (255*field[i][j]);
           auto col = Color(0, colIntensity, colIntensity);
 
-          if(100*m.travelFieldB[i][j] > mapHeight - 3 &&
-             100*m.travelFieldB[i][j] < mapHeight + 3)
+          if(100*field[i][j] > mapHeight - 3 &&
+             100*field[i][j] < mapHeight + 3)
           {
             auto col = Color::White;
           }
-
-          int x = 100*m.travelFieldB[i][j];
+          
+          int x = 100*field[i][j];
 
           if(x%5==0 || x%5==1) //Draw terrain banding
           {
@@ -299,7 +301,6 @@ void UI::render()
 #pragma region REGION_DATA_PANEL
   //=====TOP PANEL=====//
 
-  // auto mapSlider = Slider("Height:", &mapHeight, 0, 100, 1);
   auto regionDataLayout = Container::Vertical({});
 
   auto regionData = Renderer(regionDataLayout, [&] {
@@ -354,6 +355,17 @@ void UI::render()
     tab_container,
   });
 
+  int simSpeed = 7;
+  int frameCount = 0;
+  auto speedSlider = Slider("", &simSpeed, 0, 7, 1);
+  std::string pauseButtonText = "Pause";
+
+  bool simPaused = false;
+  auto pauseButton = Button(&pauseButtonText, Closure([&] {
+    simPaused = !simPaused;
+    pauseButtonText = simPaused ? "Play " : "Pause";
+  }));
+
   auto countryManager = Renderer(countryManagerLayout, [&] {
 
     std::vector<std::string> stats;
@@ -387,13 +399,23 @@ void UI::render()
           separator(),
           flexbox(statsElements, statsFlexboxConfig),
         })
+      }),
+      filler(),
+      hbox({
+        text(simPaused ? "Paused" : ("Speed " + std::to_string(simSpeed+1) + "x"))
+        | center
+        | size(WIDTH, GREATER_THAN, 10),
+        speedSlider->Render() | border,
+        pauseButton->Render()
       })
     });
   });
 
   //PANEL LAYOUT
   auto countryDataPanelLayout = Container::Vertical({
-      countryManager
+      countryManager,
+      speedSlider,
+      pauseButton
   });
 
   //=====RIGHT PANEL=====//
@@ -419,6 +441,8 @@ void UI::render()
   //=====INFO PANEL=====//
   auto info = Renderer(infoPanelLayout, [&] {
       return hbox({
+        text("Step count: " + std::to_string(war->getStepCount())) | center | size(WIDTH, GREATER_THAN, 20),
+        separator(),
         filler(),
         vbox({
           text("=====LOG=====") | center,
@@ -453,7 +477,13 @@ void UI::render()
   renderer |= CatchEvent([&](Event e) {
     if(e == Event::Custom)
     {
-      war->step();
+      int scaledSpeed = std::pow(2, 7-simSpeed);
+
+      if(frameCount % scaledSpeed == 0 && !simPaused)
+      {
+        war->step();
+      }
+      frameCount++;
     }
     war->onEvent(e);
 
@@ -541,7 +571,6 @@ void UI::executeDispute()
 void UI::startSim()
 {
   bool running = true;
-  int frameCount = 0;
 
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
@@ -555,9 +584,13 @@ void UI::startSim()
     }
     i++;
   }
+<<<<<<< HEAD
 
   // while(running)
   {
     frameCount++;
   }
 }
+=======
+}
+>>>>>>> feature/ui
