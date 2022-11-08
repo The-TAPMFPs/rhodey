@@ -11,13 +11,13 @@
 #include "../../Entities/Entity.h"
 
 class Country;
+class UnitFactory;
 class TroopFactory;
 class VehicleFactory;
 
 class BattleStrategy {
-protected:
-        TroopFactory * uf;
-        VehicleFactory * vf;
+    protected:
+        UnitFactory * uf;
         Country * _con;
         Country* friendlyCountry;
         Country* enemyCountry;

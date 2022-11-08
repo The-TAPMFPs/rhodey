@@ -135,6 +135,16 @@ target_link_libraries(WarPhase_UnitTest
   PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
   GTest::gtest_main
 )
+add_executable(
+    Factory_UnitTest
+    src/Factory_UnitTest.cpp
+  ${SRC_FILES}
+)
+target_include_directories(Factory_UnitTest PUBLIC src)
+target_link_libraries(Factory_UnitTest
+  PRIVATE ftxui::screen PRIVATE ftxui::dom PRIVATE ftxui::component
+  GTest::gtest_main
+)
 # --- Emscripten build (can ignore) --------------------------------------------
 if (EMSCRIPTEN)
   string(APPEND CMAKE_CXX_FLAGS " -s USE_PTHREADS")

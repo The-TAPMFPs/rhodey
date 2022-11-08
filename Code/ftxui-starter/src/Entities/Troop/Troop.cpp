@@ -1,11 +1,12 @@
 #include "Troop.h"
 #include <cmath>
 
-Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country * country) :
-    Entity(name, "Ground Infantry", numberOfTroops, 3, weapon, country) {
-	this->HPScalling = 3;
-	this->HP = this->HP* this->HPScalling;
-    }
+Troop::Troop(string name, int numberOfTroops, vector<Weapon*> * weapon, Country * country)
+ : Entity(name, "Ground Infantry", numberOfTroops, 3, weapon, country)
+{
+    this->HPScalling = 3;
+    this->HP = this->HP* this->HPScalling;
+}
 
 
 int Troop::getCarryingCapacity() {

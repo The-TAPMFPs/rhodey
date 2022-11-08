@@ -8,6 +8,8 @@
 #include "BattleStrategy/ResearchAndDevelopment.h"
 #include "../MapRegions/Map.h"
 
+class Observable;
+
 unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
   return 0;

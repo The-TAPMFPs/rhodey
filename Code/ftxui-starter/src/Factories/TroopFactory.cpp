@@ -1,46 +1,61 @@
 #include "TroopFactory.h"
 #include <sstream>
 
+/**
+ * @file TroopFactory.cpp
+ * @brief Construct a new Troop Factory object
+ * @author The TransactionAwarePersistenceManagerFactoryProxies
+ * @date 06 November 2022 
+ */
 
-TroopFactory::TroopFactory(std::string name, int num, Country * con){
+/**
+ * @fn TroopFactory (std::string name, int num, Country * con)
+ * @brief The constructor of the TroopFactory class.
+ * 
+ * @param name Troop Name 
+ * @param num Amount of Troops
+ * @param con Country of Troops 
+ */
+TroopFactory::TroopFactory(std::string name, int num, Country * con) :
+    UnitFactory(name, num, con)
+{
     _name = name;
     _num = num;
     _con = con;
-    //level 1
-    SMG* smg;
-    Pistol* pis;
-    //level 2
-    AR* ar;
-    Sniper* sni;
-    //level 3
-    DualBurette* db;
-    Bazooka* baz;
-    //level 4
-    Sniper50* s50;
-    AK47* ak;
-    w1 =  new vector<Weapon *> {smg, pis};
-    w2 = new vector<Weapon *> {ar, pis, sni};
-    w3 = new vector<Weapon *> {ar, smg, db, baz};
-    w4 = new vector<Weapon *> {ar, pis, sni, baz};
-    w5 = new vector<Weapon *> {ar, db, s50, ak};
-    w6 = new vector<Weapon *> {ak, db, baz, s50};
+    w1 =  new vector<Weapon *> {new SMG(), new Pistol()}; /**<Vector which contains a set of references to weapon objects>*/
+    w2 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper()}; /**<Vector which contains a set of references to weapon objects>*/
+    w3 = new vector<Weapon *> {new AR(), new SMG(), new DualBurette(), new Bazooka()}; /**<Vector which contains a set of references to weapon objects>*/
+    w4 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper(), new Bazooka()}; /**<Vector which contains a set of references to weapon objects>*/
+    w5 = new vector<Weapon *> {new AR(), new DualBurette(), new Sniper50(), new AK47()}; /**<Vector which contains a set of references to weapon objects>*/
+    w6 = new vector<Weapon *> {new AK47(), new DualBurette(), new Bazooka(), new Sniper50()}; /**<Vector which contains a set of references to weapon objects>*/
 }
-
+/**
+ * @fn ~TroopFactory()
+ * @brief The Destructor of the TroopFactory class.
+ */
 TroopFactory::~TroopFactory(){}
 
+/**
+ * @fn Entity* makeUnit()
+ * @brief Makes the specific units based on chance and research level 
+ *        and returns a reference to the new Entity that has been made.
+ */
+ 
 Entity* TroopFactory::makeUnit(){
-    int i = rand() % 2 + 1;
-    std::string temp;
-    std::stringstream convert;
+    int i = rand() % 2 + 1; /**<A random number to decide what type of unit to make when the chance arises.>*/
+    std::string temp; /**<A string to hold the message that the Vehicles were made.>*/
+    std::stringstream convert; /**<A stringstream to concentate the intital message.>*/
     Troop * e;
     if(_con->getResearch() < 0.2){
         e = new Troop(_name, _num, w1, _con);
-	convert << _num << " troops with SMGs and Pistols were recruited.";
+        w1 =  new vector<Weapon *> {new SMG(), new Pistol()};
+	    convert << _num << " troops with SMGs and Pistols were recruited.";
         temp = convert.str();
         Logger::log(temp);
     }
     else if(_con->getResearch() < 0.5){
         e = new Troop(_name, _num, w2, _con);
+        w2 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper()};
         convert << _num << " troops with ARs, Pistols and Snipers were recruited.";
         temp = convert.str();
         Logger::log(temp);
@@ -49,28 +64,36 @@ Entity* TroopFactory::makeUnit(){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w3, _con);
+                w3 = new vector<Weapon *> {new AR(), new SMG(), new DualBurette(), new Bazooka()};
                 convert << _num << " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
+                break;
             case 2:
                 e = new Troop(_name, _num, w4, _con);
+                w4 = new vector<Weapon *> {new AR(), new Pistol(), new Sniper(), new Bazooka()};
                 convert << _num << " troops with ARs, SMGs, Snipers and Bazookas were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
+                break;
         }
     }
     else if(_con->getResearch() <= 1){
         switch(i){
             case 1:
                 e = new Troop(_name, _num, w5, _con);
-		convert << _num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
+                w5 = new vector<Weapon *> {new AR(), new DualBurette(), new Sniper50(), new AK47()};
+		        convert << _num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
+                break;
             case 2:
                 e = new Troop(_name, _num, w6, _con);
+                w6 = new vector<Weapon *> {new AK47(), new DualBurette(), new Bazooka(), new Sniper50()};
                 convert << _num << " troops with AK47s, Dual Burettes, Bazooka and Sniper50s were recruited.";
                 temp = convert.str();
                 Logger::log(temp);
+                break;
         }
     }
     return e;
