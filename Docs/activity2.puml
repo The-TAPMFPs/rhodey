@@ -1,0 +1,40 @@
+@startuml StrategySelector
+|startOfWar|
+start
+:TeamsTurn;
+switch (DecideStrategy)
+case (OffensiveStrategy)
+  if (decideAction)
+    :Attack;
+  else 
+  ->;
+    :Prepare to attack by moving troops;
+  endif
+case (DefensiveStrategy) 
+  if (decideAction)
+    :Defend;
+  else 
+  ->;
+    :Move troops and recruit troops;
+  endif
+case (DevelopmentStrategy)
+  :Invest in economy and resources;
+case (IntelStrategy)
+  if (decideAction)
+    :place spies on countries;
+  else
+  ->;
+    :Move troops and recruit troops;
+  endif
+case (PreparationStrategy)
+  if (decideAction)
+    :RedistributeTroops;
+  else 
+  ->;
+    :RecruitTroops;
+  
+  
+  endif;
+endswitch
+stop
+@enduml

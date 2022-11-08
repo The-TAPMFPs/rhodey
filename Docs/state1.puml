@@ -1,0 +1,9 @@
+@startuml WarState
+hide empty description
+[*] --> Dispute
+Dispute --> Conflict
+Conflict --> Hostilities
+Hostilities --> PostWar
+PostWar --> DisputeSettled
+@enduml
+

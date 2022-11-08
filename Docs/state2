@@ -1,0 +1,10 @@
+@startuml StrategyState
+    hide empty description
+    [*] --> NoBattleStrategy
+    NoBattleStrategy --> OffensiveStrategy : [Wanting to attack]
+    NoBattleStrategy --> DefensiveStrategy : [Being attacked]
+    NoBattleStrategy --> ResearchStrategy : [Improve equipment]
+    NoBattleStrategy --> PrepareStrategy : [Prepare to attack]
+    NoBattleStrategy --> DiplomacyStrategy : [Want to be diplomatic]
+    NoBattleStrategy --> Intel : [Want to game info about enemy]
+@enduml
