@@ -18,6 +18,7 @@ void Defensive::setNameNumCont(std::string name, int num, Country * con){
 void Defensive::redistributeTroops(){
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
     delete occTable;
     
 }

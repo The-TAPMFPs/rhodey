@@ -2,18 +2,6 @@
 
 Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
-// void Offensive::warAlgorithm(int off){
-//     this->off =(_off) off;
-//     switch(off){
-//         case redOff:
-//             redistributeTroops();
-//             break;
-//         case attOff:
-//             attack();
-//             break;
-//     }
-//     return;
-// }
 
 void Offensive::doStrategy(Country* country){
     //enemyRergion = region with highest friendly ratio
@@ -39,8 +27,6 @@ void Offensive::attack(){
     std::vector<Entity *> teamA = battle->getTeamA();
     std::vector<Entity *> teamB = battle->getTeamB();
     Entity* winner;
-
-    
 
 
     if(teamA.size()==0){
