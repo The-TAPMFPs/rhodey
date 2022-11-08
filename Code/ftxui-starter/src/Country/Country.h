@@ -73,6 +73,7 @@ class Country : public Observable {
     double* generateRandomNums(int num);
     void setStrategy(BattleStrategy* strategy);
     void decideStrategy();
+    void validateValues();
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
     std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();

@@ -118,6 +118,9 @@ void Country::setStrategy(BattleStrategy* strategy) {
 }
 
 void Country::decideStrategy() {
+  //set num troops
+  //set num vehicles
+  //set num enemy regions
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;
@@ -164,10 +167,28 @@ void Country::decideStrategy() {
 }
 
 void Country::takeTurn() {
+  validateValues();
   decideStrategy();
   this->strategy->doStrategy(this);
 
   alertSpyCountries();
+}
+
+void Country::validateValues() {
+ 
+  if(population < 0) { population = 0;}
+  if(economy < 0) { economy = 0;}
+  if(resources < 0) { resources = 0;}
+  if(morale < 0) { morale = 0;}
+  if(aggressiveness < 0) { aggressiveness = 0;}
+  if(goalRating < 0) { goalRating = 0;}
+  if(research < 0) { research = 0;}
+  if(numTroops < 0) { numTroops = 0;}
+  if(numVehicles < 0) { numVehicles = 0;}
+  if(numSpies < 0) { numSpies = 0;}
+  if(numEnemyRegions < 0) { numEnemyRegions = 0;}
+
+  
 }
 
 std::vector<std::string> Country::getFormattedStats() {
