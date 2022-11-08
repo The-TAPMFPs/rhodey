@@ -55,5 +55,5 @@ TEST_F(CountryTest, StrategyTEst) {
     Map * theMap = new Map({this->country,this->enemyCountry});
     Prepare * strat = new Prepare(theMap,this->country);
     strat->doStrategy(this->country);
-    EXPECT_EQ(theMap->getOccupancyTable()->getEntities(this->country->getCapital()).size(),2);
+    EXPECT_EQ(theMap->getOccupancyTable()->getEntities(this->country->getCapital()).size(),1);
 }
