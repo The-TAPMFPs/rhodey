@@ -34,6 +34,9 @@ void Intel::doStrategy(Country* country){
         country->setNumSpies(country->getNumSpies() + 1);
         countriesBeingSpiedOn->push_back(std::pair<Country*, double>(enemyToSpyOn, 0));
         Logger::log(country->name + " is now spying on :" + enemyToSpyOn->name + "\n");
+        // country->spyOnCountry(enemyToSpyOn);
+        // countriesBeingSpiedOn->push_back(std::pair<Country*, double>(enemyToSpyOn, 0));
+        // Logger::log(country->name + " is now spying on :" + enemyToSpyOn->name);
     } 
 }
 

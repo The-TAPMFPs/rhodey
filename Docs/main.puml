@@ -250,9 +250,8 @@ rectangle Spies {
     class Spy {
         {abstract} + update(): void
     }
+    note right #lightgreen : OBSERVER
 
-}
-note right #lightgreen : OBSERVER
 
 
 

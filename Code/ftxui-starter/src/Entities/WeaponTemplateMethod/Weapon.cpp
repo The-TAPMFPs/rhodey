@@ -158,12 +158,12 @@ void TestWeapon::outputFlair(){
 TestBomb::TestBomb() : Weapon(30,"Test Bomb") {
     this->WeaponType = BOMB;
 }
+Mg160::Mg160() : Weapon(0, "MG160") {
+    this->damage = 30 + rand()%30;
+    this->WeaponType = HIGH_CAL;
+}
 void TestBomb::outputFlair(){
 
-}
-Mg160::Mg160():Weapon(0,"Mg160"){
-    this->damage=25+rand()%30;
-    this->WeaponType = CANNON;
 }
 void Mg160::outputFlair() {
     std::stringstream out;
