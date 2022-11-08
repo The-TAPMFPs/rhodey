@@ -148,13 +148,13 @@ void Country::decideStrategy() {
   {
     default:
   // case 0:
-    this->strategy = new Offensive(map);
+    // this->strategy = new Offensive(map);
   //   break;
   // case 1:
-  //   this->strategy = new Defensive(map);
+    // this->strategy = new Defensive(map);
   //   break;
   // case 2:
-  //   this->strategy = new ResearchAndDevelopment(map);
+    this->strategy = new ResearchAndDevelopment(map);
   //   break;
   // case 3:
     // this->strategy = new Prepare(map, this);
@@ -212,6 +212,7 @@ std::vector<std::string> Country::getFormattedStats() {
 std::vector<std::pair<Country*, double>>* Country::getCountriesBeingSpiedOn() {
   return &countriesBeingSpiedOn;
 }
+
 
 void Country::setPopulation(int population) {
   this->population = population;

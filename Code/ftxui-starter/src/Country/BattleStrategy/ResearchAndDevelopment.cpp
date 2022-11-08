@@ -17,4 +17,13 @@ ResearchAndDevelopment::ResearchAndDevelopment(Map* map) : BattleStrategy(map){}
 
 
 void ResearchAndDevelopment::doStrategy(Country* country){
+    switch(uuid::randomInt(0, 1))
+    {
+        case 0:
+            country->setResearch(country->getResearch() + 0.1);
+            break;
+        case 1:
+            country->setResources(country->getResources() + 0.1);
+            break;
+    }
 }
