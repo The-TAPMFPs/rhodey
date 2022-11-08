@@ -17,8 +17,18 @@ Prepare::Prepare(Map* map) : BattleStrategy(map){}
 
 
 void Prepare::doStrategy(Country* country){
-    // take action of lowest between trrop and vehicle count
-    Logger::log("Do the prepare strategy");
+    double troopNeed = ((country->getNumTroops() == 0) ? 1 : 1 - (country->getNumTroops() / (0.3 * country->getPopulation())));
+    double vehicleNeed = ((country->getNumTroops()==0) ? 1 : 1 - (country->getNumVehicles() / (country->getNumTroops() / 10)));
+    if(troopNeed >= vehicleNeed){
+        recruitTroops();
+    } else {
+        buildVehicles();
+    }
+
+    srand((unsigned)time(NULL));
+    double change = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    country->setResources(this->friendlyCountry->getResources() - change);
+    country->setEconomy(this->friendlyCountry->getEconomy() - change);
 }
 
 /**

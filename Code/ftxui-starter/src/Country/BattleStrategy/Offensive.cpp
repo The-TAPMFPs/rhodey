@@ -17,8 +17,20 @@ Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
 
 void Offensive::doStrategy(Country* country){
+    setEnemyRegion(map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), true, false)); //enemy region with the least enemies
+    setFriendlyRegion(map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), false, false));//friendly region with the most friendlies
     //enemyRergion = region with highest friendly ratio
     //friendlyRegion = region with lowest enemy ratio
+    if(map->getEnemyRatioInRegion(enemyRegion, country->getAlliance()->isTeamA()) < 0.55){//if the enemy ratio is less than 55%
+        attack();
+    }
+    else{
+        redistributeTroops();
+    }
+    srand((unsigned)time(NULL));
+    double change = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    country->setResources(this->friendlyCountry->getResources() - change);
+    country->setEconomy(this->friendlyCountry->getEconomy() - change);
 }
 
 /**

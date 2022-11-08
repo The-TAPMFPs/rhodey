@@ -28,6 +28,9 @@ void ResearchAndDevelopment::doStrategy(Country* country){
     else {
         developResources();
     }
+    srand((unsigned)time(NULL));
+    double change = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    country->setAggressiveness(country->getAggressiveness() - change);
 }
 
 /**

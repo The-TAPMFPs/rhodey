@@ -27,12 +27,16 @@ Country::Country(std::string name) : name(name) {
     resources = (((double) rand() / RAND_MAX) * max-min) + min;
     research = (((double) rand() / RAND_MAX) * max-min) + min;
     aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
-    goalRating = 0;
+    goalRating = (((double) rand() / RAND_MAX) * 0.10-0.05) + 0.05;
     numSpies = 0;
-    numTroops = 0;
-    numVehicles = 0;
-    numEnemyRegions = 0;
     strategy = NULL;
+    OccupancyTable* occTable = map->getOccupancyTable();
+    numTroops = occTable->getNumTroops(this);
+    numVehicles = occTable->getNumVehicles(this);
+    numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
+
+    delete occTable;
+    
     generatePersonalityMatrix();
 }
 
@@ -69,7 +73,7 @@ void Country::generatePersonalityMatrix() {
       0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, developVals[2],  // development
       0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // preparation
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
-      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], diploVals[3], 0, 0, 0;  // diplomacy
+      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], 0, diploVals[3], 0, 0;  // diplomacy
 
   delete[] offensiveVals;
   delete[] defensiveVals;
@@ -127,9 +131,12 @@ void Country::setStrategy(BattleStrategy* strategy) {
 }
 
 void Country::decideStrategy() {
-  //set num troops
-  //set num vehicles
-  //set num enemy regions
+  OccupancyTable* occTable = map->getOccupancyTable();
+  numTroops = occTable->getNumTroops(this);
+  numVehicles = occTable->getNumVehicles(this);
+  numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
+
+  delete occTable;
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;

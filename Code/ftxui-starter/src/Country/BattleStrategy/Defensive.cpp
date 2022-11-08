@@ -17,9 +17,20 @@ Defensive::Defensive(Map* map) : BattleStrategy(map){}
 
 
 void Defensive::doStrategy(Country* country){
-    // if there is a non contesting region, move those troops to a contesting
-      // region if no contesting region then recruit this->strategy = new
-      // Defensive();
+    setEnemyRegion(map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), false, true)); //get friendly region with the most enemies
+    setFriendlyRegion(map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), false, false)); //get friendly region with the least enemies
+
+    if(map->getEnemyRatioInRegion(enemyRegion, country->getAlliance()->isTeamA()) > 0.35){//if the enemy ratio is greater than 35%
+        redistributeTroops();
+    }
+    else{
+        recruitTroops();
+    }
+    srand((unsigned)time(NULL));
+    double change = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    country->setResources(this->friendlyCountry->getResources() - change);
+    country->setEconomy(this->friendlyCountry->getEconomy() - change);
+
 }
 /**
  * @fn void setNameNumCont(string name, int num, Country * con)
@@ -38,6 +49,9 @@ void Defensive::setNameNumCont(std::string name, int num, Country * con){
 void Defensive::redistributeTroops(){
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+
+    
+
     Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
     delete occTable;
     

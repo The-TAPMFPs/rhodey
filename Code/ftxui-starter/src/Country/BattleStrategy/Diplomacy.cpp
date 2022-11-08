@@ -24,20 +24,28 @@ Diplomacy::Diplomacy(Map* map) : BattleStrategy(map){}
  */
 
 void Diplomacy::doStrategy(Country* country){
-    int temp = 0;
-    Logger::log("Do the diplomacy strategy");
-    if(myCountry->getPopulation() < enemyCountry->getPopulation()){temp++;}
-    if(myCountry->getEconomy() < enemyCountry->getEconomy()){temp++;}
-    if(myCountry->getMorale() < enemyCountry->getEconomy()){temp++;}
-    if(myCountry->getResources() < enemyCountry->getResources()){temp++;}
-    if(myCountry->getResearch() < enemyCountry->getResources()){temp++;}
+    setEnemyCountry((map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), true, true))->getPossessor());
+    setMyCountry(country);
 
-    if(temp = 3){
+    int score = 0;
+    if(myCountry->getNumTroops() <= enemyCountry->getNumTroops()){score++;}
+    if(myCountry->getEconomy() <= enemyCountry->getEconomy()){score++;}
+    if(myCountry->getMorale() <= enemyCountry->getMorale()){score++;}
+    if(myCountry->getResources() <= enemyCountry->getResources()){score++;}
+    if(myCountry->getNumVehicles() <= enemyCountry->getNumVehicles()){score++;}
+    if(myCountry->getNumSpies() <= enemyCountry->getNumSpies()){score++;}
+    if(myCountry->getPopulation() <= enemyCountry->getPopulation()){score++;}
+    
+    if(score <= 4){
         proposeTreaty();
-    }
-    else if(temp > 3){
+    } else {
         surrender();
     }
+    srand((unsigned)time(NULL));
+    double change = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    country->setAggressiveness(country->getAggressiveness() - change);
+
+
 }
 
 /**
@@ -66,7 +74,24 @@ void Diplomacy::setEnemyCountry(Country* enemyCountry){
  * 
  */
 void Diplomacy::proposeTreaty(){
-    Logger::log(myCountry->getName() + " proposed a treaty with " + enemyCountry->getName());
+    Logger::log(myCountry->getName() + " proposed a treaty with " + enemyCountry->getName() + "\n");
+
+    int score = 0;
+    if(myCountry->getNumTroops()/enemyCountry->getNumTroops() >0.95){score++;}
+    if(myCountry->getEconomy()/enemyCountry->getEconomy() >0.95){score++;}
+    if(myCountry->getMorale()/enemyCountry->getMorale() >0.95){score++;}
+    if(myCountry->getResources()/enemyCountry->getResources() >0.95){score++;}
+    if(myCountry->getNumVehicles()/enemyCountry->getNumVehicles() >0.95){score++;}
+    if(myCountry->getNumSpies()/enemyCountry->getNumSpies() >0.95){score++;}
+    if(myCountry->getPopulation()/enemyCountry->getPopulation() >0.95){score++;}
+
+    if(score >= 5){
+        Logger::log(enemyCountry->getName() + " has accepted " + myCountry->getName() + "'s treaty" + "\n");
+    } else {
+        Logger::log(enemyCountry->getName() + " has rejected " + myCountry->getName() + "'s treaty" + "\n");
+
+    }
+    //Have a treaty function in the country
 }
 
 /**
@@ -75,5 +100,7 @@ void Diplomacy::proposeTreaty(){
  * 
  */
 void Diplomacy::surrender(){
-    Logger::log(myCountry->getName() + " surrended to " + enemyCountry->getName());
+    Logger::log(myCountry->getName() + " has surrendered to " + enemyCountry->getName() + "\n");
+    //end war
+    //Have a surrender function in the country
 }

@@ -9,6 +9,7 @@
 #include "../../MapRegions/Map.h"
 #include "../../War/Battle/Battle.h"
 #include "../../Entities/Entity.h"
+#include "../../War/War.h"
 
 class Country;
 class UnitFactory;
