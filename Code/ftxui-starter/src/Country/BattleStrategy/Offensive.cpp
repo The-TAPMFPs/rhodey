@@ -62,6 +62,7 @@ void Offensive::attack(){
     std::vector<Entity *> teamA = battle->getTeamA();
     std::vector<Entity *> teamB = battle->getTeamB();
     std::vector<Country *> losers = battle->getLossers();
+    std::vector<Country *> winners = battle->getWinners();
     Entity* winner;
 
 
@@ -81,6 +82,12 @@ void Offensive::attack(){
 
     for (auto it = begin (losers); it != end (losers); ++it) {
         (*it)->setAggressiveness((*it)->getAggressiveness() - agg);
+        (*it)->setMorale((*it)->getMorale() - mor);
+        (*it)->setGoalRating((*it)->getGoalRating() - goal);
+    }
+
+    for (auto it = begin (winners); it != end (winners); ++it) {
+        (*it)->setAggressiveness((*it)->getAggressiveness() + agg);
         (*it)->setMorale((*it)->getMorale() + mor);
         (*it)->setGoalRating((*it)->getGoalRating() + goal);
     }
