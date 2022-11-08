@@ -17,7 +17,7 @@ class War {
 #endif
         WarPhase* warPhase;
         Map* map;
-        int frameCount;
+        int stepCount;
 
     public:
         Alliance* teamA;
@@ -34,6 +34,7 @@ class War {
 
         void step(); //The main game loop
         bool onEvent(ftxui::Event e);
+        int getStepCount();
 
         void transitionTo(WarPhase* warPhase);
         void addCountryToSideA(Country* country);

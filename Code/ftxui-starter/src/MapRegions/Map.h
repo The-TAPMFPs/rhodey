@@ -32,7 +32,7 @@ class Map {
         static float distToRegion(int x, int y, Region* r);
 
     public:
-        static const unsigned int numRegions = 10;
+        static const unsigned int numRegions = 100;
         static const unsigned int mapW = 100, mapH = 100;
 
 

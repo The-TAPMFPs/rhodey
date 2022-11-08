@@ -155,7 +155,6 @@ void UI::render()
 #pragma region REGION_DATA_PANEL
   //=====TOP PANEL=====//
 
-  // auto mapSlider = Slider("Height:", &mapHeight, 0, 100, 1);
   auto regionDataLayout = Container::Vertical({});
 
   auto regionData = Renderer(regionDataLayout, [&] {
@@ -208,6 +207,17 @@ void UI::render()
     tab_container,
   });
 
+  int simSpeed = 7;
+  int frameCount = 0;
+  auto speedSlider = Slider("", &simSpeed, 0, 7, 1);
+  std::string pauseButtonText = "Pause";
+
+  bool simPaused = false;
+  auto pauseButton = Button(&pauseButtonText, Closure([&] {
+    simPaused = !simPaused;
+    pauseButtonText = simPaused ? "Play " : "Pause";
+  }));
+
   auto countryManager = Renderer(countryManagerLayout, [&] {
 
     std::vector<std::string> stats;
@@ -241,13 +251,23 @@ void UI::render()
           separator(),
           flexbox(statsElements, statsFlexboxConfig),
         })
+      }),
+      filler(),
+      hbox({
+        text(simPaused ? "Paused" : ("Speed " + std::to_string(simSpeed+1) + "x"))
+        | center
+        | size(WIDTH, GREATER_THAN, 10),
+        speedSlider->Render() | border,
+        pauseButton->Render()
       })
     });
   });
 
   //PANEL LAYOUT
   auto countryDataPanelLayout = Container::Vertical({
-      countryManager
+      countryManager,
+      speedSlider,
+      pauseButton
   });
 
   //=====RIGHT PANEL=====//
@@ -273,6 +293,8 @@ void UI::render()
   //=====INFO PANEL=====//
   auto info = Renderer(infoPanelLayout, [&] {
       return hbox({
+        text("Step count: " + std::to_string(war->getStepCount())) | center | size(WIDTH, GREATER_THAN, 20),
+        separator(),
         filler(),
         vbox({
           text("=====LOG=====") | center,
@@ -307,7 +329,13 @@ void UI::render()
   renderer |= CatchEvent([&](Event e) {
     if(e == Event::Custom)
     {
-      war->step();
+      int scaledSpeed = std::pow(2, 7-simSpeed);
+
+      if(frameCount % scaledSpeed == 0 && !simPaused)
+      {
+        war->step();
+      }
+      frameCount++;
     }
     war->onEvent(e);
 
@@ -395,7 +423,6 @@ void UI::executeDispute()
 void UI::startSim()
 {
   bool running = true;
-  int frameCount = 0;
 
   //PHASES:
   //Dispute, Hostilitiies, Conflict, Postwar, DisputeSettled
@@ -408,10 +435,5 @@ void UI::startSim()
       render();
     }
     i++;
-  }
-
-  // while(running)
-  {
-    frameCount++;
   }
 }
