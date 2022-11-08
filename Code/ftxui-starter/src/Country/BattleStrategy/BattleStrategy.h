@@ -8,6 +8,7 @@
 #include "../../logger.h"
 #include "../../MapRegions/Map.h"
 #include "../../War/Battle/Battle.h"
+#include "../../Entities/Entity.h"
 
 class Country;
 class UnitFactory;
@@ -29,5 +30,6 @@ public:
     virtual void setFriendlyRegion(Region* friendlyRegion){}
     virtual void setEnemyRegion(Region* enemyRegion){}
     virtual void setEnemyCountry(Country* enemy){}
+    virtual void setFriendlyCountry(Country* friendly){}
     virtual ~BattleStrategy();
 };

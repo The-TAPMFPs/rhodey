@@ -1,6 +1,8 @@
 #include "Battle.h"
 #include <sstream>
+#include <vector>
 #include "../../logger.h"
+#include "Entities/Entity.h"
 
 Battle::Battle(Region* region, OccupancyTable * table, bool testing) {
     this->_region = region;
@@ -9,8 +11,10 @@ Battle::Battle(Region* region, OccupancyTable * table, bool testing) {
     for (auto itr = allEntitities.begin(); itr != allEntitities.end(); ++itr) {
 	if ((*itr)->getCountry()->getAlliance()->isTeamA()) {
 	    teamA.push_back((*itr));
+	    this->allianceAInvolved.emplace((*itr)->getCountry());
 	} else {
 	    teamB.push_back((*itr));
+	    this->allianceBInvolved.emplace((*itr)->getCountry());
 	}
     }
     this->testing = testing;
@@ -23,8 +27,10 @@ void Battle::checkReinforcements() {
     for (auto itr = allEntitities.begin(); itr != allEntitities.end(); ++itr) {
 	if ((*itr)->getCountry()->getAlliance()->isTeamA()) {
 	    teamA.push_back((*itr));
+	    this->allianceAInvolved.emplace((*itr)->getCountry());
 	} else {
 	    teamB.push_back((*itr));
+	    this->allianceBInvolved.emplace((*itr)->getCountry());
 	}
     }
 }
@@ -99,4 +105,19 @@ bool Battle::takeTurn() {
 }
 
 Battle::~Battle(){
+}
+
+std::vector<Country *> Battle::getLossers() {
+    std::vector<Country *> toReturn;
+    if (this->teamB.size() == 0) {
+	for (auto itr = this->allianceBInvolved.begin(); itr != this->allianceBInvolved.end(); ++itr) {
+	    toReturn.push_back((*itr));
+	}
+    }
+    if (this->teamA.size() == 0) {
+	for (auto itr = this->allianceAInvolved.begin(); itr != this->allianceAInvolved.end(); ++itr) {
+	    toReturn.push_back((*itr));
+	}
+    }
+    return toReturn;
 }

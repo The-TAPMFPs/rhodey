@@ -35,6 +35,7 @@ void Offensive::redistributeTroops(){
     //move troops from region with lowest enemy troop count to region with highest friendly ratio
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
+    Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
     delete occTable;
 }
 
@@ -46,12 +47,42 @@ void Offensive::redistributeTroops(){
 void Offensive::attack(){
     OccupancyTable* occTable = map->getOccupancyTable();
     Battle* battle = new Battle(enemyRegion, occTable);
+    Logger::log(this->friendlyCountry->getName() + " has started a battle in" + battle->getRegion()->getRegionName() + "\n");
     while(battle->takeTurn()){
 
     }
 
+    std::vector<Entity *> teamA = battle->getTeamA();
+    std::vector<Entity *> teamB = battle->getTeamB();
+    std::vector<Country *> losers = battle->getLossers();
+    Entity* winner;
+
+
+    if(teamA.size()==0){
+        winner = teamB.front();
+        Logger::log(winner->getCountry()->getAlliance()->getName() + " has won the battle in " + battle->getRegion()->getRegionName() + "\n");
+    }
+    else{
+        winner = teamA.front();
+        Logger::log(winner->getCountry()->getAlliance()->getName() + " has won the battle in " + battle->getRegion()->getRegionName() + "\n");
+    }
+
+    srand((unsigned)time(NULL));
+    double agg = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    double mor = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+    double goal = (((double) rand() / RAND_MAX) * 0.05-0.01) + 0.01;
+
+    for (auto it = begin (losers); it != end (losers); ++it) {
+        (*it)->setAggressiveness((*it)->getAggressiveness() - agg);
+        (*it)->setMorale((*it)->getMorale() + mor);
+        (*it)->setGoalRating((*it)->getGoalRating() + goal);
+    }
+    
+
+
     delete battle;
     delete occTable;
+    delete winner;
 }
 
 /**
@@ -72,4 +103,8 @@ void Offensive::setFriendlyRegion(Region* friendlyRegion){
  */
 void Offensive::setEnemyRegion(Region* enemyRegion){
     this->enemyRegion = enemyRegion;
+}
+
+void Offensive::setFriendlyCountry(Country* friendlyCountry){
+    this->friendlyCountry = friendlyCountry;
 }

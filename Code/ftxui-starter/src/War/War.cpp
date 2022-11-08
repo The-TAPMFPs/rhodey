@@ -6,9 +6,8 @@ std::string War::warStateDesc = "UNSET_WAR_STATE_DESC";
 std::vector<std::string> War::warStateThumbnail;
 ftxui::Color War::warStateThumbnailColor = ftxui::Color::Yellow1;
 
-War::War() : frameCount(0), warPhase(new Dispute()) {
+War::War(): stepCount(0), warPhase(new Dispute()) {
 
-  this->warPhase = new Conflict();
   teamA = new Alliance("Side A", true);
   teamB = new Alliance("Side B", false);
   teamA->setEnemyAlliance(teamB);
@@ -47,22 +46,26 @@ std::vector<Country*> War::getAllCountries()
 void War::step()
 {
   //Get alliance/country whose turn it is now
-  Alliance* team = (frameCount%2?this->teamA:this->teamB);
-  Country* c = team->getMemberModuloSize(frameCount/2);
+  Alliance* team = (stepCount%2?this->teamA:this->teamB);
+  Country* c = team->getMemberModuloSize(stepCount/2);
 
   if(c != nullptr)
   {
-    c->morale = frameCount;
     // c->takeTurn(); //TODO: Fix Floating point exception
   }
 
-  frameCount++;
+  this->stepCount++;
 }
 
 //Called when there is an input event from the UI
 bool War::onEvent(ftxui::Event e)
 {
   return false;
+}
+
+int War::getStepCount()
+{
+  return this->stepCount;
 }
 
 void War::transitionTo(WarPhase* warPhase) {
@@ -106,4 +109,48 @@ Alliance* War::getSideCountryIsOn(Country* country)
 Map* War::getMap()
 {
   return this->map;
+}
+
+Country* War::getCountryInAllianceWithHighestTroopCount(bool teamA)
+{
+  vector<Country*> teamMembers = (teamA ? this->teamA : this->teamB)->getMembers();
+  OccupancyTable* oc = this->map->getOccupancyTable();
+
+  int max = -1;
+  Country* maxC = nullptr;
+
+  for(auto c = teamMembers.begin(); c != teamMembers.end(); c++)
+  {
+    int numT = oc->getNumTroops(*c);
+
+    if(numT > max)
+    {
+      max = numT;
+      maxC = *c;
+    }
+  }
+
+  return maxC;
+}
+
+Country* War::getCountryInAllianceWithHighestVehicleCount(bool teamA)
+{
+  vector<Country*> teamMembers = (teamA ? this->teamA : this->teamB)->getMembers();
+  OccupancyTable* oc = this->map->getOccupancyTable();
+
+  int max = -1;
+  Country* maxC = nullptr;
+
+  for(auto c = teamMembers.begin(); c != teamMembers.end(); c++)
+  {
+    int numV = oc->getNumVehicles(*c);
+
+    if(numV > max)
+    {
+      max = numV;
+      maxC = *c;
+    }
+  }
+
+  return maxC;
 }

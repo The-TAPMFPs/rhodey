@@ -1,6 +1,5 @@
 #pragma once
 #include "WarPhase.h"
-#include "Hostilities.h"
 
 class Dispute : public WarPhase {
  public:

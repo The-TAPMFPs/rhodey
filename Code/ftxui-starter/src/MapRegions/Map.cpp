@@ -311,7 +311,17 @@ std::vector<Region*> Map::getRegionsOwnedBy(Country* country)
     return res;
 }
 
-Region* Map::getRegionWithHighestEnemyRatio(bool teamA)
+//This function serves to replace 4 other functions
+//weAreTeamA:        true -> we are calling from the perspective of Alliance A; false -> team B
+//getEnemyRegion:    true -> we are getting an enemy's region; false -> we are getting a friendly region
+//highest: true -> get the highest enemy ratio ; false -> get the lowest enemy ratio
+
+//E.g.
+//(true, true, false) -> get enemy region (regions owned by team B) with highest friendly ratio
+
+//Returns nullptr if there are no regions (which should never happen under normal circumstances)
+//NOTE: The region with the highest enemy ratio == the region with the lowest friend ratio (and vice versa)
+Region* Map::getTeamsRegionWithEnemyRatio(bool weAreTeamA, bool getEnemyRegion, bool highest)
 {
     Region* maxRegion = nullptr;
     float max = 0.0;
@@ -319,18 +329,23 @@ Region* Map::getRegionWithHighestEnemyRatio(bool teamA)
 
     for(auto r = regions.begin(); r != regions.end(); r++)
     {
-        if(r->second->getPossessor()->getAlliance()->isTeamA() == teamA) //If region is owned by our team
+        bool regionIsTeamA = r->second->getPossessor()->getAlliance()->isTeamA();
+
+        if(getEnemyRegion ? (regionIsTeamA == weAreTeamA) : (regionIsTeamA != weAreTeamA)) //Only correct regions
         {
-            float ratio = getEnemyRatioInRegion(r->second, teamA);
-            if(ratio > max)
+            float enemyRatio = getEnemyRatioInRegion(r->second, weAreTeamA);
+
+            bool comparison = highest?(enemyRatio > max) : (enemyRatio < max);
+            if(comparison)
             {
-                max = ratio;
+                max = enemyRatio;
                 maxRegion = r->second;
             }
         }
     }
     return maxRegion;
 }
+
 
 MapMemento* Map::makeMemento()
 {

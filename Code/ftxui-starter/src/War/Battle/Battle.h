@@ -9,6 +9,8 @@
 
 #include <vector>
 #include "../../MapRegions/OccupancyTable.h"
+#include "Country/Country.h"
+#include <unordered_set>
 
 class Battle{
     private:
@@ -18,6 +20,8 @@ class Battle{
         std::vector<Entity *> teamB;
 	void checkReinforcements();
 	bool testing = false;
+	unordered_set<Country *> allianceAInvolved;
+	unordered_set<Country *> allianceBInvolved;
     public:
 	/**
 	 * \fn Battle::Battle(Region *, OccupancyTable *)
@@ -39,5 +43,6 @@ class Battle{
 	Region * getRegion() {return this->_region;};
 	std::vector<Entity *> getTeamA() {return this->teamA;}
 	std::vector<Entity *> getTeamB() {return this->teamB;}
+	std::vector<Country *> getLossers();
         ~Battle();
 };

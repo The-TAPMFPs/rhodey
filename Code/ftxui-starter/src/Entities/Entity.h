@@ -89,6 +89,7 @@ class Entity{
 
 	Entity* split(int numberOfEntities);
 	void absorb(Entity * entity);
+	virtual bool isVehicle()=0;
 };
 
 struct WrongType : public exception {

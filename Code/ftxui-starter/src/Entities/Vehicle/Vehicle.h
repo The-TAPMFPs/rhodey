@@ -12,4 +12,5 @@ public:
 	    vector<Weapon*> * weapon, Country * country, std::string type);
     int getCarryingCapacity();
     int getTerrainHandling();
+    virtual bool isVehicle() {return true;}
 };

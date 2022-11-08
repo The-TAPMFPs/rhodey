@@ -56,7 +56,7 @@ class Map {
         void recalculateTravelFields();
 
     public:
-        static const unsigned int numRegions = 10;
+        static const unsigned int numRegions = 100;
         static const unsigned int mapW = 100, mapH = 100;
 
 
@@ -74,9 +74,15 @@ class Map {
 
         OccupancyTable* getOccupancyTable();
         float getEnemyRatioInRegion(Region* region, bool teamA);
+
         std::vector<Region*> getRegionsOwnedBy(Country* country);
         std::vector<Region*> getRegionsOwnedBy(bool teamA);
-        Region* getRegionWithHighestEnemyRatio(bool teamA);
+
+        // Region* getFriendRegionWithHighestEnemyRatio(bool teamA);
+        // Region* getEnemyRegionWithHighestFriendRatio(bool teamA);
+        // Region* getFriendRegionWithLowestEnemyRatio(bool teamA);
+        Region* getTeamsRegionWithEnemyRatio(bool weAreTeamA, bool getEnemyRegion, bool highest);
+
 
         // THIS IS WHERE THE PROBLEM IS!
         MapMemento* makeMemento();
