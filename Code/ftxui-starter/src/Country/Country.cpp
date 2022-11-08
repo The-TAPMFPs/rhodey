@@ -123,7 +123,7 @@ void Country::decideStrategy() {
   numVehicles = occTable->getNumVehicles(this);
   numEnemyRegions = (map->getRegionsOwnedBy(this->getAlliance()->isTeamA())).size();
 
-  delete occTable;
+  // delete occTable;
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
   Eigen::MatrixXd result = pm * valMatrix;

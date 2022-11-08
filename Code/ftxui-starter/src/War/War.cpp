@@ -51,7 +51,7 @@ void War::step()
 
   if(c != nullptr)
   {
-    // c->takeTurn(); //TODO: Fix Floating point exception
+    c->takeTurn(); //TODO: Fix Floating point exception
   }
 
   this->stepCount++;

@@ -53,7 +53,7 @@ void Defensive::redistributeTroops(){
     
 
     Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
-    delete occTable;
+    // delete occTable;
     
 }
 

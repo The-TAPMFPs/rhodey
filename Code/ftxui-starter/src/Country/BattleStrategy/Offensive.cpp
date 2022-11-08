@@ -43,7 +43,7 @@ void Offensive::redistributeTroops(){
     OccupancyTable* occTable = map->getOccupancyTable();
     occTable->moveEntity(occTable->getEntities(friendlyRegion), enemyRegion);
     Logger::log(this->friendlyCountry->getName() + " has moved troops from " + this->friendlyRegion->getRegionName() + " to " + this->enemyRegion->getRegionName() + "\n");
-    delete occTable;
+    // delete occTable;
 }
 
 /**
@@ -88,7 +88,7 @@ void Offensive::attack(){
 
 
     delete battle;
-    delete occTable;
+    // delete occTable;
     delete winner;
 }
 
