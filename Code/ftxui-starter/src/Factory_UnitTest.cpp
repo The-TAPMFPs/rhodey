@@ -52,13 +52,13 @@ struct VehicleFactoryTest : testing::Test{
     VehicleFactoryTest(){
         countrytry = new Country("WillyWonka");
         veh = truck;
-        uf1 = new VehicleFactory("VehicleFactory1", 100, veh, countrytry);
+        uf1 = new VehicleFactory("VehicleFactory1", 100,  countrytry);
         e1 = uf1->makeUnit();
         veh = bomber;
-        uf2 = new VehicleFactory("VehicleFactory2", 100, veh, countrytry);
+        uf2 = new VehicleFactory("VehicleFactory2", 100, countrytry);
         uf2->makeUnit();
         veh = warship;
-        uf3 = new VehicleFactory("VehicleFactory3", 100, veh, countrytry);
+        uf3 = new VehicleFactory("VehicleFactory3", 100, countrytry);
         //uf3->makeUnit();
     }
 

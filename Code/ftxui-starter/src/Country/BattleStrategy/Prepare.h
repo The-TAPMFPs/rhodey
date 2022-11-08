@@ -13,9 +13,13 @@ class Prepare : public BattleStrategy {
         std::string _name;
         int _num;
         VEHICLE_TYPE _veh;
+	VehicleFactory * vehicleFactory;
+	TroopFactory * troopFactory;
+
     public:
-        Prepare(Map* map);
+        Prepare(Map* map, Country *);
         void doStrategy(Country* country);
+	~Prepare();
         // void buildVehicles();
         // void recruitTroops();
         // void setFriendlyRegion(Region* friendlyRegion);

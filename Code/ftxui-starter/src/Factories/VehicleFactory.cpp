@@ -7,20 +7,20 @@
  * @file VehicelFactory.cpp
  * @brief Construct a new Vehicle Factory object
  * @author The TransactionAwarePersistenceManagerFactoryProxies
- * @date 06 November 2022 
+ * @date 06 November 2022
  */
 
 /**
  * @fn TroopFactory (std::string name, int num, Country * con)
  * @brief The constructor of the TroopFactory class.
- * 
- * @param name Troop Name 
+ *
+ * @param name Troop Name
  * @param num Amount of Troops
  * @param type An enum of the types of vehicles
  * @param con Country of Troops
  */
-VehicleFactory::VehicleFactory(std::string name, int num, VEHICLE_TYPE type, Country * con)
- : UnitFactory(name, num, type, con)
+VehicleFactory::VehicleFactory(std::string name, int num, Country * con)
+ : UnitFactory(name, num, con)
 {
   _name = name;
   _num = num;
@@ -37,11 +37,43 @@ VehicleFactory::VehicleFactory(std::string name, int num, VEHICLE_TYPE type, Cou
  * @fn ~VehicleFactory()
  * @brief The Destructor of the VehicleFactory class.
  */
-VehicleFactory::~VehicleFactory() {}
+VehicleFactory::~VehicleFactory() {
+    for (int count = 0; count < w1->size(); count) {
+	delete w1->at(w1->size()-1);
+	w1->pop_back();
+    }
+    delete w1;
+
+    for (int count = 0; count < w2->size(); count) {
+	delete w2->at(w2->size()-1);
+	w2->pop_back();
+    }
+    delete w2;
+    for (int count = 0; count < w3->size(); count) {
+	delete w3->at(w3->size()-1);
+	w3->pop_back();
+    }
+    delete w4;
+    for (int count = 0; count < w4->size(); count) {
+	delete w4->at(w4->size()-1);
+	w4->pop_back();
+    }
+    delete w4;
+    for (int count = 0; count < w5->size(); count) {
+	delete w5->at(w5->size()-1);
+	w5->pop_back();
+    }
+    delete w5;
+    for (int count = 0; count < w6->size(); count) {
+	delete w6->at(w6->size()-1);
+	w6->pop_back();
+    }
+    delete w6;
+}
 
 /**
  * @fn Entity* makeUnit()
- * @brief Makes the specific units based on chance and research level 
+ * @brief Makes the specific units based on chance and research level
  *        and returns a reference to the new Entity that has been made.
  */
 

@@ -1,21 +1,22 @@
 #include "TroopFactory.h"
 #include <sstream>
 #include "Entities/WeaponTemplateMethod/Weapon.h"
+#include "../MapRegions/Map.h"
 
 /**
  * @file TroopFactory.cpp
  * @brief Construct a new Troop Factory object
  * @author The TransactionAwarePersistenceManagerFactoryProxies
- * @date 06 November 2022 
+ * @date 06 November 2022
  */
 
 /**
  * @fn TroopFactory (std::string name, int num, Country * con)
  * @brief The constructor of the TroopFactory class.
- * 
- * @param name Troop Name 
+ *
+ * @param name Troop Name
  * @param num Amount of Troops
- * @param con Country of Troops 
+ * @param con Country of Troops
  */
 TroopFactory::TroopFactory(std::string name, int num, Country * con) :
     UnitFactory(name, num, con)
@@ -34,14 +35,46 @@ TroopFactory::TroopFactory(std::string name, int num, Country * con) :
  * @fn ~TroopFactory()
  * @brief The Destructor of the TroopFactory class.
  */
-TroopFactory::~TroopFactory(){}
+TroopFactory::~TroopFactory(){
+    for (int count = 0; count < w1->size(); count) {
+	delete w1->at(w1->size()-1);
+	w1->pop_back();
+    }
+    delete w1;
+
+    for (int count = 0; count < w2->size(); count) {
+	delete w2->at(w2->size()-1);
+	w2->pop_back();
+    }
+    delete w2;
+    for (int count = 0; count < w3->size(); count) {
+	delete w3->at(w3->size()-1);
+	w3->pop_back();
+    }
+    delete w4;
+    for (int count = 0; count < w4->size(); count) {
+	delete w4->at(w4->size()-1);
+	w4->pop_back();
+    }
+    delete w4;
+    for (int count = 0; count < w5->size(); count) {
+	delete w5->at(w5->size()-1);
+	w5->pop_back();
+    }
+    delete w5;
+    for (int count = 0; count < w6->size(); count) {
+	delete w6->at(w6->size()-1);
+	w6->pop_back();
+    }
+    delete w6;
+}
 
 /**
  * @fn Entity* makeUnit()
- * @brief Makes the specific units based on chance and research level 
+ * @brief Makes the specific units based on chance and research level
  *        and returns a reference to the new Entity that has been made.
  */
- 
+
 Entity* TroopFactory::makeUnit(){
     int i = rand() % 2 + 1; /**<A random number to decide what type of unit to make when the chance arises.>*/
     std::string temp; /**<A string to hold the message that the Vehicles were made.>*/
@@ -103,6 +136,7 @@ Entity* TroopFactory::makeUnit(){
                 break;
         }
     }
+    this->_con->getMap()->getOccupancyTable()->addEntity(e, this->_con->getCapital());
     return e;
 }
 

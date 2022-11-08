@@ -29,7 +29,7 @@ Country::Country(std::string name) : name(name) {
     aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
     goalRating = (((double) rand() / RAND_MAX) * 0.10-0.05) + 0.05;
     numSpies = 0;
-    strategy = new Prepare(map);
+    strategy = NULL;
     generatePersonalityMatrix();
 }
 
@@ -157,7 +157,7 @@ void Country::decideStrategy() {
   //   this->strategy = new ResearchAndDevelopment(map);
   //   break;
   // case 3:
-    this->strategy = new Prepare(map);
+    this->strategy = new Prepare(map, this);
     break;
   // case 4:
   //   this->strategy = new Intel(map);
