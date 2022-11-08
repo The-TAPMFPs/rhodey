@@ -41,7 +41,10 @@ Country::Country(std::string name, Map* map) : Country(name) {
 
 Country::~Country(){
     if (this->strategy != NULL) {
-	//delete this->strategy;
+	    delete strategy;
+    }
+    if (this->allies != NULL) {
+       delete allies;
     }
     personalityMatrix.resize(0,0);
 }
