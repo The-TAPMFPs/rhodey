@@ -2,7 +2,7 @@
 
 DisputeSettled::DisputeSettled() {
   War::warState = "DisputeSettled";
-  War::warStateDesc = "Currently in DisputeSettled State <- This should be changed";
+  War::warStateDesc = War::narrative.disputeSettled;
   War::warStateThumbnailColor = ftxui::Color::CadetBlue;
   War::warStateThumbnail = {
 "",

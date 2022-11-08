@@ -6,7 +6,8 @@
 #include "../Country/Alliance.h"
 #include "../MapRegions/Map.h"
 #include "WarPhases/WarPhase.h"
-
+#include "Narrative/Narrative.h"
+#include "Narrative/NarrativeDirector.h"
 class WarPhase;
 
 class War {
@@ -23,6 +24,7 @@ class War {
         Alliance* teamA;
         Alliance* teamB;
 
+        static Narrative narrative;
         static std::string warState;
         static std::string warStateDesc;
         static std::vector<std::string> warStateThumbnail;
