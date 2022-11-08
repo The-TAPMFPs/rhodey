@@ -20,7 +20,7 @@ void RevengeNarrativeBuilder::setHostilities(std::vector<std::string> countriesA
 void RevengeNarrativeBuilder::setPostWar(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.postWar = NarrativeBuilder::pickRandom({
-        "Tensions are still there however " + countriesA[0] + " and " + countriesB[0] " + are tired of fighting, there people want to go home."
+        "Tensions are still there however " + countriesA[0] + " and " + countriesB[0] + " are tired of fighting, there people want to go home."
      });
 }
 

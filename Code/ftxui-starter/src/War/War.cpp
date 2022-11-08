@@ -25,7 +25,29 @@ War::War(): frameCount(0) {
 
   //Build war narrative
   NarrativeDirector* director = new NarrativeDirector(teamA, teamB);
-  this->narrative = director->makeTerritorialNarrative(); //TODO: Randomize this
+  switch(uuid::randomInt(0, 4))
+  {
+    case 0:
+      this->narrative = director->makeEconomicNarrative();
+      break;
+
+    case 1:
+      this->narrative = director->makeTerritorialNarrative();
+      break;
+
+    case 2:
+      this->narrative = director->makeRevengeNarrative();
+      break;
+
+    case 3:
+      this->narrative = director->makeReligiouslNarrative();
+      break;
+
+    default:
+      this->narrative = director->makePoliticalNarrative();
+      break;
+  }
+
   delete director;
 
   //Set start state

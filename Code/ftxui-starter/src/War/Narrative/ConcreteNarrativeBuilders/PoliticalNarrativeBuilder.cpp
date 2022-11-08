@@ -11,7 +11,7 @@ void PoliticalNarrativeBuilder::setDispute(std::vector<std::string> countriesA, 
 void PoliticalNarrativeBuilder::setHostilities(std::vector<std::string> countriesA, std::vector<std::string> countriesB)
 {
     product.hostilities = NarrativeBuilder::pickRandom({
-        countriesb[0] + " call " + countriesA[0] + " out for the what has been said against there country and the political ideologies that they hold" +
+        countriesB[0] + " call " + countriesA[0] + " out for the what has been said against there country and the political ideologies that they hold" +
         countriesA[0] + " repoonse is further aggrevation of the situation, military forces begin to surface on both sides."
     });
 }

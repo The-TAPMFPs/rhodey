@@ -57,6 +57,8 @@ file(GLOB_RECURSE SRC_FILES
   src/MapRegions/*.cpp
 
   src/War/*.cpp
+  src/War/Narrative/*.cpp
+  src/War/Narrative/ConcreteNarrativeBuilders/*.cpp
   src/War/WarPhases/*.cpp
 )
 
