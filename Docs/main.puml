@@ -625,9 +625,77 @@ class WarState {
 }
 note top of Mementos #lightgreen : MEMENTO
 
+rectangle "Builder" as builder{
+    class Narrative{
+        + dispute : string
+        + hostilities : string
+        + postWar : string
+        + disputeSettled : string
+    }
+    class NarrativeBuilder{
+        # product : Narrative
+        # pickRandom(strings : vector<string>) : string
+        {abstract} + setDispute(countriesA : vector<std::string> , countriesB : vector<std::string>) : void
+        {abstract} + setHostilities(countriesA : vector<std::string> , countriesB : vector<std::string>) : void
+        {abstract} + setPostWar(countriesA : vector<std::string> , countriesB : vector<std::string>) : void
+        {abstract} + setDisputeSettled(countriesA : vector<std::string> , countriesB : vector<std::string>) : void
+        + reset : void
+        + getResult() : Narrative 
+    }
+    class NarrativeDirector{
+        - Alliance * teamA 
+        - Alliance * teamB
+        - executeStandardMake(builder NarrativeBuilder*)
+        + NarrativeDirector(teamA : Alliance* , teamB : Alliance*)
+        + makeEconomicNarrative() : Narrative
+        + makeTerritorialNarrative() : Narrative
+        + makeRevengeNarrative() : Narrative
+        + makeReligiouslNarrative() : Narrative
+        + makePoliticalNarrative() : Narrative
+    }
+
+    class EconomicNarrativeBuilder{
+        + setDispute(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setHostilities(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setPostWar(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setDisputeSettled(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+    }
+    class TerrorialNarrativeBuilder{
+        + setDispute(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setHostilities(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setPostWar(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setDisputeSettled(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+    }
+    class ReligiousNarrativeBuilder{
+        + setDispute(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setHostilities(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setPostWar(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setDisputeSettled(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+    }
+    class PoliticalNarrativeBuilder{
+        + setDispute(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setHostilities(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setPostWar(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setDisputeSettled(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+    }
+    class RevengeNarrativeBuilder{
+        + setDispute(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setHostilities(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setPostWar(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+        + setDisputeSettled(countriesA : vector<std::string>, countriesB : vector<std::string>) : void
+    }
+}
 ' ===== RELATIONSHIPS =====
 Simulation o- War
 Simulation o- Simulation
+
+NarrativeBuilder <|-- EconomicNarrativeBuilder
+NarrativeBuilder <|-- TerrorialNarrativeBuilder
+NarrativeBuilder <|-- ReligiousNarrativeBuilder
+NarrativeBuilder <|-- PoliticalNarrativeBuilder
+NarrativeBuilder <|-- RevengeNarrativeBuilder
+Narrative o- NarrativeBuilder
+NarrativeBuilder o- NarrativeDirector
 
 Entity o- Weapon
 Entity <|-- Troop
