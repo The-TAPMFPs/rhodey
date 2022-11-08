@@ -65,6 +65,8 @@ file(GLOB_RECURSE SRC_FILES
   # src/Military/*.cpp
 
   src/War/*.cpp
+  src/War/Narrative/*.cpp
+  src/War/Narrative/ConcreteNarrativeBuilders/*.cpp
   src/War/WarPhases/*.cpp
   src/War/Battle/*.cpp
 )

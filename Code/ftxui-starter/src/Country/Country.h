@@ -77,6 +77,9 @@ class Country : public Observable {
     std::vector<std::string> getFormattedStats();
     Alliance * getAlliance() {return this->allies;}
     std::vector<std::pair<Country*, double>>* getCountriesBeingSpiedOn();
+
+    void improveMillitary();
+
     double getMorale();
     double getEconomy();
     int getPopulation();
