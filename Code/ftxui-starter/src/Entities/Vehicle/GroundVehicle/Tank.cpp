@@ -1,5 +1,4 @@
 #include "Tank.h"
-#include "GroundVehicle.h"
 Tank::Tank(string name, int numberOfTroops, vector<Weapon *> * weapons, Country * country) :
     GroundVehicle(name, numberOfTroops, 500, 30, weapons, country, "Tank") {
 	this->terrianHandling = 50;

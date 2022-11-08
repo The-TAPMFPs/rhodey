@@ -12,4 +12,5 @@ public:
 	    Country * country);
     virtual int getCarryingCapacity();
     virtual int getTerrainHandling();
+    bool isVehicle() {return false;}
 };
