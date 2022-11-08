@@ -9,10 +9,9 @@
 #       TAG += value [value, ...]
 # Values that contain spaces should be placed between quotes (" ")
 
-PROJECT_NAME           = "Doxygen Comment Example"
-PROJECT_LOGO           = ../Docs/logos/doxylogo.png
+PROJECT_NAME           = "Rhode War Simulation Engine"
 PROJECT_NUMBER         = "Version 1.0"
-INPUT                  = ../Docs/Code/ftxui-starter/src
+INPUT                  = ../Code/ftxui-starter/src
 RECURSIVE              = YES
 TAB_SIZE               = 4
 JAVADOC_AUTOBRIEF      = YES
@@ -22,3 +21,4 @@ WARNINGS               = YES
 GENERATE_LATEX         = NO
 SORT_MEMBER_DOCS       = NO
 REPEAT_BRIEF           = YES
+PROJECT_LOGO           = ../Docs/logos/doxylogo.png
