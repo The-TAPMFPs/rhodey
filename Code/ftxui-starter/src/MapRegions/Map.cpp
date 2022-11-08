@@ -110,6 +110,7 @@ void Map::randomInitializeRegions(int numRegions, std::vector<Country*> allCount
 
         Region* r = new Region(toTryInsert.x, toTryInsert.y, *c);
         regions.emplace(r->getUUID(), r);
+        (*c)->setCapital(r);
     }
 
     //Insert regions in such a way that no two regions have the same coordinates
