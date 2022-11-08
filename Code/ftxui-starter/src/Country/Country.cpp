@@ -148,7 +148,7 @@ void Country::decideStrategy() {
   {
     default:
   // case 0:
-  //   this->strategy = new Offensive(map);
+    this->strategy = new Offensive(map);
   //   break;
   // case 1:
   //   this->strategy = new Defensive(map);
@@ -157,7 +157,7 @@ void Country::decideStrategy() {
   //   this->strategy = new ResearchAndDevelopment(map);
   //   break;
   // case 3:
-    this->strategy = new Prepare(map, this);
+    // this->strategy = new Prepare(map, this);
     break;
   // case 4:
   //   this->strategy = new Intel(map);

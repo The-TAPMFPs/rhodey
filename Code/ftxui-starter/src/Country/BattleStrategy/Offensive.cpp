@@ -17,4 +17,30 @@ Offensive::Offensive(Map* map) : BattleStrategy(map) {}
 
 
 void Offensive::doStrategy(Country* country){
+    std::vector<Region*> regionsForAttack = map->getAllAvailableRegionsForAttack(country);
+    int rIndex = uuid::randomInt(0, regionsForAttack.size()-1);
+
+    Battle* battle = new Battle(regionsForAttack[rIndex], map->getOccupancyTable(), false);
+
+    while(battle->takeTurn()) {} //Simulate battle
+
+    vector<Country*> winners = battle->getWinners();
+    float n = map->getEnemyRatioInRegion(regionsForAttack[rIndex], country->getAlliance()->isTeamA());
+
+    Logger::log(std::to_string(n) + "winners");
+
+    if(winners.size() > 0)
+    {
+        regionsForAttack[rIndex]->setPossessor(winners[uuid::randomInt(0, winners.size())]);
+        map->recalculateTravelFields();
+    }
+
+    //TODO: Increase morale on win
+
+    // Region* toAttack = map->getTeamsRegionWithEnemyRatio(country->getAlliance()->isTeamA(), true, false);
+
+    // for(auto r = regionsForAttack.begin(); r != regionsForAttack.end(); r++)
+    // {
+
+    // }
 }

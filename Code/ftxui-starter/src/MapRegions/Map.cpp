@@ -35,6 +35,22 @@ Map::Map(std::vector<Country*> allCountries, bool testing)
     }
 }
 
+std::vector<Region*> Map::getAllAvailableRegionsForAttack(Country* country)
+{
+    std::vector<Region*> res;
+
+    bool getTeamA = !country->getAlliance()->isTeamA();
+
+    for(auto r = regions.begin(); r != regions.end(); r++)
+    {
+        if(r->second->getPossessor()->getAlliance()->isTeamA() == getTeamA)
+        {
+            res.push_back(r->second);
+        }
+    }
+    return res;
+}
+
 //Call this whenever the outcome of a battle changes a Region's occupancy
 void Map::recalculateTravelFields()
 {
@@ -81,8 +97,23 @@ void Map::randomInitializeRegions(int numRegions, std::vector<Country*> allCount
 
     std::set<MapCoords> coords;
 
+    //Create country capitals
+    for(auto c = allCountries.begin(); c != allCountries.end(); c++)
+    {
+        MapCoords toTryInsert = { uuid::randomInt(0, 49), uuid::randomInt(0, 24) };
+
+        while(coords.count(toTryInsert)) //While there is a collision
+        {
+            toTryInsert = {uuid::randomInt(0, 49), uuid::randomInt(0, 24)};
+        }
+        coords.insert(toTryInsert);
+
+        Region* r = new Region(toTryInsert.x, toTryInsert.y, *c);
+        regions.emplace(r->getUUID(), r);
+    }
+
     //Insert regions in such a way that no two regions have the same coordinates
-    for(int i = 0; i < numRegions; i++)
+    for(int i = 0; i < numRegions-allCountries.size(); i++)
     {
         MapCoords toTryInsert = { uuid::randomInt(0, 49), uuid::randomInt(0, 24) };
 

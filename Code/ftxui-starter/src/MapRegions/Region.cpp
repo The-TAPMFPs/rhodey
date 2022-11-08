@@ -37,3 +37,8 @@ Country* Region::getPossessor()
 {
   return this->possessor;
 }
+
+void Region::setPossessor(Country* possessor)
+{
+  this->possessor = possessor;
+}
