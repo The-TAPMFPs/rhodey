@@ -15,8 +15,7 @@ level of civilization, war remains rife. The simulation allows you to update a c
   <li><a href="https://drive.google.com/drive/folders/1uG_S1bbg-hU2gRrWa_SrvZrkXdSlMDhJ?usp=share_link" target="_blank">UML Diagrams</a></li>
 </ul>
 
-![Screenshot 2022-11-08 103639](https://user-images.githubusercontent.com/105363824/200515580-38fdbe86-1fdd-4667-857c-051fef5205d4.png)
-
+![Demo](https://raw.githubusercontent.com/The-TAPMFPs/rhodey/master/Docs/demo.gif)
 
 ## Build Instructions
 ### Prerequisites
