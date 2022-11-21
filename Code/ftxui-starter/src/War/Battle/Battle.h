@@ -47,3 +47,9 @@ class Battle{
 	std::vector<Country *> getWinners();
         ~Battle();
 };
+
+struct StaleMate : public exception {
+   const char * what () const throw () {
+      return "Both sides have completely annihilated each other.";
+   }
+};

@@ -192,7 +192,7 @@ void UI::render()
           {
             auto col = Color::White;
           }
-          
+
           int x = 100*field[i][j];
 
           if(x%5==0 || x%5==1) //Draw terrain banding

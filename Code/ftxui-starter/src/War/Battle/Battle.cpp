@@ -124,6 +124,9 @@ std::vector<Country *> Battle::getLossers() {
 
 std::vector<Country *> Battle::getWinners() {
     std::vector<Country *> toReturn;
+    if (this->teamA.size() == 0 && this->teamB.size() == 0) {
+	throw StaleMate();
+    }
     if (this->teamB.size() == 0) {
 	for (auto itr = this->allianceAInvolved.begin(); itr != this->allianceAInvolved.end(); ++itr) {
 	    toReturn.push_back((*itr));
