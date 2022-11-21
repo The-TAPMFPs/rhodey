@@ -5,111 +5,162 @@ using namespace std;
 
 enum WEAPON_TYPE {SMALL_ARMS, TANK_ROUND, ANTI_TANK, ANTI_AIR, CANNON, HIGH_CAL, BOMB, ROCKET};
 
+/*! \enum WEAPON_NAME *
+ *  Name of a weapon used to get a flyweight weapon from the flyweight factory.
+ */
+enum WEAPON_NAME{
+    CLASS_BAZOOKA,
+    CLASS_SNIPER,
+    CLASS_SNIPER50,
+    CLASS_PISTOL,
+    CLASS_AR,
+    CLASS_SMG,
+    CLASS_DUALBURETTE,
+    CLASS_AK47,
+    CLASS_TORPEDO,
+    CLASS_MISSILE,
+    CLASS_BOMB,
+    CLASS_CANNON,
+    CLASS_MG160
+};
+
+class WeaponFlyweightFactory;
+
 class Weapon {
- protected:
-  string WeaponName;
-  int damage = 0;
-  WEAPON_TYPE WeaponType;
-
- public:
-  Weapon(int damage, string weaponName);
-  virtual ~Weapon();
-  int getDamage();
-  WEAPON_TYPE getType();
-  string getName();
-  virtual void outputFlair()=0;
-};
-
-class Bazooka : public Weapon {
+    friend WeaponFlyweightFactory;
+    protected:
+      string WeaponName;
+      int damage = 0;
+      WEAPON_TYPE WeaponType;
+      Weapon(int damage, string weaponName);
     public:
-  Bazooka();
-  virtual void outputFlair() override;
+      virtual ~Weapon();
+      int getDamage();
+      WEAPON_TYPE getType();
+      string getName();
+      virtual void outputFlair()=0;
 };
 
-class Sniper : public Weapon{
-    public:
-    Sniper();
-  virtual void outputFlair() override;
-};
-
-class Sniper50 : public Weapon{
+class Bazooka : protected Weapon {
+    friend WeaponFlyweightFactory;
+    protected:
+	Bazooka();
     public:
 	virtual void outputFlair() override;
-    Sniper50();
 };
 
-class Pistol : public Weapon{
+class Sniper : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Sniper();
     public:
 	virtual void outputFlair() override;
-    Pistol();
 };
 
-class AR : public Weapon{
+class Sniper50 : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Sniper50();
     public:
 	virtual void outputFlair() override;
-    AR();
 };
 
-class SMG : public Weapon{
+class Pistol : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Pistol();
     public:
 	virtual void outputFlair() override;
-    SMG();
 };
 
-class DualBurette : public Weapon{
+class AR : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	AR();
     public:
 	virtual void outputFlair() override;
-    DualBurette();
 };
 
-class AK47 : public Weapon{
+class SMG : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	SMG();
     public:
 	virtual void outputFlair() override;
-    AK47();
 };
 
-class Torpedo:public Weapon{
+class DualBurette : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	DualBurette();
     public:
 	virtual void outputFlair() override;
-    Torpedo();
 };
 
-class Missile:public Weapon{
+class AK47 : protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	AK47();
     public:
 	virtual void outputFlair() override;
-    Missile();
 };
 
-class Bomb:public Weapon{
+class Torpedo:protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Torpedo();
     public:
 	virtual void outputFlair() override;
-    Bomb();
 };
-class Cannon:public Weapon{
+
+class Missile:protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Missile();
     public:
 	virtual void outputFlair() override;
-    Cannon();
 };
-class Mg160:public Weapon{
+
+class Bomb:protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Bomb();
     public:
 	virtual void outputFlair() override;
-    Mg160();
+};
+class Cannon:protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Cannon();
+    public:
+	virtual void outputFlair() override;
+};
+class Mg160:protected Weapon{
+    friend WeaponFlyweightFactory;
+    protected:
+	Mg160();
+    public:
+	virtual void outputFlair() override;
 };
 
 class TestWeapon : public Weapon {
+    friend WeaponFlyweightFactory;
     public:
-	virtual void outputFlair() override;
 	TestWeapon();
+	virtual void outputFlair() override;
 };
 
-class TankCannon : public Weapon {
+class TankCannon : protected Weapon {
+    friend WeaponFlyweightFactory;
+    protected:
+	TankCannon();
     public:
 	virtual void outputFlair() override;
-	TankCannon();
 };
 
 class TestBomb : public Weapon {
+    friend WeaponFlyweightFactory;
     public:
-	virtual void outputFlair() override;
 	TestBomb();
+	virtual void outputFlair() override;
 };

@@ -77,6 +77,7 @@ TEST_F(TroopFactoryTest, test1){
     EXPECT_EQ(e1->getName(), "TroopFactory1");
     EXPECT_EQ(e1->getAmount(), 5000);
     EXPECT_EQ(e1->getCountry()->getName(), "WillyWonka");
-    std::vector<Weapon *> * v = new std::vector<Weapon*>{new SMG(), new Pistol()};
+    WeaponFlyweightFactory * weapons = new WeaponFlyweightFactory();
+    std::vector<Weapon *> * v = new std::vector<Weapon*>{weapons->getWeapon(CLASS_SMG), weapons->getWeapon(CLASS_PISTOL)};
     EXPECT_NE(e1->getWeapon(), v);
 }

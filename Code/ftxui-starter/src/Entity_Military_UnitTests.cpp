@@ -240,7 +240,7 @@ TEST_F(EntitityTest, SplitAndMerge) {
 
 TEST_F(EntitityTest, AttackAgainstDifferentTypes) {
     std::vector<Weapon * > * v = new std::vector<Weapon *>{new TestWeapon()};
-    std::vector<Weapon * > * v2 = new std::vector<Weapon *>{new AK47()};
+    std::vector<Weapon * > * v2 = new std::vector<Weapon *>{new TestWeapon()};
     Entity * tank = (Entity *) new Tank("Armour",2,v,country1);
     Entity * enemyTank = (Entity *) new Tank("Armour", 1, v2, country2);
     for (int count = 0; count < 10000; count++) {
@@ -248,7 +248,7 @@ TEST_F(EntitityTest, AttackAgainstDifferentTypes) {
 	tank->update();
     }
     EXPECT_EQ(tank->getAmount(), 2);
-    enemyTank->assignWeapon(*(new Cannon()));
+    enemyTank->assignWeapon(*(new TestBomb()));
     for (int count = 0; count < 10000; count++) {
 	enemyTank->attack(*tank,true);
 	tank->update();
@@ -309,7 +309,7 @@ TEST_F(OccupancyTableTest, getNumVehicles) {
 }
 
 TEST_F(OccupancyTableTest, CheckThatCantMergeWithWrongType) {
-    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new TestBomb()};
     this->table->addEntity((Entity *) new Tank("My Squad", 1, tankWeapons, country1), aRegion);
     vector<Entity *> entities = this->table->getEntities(aRegion);
     EXPECT_EQ(entities.size(),4);
@@ -449,7 +449,7 @@ TEST_F(BattleTest, RunBattle) {
 TEST_F(BattleTest, getLosser) {
     Country * newCountry = new Country("COuntry C");
     this->friendlies->add(newCountry);
-    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new TestBomb()};
     std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
     Entity * myTank = (Entity *) new Tank("My Squad", 1, tankWeapons, newCountry);
     Entity * theirBomber =(Entity *) new Bomber("7th AirForce Division", 100000, baddiesbombs, this->country2);
@@ -466,7 +466,7 @@ TEST_F(BattleTest, getLosser) {
     EXPECT_EQ(v.at(0), newCountry);
 }
 TEST_F(BattleTest, BigBattle) {
-    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new Cannon()};
+    std::vector<Weapon *> * tankWeapons = new std::vector<Weapon*>{new TestBomb()};
     std::vector<Weapon *> * bomberfriends = new std::vector<Weapon*>{new TestBomb()};
     std::vector<Weapon *> * baddiesbombs = new std::vector<Weapon*>{new TestBomb()};
     Entity * myTank = (Entity *) new Tank("My Squad", 1, tankWeapons, this->country1);

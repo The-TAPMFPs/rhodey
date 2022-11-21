@@ -1,6 +1,7 @@
 #pragma once
 #include "../Entities/Entity.h"
 #include "../Entities/WeaponTemplateMethod/Weapon.h"
+#include "Entities/WeaponTemplateMethod/WeaponFlyWeightFactory.h"
 #include "../Entities/Vehicle/GroundVehicle/Tank.h"
 #include "../Entities/Vehicle/GroundVehicle/Truck.h"
 #include "../Entities/Vehicle/AirVehicle/Bomber.h"
@@ -16,6 +17,7 @@
 class Country;
 class UnitFactory{
     protected:
+	WeaponFlyweightFactory * weapons;
         std::string _name;
         int _num;
         Country * _con;
@@ -28,6 +30,7 @@ class UnitFactory{
         Entity* e;
     public:
         UnitFactory(std::string name, int num, Country * con);
+	virtual ~UnitFactory();
         virtual Entity* makeUnit() = 0;
 
 

@@ -2,4 +2,10 @@
 
 UnitFactory::UnitFactory(std::string name, int num, Country * con)
  : _name(name), _num(num), _con(con)
-{}
+{
+    weapons = new WeaponFlyweightFactory();
+}
+
+UnitFactory::~UnitFactory() {
+    delete weapons;
+}

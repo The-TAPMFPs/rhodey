@@ -34,10 +34,6 @@ Entity::Entity(string name, string type, int HP, int Damage,
 */
 Entity::~Entity() {
     int initial = this->weapons->size();
-    for (int count = 0; count < initial; count++) {
-	delete this->weapons->at(this->weapons->size()-1);
-	this->weapons->pop_back();
-    }
     delete this->weapons;
 }
 
