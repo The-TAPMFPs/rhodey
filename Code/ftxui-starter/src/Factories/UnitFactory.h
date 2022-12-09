@@ -1,33 +1,17 @@
 #pragma once
-#include "../Entities/Entity.h"
-#include "../Entities/WeaponTemplateMethod/Weapon.h"
+#include <memory>
+#include "Entities/Entity.h"
 #include "Entities/WeaponTemplateMethod/WeaponFlyWeightFactory.h"
-#include "../Entities/Vehicle/GroundVehicle/Tank.h"
-#include "../Entities/Vehicle/GroundVehicle/Truck.h"
-#include "../Entities/Vehicle/AirVehicle/Bomber.h"
-#include "../Entities/Vehicle/AirVehicle/CargoPlane.h"
-#include "../Entities/Vehicle/AirVehicle/Fighterjet.h"
-#include "../Entities/Vehicle/WaterVehicle/CargoShip.h"
-#include "../Entities/Vehicle/WaterVehicle/Carrier.h"
-#include "../Entities/Vehicle/WaterVehicle/Submarine.h"
-#include "../Entities/Vehicle/WaterVehicle/Warship.h"
-#include "../Entities/Troop/Troop.h"
-#include "../logger.h"
+#include "logger.h"
 
 class Country;
 class UnitFactory{
     protected:
-	WeaponFlyweightFactory * weapons;
-        std::string _name;
-        int _num;
-        Country * _con;
-        vector<Weapon *> * w1;
-        vector<Weapon *> * w2;
-        vector<Weapon *> * w3;
-        vector<Weapon *> * w4;
-        vector<Weapon *> * w5;
-        vector<Weapon *> * w6;
-        Entity* e;
+	shared_ptr<WeaponFlyweightFactory> weapons;
+        std::string name;
+        int num; // Max Number of entities that factory can produce given
+	         // perfect stability of country.
+        Country * country;
     public:
         UnitFactory(std::string name, int num, Country * con);
 	virtual ~UnitFactory();

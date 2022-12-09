@@ -1,11 +1,11 @@
 #include "UnitFactory.h"
+#include "Country/Country.h"
 
 UnitFactory::UnitFactory(std::string name, int num, Country * con)
- : _name(name), _num(num), _con(con)
+ : name(name), num(num), country(con)
 {
-    weapons = new WeaponFlyweightFactory();
+    weapons = this->country->getWeaponFlyweightFactory();
 }
 
 UnitFactory::~UnitFactory() {
-    delete weapons;
 }

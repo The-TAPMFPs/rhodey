@@ -1,4 +1,7 @@
 #include "Country.h"
+#include "uuid.h"
+#include <climits>
+#include <utility>
 #include "BattleStrategy/Defensive.h"
 #include "BattleStrategy/BattleStrategy.h"
 #include "BattleStrategy/Diplomacy.h"
@@ -10,40 +13,37 @@
 
 class Observable;
 
-unsigned int Country::sizeOfArmy()  // TODO: Calculate based off of troops
+int Country::sizeOfArmy()  // TODO: Calculate based off of troops
 {
   return 0;
 }
-unsigned int Country::prowessInRegion(Region* region) {
+int Country::prowessInRegion(Region* region) {
   return 0;
 }
 
 Country::Country(std::string name) : name(name) {
     double min=0.25, max=0.75;
-    srand((unsigned)time(NULL));
-    population = (int) (rand() % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
-    economy = (((double) rand() / RAND_MAX) * max-min) + min;
-    morale = (((double) rand() / RAND_MAX) * max-min) + min;
-    resources = (((double) rand() / RAND_MAX) * max-min) + min;
-    research = (((double) rand() / RAND_MAX) * max-min) + min;
-    aggressiveness = (((double) rand() / RAND_MAX) * max-min) + min;
-    goalRating = (((double) rand() / RAND_MAX) * 0.10-0.05) + 0.05;
+    population = (int) (uuid::randomInt(0,INT_MAX) % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
+    economy = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
+    morale = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
+    resources = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
+    research = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
+    aggressiveness = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
+    goalRating = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * 0.10-0.05) + 0.05;
     numSpies = 0;
     strategy = NULL;
-    generatePersonalityMatrix();
+    this->weaponFactory = std::shared_ptr<WeaponFlyweightFactory>(new WeaponFlyweightFactory());
+    this->generatePersonalityMatrix();
 }
 
 
+// TODO: Destory all owned factories
 Country::~Country(){
     if (this->strategy != NULL) {
     }
     if (this->allies != NULL) {
     }
     personalityMatrix.resize(0,0);
-}
-
-std::string Country::getName() {
-  return this->name;
 }
 
 void Country::generatePersonalityMatrix() {
@@ -56,11 +56,11 @@ void Country::generatePersonalityMatrix() {
   double* diploVals = generateRandomNums(4);
 
   pm << offensiveVals[0], 0, offensiveVals[1], 0, 0, 0, 0, 0, 0, offensiveVals[2], 0, 0, offensiveVals[3], 0, 0, 0, 0, 0,  // offensive
-      defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2], 0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
-      0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, developVals[2],  // development
-      0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // preparation
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
-      0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], 0, diploVals[3], 0, 0;  // diplomacy
+	defensiveVals[0], 0, defensiveVals[1], 0, 0, 0, 0, 0, 0, defensiveVals[2], 0, 0, defensiveVals[3], 0, 0, 0, 0, 0,  // defensive
+	0, 0, 0, 0, 0, developVals[0], 0, developVals[1], 0, 0, 0, 0, 0, 0, 0, 0, 0, developVals[2],  // development
+	0, prepVals[0], 0, prepVals[1], prepVals[2], 0, 0, prepVals[3], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // preparation
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, intelVals[0], 0, 0, 0, 0, 0, 0,  // intel
+	0, 0, 0, 0, 0, diploVals[0], 0, diploVals[1], 0, 0, 0, 0, 0, diploVals[2], 0, diploVals[3], 0, 0;  // diplomacy
 
   delete[] offensiveVals;
   delete[] defensiveVals;
@@ -72,37 +72,42 @@ void Country::generatePersonalityMatrix() {
   this->personalityMatrix = pm;
 }
 
+/**
+  * @brief Creates a matrix based on the countries avalible resources
+  *        This is used to determine the next strategy that the country
+  *        will use.
+  * @return Eigen::MatrixXd
+*/
 Eigen::MatrixXd Country::generateValueMatrix() {
   Eigen::MatrixXd valMatrix(18, 1);
-  valMatrix << ((population==0) ? 0 : numTroops / (0.3 * population)),
-    ((numTroops == 0) ? 1 : 1 - (numTroops / (0.3 * population))),
-      ((numTroops==0) ? 0 : numVehicles / (numTroops / 10)),
-      ((numTroops==0) ? 1 : 1 - (numVehicles / (numTroops / 10))),
-      economy,
-      1 - economy,
-      resources,
-      1 - resources,
-      morale,
-      1 - morale,
-      ((numEnemyRegions == 0) ? 1 :numSpies / (numEnemyRegions / 5)),
-      ((numEnemyRegions == 0) ? 0 : 1 - (numSpies / (numEnemyRegions / 5))),
-      aggressiveness,
-      1 - aggressiveness,
-      goalRating,
-      1 - goalRating,
-      research,
-      1 - research;
+
+  valMatrix <<  ((population==0) ? 0 : numTroops / (0.3 * population)), // Used in calculation of the offensive and defensive value.
+		((population == 0) ? 1 : 1 - (numTroops / (0.3 * population))), // Used in calculation of the preperation value.
+		((numTroops==0) ? 0 : numVehicles / (numTroops / 10)),
+		((numTroops==0) ? 1 : 1 - (numVehicles / (numTroops / 10))),
+		economy,
+		1 - economy,
+		resources,
+		1 - resources,
+		morale,
+		1 - morale,
+		((numEnemyRegions == 0) ? 1 :numSpies / (double(numEnemyRegions) / 5)),
+		((numEnemyRegions == 0) ? 0 : 1 - (numSpies / (double(numEnemyRegions) / 5))),
+		aggressiveness,
+		1 - aggressiveness,
+		goalRating,
+		1 - goalRating,
+		research,
+		1 - research;
 
   return valMatrix;
 }
 
 double* Country::generateRandomNums(int num) {
-  srand((unsigned)time(NULL));
-
   double* vals = new double[num];
   double sum = 0;
   for (int i = 0; i < num; i++) {
-    vals[i] = (double)rand() / RAND_MAX;  // array initialisation
+    vals[i] = (double)uuid::randomInt(0,INT_MAX) / RAND_MAX;  // array initialisation
     sum += vals[i];
   }
 
@@ -113,10 +118,6 @@ double* Country::generateRandomNums(int num) {
   return vals;
 }
 
-void Country::setStrategy(BattleStrategy* strategy) {
-  this->strategy = strategy;
-}
-
 void Country::decideStrategy() {
   OccupancyTable* occTable = map->getOccupancyTable();
   numTroops = occTable->getNumTroops(this);
@@ -125,7 +126,13 @@ void Country::decideStrategy() {
 
   Eigen::MatrixXd valMatrix = generateValueMatrix();
   Eigen::MatrixXd pm = this->personalityMatrix;
-  Eigen::MatrixXd result = pm * valMatrix;
+  Eigen::MatrixXd result = pm * valMatrix; // This should return a 1x6 matrix
+  // 1. will be the The offensive result
+  // 2. will be the Defensive result
+  // 3. will be the Development result
+  // 4. will be the preperation value
+  // 5. will be the intel value
+  // 6. will be the diplomacy value.
 
   //Get max value in result vector
   int maxIndex = 0;
@@ -137,9 +144,9 @@ void Country::decideStrategy() {
     }
   }
 
-  valMatrix.resize(0,0);
-  pm.resize(0,0);
-  result.resize(0,0);
+  // valMatrix.resize(0,0);
+  // pm.resize(0,0);
+  // result.resize(0,0);
 
   if(this->strategy != NULL) {
     delete this->strategy;
@@ -208,39 +215,8 @@ std::vector<std::string> Country::getFormattedStats() {
       "Number of Spies: " + std::to_string(numSpies)};
 }
 
-std::vector<std::pair<Country*, double>>* Country::getCountriesBeingSpiedOn() {
-  return &countriesBeingSpiedOn;
-}
 
-
-void Country::setPopulation(int population) {
-  this->population = population;
-}
-
-void Country::setEconomy(double economy) {
-  this->economy = economy;
-}
-
-void Country::setMorale(double morale) {
-  this->morale = morale;
-}
-
-void Country::setResources(double resources) {
-  this->resources = resources;
-}
-
-void Country::setResearch(double research) {
-  this->research = research;
-}
-
-void Country::setAggressiveness(double aggressiveness) {
-  this->aggressiveness = aggressiveness;
-}
-
-void Country::setGoalRating(double goalRating) {
-  this->goalRating = goalRating;
-}
-
+// TODO: Change all of these sets to change actual number of troops and stuff
 void Country::setNumSpies(int numSpies) {
   this->numSpies = numSpies;
 }
@@ -257,49 +233,6 @@ void Country::setNumEnemyRegions(int numEnemyRegions) {
   this->numEnemyRegions = numEnemyRegions;
 }
 
-int Country::getPopulation() {
-  return this->population;
-}
-
-double Country::getEconomy() {
-  return this->economy;
-}
-
-double Country::getMorale() {
-  return this->morale;
-}
-
-double Country::getResources() {
-  return this->resources;
-}
-
-double Country::getResearch() {
-  return this->research;
-}
-
-double Country::getAggressiveness() {
-  return this->aggressiveness;
-}
-
-double Country::getGoalRating() {
-  return this->goalRating;
-}
-
-int Country::getNumSpies() {
-  return this->numSpies;
-}
-
-int Country::getNumTroops() {
-  return this->numTroops;
-}
-
-int Country::getNumVehicles() {
-  return this->numVehicles;
-}
-
-int Country::getNumEnemyRegions() {
-  return this->numEnemyRegions;
-}
 
 void Country::setCapital(Region * capital) {
     this->capital = capital;

@@ -1,15 +1,15 @@
 //A BattleStrategy effectively represents a type of turn that a Country can make
 //The chosen strategy for each Country is decided within the Coutry based on its statistics at that time
 #pragma once
-#include "../../MapRegions/Region.h"
-#include "../../Factories/TroopFactory.h"
-#include "../../Factories/VehicleFactory.h"
-#include "../Country.h"
-#include "../../logger.h"
-#include "../../MapRegions/Map.h"
-#include "../../War/Battle/Battle.h"
-#include "../../Entities/Entity.h"
-#include "../../War/War.h"
+#include "MapRegions/Region.h"
+#include "Factories/TroopFactory.h"
+#include "Factories/VehicleFactory.h"
+#include "Country/Country.h"
+#include "logger.h"
+#include "MapRegions/Map.h"
+#include "War/Battle/Battle.h"
+#include "Entities/Entity.h"
+#include "War/War.h"
 
 class Country;
 class UnitFactory;
