@@ -23,13 +23,16 @@ int Country::prowessInRegion(Region* region) {
 
 Country::Country(std::string name) : name(name) {
     double min=0.25, max=0.75;
-    population = (int) (uuid::randomInt(0,INT_MAX) % 500000-300000+1) + 3000000; //population between 300 000 and 500 000
+    //population between 300 000 and 500 000
+    population = (int) (uuid::randomInt(0,INT_MAX) % 2000000) + 3000000;
+    // All of these values are initialized between 0.25 and 0.75
     economy = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
     morale = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
     resources = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
     research = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
     aggressiveness = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * max-min) + min;
-    goalRating = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * 0.10-0.05) + 0.05;
+    // This value is initialized inbetween 0.05 and 0.1
+    goalRating = (((double) uuid::randomInt(0,INT_MAX) / RAND_MAX) * 0.05) + 0.05;
     numSpies = 0;
     strategy = NULL;
     this->weaponFactory = std::shared_ptr<WeaponFlyweightFactory>(new WeaponFlyweightFactory());
@@ -151,6 +154,7 @@ void Country::decideStrategy() {
   if(this->strategy != NULL) {
     delete this->strategy;
   }
+
   switch (maxIndex)
   {
       case 0:

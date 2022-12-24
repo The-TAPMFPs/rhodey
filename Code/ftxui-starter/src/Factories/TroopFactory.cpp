@@ -1,7 +1,11 @@
 #include "TroopFactory.h"
+#include <algorithm>
 #include <sstream>
+#include <vector>
+#include "Entities/Troop/Troop.h"
 #include "Entities/WeaponTemplateMethod/Weapon.h"
 #include "../MapRegions/Map.h"
+#include "uuid.h"
 
 /**
  * @file TroopFactory.cpp
@@ -15,12 +19,13 @@
  * @brief The constructor of the TroopFactory class.
  *
  * @param name Troop Name
- * @param num Amount of Troops
+ * @param num Amount of Troops factory is capable of producing.
  * @param con Country of Troops
  */
 TroopFactory::TroopFactory(std::string name, int num, Country * con) :
     UnitFactory(name, num, con) {
 }
+
 /**
  * @fn ~TroopFactory()
  * @brief The Destructor of the TroopFactory class.
@@ -29,45 +34,81 @@ TroopFactory::~TroopFactory(){
 }
 
 /**
+ * @fn getWeapons (int numberOfTroops)
+ * @brief Returns the weapons that entities will be armed with.
+ * @param numberOfEntities The number of entities that need to be armed
+ * @returns std::vector<Weapon *>
+ */
+std::vector<Weapon *> * TroopFactory::getWeapons(int numberOfEntities) {
+    /**<Vector which contains a set of references to weapon objects>*/
+    std::vector<Weapon *> * weaponsToReturn = new std::vector<Weapon *>;
+    int weaponTypeArraySize = 0;
+    WEAPON_NAME * weaponTypeArray = NULL;
+    int specialWeaponsArraySize = 0;
+    WEAPON_NAME * specialWeaponsArray = NULL;
+
+    if(this->country->getResearch() < 0.2){
+	weaponTypeArray = new WEAPON_NAME[2] {CLASS_SMG, CLASS_PISTOL};
+	weaponTypeArraySize = 2;
+    } else if(this->country->getResearch() < 0.5){
+	weaponTypeArray = new WEAPON_NAME[3] {CLASS_AR, CLASS_PISTOL};
+	weaponTypeArraySize = 3;
+	specialWeaponsArray = new WEAPON_NAME[1] {CLASS_SNIPER};
+	specialWeaponsArraySize = 1;
+    } else if(this->country->getResearch() < 0.8){
+	weaponTypeArray = new WEAPON_NAME[3] {CLASS_AR, CLASS_SMG, CLASS_DUALBURETTE};
+	weaponTypeArraySize = 3;
+	specialWeaponsArray = new WEAPON_NAME[1] {CLASS_BAZOOKA};
+	specialWeaponsArraySize = 1;
+    } else if(this->country->getResearch() <= 1){
+	weaponTypeArray = new WEAPON_NAME [2] {CLASS_AK47,CLASS_DUALBURETTE};
+	weaponTypeArraySize = 2;
+	specialWeaponsArray = new WEAPON_NAME [2] {CLASS_SNIPER50, CLASS_BAZOOKA};
+	specialWeaponsArraySize = 2;
+    }
+
+    if (weaponTypeArray != NULL) {
+	for (int count = 0; count*40 < numberOfEntities; count++) {
+	    Weapon * weapon = this->weapons->getWeapon(
+		    weaponTypeArray[count%weaponTypeArraySize]);
+	    weaponsToReturn->push_back(weapon);
+	}
+    }
+    if (specialWeaponsArray != NULL) {
+	for (int count = 0; count*100 < numberOfEntities; count++) {
+	    Weapon * weapon = this->weapons->getWeapon(
+		    specialWeaponsArray[count%specialWeaponsArraySize]);
+	    weaponsToReturn->push_back(weapon);
+	}
+    }
+    // gen is from uuid.h
+    std::shuffle(weaponsToReturn->begin(), weaponsToReturn->end(), gen);
+    return weaponsToReturn;
+}
+
+
+/**
  * @fn Entity* makeUnit()
  * @brief Makes the specific units based on chance and research level
  *        and returns a reference to the new Entity that has been made.
  */
-
 Entity* TroopFactory::makeUnit(){
-    int i = rand() % 2 + 1; /**<A random number to decide what type of unit to make when the chance arises.>*/
-    std::string temp; /**<A string to hold the message that the Vehicles were made.>*/
-    std::stringstream convert; /**<A stringstream to concentate the intital message.>*/
     vector<Weapon *> * weaponVector;
     Troop * result;
 
-    if(this->country->getResearch() < 0.2){
-	weaponVector =  new vector<Weapon *> {weapons->getWeapon(CLASS_SMG), weapons->getWeapon(CLASS_PISTOL)}; /**<Vector which contains a set of references to weapon objects>*/
-	result = new Troop(this->name, this->num, weaponVector, this->country);
+    // TODO: Create the weapons and the troops
+    // Determine amount of troops to be made based on the state of the country
+    int numberOfTroops = this->numberToProduce();
+    // Create weapons
+    weaponVector = getWeapons(numberOfTroops);
 
-	convert << this->num << " troops with SMGs and Pistols were recruited.";
-    } else if(this->country->getResearch() < 0.5){
-	weaponVector = new vector<Weapon *> {weapons->getWeapon(CLASS_AR), weapons->getWeapon(CLASS_PISTOL), weapons->getWeapon(CLASS_SNIPER)}; /**<Vector which contains a set of references to weapon objects>*/
-       result = new Troop(this->name, this->num, weaponVector, this->country);
+    //Create Troops
+    std::string someName = this->name + " " + this->incAndGetBatalionNumber();
+    result = new Troop(someName,numberOfTroops,weaponVector,this->country);
 
-        convert << this->num << " troops with ARs, Pistols and Snipers were recruited.";
-    } else if(this->country->getResearch() < 0.8){
-       result = new Troop(this->name, this->num, w3, this->country);
-	w3 = new vector<Weapon *> {weapons->getWeapon(CLASS_AR), weapons->getWeapon(CLASS_SMG), weapons->getWeapon(CLASS_DUALBURETTE), weapons->getWeapon(CLASS_BAZOOKA)}; /**<Vector which contains a set of references to weapon objects>*/
-
-	convert << this->num << " troops with ARs, SMGs, Dual Burettes and Bazookas were recruited.";
-    } else if(this->country->getResearch() <= 1){
-       result = new Troop(this->name, this->num, w5, this->country);
-	w5 = new vector<Weapon *> {weapons->getWeapon(CLASS_AR), weapons->getWeapon(CLASS_DUALBURETTE), weapons->getWeapon(CLASS_SNIPER50), weapons->getWeapon(CLASS_AK47)}; /**<Vector which contains a set of references to weapon objects>*/
-
-	convert << this->num << " troops with ARs, Dual Burettes, Sniper50s and AK47s were recruited.";
-    }
-
-    temp = convert.str();
-    Logger::log(temp);
-    this->country->getMap()->getOccupancyTable()->addEntity(
-	    result, this->country->getCapital());
-
+    this->ouputCreationFlair(*weaponVector);
+    this->country->getMap()->getOccupancyTable()->addEntity(result,
+	    this->country->getCapital());
     return result;
 }
 

@@ -50,12 +50,6 @@ void Entity::attack(Entity & defender, bool testing) {
     if (this->weapons->size() != 0) {
 	totalDamage = (this->Damage*this->getAmount())/this->weapons->size();
     }
-    for (auto itr = this->country->getCountriesBeingSpiedOn()->begin();
-	    itr != this->country->getCountriesBeingSpiedOn()->end(); ++itr) {
-	if (long(itr->first) == long(this->country)) {
-	    totalDamage = totalDamage*(log(itr->second+70)/log(70));
-	}
-    }
     for (int count = 0; count < this->weapons->size(); count++) {
 	defender.defend(totalDamage, * this->weapons->at(count),testing);
     }
@@ -80,17 +74,17 @@ void Entity::update() {
 */
 void Entity::defend(int damage, Weapon &weapon, bool testing) {
     int potentialDamage = damage;
-    if (this->getAndSetDefense()) {
+    if (!this->getAndSetDefense()) {
 	potentialDamage = potentialDamage*0.7;
-    }
-    if (testing) {
+    } else if (testing) {
 	potentialDamage = potentialDamage*0.5;
     } else {
 	potentialDamage = potentialDamage*float(float(uuid::randomInt(300, 700))/1000);
     }
-    potentialDamage = potentialDamage*(std::log(weapon.getDamage())/std::log(20));
+    potentialDamage = potentialDamage + weapon.getDamage();
     potentialDamage = this->weaknesses(potentialDamage, weapon);
     this->DamageDone = potentialDamage;
+    weapon.outputFlair();
 }
 
 /**

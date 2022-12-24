@@ -24,6 +24,7 @@ class Country : public Observable {
     private:
 #endif
 
+  private:
     Map* map;
     std::string name;
     BattleStrategy* strategy;
@@ -35,13 +36,15 @@ class Country : public Observable {
     std::shared_ptr<WeaponFlyweightFactory> weaponFactory; // Used to keep references to weapons in factories.
 
     //===== STATS =====//
-    int population;   // The number of citizens in the country
     double economy;   // The GDP
+    double morale;    // The general morale of the country's citizens
+    int population;   // The number of citizens in the country
     double resources;  // TODO: Reconsider this since it may be redundant with `economy`
     double research; // The amount of research points the country has
+
     double aggressiveness; // The aggressiveness of the country
     double goalRating; // The rating of the country's goal
-    double morale;    // The general morale of the country's citizens
+
     double numSpies;
     int numTroops;
     int numVehicles;
