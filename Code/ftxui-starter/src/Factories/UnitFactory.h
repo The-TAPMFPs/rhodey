@@ -7,6 +7,10 @@
 #include "logger.h"
 #include <climits>
 
+enum ENTITY_TYPE {
+    TRUCK, TANK, CARRIER, CARGOSHIP, WARSHIP, SUBMARINE, FIGHTERJET, BOMBER,
+    CARGOPLANE, TROOP
+};
 class Country;
 class UnitFactory{
     protected:
@@ -16,10 +20,18 @@ class UnitFactory{
         int num; // Max Number of entities that factory can produce given
 	         // perfect stability of country.
         Country * country;
+	// WeaponName vectors used to store sets of weapons used for different
+	//    levels of advancement.
+	std::map<ENTITY_TYPE, std::vector<
+	    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>>>> weaponSets;
 	// Creates weapons for troops
-	virtual std::vector<Weapon *> * getWeapons(int numberOfEntities) = 0;
+	virtual std::vector<Weapon *> * getWeapons(int numberOfEntities,
+		ENTITY_TYPE,
+		int primaryLoopModifier = 40,
+		int secondarLoopModifier = 100);
 	virtual void ouputCreationFlair(vector<Weapon *> weapons);
 	virtual int numberToProduce(int num = INT_MIN);
+	pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> selectWeaponSet(ENTITY_TYPE);
 	std::string incAndGetBatalionNumber();
     public:
         UnitFactory(std::string name, int num, Country * con);

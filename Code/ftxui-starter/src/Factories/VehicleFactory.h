@@ -12,13 +12,7 @@
 #include "Entities/Vehicle/WaterVehicle/Warship.h"
 
 
-enum VEHICLE_TYPE {
-    truck, tank, carrier, cargoship, warship, submarine, fighterjet, bomber,
-    cargoplane
-};
-
-class VehicleFactory : public UnitFactory{
-    private:
+class VehicleFactory : public UnitFactory {
     public:
         VehicleFactory(std::string name, int num, Country * con);
         ~VehicleFactory();

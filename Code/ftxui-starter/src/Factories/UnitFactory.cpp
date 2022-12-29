@@ -63,5 +63,37 @@ std::string UnitFactory::incAndGetBatalionNumber() {
     return temp.str();
 }
 
+/**
+ * @fn getWeapons (int numberOfTroops)
+ * @brief Returns the weapons that entities will be armed with.
+ * @param numberOfEntities The number of entities that need to be armed
+ * @returns std::vector<Weapon *>
+ */
+std::vector<Weapon *> * UnitFactory::getWeapons(int numberOfEntities,
+	ENTITY_TYPE type, int primaryLoopModifier, int secondaryLoopModifier) {
+    /**<Vector which contains a set of references to weapon objects>*/
+    std::vector<Weapon *> * weaponsToReturn = new std::vector<Weapon *>;
 
+    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> weaponSet = this->selectWeaponSet(troop);
 
+    for (int count = 0; count*primaryLoopModifier < numberOfEntities; count++) {
+	Weapon * weapon = this->weapons->getWeapon(
+		weaponSet.first[count%weaponSet.first.size()]);
+	weaponsToReturn->push_back(weapon);
+    }
+    for (int count = 0; count*secondaryLoopModifier < numberOfEntities; count++) {
+	Weapon * weapon = this->weapons->getWeapon(
+		weaponSet.second[count%weaponSet.second.size()]);
+	weaponsToReturn->push_back(weapon);
+    }
+
+    // gen is from uuid.h
+    std::shuffle(weaponsToReturn->begin(), weaponsToReturn->end(), gen);
+    return weaponsToReturn;
+}
+
+pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> UnitFactory::selectWeaponSet(ENTITY_TYPE type) {
+    float intervals = float (1)/(this->weaponSets.size() ? 0 : 1);
+    int setIndexToReturn = this->country->getResearch()/intervals;
+    return this->weaponSets.at(type).at(setIndexToReturn);
+}
