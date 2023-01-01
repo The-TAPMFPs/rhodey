@@ -54,7 +54,7 @@ void Country::generatePersonalityMatrix() {
   double* offensiveVals = generateRandomNums(4);
   double* defensiveVals = generateRandomNums(4);
   double* developVals = generateRandomNums(3);
-  double* prepVals = generateRandomNums(3);
+  double* prepVals = generateRandomNums(4);
   double* intelVals = generateRandomNums(1);
   double* diploVals = generateRandomNums(4);
 
@@ -84,18 +84,18 @@ void Country::generatePersonalityMatrix() {
 Eigen::MatrixXd Country::generateValueMatrix() {
   Eigen::MatrixXd valMatrix(18, 1);
 
-  valMatrix <<  ((population==0) ? 0 : numTroops / (0.3 * population)), // Used in calculation of the offensive and defensive value.
-		((population == 0) ? 1 : 1 - (numTroops / (0.3 * population))), // Used in calculation of the preperation value.
-		((numTroops==0) ? 0 : numVehicles / (numTroops / 10)),
-		((numTroops==0) ? 1 : 1 - (numVehicles / (numTroops / 10))),
+  valMatrix <<  ((population==0) ? 0 : float(numTroops / (0.3 * population))), // Used in calculation of the offensive and defensive value
+		((population == 0) ? 1 : 1 - float(numTroops / (0.3 * population))), // Used in calculation of the preperation value.
+		((numTroops==0) ? 0 : float(numVehicles / (float(numTroops) / 10))),
+		((numTroops==0) ? 1 : 1 - float(numVehicles / (float(numTroops) / 10))),
 		economy,
 		1 - economy,
 		resources,
 		1 - resources,
 		morale,
 		1 - morale,
-		((numEnemyRegions == 0) ? 1 :numSpies / (double(numEnemyRegions) / 5)),
-		((numEnemyRegions == 0) ? 0 : 1 - (numSpies / (double(numEnemyRegions) / 5))),
+		((numEnemyRegions == 0) ? 1 :double(numSpies / (double(numEnemyRegions) / 5))),
+		((numEnemyRegions == 0) ? 0 : 1 - double(numSpies / (double(numEnemyRegions) / 5))),
 		aggressiveness,
 		1 - aggressiveness,
 		goalRating,

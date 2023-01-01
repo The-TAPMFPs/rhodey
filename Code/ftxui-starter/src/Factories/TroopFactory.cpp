@@ -26,25 +26,26 @@
  */
 TroopFactory::TroopFactory(std::string name, int num, Country * con) :
     UnitFactory(name, num, con) {
-	this->weaponSets.emplace(troop,
-		make_pair(
-		    vector({CLASS_SMG, CLASS_PISTOL}),
-		    vector({CLASS_BAZOOKA})
+	this->weaponSets.insert({TROOP, vector<pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>>>()});
+	this->weaponSets.at(TROOP).push_back(
+		pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>>(
+		    vector<WEAPON_NAME> {CLASS_SMG, CLASS_PISTOL},
+		    vector<WEAPON_NAME> {CLASS_BAZOOKA}
 		));
-	this->weaponSets.emplace(troop,
+	this->weaponSets.at(TROOP).push_back(
 		make_pair(
-		    vector({CLASS_AR, CLASS_PISTOL}),
-		    vector({CLASS_BAZOOKA,CLASS_SNIPER})
+		    vector<WEAPON_NAME> {CLASS_AR, CLASS_PISTOL},
+		    vector<WEAPON_NAME> {CLASS_BAZOOKA,CLASS_SNIPER}
 		));
-	this->weaponSets.emplace(troop,
+	this->weaponSets.at(TROOP).push_back(
 		make_pair(
-		    vector({CLASS_AR, CLASS_SMG, CLASS_DUALBURETTE}),
-		    vector({CLASS_BAZOOKA,CLASS_SNIPER})
+		    vector<WEAPON_NAME> {CLASS_AR, CLASS_SMG, CLASS_DUALBURETTE},
+		    vector<WEAPON_NAME> {CLASS_BAZOOKA,CLASS_SNIPER}
 		));
-	this->weaponSets.emplace(troop,
+	this->weaponSets.at(TROOP).push_back(
 		make_pair(
-		    vector({CLASS_AK47,CLASS_DUALBURETTE}),
-		    vector({CLASS_SNIPER50, CLASS_BAZOOKA})
+		    vector<WEAPON_NAME> {CLASS_AK47,CLASS_DUALBURETTE},
+		    vector<WEAPON_NAME> {CLASS_SNIPER50, CLASS_BAZOOKA}
 		));
 }
 
@@ -68,13 +69,14 @@ Entity* TroopFactory::makeUnit(){
     // Determine amount of troops to be made based on the state of the country
     int numberOfTroops = this->numberToProduce();
     // Create weapons
-    weaponVector = getWeapons(numberOfTroops, troop);
+    weaponVector = getWeapons(numberOfTroops, TROOP);
 
     //Create Troops
     std::string someName = this->name + " " + this->incAndGetBatalionNumber();
     result = new Troop(someName,numberOfTroops,weaponVector,this->country);
 
-    this->ouputCreationFlair(*weaponVector);
+    this->ouputCreationFlair(*weaponVector, result);
+
     this->country->getMap()->getOccupancyTable()->addEntity(result,
 	    this->country->getCapital());
     return result;

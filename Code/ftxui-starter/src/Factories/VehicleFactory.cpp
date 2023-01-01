@@ -48,71 +48,63 @@ Entity* VehicleFactory::makeUnit() {
     while (toReturn == NULL) {
 	ENTITY_TYPE currVehicleType = ENTITY_TYPE(uuid::randomInt(0, 8));
 	switch (currVehicleType) {
-	    case TRUCK:
+	    case ENTITY_TYPE::TRUCK:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake,TRUCK);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::TRUCK);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Truck(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case TANK:
+	    case ENTITY_TYPE::TANK:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake,TANK);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::TANK);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Tank(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case CARRIER:
+	    case ENTITY_TYPE::CARRIER:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake,CARRIER);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::CARRIER);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Carrier(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case CARGOSHIP:
+	    case ENTITY_TYPE::CARGOSHIP:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, CARGOSHIP);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::CARGOSHIP);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new CargoShip(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case WARSHIP:
+	    case ENTITY_TYPE::WARSHIP:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, WARSHIP);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::WARSHIP);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Warship(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case SUBMARINE:
+	    case ENTITY_TYPE::SUBMARINE:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, SUBMARINE);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::SUBMARINE);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Submarine(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case FIGHTERJET:
+	    case ENTITY_TYPE::FIGHTERJET:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, FIGHTERJET);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::FIGHTERJET);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Fighterjet(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case BOMBER:
+	    case ENTITY_TYPE::BOMBER:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, BOMBER);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::BOMBER);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new Bomber(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
-	    case CARGOPLANE:
+	    case ENTITY_TYPE::CARGOPLANE:
 		numToMake = this->numberToProduce();
-		weapons = getWeapons(numToMake, CARGOPLANE);
+		weapons = getWeapons(numToMake, ENTITY_TYPE::CARGOPLANE);
 		someName = this->name + " " + this->incAndGetBatalionNumber();
 		toReturn = (Entity *) new CargoPlane(someName,numToMake,weapons,this->country);
-		this->ouputCreationFlair(*weapons);
 		break;
 	}
     }
+    this->ouputCreationFlair(*weapons,toReturn);
     this->country->getMap()->getOccupancyTable()->addEntity(toReturn, this->country->getCapital());
     return (toReturn);
 }

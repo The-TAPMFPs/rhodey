@@ -1,5 +1,6 @@
 #include "UnitFactory.h"
 #include <climits>
+#include <exception>
 #include <random>
 #include <sstream>
 #include <string>
@@ -18,14 +19,14 @@ UnitFactory::UnitFactory(std::string name, int num, Country * con)
 UnitFactory::~UnitFactory() {
 }
 
-void UnitFactory::ouputCreationFlair(vector<Weapon *> weapons) {
+void UnitFactory::ouputCreationFlair(vector<Weapon *> weapons, Entity * entity) {
     std::stringstream convert; /**<A stringstream to concentate the intital message.>*/
     std::map<std::string,std::string> uniqueNames; /**<The only reason a map is
 						     used here is becuase it is
 						     fast and i didn't want to
 						     create a new data structure
 						     just for lookups>*/
-    convert << "A battalion of troops armed with: ";
+    convert << "A battalion of " << entity->getType() << " armed with: ";
     for (int count = 0; count < weapons.size(); count++) { // get all the unique names
 	if (uniqueNames.find(weapons.at(count)->getName()) == uniqueNames.end()) {
 	    uniqueNames.emplace(
@@ -38,19 +39,21 @@ void UnitFactory::ouputCreationFlair(vector<Weapon *> weapons) {
     }
 
     // Iterate through all the unique names to build a string.
-    for (auto iter = uniqueNames.begin(); iter != (--uniqueNames.end()); ++iter) {
-	convert << iter->second << ", ";
+    if (uniqueNames.begin() != uniqueNames.end()) {
+	for (auto iter = uniqueNames.begin(); iter != --uniqueNames.end(); ++iter) {
+	    convert << iter->second << ", ";
+	}
+	convert << "and " << (--uniqueNames.end())->second;
     }
-
-    convert << "and " << (--uniqueNames.end())->second << " were recruited.";
+    convert << " were recruited.";
     Logger::log(convert.str());
 }
 
 int UnitFactory::numberToProduce(int num) {
-    int toReturn = num;
-    if (num == INT_MIN) {
-	if (this->country->getPopulation() < 1000000 + num*100) {
-	    toReturn = toReturn/3;
+    int toReturn = 1000;
+    if (num != INT_MIN) {
+	if (this->country->getPopulation() < 1000000) {
+	    toReturn = num;
 	}
     }
     return toReturn;
@@ -73,18 +76,26 @@ std::vector<Weapon *> * UnitFactory::getWeapons(int numberOfEntities,
 	ENTITY_TYPE type, int primaryLoopModifier, int secondaryLoopModifier) {
     /**<Vector which contains a set of references to weapon objects>*/
     std::vector<Weapon *> * weaponsToReturn = new std::vector<Weapon *>;
-
-    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> weaponSet = this->selectWeaponSet(troop);
-
-    for (int count = 0; count*primaryLoopModifier < numberOfEntities; count++) {
-	Weapon * weapon = this->weapons->getWeapon(
-		weaponSet.first[count%weaponSet.first.size()]);
-	weaponsToReturn->push_back(weapon);
+    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> weaponSet;
+    try {
+	weaponSet = this->selectWeaponSet(type);
+    } catch(exception e) {
+	weaponSet = make_pair(vector<WEAPON_NAME>(), vector<WEAPON_NAME>());
     }
-    for (int count = 0; count*secondaryLoopModifier < numberOfEntities; count++) {
-	Weapon * weapon = this->weapons->getWeapon(
-		weaponSet.second[count%weaponSet.second.size()]);
-	weaponsToReturn->push_back(weapon);
+
+    if (weaponSet.first.size() != 0) {
+	for (int count = 0; count*primaryLoopModifier < numberOfEntities; count++) {
+	    Weapon * weapon = this->weapons->getWeapon(
+		    weaponSet.first[count%weaponSet.first.size()]);
+	    weaponsToReturn->push_back(weapon);
+	}
+    }
+    if (weaponSet.second.size() != 0) {
+	for (int count = 0; count*secondaryLoopModifier < numberOfEntities; count++) {
+	    Weapon * weapon = this->weapons->getWeapon(
+		    weaponSet.second[count%weaponSet.second.size()]);
+	    weaponsToReturn->push_back(weapon);
+	}
     }
 
     // gen is from uuid.h
@@ -93,7 +104,8 @@ std::vector<Weapon *> * UnitFactory::getWeapons(int numberOfEntities,
 }
 
 pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> UnitFactory::selectWeaponSet(ENTITY_TYPE type) {
-    float intervals = float (1)/(this->weaponSets.size() ? 0 : 1);
+    float intervals = float (1)/((this->weaponSets.at(type).size()==0) ? 1 : this->weaponSets.at(type).size());
     int setIndexToReturn = this->country->getResearch()/intervals;
-    return this->weaponSets.at(type).at(setIndexToReturn);
+    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> toReturn = this->weaponSets.find(type)->second.at(setIndexToReturn);
+    return toReturn;
 }

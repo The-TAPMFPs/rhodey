@@ -12,7 +12,7 @@ class Prepare : public BattleStrategy {
         Region* enemyRegion;
         std::string _name;
         int _num;
-        VEHICLE_TYPE _veh;
+        ENTITY_TYPE _veh;
 	VehicleFactory * vehicleFactory;
 	TroopFactory * troopFactory;
 

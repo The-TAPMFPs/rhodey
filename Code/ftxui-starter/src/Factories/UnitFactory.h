@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <memory>
 #include <vector>
 #include "Entities/Entity.h"
@@ -6,6 +7,7 @@
 #include "Entities/WeaponTemplateMethod/WeaponFlyWeightFactory.h"
 #include "logger.h"
 #include <climits>
+#include <map>
 
 enum ENTITY_TYPE {
     TRUCK, TANK, CARRIER, CARGOSHIP, WARSHIP, SUBMARINE, FIGHTERJET, BOMBER,
@@ -22,14 +24,20 @@ class UnitFactory{
         Country * country;
 	// WeaponName vectors used to store sets of weapons used for different
 	//    levels of advancement.
-	std::map<ENTITY_TYPE, std::vector<
-	    pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>>>> weaponSets;
+	std::map<
+	    int,
+	    std::vector<
+		std::pair<
+		vector<WEAPON_NAME>,
+	        vector<WEAPON_NAME>
+		>
+	    >> weaponSets;
 	// Creates weapons for troops
 	virtual std::vector<Weapon *> * getWeapons(int numberOfEntities,
 		ENTITY_TYPE,
 		int primaryLoopModifier = 40,
 		int secondarLoopModifier = 100);
-	virtual void ouputCreationFlair(vector<Weapon *> weapons);
+	virtual void ouputCreationFlair(vector<Weapon *> weapons, Entity *);
 	virtual int numberToProduce(int num = INT_MIN);
 	pair<vector<WEAPON_NAME>,vector<WEAPON_NAME>> selectWeaponSet(ENTITY_TYPE);
 	std::string incAndGetBatalionNumber();
