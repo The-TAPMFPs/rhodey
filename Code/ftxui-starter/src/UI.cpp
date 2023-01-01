@@ -469,6 +469,14 @@ void UI::render()
     button
   });
 
+  auto createLog = [&] {
+      Elements elements;
+      std::vector<std::string> message = Logger::getMsg();
+      for (int count = 0; count < message.size(); count++) {
+          elements.push_back(text(message[count]));
+      }
+      return elements;
+  };
   //=====INFO PANEL=====//
   auto info = Renderer(infoPanelLayout, [&] {
       return hbox({
@@ -477,7 +485,7 @@ void UI::render()
         filler(),
         vbox({
           text("=====LOG=====") | center,
-          text(Logger::getMsg()) | center,
+          vbox(createLog()),
         }),
         filler(),
         separator(),

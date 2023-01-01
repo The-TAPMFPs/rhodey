@@ -1,17 +1,34 @@
 #include "logger.h"
+#include <sstream>
 
-std::vector<std::string> Logger::messages = {"ACTIONS WILL APPEAR HERE"};
-std::string Logger::message = "ACTIONS WILL APPEAR HERE";
+Message * Logger::messageLogHistory [200] = {NULL};
+int Logger::messageLogCounter = 0;
+Message * Logger::head = new Message("Start Of Simulation", NULL);
 
 void Logger::log(std::string message)
 {
-    // Logger::messages.push_back(message);
-    Logger::message = message;
+    if (Logger::messageLogHistory[Logger::messageLogCounter%200] != NULL) {
+	delete Logger::messageLogHistory[Logger::messageLogCounter%200];
+	Logger::messageLogHistory[(Logger::messageLogCounter+1)%200]->prev = NULL;
+	Logger::messageLogHistory[Logger::messageLogCounter%200] = new Message(message,
+		    Logger::messageLogHistory[(Logger::messageLogCounter-1)%200]);
+	Logger::head = Logger::messageLogHistory[Logger::messageLogCounter%200];
+	Logger::messageLogCounter++;
+    } else {
+	Logger::messageLogHistory[Logger::messageLogCounter] = new Message(message,
+		    Logger::messageLogHistory[Logger::messageLogCounter-1]);
+	Logger::head = Logger::messageLogHistory[Logger::messageLogCounter%200];
+	Logger::messageLogCounter++;
+    }
 }
 
-std::string Logger::getMsg()
+std::vector<std::string> Logger::getMsg()
 {
-    // std::string toReturn = Logger::messages.back();
-    std::string toReturn = Logger::message;
+    Message * message = Logger::head;
+    std::vector<std::string> toReturn;
+    while (message != NULL && message->alive) {
+	toReturn.push_back(message->str);
+	message = message->prev;
+    }
     return toReturn;
 }
